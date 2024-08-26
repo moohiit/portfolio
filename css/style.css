@@ -544,7 +544,7 @@ nav {
   }
 
   .banner-image {
-    background-image: url(./sastagram.png);
+    background-image: url(./images/sastagram.png);
     background-position: center;
     background-size: cover;
     height: 200px;
@@ -553,7 +553,7 @@ nav {
     border: 1px solid rgba(255, 255, 255, 0.255);
   }
   .banner-image1 {
-    background-image: url(./portfolio.png);
+    background-image: url(./images/portfolio.png);
     background-position: center;
     background-size: cover;
     height: 200px;
