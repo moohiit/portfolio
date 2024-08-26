@@ -347,6 +347,7 @@ nav {
     display: flex;
     flex-wrap: wrap;
     margin-top: 4%;
+    padding-block: 5%;
     justify-content: center; /* Center items horizontally */
     gap: 5%; /* Adjust gap for better spacing */
     text-align: center; /* Center text within the skills section */
@@ -406,8 +407,9 @@ nav {
 .experience, .education {
     display: flex;
     flex-direction: column;
-    background-image: url(https://i.postimg.cc/VNJkp3Xx/TimeLine.png);
+    /* background-image: url(https://i.postimg.cc/VNJkp3Xx/TimeLine.png); */
     margin: 5%;
+    padding-block: 5%;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -544,7 +546,7 @@ nav {
   }
 
   .banner-image {
-    background-image: url(./images/sastagram.png);
+    background-image: url(../images/sastagram.png);
     background-position: center;
     background-size: cover;
     height: 200px;
@@ -553,7 +555,16 @@ nav {
     border: 1px solid rgba(255, 255, 255, 0.255);
   }
   .banner-image1 {
-    background-image: url(./images/portfolio.png);
+    background-image: url(../images/portfolio.png);
+    background-position: center;
+    background-size: cover;
+    height: 200px;
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.255);
+  }
+  .banner-image2 {
+    background-image: url(../images/watchman.png);
     background-position: center;
     background-size: cover;
     height: 200px;
