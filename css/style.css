@@ -988,12 +988,12 @@ nav {
         }
 
         /* contact */
- .contact {
+.contact {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     margin-top: 150px;
-    padding: 50px;
+    padding: 10px;
 }
 
 .contact-container {
@@ -1108,9 +1108,10 @@ p {
         padding: 6px;
     }
 }
-        .copyRights{
-            display: flex;
-            justify-content: space-between;
-            padding-inline: 5%;
-            color: #ccc;
-        }
+.copyRights{
+    display: flex;
+    justify-content: space-between;
+    padding:10px;
+    padding-inline: 20px;
+    color: #ccc;
+}
