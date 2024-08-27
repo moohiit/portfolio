@@ -14,6 +14,7 @@
       rel="stylesheet"
     />
     <script src="https://unpkg.com/typed.js@2.0.15/dist/typed.umd.js"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
   </head>
 
   <body>
@@ -36,7 +37,7 @@
           <li><a href="#certificates">Certificates</a></li>
           <li><a href="#education">Education</a></li>
           <li><a href="#contact">Contact</a></li>
-          <li><button class="hire-button">Hire Me</button></li>
+          <li><a class="hire-button" href="#contact">Hire Me</a></li>
           <li>
             <button class="resume-button" style="overflow: hidden">
               <a
@@ -305,8 +306,11 @@
           </ul>
         </div>
       </div>
-      <div class="experience"  id="experience" style="color: #ffffff">
-        <h2 class="experience-tittle" style="margin-bottom: 3%; padding-bottom: 10px;">
+      <div class="experience" id="experience" style="color: #ffffff">
+        <h2
+          class="experience-tittle"
+          style="margin-bottom: 3%; padding-bottom: 10px"
+        >
           Experience
         </h2>
         <div class="experience1 start">
@@ -513,12 +517,6 @@
               Project Focus: College Entry-Exit Monitoring System Gained
               hands-on experience in developing a comprehensive digital system
               for monitoring college student entry and exit patterns.
-              Streamlined gate processes and efficiently managed visitor data,
-              improving campus security and reducing unauthorized entries by
-              35-40%. Led process re-engineering to consolidate services across
-              10 departments, reducing paperwork by 75%. Utilized Git for
-              version control to maintain and update source code, ensuring
-              continuous improvement and system stability.
             </p>
           </div>
           <div class="button-wrapper">
@@ -555,15 +553,56 @@
           <div class="slides">
             <!-- Each slide -->
             <div class="slide">
-              <img src="https://i.postimg.cc/k4tD6k4Q/meta.png" alt="Image 1" />
-              <div class="text">Programming with javascript</div>
+              <img src="./images/Advance Excel.png" alt="Image 1" />
+              <div class="text">
+                <span>Advance Certification in Microsoft Excel</span>
+                <a
+                  class="hire-button"
+                  href="https://lms.intellipaat.com/certificate-link/?Yz0yNjYwOSZ1PTE2NDkxMiZleHQ9MQ=="
+                  download="Mohit_Patel_Advance_Excel.pdf"
+                  >Download
+                </a>
+              </div>
             </div>
             <div class="slide">
-              <img
-                src="https://i.postimg.cc/Qxg9qGqS/infosys.png"
-                alt="Image 2"
-              />
-              <div class="text">HTML 5</div>
+              <img src="./images/Data Science.png" alt="Image 2" />
+              <div class="text">
+                <span>Data Science Course</span>
+                <a
+                  class="hire-button"
+                  href="https://lms.intellipaat.com/certificate-link/?Yz01Nzk5JnU9MTY0OTEyJmV4dD0x"
+                  download="Mohit_Patel_Data_Science.pdf"
+                  >Download
+                </a>
+              </div>
+            </div>
+            <div class="slide">
+              <img src="./images/MongoDB.png" alt="Image 2" />
+              <div class="text">
+                <span
+                  >MongoDB Developer's Toolkit: CRUD Mastery with Node.js</span
+                >
+                <a
+                  class="hire-button"
+                  href="https://www.geeksforgeeks.org/certificate/c97fe9133e67d1456dcc544d1410b7e5"
+                  download="Mohit_Patel_MongoDB.pdf"
+                  >Download
+                </a>
+              </div>
+            </div>
+            <div class="slide">
+              <img src="./images/IBM_Data_Science.png" alt="Image 2" />
+              <div class="text">
+                <span
+                  >IBM Data Science</span
+                >
+                <a
+                  class="hire-button"
+                  href="https://coursera.org/share/2acc587f7d7b0d409c3c2fb2333f522a"
+                  download="Mohit_Patel_IBM_Data_Science.pdf"
+                  >Download
+                </a>
+              </div>
             </div>
           </div>
           <!-- Navigation buttons -->
@@ -575,6 +614,7 @@
             <span class="dot" onclick="currentSlide(1)"></span>
             <span class="dot" onclick="currentSlide(2)"></span>
             <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
           </div>
         </div>
       </div>
@@ -589,31 +629,35 @@
               class=""
               ><i
                 class="fa-solid fa-building-columns fa-2xl"
-                style="color: #ffffff; margin-right: 10px;"
+                style="color: #ffffff; margin-right: 10px"
               ></i>
-              <span>Dr. A.P.J. Abdul Kalam Technical University, Uttar Pradesh</span>
-              </span
-            >
+              <span
+                >Dr. A.P.J. Abdul Kalam Technical University, Uttar
+                Pradesh</span
+              >
+            </span>
             <span
               style="color: #63e6be; padding-inline: 6%; margin-block: 5%"
               class=""
               ><i
                 class="fa-solid fa-code-branch fa-2xl"
-                style="color: #ffffff; margin-right: 10px;"
+                style="color: #ffffff; margin-right: 10px"
               ></i>
-              <span style="margin-left: 8px; text-transform: uppercase">Information Technology</span>
-              </span
-            >
+              <span style="margin-left: 8px; text-transform: uppercase"
+                >Information Technology</span
+              >
+            </span>
             <span
               style="color: #63e6be; padding-inline: 6%; margin-block: 5%"
               class=""
               ><i
                 class="fa-solid fa-calendar-days fa-2xl"
-                style="color: #ffffff; margin-right: 10px;"
+                style="color: #ffffff; margin-right: 10px"
               ></i>
-              <span style="margin-left: 8px; text-transform: uppercase">2022 - 2024</span>
-              </span
-            >
+              <span style="margin-left: 8px; text-transform: uppercase"
+                >2022 - 2024</span
+              >
+            </span>
           </div>
         </div>
         <div class="experience1 end">
@@ -625,70 +669,73 @@
               class=""
               ><i
                 class="fa-solid fa-building-columns fa-2xl"
-                style="color: #ffffff; margin-right: 10px;"
+                style="color: #ffffff; margin-right: 10px"
               ></i>
-              <span>Invertis University Bareilly<br>Uttar Pradesh</span>
-              </span
-            >
+              <span>Invertis University Bareilly<br />Uttar Pradesh</span>
+            </span>
             <span
               style="color: #63e6be; padding-inline: 6%; margin-block: 5%"
               class=""
               ><i
                 class="fa-solid fa-code-branch fa-2xl"
-                style="color: #ffffff; margin-right: 10px;"
+                style="color: #ffffff; margin-right: 10px"
               ></i>
-              <span style="margin-left: 8px; text-transform: uppercase">Science</span>
-              </span
-            >
+              <span style="margin-left: 8px; text-transform: uppercase"
+                >Science</span
+              >
+            </span>
             <span
               style="color: #63e6be; padding-inline: 6%; margin-block: 5%"
               class=""
               ><i
                 class="fa-solid fa-calendar-days fa-2xl"
-                style="color: #ffffff; margin-right: 10px;"
+                style="color: #ffffff; margin-right: 10px"
               ></i>
-              <span style="margin-left: 8px; text-transform: uppercase">2017 - 2020</span>
-              </span
-            >
+              <span style="margin-left: 8px; text-transform: uppercase"
+                >2017 - 2020</span
+              >
+            </span>
           </div>
         </div>
         <div class="experience1 start">
-          <h2 class="experience-tittle" style="margin-bottom: 8%">Intermediate</h2>
+          <h2 class="experience-tittle" style="margin-bottom: 8%">
+            Intermediate
+          </h2>
           <div class="date" style="display: flex; flex-direction: column">
             <span
               style="color: #63e6be; padding-inline: 6%; margin-block: 5%"
               class=""
               ><i
                 class="fa-solid fa-building-columns fa-2xl"
-                style="color: #ffffff; margin-right: 10px;"
+                style="color: #ffffff; margin-right: 10px"
               ></i>
               <span>Padmawati Academy Bareilly</span>
-              </span
-            >
+            </span>
             <span
               style="color: #63e6be; padding-inline: 6%; margin-block: 5%"
               class=""
               ><i
                 class="fa-solid fa-code-branch fa-2xl"
-                style="color: #ffffff; margin-right: 10px;"
+                style="color: #ffffff; margin-right: 10px"
               ></i>
-              <span style="margin-left: 8px; text-transform: uppercase">Science</span>
-              </span
-            >
-            
+              <span style="margin-left: 8px; text-transform: uppercase"
+                >Science</span
+              >
+            </span>
+
             <span
               style="color: #63e6be; padding-inline: 6%; margin-block: 5%"
               class=""
               ><i
                 class="fa-solid fa-calendar-days fa-2xl"
-                style="color: #ffffff; margin-right: 10px;"
+                style="color: #ffffff; margin-right: 10px"
               ></i>
-              <span style="margin-left: 8px; text-transform: uppercase">2014 - 2016</span>
-              </span
-            >
+              <span style="margin-left: 8px; text-transform: uppercase"
+                >2014 - 2016</span
+              >
+            </span>
           </div>
         </div>
-
       </div>
       <div class="contact" id="contact" id="hireme">
         <div class="contact-container">
@@ -703,22 +750,23 @@
               method="POST"
               class="contact-form"
             >
-              <input type="hidden" name="access_key" value="" />
+              <input type="hidden" name="access_key" value="0db51182-14c2-4b47-bc33-f3fcbb1c7b55" />
               <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" id="name" name="name" required />
+                <input type="text" id="name" name="name" placeholder="Your Name" required />
               </div>
               <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" required />
+                <input type="email" id="email" name="email" placeholder="Your Email" required />
               </div>
 
-              <div class="form-group">
+              <div class="form-group"> 
                 <label for="message">Message</label>
                 <textarea
                   id="message"
                   name="message"
                   rows="5"
+                  placeholder="Message here"
                   required
                 ></textarea>
               </div>
@@ -729,10 +777,10 @@
       </div>
       <hr />
       <div class="copyRights">
-        <div class="copy">&copy kishore</div>
+        <div class="copy">&copy Mohit Patel</div>
         <div class="design">
           <span style="color: #63e6be">Design by</span>
-          &nbsp;&nbsp;&nbsp;Kishore Lavuri
+          &nbsp;&nbsp;&nbsp;Mohit Patel
         </div>
       </div>
     </div>
