@@ -35,16 +35,8 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(
-      circle at 10% 20%,
-      rgba(123, 44, 191, 0.1) 0%,
-      transparent 20%
-    ),
-    radial-gradient(
-      circle at 90% 80%,
-      rgba(0, 255, 204, 0.1) 0%,
-      transparent 20%
-    );
+  background-image: linear-gradient(rgb(0 0 0 / 80%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(0 0 0 / 80%) 1px, transparent 1px);
   z-index: -1;
   pointer-events: none;
 }
@@ -573,6 +565,17 @@ section {
 .timeline-company {
   font-size: 1.2rem;
   color: var(--lighter);
+  font-weight: 500;
+}
+
+.experience-duration {
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 0.9rem;
+  background: rgba(0, 255, 204, 0.1);
+  padding: 3px 10px;
+  border-radius: 20px;
+  color: var(--primary);
   font-weight: 500;
 }
 
@@ -1185,6 +1188,12 @@ footer {
     width: 45px;
     height: 45px;
   }
+
+  .hero-image {
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1229,5 +1238,11 @@ footer {
     font-size: 1.6rem;
     width: 40px;
     height: 40px;
+  }
+
+  .hero-image {
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
   }
 }

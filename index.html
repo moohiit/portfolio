@@ -83,7 +83,7 @@
             <a href="#contact">Contact</a>
             <a href="#contact" class="cta-button hire-me-mobile">Hire Me</a>
             <a
-            class="cta-button resume-button"
+              class="cta-button resume-button"
               href="./files/MohitPatelResume.pdf"
               download="Mohit_Patel_Resume.pdf"
               >Resume</a
@@ -224,6 +224,7 @@
       </div>
     </section>
 
+    <!-- Experience Section -->
     <section id="experience">
       <div class="container">
         <div class="section-title">
@@ -238,6 +239,7 @@
                 <h3 class="timeline-position">Full Stack Developer</h3>
                 <div class="timeline-company">
                   Life Layer Health Solutions Pvt. Ltd
+                  <span class="experience-duration" id="currentDuration"></span>
                 </div>
               </div>
               <p class="timeline-description">
@@ -296,7 +298,10 @@
             <div class="timeline-content">
               <div class="timeline-header">
                 <h3 class="timeline-position">Internship</h3>
-                <div class="timeline-company">KCMT College</div>
+                <div class="timeline-company">
+                  KCMT College
+                  <span class="experience-duration">6 months</span>
+                </div>
               </div>
               <p class="timeline-description">
                 Developed a comprehensive digital system for college security.
@@ -393,9 +398,7 @@
           <div class="project-card">
             <div
               class="project-img"
-              style="
-                background-image: url('./images/sastagram.png');
-              "
+              style="background-image: url('./images/sastagram.png')"
             ></div>
             <div class="project-content">
               <h3 class="project-title">Social Media & Messaging Platform</h3>
@@ -428,9 +431,7 @@
           <div class="project-card">
             <div
               class="project-img"
-              style="
-                background-image: url('./images/watchman.png');
-              "
+              style="background-image: url('./images/watchman.png')"
             ></div>
             <div class="project-content">
               <h3 class="project-title">Watchman System (WMS)</h3>
@@ -784,6 +785,40 @@
 
       showSlides(slideIndex);
       setInterval(() => plusSlides(1), 5000);
+      
+      // Calculate and display current experience duration
+      function calculateCurrentDuration() {
+        const startDate = new Date("2024-07-01");
+        const currentDate = new Date();
+
+        let months = (currentDate.getFullYear() - startDate.getFullYear()) * 12;
+        months -= startDate.getMonth();
+        months += currentDate.getMonth();
+
+        const years = Math.floor(months / 12);
+        const remainingMonths = months % 12;
+        const days = Math.floor(
+          (currentDate -
+            new Date(currentDate.getFullYear(), currentDate.getMonth(), 1)) /
+            (1000 * 60 * 60 * 24)
+        );
+
+        let durationText = "";
+        if (years > 0) durationText += `${years} year${years > 1 ? "s" : ""} `;
+        if (remainingMonths > 0)
+          durationText += `${remainingMonths} month${
+            remainingMonths > 1 ? "s" : ""
+          } `;
+        if (years === 0 && remainingMonths === 0)
+          durationText += `${days} day${days > 1 ? "s" : ""}`;
+
+        document.getElementById("currentDuration").textContent =
+          durationText.trim();
+      }
+
+      // Call the function initially and then every day to update
+      calculateCurrentDuration();
+      setInterval(calculateCurrentDuration, 86400000); // Update daily
     </script>
   </body>
 </html>
