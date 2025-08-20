@@ -18,4 +18,40 @@
    <changefreq>monthly</changefreq>
    <priority>0.8000</priority>
 </url>
+<url>
+   <loc>https://mohitpatel.org/#about</loc>
+   <lastmod>2025-08-20T00:00:00+00:00</lastmod>
+   <changefreq>monthly</changefreq>
+   <priority>0.8000</priority>
+</url>
+<url>
+   <loc>https://mohitpatel.org/#skills</loc>
+   <lastmod>2025-08-20T00:00:00+00:00</lastmod>
+   <changefreq>monthly</changefreq>
+   <priority>0.8000</priority>
+</url>
+<url>
+   <loc>https://mohitpatel.org/#experience</loc>
+   <lastmod>2025-08-20T00:00:00+00:00</lastmod>
+   <changefreq>monthly</changefreq>
+   <priority>0.8000</priority>
+</url>
+<url>
+   <loc>https://mohitpatel.org/#projects</loc>
+   <lastmod>2025-08-20T00:00:00+00:00</lastmod>
+   <changefreq>monthly</changefreq>
+   <priority>0.8000</priority>
+</url>
+<url>
+   <loc>https://mohitpatel.org/#certificates</loc>
+   <lastmod>2025-08-20T00:00:00+00:00</lastmod>
+   <changefreq>monthly</changefreq>
+   <priority>0.8000</priority>
+</url>
+<url>
+   <loc>https://mohitpatel.org/#contact</loc>
+   <lastmod>2025-08-20T00:00:00+00:00</lastmod>
+   <changefreq>monthly</changefreq>
+   <priority>0.8000</priority>
+</url>
 </urlset>
