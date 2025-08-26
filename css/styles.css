@@ -303,8 +303,8 @@ header {
 
 .hero-description {
   font-size: 1.2rem;
+  text-align: center;
   margin-bottom: 40px;
-  max-width: 600px;
   color: var(--lighter);
 }
 
@@ -731,8 +731,9 @@ section {
 
 /* Projects Section */
 .projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 30px;
   margin-top: 40px;
 }
@@ -747,6 +748,8 @@ section {
   backdrop-filter: blur(10px);
   transform: translateY(50px);
   opacity: 0;
+  flex: 0 1 350px;
+  max-width: 350px;
 }
 
 .project-card.active {
@@ -971,6 +974,26 @@ footer {
   opacity: 0.7;
 }
 
+/* Typing Animation */
+.typing {
+  display: inline-block;
+  overflow: hidden;
+  border-right: 0.15em solid var(--primary);
+  white-space: nowrap;
+  letter-spacing: 0.15em;
+  animation: typing 2s steps(11), blink-caret 0.5s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: var(--primary) }
+}
+
 /* Animations */
 @keyframes fadeInUp {
   from {
@@ -1193,6 +1216,10 @@ footer {
     width: 100%;
     height: auto;
     margin-top: 20px;
+  }
+
+  .project-card {
+    max-width: none;
   }
 }
 
