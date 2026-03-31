@@ -119,6 +119,7 @@
             <a href="#experience">Experience</a>
             <a href="#projects">Projects</a>
             <a href="#certificates">Certificates</a>
+            <a href="#education">Education</a>
             <a href="#contact">Contact</a>
             <a href="#contact" class="cta-button hire-me-mobile">Hire Me</a>
             <a
@@ -144,8 +145,8 @@
           <div class="hero-text">
             <div class="hero-subtitle">Hello, I'm</div>
             <h1 class="hero-title">
-              <span class="">Mohit Patel</span>
-              <span>Full Stack Developer</span>
+              <span>Mohit Patel</span>
+              <span class="typewriter" id="typewriter"></span>
             </h1>
             <p class="hero-description">
               Passionate about building scalable web applications with
@@ -202,6 +203,57 @@
       </div>
     </section>
 
+    <section id="about-terminal">
+      <div class="container">
+        <div class="section-title">
+          <h2>Know Me Better</h2>
+        </div>
+
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <div class="terminal-dots">
+              <span class="dot-red"></span>
+              <span class="dot-yellow"></span>
+              <span class="dot-green"></span>
+            </div>
+            <div class="terminal-title">mohit@portfolio:~</div>
+            <div class="terminal-actions">
+              <button class="terminal-clear-btn" id="terminalClear" title="Clear terminal">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="terminal-body" id="terminalBody">
+            <div class="terminal-line">
+              <span class="terminal-prompt">$</span>
+              <span class="terminal-text">Welcome! I'm <span class="terminal-highlight">Mohit's portfolio bot</span>. Click a question below or type your own to know more about me.</span>
+            </div>
+            <div class="terminal-line">
+              <span class="terminal-prompt">$</span>
+              <span class="terminal-text terminal-muted">Type <span class="terminal-cmd">help</span> to see available commands...</span>
+            </div>
+          </div>
+
+          <div class="terminal-input-area">
+            <span class="terminal-prompt">$</span>
+            <input type="text" class="terminal-input" id="terminalInput" placeholder="Type a command or question..." autocomplete="off" />
+          </div>
+
+          <div class="terminal-suggestions" id="terminalSuggestions">
+            <button class="suggestion-chip" data-cmd="whoami">whoami</button>
+            <button class="suggestion-chip" data-cmd="skills">skills</button>
+            <button class="suggestion-chip" data-cmd="experience">experience</button>
+            <button class="suggestion-chip" data-cmd="education">education</button>
+            <button class="suggestion-chip" data-cmd="projects">projects</button>
+            <button class="suggestion-chip" data-cmd="contact">contact</button>
+            <button class="suggestion-chip" data-cmd="hobbies">hobbies</button>
+            <button class="suggestion-chip" data-cmd="help">help</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="skills">
       <div class="container">
         <div class="section-title">
@@ -221,11 +273,14 @@
               <div class="skill-item">HTML5</div>
               <div class="skill-item">CSS3</div>
               <div class="skill-item">JavaScript (ES6+)</div>
+              <div class="skill-item">TypeScript</div>
               <div class="skill-item">Redux</div>
               <div class="skill-item">Tailwind CSS</div>
               <div class="skill-item">Bootstrap</div>
-              <div class="skill-item">Responsive Design</div>
               <div class="skill-item">Material UI</div>
+              <div class="skill-item">Axios</div>
+              <div class="skill-item">React Hook Form</div>
+              <div class="skill-item">Responsive Design</div>
               <div class="skill-item">UI/UX Best Practices</div>
             </div>
           </div>
@@ -246,6 +301,7 @@
               <div class="skill-item">JavaScript</div>
               <div class="skill-item">Java</div>
               <div class="skill-item">RESTful APIs</div>
+              <div class="skill-item">MVC Architecture</div>
               <div class="skill-item">Socket.io</div>
               <div class="skill-item">Cloud Storage</div>
               <div class="skill-item">JWT/OAuth2 Authentication</div>
@@ -347,7 +403,7 @@
                 <div class="detail-item">
                   <i class="fab fa-git-alt"></i>
                   <span
-                    >Implemented Google Maps API for mapping and location-based services.</span
+                    >Worked in Agile sprint-based development using GitHub for version control and collaboration.</span
                   >
                 </div>
               </div>
@@ -489,9 +545,9 @@
                 effectively.
               </p>
               <div class="project-tech">
-                <div class="tech-item">React</div>
                 <div class="tech-item">Next.js</div>
                 <div class="tech-item">Node.js</div>
+                <div class="tech-item">Express.js</div>
                 <div class="tech-item">MongoDB</div>
                 <div class="tech-item">Git</div>
               </div>
@@ -527,6 +583,7 @@
                 <div class="tech-item">Express</div>
                 <div class="tech-item">MongoDB</div>
                 <div class="tech-item">Socket.io</div>
+                <div class="tech-item">Tailwind CSS</div>
               </div>
               <div class="project-links">
                 <a
@@ -642,6 +699,20 @@
             >
           </div>
 
+          <div class="certificate-slide">
+            <div class="certificate-placeholder">
+              <i class="fas fa-database"></i>
+            </div>
+            <h3 class="certificate-title">
+              MS SQL Developer Course
+            </h3>
+            <a
+              href="#"
+              class="certificate-link"
+              >View Certificate</a
+            >
+          </div>
+
           <div class="slider-controls">
             <button type="button" class="slider-btn prev">&#10094;</button>
             <button type="button" class="slider-btn next">&#10095;</button>
@@ -652,6 +723,45 @@
             <span class="dot" onclick="currentSlide(2)"></span>
             <span class="dot" onclick="currentSlide(3)"></span>
             <span class="dot" onclick="currentSlide(4)"></span>
+            <span class="dot" onclick="currentSlide(5)"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="container">
+        <div class="section-title">
+          <h2>Education</h2>
+        </div>
+
+        <div class="education-grid">
+          <div class="education-card">
+            <div class="education-icon">
+              <i class="fas fa-graduation-cap"></i>
+            </div>
+            <div class="education-info">
+              <h3 class="education-degree">Master of Computer Applications (MCA)</h3>
+              <p class="education-school">Dr. A.P.J. Abdul Kalam Technical University, Uttar Pradesh, Lucknow</p>
+              <div class="education-meta">
+                <span class="education-year"><i class="fas fa-calendar-alt"></i> 2022 - 2024</span>
+                <span class="education-grade"><i class="fas fa-star"></i> CGPA: 8.26</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="education-card">
+            <div class="education-icon">
+              <i class="fas fa-graduation-cap"></i>
+            </div>
+            <div class="education-info">
+              <h3 class="education-degree">Bachelor of Science (B.Sc)</h3>
+              <p class="education-school">Invertis University, Bareilly</p>
+              <div class="education-meta">
+                <span class="education-year"><i class="fas fa-calendar-alt"></i> 2017 - 2020</span>
+                <span class="education-grade"><i class="fas fa-star"></i> 82.37%</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -768,6 +878,10 @@
       </div>
     </section>
 
+    <button class="scroll-top" id="scrollTop" title="Back to top">
+      <i class="fas fa-chevron-up"></i>
+    </button>
+
     <footer>
       <div class="container">
         <div class="footer-content">
@@ -835,17 +949,88 @@
         });
       });
 
-      // Header scroll effect
+      // Header scroll effect + active nav highlighting
+      const sections = document.querySelectorAll("section[id]");
+      const navItems = document.querySelectorAll(".nav-links a[href^='#']");
+      const scrollTopBtn = document.getElementById("scrollTop");
+
       window.addEventListener("scroll", () => {
         const header = document.querySelector("header");
-        if (window.scrollY > 100) {
+        const scrollY = window.scrollY;
+
+        if (scrollY > 100) {
           header.style.padding = "10px 0";
           header.style.boxShadow = "0 5px 20px rgba(0, 0, 0, 0.1)";
         } else {
           header.style.padding = "20px 0";
           header.style.boxShadow = "none";
         }
+
+        // Active nav highlighting
+        let current = "";
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop - 120;
+          if (scrollY >= sectionTop) {
+            current = section.getAttribute("id");
+          }
+        });
+        navItems.forEach((link) => {
+          link.classList.remove("active-link");
+          if (link.getAttribute("href") === "#" + current) {
+            link.classList.add("active-link");
+          }
+        });
+
+        // Scroll-to-top button visibility
+        if (scrollY > 500) {
+          scrollTopBtn.classList.add("visible");
+        } else {
+          scrollTopBtn.classList.remove("visible");
+        }
       });
+
+      // Scroll to top
+      scrollTopBtn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      // Typewriter effect
+      const typewriterEl = document.getElementById("typewriter");
+      const roles = [
+        "Full Stack Developer",
+        "MERN Stack Developer",
+        "Node.js Developer",
+        "React.js Developer",
+      ];
+      let roleIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+
+      function typeWriter() {
+        const currentRole = roles[roleIndex];
+        if (isDeleting) {
+          typewriterEl.textContent = currentRole.substring(0, charIndex - 1);
+          charIndex--;
+        } else {
+          typewriterEl.textContent = currentRole.substring(0, charIndex + 1);
+          charIndex++;
+        }
+
+        let speed = isDeleting ? 40 : 80;
+
+        if (!isDeleting && charIndex === currentRole.length) {
+          speed = 2000;
+          isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+          isDeleting = false;
+          roleIndex = (roleIndex + 1) % roles.length;
+          speed = 400;
+        }
+
+        setTimeout(typeWriter, speed);
+      }
+
+      typeWriter();
 
       // Animation on scroll
       const observerOptions = {
@@ -861,7 +1046,7 @@
       }, observerOptions);
 
       document
-        .querySelectorAll(".skill-card, .project-card, .timeline-item")
+        .querySelectorAll(".skill-card, .project-card, .timeline-item, .education-card")
         .forEach((el) => {
           observer.observe(el);
         });
@@ -932,9 +1117,196 @@
           durationText.trim();
       }
 
-      // Call the function initially and then every day to update
       calculateCurrentDuration();
-      setInterval(calculateCurrentDuration, 86400000); // Update daily
+      setInterval(calculateCurrentDuration, 86400000);
+
+      // Terminal Chatbot
+      const terminalBody = document.getElementById("terminalBody");
+      const terminalInput = document.getElementById("terminalInput");
+      const terminalClear = document.getElementById("terminalClear");
+      const suggestionChips = document.querySelectorAll(".suggestion-chip");
+
+      const botResponses = {
+        whoami: [
+          "Hey! I'm <span class='terminal-highlight'>Mohit Patel</span> — a Full Stack Developer based in Gurgaon, Haryana.",
+          "I'm a results-driven <span class='terminal-highlight'>Node.js & MERN Stack Developer</span> with 1.5+ years of hands-on experience.",
+          "I build scalable REST APIs, real-time apps, and cloud-integrated full-stack solutions.",
+          "Currently working at <span class='terminal-highlight'>Life Layer Health Solutions Pvt. Ltd</span> as a Full Stack Developer."
+        ],
+        skills: [
+          "<span class='terminal-cmd'>// Frontend</span>",
+          "React.js | Redux | TypeScript | Tailwind CSS | Material UI | Axios | React Hook Form",
+          "<span class='terminal-cmd'>// Backend</span>",
+          "Node.js | Express.js | REST APIs | Socket.io | JWT | OAuth2 | MVC | Redis",
+          "<span class='terminal-cmd'>// Databases</span>",
+          "MongoDB | Mongoose | MySQL | Aggregation Pipelines",
+          "<span class='terminal-cmd'>// Cloud & Tools</span>",
+          "AWS S3 | Google Cloud | Docker | Git | Postman | Jest | CI/CD"
+        ],
+        experience: [
+          "<span class='terminal-highlight'>Full Stack Developer</span> @ Life Layer Health Solutions — <span class='terminal-cmd'>June 2024 - Present</span>",
+          "  → Built secure backend APIs with Node.js, Express & JWT auth",
+          "  → Implemented Redis caching — reduced DB queries by ~70%, 10x faster APIs",
+          "  → Built reusable React components with hooks & custom hooks",
+          "  → Integrated AWS S3, Google Cloud & Utho for file handling",
+          "  → Real-time features with Socket.io (chat, notifications, live status)",
+          "  → Integrated Razorpay payment gateway",
+          "  → Agile sprint-based development with GitHub collaboration"
+        ],
+        education: [
+          "<span class='terminal-highlight'>MCA</span> — Dr. A.P.J. Abdul Kalam Technical University, Lucknow",
+          "  CGPA: <span class='terminal-cmd'>8.26</span> | 2022 - 2024",
+          "",
+          "<span class='terminal-highlight'>B.Sc</span> — Invertis University, Bareilly",
+          "  Score: <span class='terminal-cmd'>82.37%</span> | 2017 - 2020"
+        ],
+        projects: [
+          "<span class='terminal-highlight'>1. ShopEase</span> — Full e-commerce platform with Razorpay payments, admin dashboard",
+          "   Tech: React, Node.js, Express, MongoDB, Redux, Tailwind",
+          "",
+          "<span class='terminal-highlight'>2. AI Interview Prep</span> — AI-powered question generator with voice responses",
+          "   Tech: Next.js, Node.js, Express, MongoDB",
+          "",
+          "<span class='terminal-highlight'>3. SastaGram</span> — Social media with real-time chat, follow system, notifications",
+          "   Tech: MERN, Socket.io, Tailwind CSS",
+          "",
+          "<span class='terminal-highlight'>4. Watchman System</span> — Campus security & visitor tracking system",
+          "   Tech: PHP, Apache, MySQL"
+        ],
+        contact: [
+          "📧 Email: <span class='terminal-highlight'>mohit.patel.edu@gmail.com</span>",
+          "📱 Phone: <span class='terminal-highlight'>+91 7060993826</span>",
+          "📍 Location: <span class='terminal-highlight'>Gurgaon, Haryana, India</span>",
+          "🔗 LinkedIn: <span class='terminal-cmd'>linkedin.com/in/mohit-patel-51338a245</span>",
+          "💻 GitHub: <span class='terminal-cmd'>github.com/moohiit</span>",
+          "",
+          "Feel free to reach out! I'm an <span class='terminal-highlight'>immediate joiner</span>."
+        ],
+        hobbies: [
+          "When I'm not coding, you'll find me:",
+          "  → 🎮 Exploring new technologies & building side projects",
+          "  → 📚 Learning about system design & scalable architectures",
+          "  → 🎧 Listening to music while debugging at 2 AM",
+          "  → ☕ Fueled by chai and clean code"
+        ],
+        help: [
+          "Available commands:",
+          "  <span class='terminal-cmd'>whoami</span>       — Know who I am",
+          "  <span class='terminal-cmd'>skills</span>       — My technical skills",
+          "  <span class='terminal-cmd'>experience</span>   — Work experience",
+          "  <span class='terminal-cmd'>education</span>    — Academic background",
+          "  <span class='terminal-cmd'>projects</span>     — Featured projects",
+          "  <span class='terminal-cmd'>contact</span>      — How to reach me",
+          "  <span class='terminal-cmd'>hobbies</span>      — What I do for fun",
+          "  <span class='terminal-cmd'>clear</span>        — Clear the terminal",
+          "",
+          "Or type anything — I'll try my best to answer!"
+        ]
+      };
+
+      const fuzzyMatch = {
+        "who are you": "whoami", "about": "whoami", "about you": "whoami",
+        "introduce": "whoami", "name": "whoami", "who": "whoami", "yourself": "whoami",
+        "tech": "skills", "technologies": "skills", "stack": "skills", "what do you know": "skills",
+        "work": "experience", "job": "experience", "company": "experience", "career": "experience",
+        "study": "education", "college": "education", "degree": "education", "university": "education",
+        "project": "projects", "portfolio": "projects", "built": "projects", "made": "projects",
+        "email": "contact", "phone": "contact", "reach": "contact", "hire": "contact", "connect": "contact",
+        "fun": "hobbies", "hobby": "hobbies", "free time": "hobbies", "interests": "hobbies",
+        "hi": "greeting", "hello": "greeting", "hey": "greeting",
+      };
+
+      function addTerminalLine(text, isCommand) {
+        const line = document.createElement("div");
+        line.classList.add("terminal-line");
+        if (isCommand) {
+          line.innerHTML = `<span class="terminal-prompt">$</span><span class="terminal-text terminal-user-cmd">${text}</span>`;
+        } else {
+          line.innerHTML = `<span class="terminal-response">${text}</span>`;
+        }
+        terminalBody.appendChild(line);
+      }
+
+      function typeResponse(lines, index) {
+        if (index >= lines.length) return;
+        const line = document.createElement("div");
+        line.classList.add("terminal-line", "terminal-typing");
+        line.innerHTML = `<span class="terminal-response">${lines[index]}</span>`;
+        terminalBody.appendChild(line);
+        terminalBody.scrollTop = terminalBody.scrollHeight;
+
+        setTimeout(() => {
+          line.classList.remove("terminal-typing");
+          line.classList.add("terminal-typed");
+          typeResponse(lines, index + 1);
+        }, 80 + lines[index].length * 2);
+      }
+
+      function processCommand(input) {
+        const cmd = input.trim().toLowerCase();
+        if (!cmd) return;
+
+        addTerminalLine(input, true);
+
+        if (cmd === "clear") {
+          terminalBody.innerHTML = "";
+          addTerminalLine("Terminal cleared. Type <span class='terminal-cmd'>help</span> for commands.", false);
+          terminalBody.scrollTop = terminalBody.scrollHeight;
+          return;
+        }
+
+        let responseKey = botResponses[cmd] ? cmd : null;
+
+        if (!responseKey) {
+          for (const [keyword, key] of Object.entries(fuzzyMatch)) {
+            if (cmd.includes(keyword)) {
+              responseKey = key;
+              break;
+            }
+          }
+        }
+
+        if (responseKey === "greeting") {
+          const greetings = [
+            "Hey there! 👋 Nice to meet you. Type <span class='terminal-cmd'>help</span> to explore!",
+            "Hello! Welcome to my portfolio terminal. Try <span class='terminal-cmd'>whoami</span> to learn about me!",
+            "Hi! I'm Mohit's portfolio bot. Ask me anything!"
+          ];
+          setTimeout(() => {
+            addTerminalLine(greetings[Math.floor(Math.random() * greetings.length)], false);
+            terminalBody.scrollTop = terminalBody.scrollHeight;
+          }, 300);
+          return;
+        }
+
+        if (responseKey && botResponses[responseKey]) {
+          setTimeout(() => {
+            typeResponse(botResponses[responseKey], 0);
+          }, 300);
+        } else {
+          setTimeout(() => {
+            addTerminalLine(`<span class="terminal-error">Command not found:</span> ${cmd}. Type <span class="terminal-cmd">help</span> for available commands.`, false);
+            terminalBody.scrollTop = terminalBody.scrollHeight;
+          }, 300);
+        }
+      }
+
+      terminalInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          processCommand(terminalInput.value);
+          terminalInput.value = "";
+        }
+      });
+
+      suggestionChips.forEach((chip) => {
+        chip.addEventListener("click", () => {
+          processCommand(chip.dataset.cmd);
+        });
+      });
+
+      terminalClear.addEventListener("click", () => {
+        processCommand("clear");
+      });
     </script>
   </body>
 </html>

@@ -154,11 +154,13 @@ header {
   transition: var(--transition);
 }
 
-.nav-links a:hover {
+.nav-links a:hover,
+.nav-links a.active-link {
   color: var(--primary);
 }
 
-.nav-links a:hover::after {
+.nav-links a:hover::after,
+.nav-links a.active-link::after {
   width: 100%;
 }
 
@@ -419,6 +421,220 @@ section {
   height: 4px;
   background: var(--primary);
   border-radius: 2px;
+}
+
+/* Terminal Chatbot Section */
+.terminal-window {
+  max-width: 800px;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 255, 204, 0.15);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(0, 255, 204, 0.05);
+  background: rgba(6, 16, 35, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.terminal-header {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background: rgba(10, 25, 47, 0.9);
+  border-bottom: 1px solid rgba(0, 255, 204, 0.1);
+}
+
+.terminal-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.dot-red,
+.dot-yellow,
+.dot-green {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.dot-red { background: #ff5f57; }
+.dot-yellow { background: #ffbd2e; }
+.dot-green { background: #28c840; }
+
+.terminal-title {
+  flex: 1;
+  text-align: center;
+  font-family: "Orbitron", monospace;
+  font-size: 0.8rem;
+  color: rgba(202, 240, 248, 0.5);
+  letter-spacing: 1px;
+}
+
+.terminal-actions {
+  display: flex;
+}
+
+.terminal-clear-btn {
+  background: none;
+  border: none;
+  color: rgba(202, 240, 248, 0.4);
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: var(--transition);
+}
+
+.terminal-clear-btn:hover {
+  color: var(--primary);
+  background: rgba(0, 255, 204, 0.1);
+}
+
+.terminal-body {
+  padding: 20px;
+  min-height: 200px;
+  max-height: 400px;
+  overflow-y: auto;
+  font-family: 'Courier New', 'Fira Code', monospace;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  scroll-behavior: smooth;
+}
+
+.terminal-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.terminal-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.terminal-body::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 204, 0.2);
+  border-radius: 3px;
+}
+
+.terminal-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 255, 204, 0.4);
+}
+
+.terminal-line {
+  margin-bottom: 4px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.terminal-prompt {
+  color: var(--primary);
+  font-weight: 700;
+  user-select: none;
+  min-width: 14px;
+}
+
+.terminal-text {
+  color: var(--lighter);
+}
+
+.terminal-muted {
+  color: rgba(202, 240, 248, 0.4);
+}
+
+.terminal-highlight {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.terminal-cmd {
+  color: #ffbd2e;
+}
+
+.terminal-error {
+  color: #ff5f57;
+  font-weight: 600;
+}
+
+.terminal-user-cmd {
+  color: #28c840;
+  font-weight: 500;
+}
+
+.terminal-response {
+  color: var(--lighter);
+  padding-left: 24px;
+}
+
+.terminal-typing {
+  opacity: 0;
+  animation: terminalFadeIn 0.15s ease forwards;
+}
+
+.terminal-typed {
+  opacity: 1;
+}
+
+@keyframes terminalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.terminal-input-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border-top: 1px solid rgba(0, 255, 204, 0.08);
+  background: rgba(10, 25, 47, 0.5);
+}
+
+.terminal-input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  color: #28c840;
+  font-family: 'Courier New', 'Fira Code', monospace;
+  font-size: 0.9rem;
+  caret-color: var(--primary);
+}
+
+.terminal-input::placeholder {
+  color: rgba(202, 240, 248, 0.25);
+}
+
+.terminal-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 14px 20px;
+  border-top: 1px solid rgba(0, 255, 204, 0.06);
+  background: rgba(10, 25, 47, 0.3);
+}
+
+.suggestion-chip {
+  background: rgba(0, 255, 204, 0.08);
+  border: 1px solid rgba(0, 255, 204, 0.15);
+  color: var(--primary);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: var(--transition);
+  letter-spacing: 0.5px;
+}
+
+.suggestion-chip:hover {
+  background: var(--primary);
+  color: var(--darker);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 255, 204, 0.3);
 }
 
 /* Skills Section */
@@ -773,6 +989,11 @@ section {
   background-size: cover;
   background-position: center;
   position: relative;
+  transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-img {
+  transform: scale(1.05);
 }
 
 .project-img::after {
@@ -979,24 +1200,157 @@ footer {
   opacity: 0.7;
 }
 
-/* Typing Animation */
-.typing {
+/* Typewriter Animation */
+.typewriter {
   display: inline-block;
-  overflow: hidden;
-  border-right: 0.15em solid var(--primary);
-  white-space: nowrap;
-  letter-spacing: 0.15em;
-  animation: typing 2s steps(11), blink-caret 0.5s step-end infinite;
+  min-height: 1.2em;
 }
 
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
+.typewriter::after {
+  content: "|";
+  animation: blink-caret 0.7s step-end infinite;
+  color: var(--primary);
+  font-weight: 300;
 }
 
 @keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: var(--primary) }
+  from, to { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Scroll to Top Button */
+.scroll-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: var(--darker);
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: var(--transition);
+  box-shadow: 0 5px 20px rgba(0, 255, 204, 0.3);
+}
+
+.scroll-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.scroll-top:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 255, 204, 0.5);
+}
+
+/* Education Section */
+.education-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.education-card {
+  background: rgba(20, 40, 70, 0.3);
+  border-radius: 15px;
+  padding: 30px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  border: 1px solid rgba(0, 255, 204, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: var(--transition);
+  transform: translateY(50px);
+  opacity: 0;
+}
+
+.education-card.active {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.education-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary);
+  box-shadow: 0 10px 30px rgba(0, 255, 204, 0.15);
+}
+
+.education-icon {
+  width: 60px;
+  height: 60px;
+  min-width: 60px;
+  background: linear-gradient(135deg, rgba(0, 255, 204, 0.15), rgba(123, 44, 191, 0.15));
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--primary);
+}
+
+.education-degree {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.education-school {
+  font-size: 0.95rem;
+  color: var(--lighter);
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.education-meta {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.education-year,
+.education-grade {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: var(--light);
+  background: rgba(0, 255, 204, 0.1);
+  padding: 5px 12px;
+  border-radius: 20px;
+}
+
+.education-year i,
+.education-grade i {
+  color: var(--primary);
+  font-size: 0.85rem;
+}
+
+/* Certificate Placeholder (for certificates without images) */
+.certificate-placeholder {
+  width: 200px;
+  height: 150px;
+  margin: 0 auto 20px;
+  background: linear-gradient(135deg, rgba(0, 255, 204, 0.1), rgba(123, 44, 191, 0.1));
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: var(--primary);
+  border: 2px dashed rgba(0, 255, 204, 0.2);
 }
 
 /* Animations */
@@ -1160,8 +1514,34 @@ footer {
   }
 
   .skills-container,
-  .projects-grid {
+  .projects-grid,
+  .education-grid {
     grid-template-columns: 1fr;
+  }
+
+  .education-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .education-meta {
+    justify-content: center;
+  }
+
+  .terminal-body {
+    max-height: 300px;
+    padding: 15px;
+    font-size: 0.82rem;
+  }
+
+  .suggestion-chip {
+    font-size: 0.75rem;
+    padding: 5px 12px;
+  }
+
+  .terminal-title {
+    font-size: 0.7rem;
   }
 
   .hero-buttons {
@@ -1235,6 +1615,17 @@ footer {
 
   .section-title h2 {
     font-size: 1.8rem;
+  }
+
+  .education-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .scroll-top {
+    bottom: 20px;
+    right: 20px;
+    width: 42px;
+    height: 42px;
   }
 
   .project-card {
