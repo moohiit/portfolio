@@ -41,6 +41,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./css/styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <link rel="canonical" href="https://mohitpatel.org/" />
     <script type="application/ld+json">
       {
@@ -130,6 +131,10 @@
             >
           </nav>
 
+          <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+            <i class="fas fa-moon" id="themeIcon"></i>
+          </button>
+
           <div class="hamburger" id="hamburger">
             <span></span>
             <span></span>
@@ -199,6 +204,33 @@
             title="Whatsapp"
             ><i class="fab fa-whatsapp"></i
           ></a>
+        </div>
+      </div>
+    </section>
+
+    <section id="stats">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-briefcase"></i></div>
+            <div class="stat-number" data-target="1.5">0</div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-project-diagram"></i></div>
+            <div class="stat-number" data-target="10">0</div>
+            <div class="stat-label">Projects Completed</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-code"></i></div>
+            <div class="stat-number" data-target="15000">0</div>
+            <div class="stat-label">Lines of Code</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-mug-hot"></i></div>
+            <div class="stat-number" data-target="500">0</div>
+            <div class="stat-label">Cups of Chai</div>
+          </div>
         </div>
       </div>
     </section>
@@ -329,6 +361,74 @@
               <div class="skill-item">Testing (Jest)</div>
               <div class="skill-item">npm/yarn</div>
               <div class="skill-item">CI/CD</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="radar-chart-container">
+          <h3 class="radar-title">Skill Proficiency</h3>
+          <div class="radar-wrapper">
+            <canvas id="skillsRadar"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="github-activity">
+      <div class="container">
+        <div class="section-title">
+          <h2>GitHub Activity</h2>
+        </div>
+
+        <div class="github-heatmap-card">
+          <div class="github-profile-row">
+            <img src="https://avatars.githubusercontent.com/u/109367447?v=4" alt="Mohit Patel" class="github-avatar" />
+            <div class="github-profile-info">
+              <h3 class="github-username">moohiit</h3>
+              <p class="github-bio">Full Stack Developer | MERN Stack</p>
+            </div>
+            <a href="https://github.com/moohiit" class="btn-outline github-follow-btn" target="_blank">
+              <i class="fab fa-github"></i> Follow
+            </a>
+          </div>
+
+          <div class="github-stats-row" id="githubStats">
+            <div class="github-stat">
+              <span class="github-stat-value" id="ghRepos">--</span>
+              <span class="github-stat-label">Repos</span>
+            </div>
+            <div class="github-stat">
+              <span class="github-stat-value" id="ghFollowers">--</span>
+              <span class="github-stat-label">Followers</span>
+            </div>
+            <div class="github-stat">
+              <span class="github-stat-value" id="ghFollowing">--</span>
+              <span class="github-stat-label">Following</span>
+            </div>
+            <div class="github-stat">
+              <span class="github-stat-value" id="ghContributions">--</span>
+              <span class="github-stat-label">Contributions (Year)</span>
+            </div>
+          </div>
+
+          <div class="heatmap-container">
+            <div class="heatmap-months" id="heatmapMonths"></div>
+            <div class="heatmap-grid-wrapper">
+              <div class="heatmap-days">
+                <span>Mon</span>
+                <span>Wed</span>
+                <span>Fri</span>
+              </div>
+              <div class="heatmap-grid" id="heatmapGrid"></div>
+            </div>
+            <div class="heatmap-legend">
+              <span class="heatmap-legend-label">Less</span>
+              <span class="heatmap-cell" data-level="0"></span>
+              <span class="heatmap-cell" data-level="1"></span>
+              <span class="heatmap-cell" data-level="2"></span>
+              <span class="heatmap-cell" data-level="3"></span>
+              <span class="heatmap-cell" data-level="4"></span>
+              <span class="heatmap-legend-label">More</span>
             </div>
           </div>
         </div>
@@ -912,6 +1012,13 @@
               ><i class="fab fa-twitter"></i
             ></a>
           </div>
+          <div class="visitor-counter">
+            <i class="fas fa-eye"></i>
+            <span>Visitors: </span>
+            <img src="https://mohitpatel.goatcounter.com/counter//count.svg"
+              alt="visitor count"
+              class="visitor-count-badge" />
+          </div>
           <div class="copyright">© 2025 Mohit Patel. All Rights Reserved.</div>
         </div>
       </div>
@@ -1125,6 +1232,332 @@
       calculateCurrentDuration();
       setInterval(calculateCurrentDuration, 86400000);
 
+      // ========== Dark/Light Theme Toggle ==========
+      const themeToggle = document.getElementById("themeToggle");
+      const themeIcon = document.getElementById("themeIcon");
+      const savedTheme = localStorage.getItem("theme") || "dark";
+
+      function applyTheme(theme) {
+        document.body.setAttribute("data-theme", theme);
+        if (theme === "light") {
+          themeIcon.classList.remove("fa-moon");
+          themeIcon.classList.add("fa-sun");
+        } else {
+          themeIcon.classList.remove("fa-sun");
+          themeIcon.classList.add("fa-moon");
+        }
+        localStorage.setItem("theme", theme);
+        // Update radar chart colors if it exists
+        if (window.skillsRadarChart) {
+          updateRadarChartTheme(theme);
+        }
+      }
+
+      applyTheme(savedTheme);
+
+      themeToggle.addEventListener("click", () => {
+        const current = document.body.getAttribute("data-theme") || "dark";
+        applyTheme(current === "dark" ? "light" : "dark");
+      });
+
+      // ========== Stats Counter Animation ==========
+      const statNumbers = document.querySelectorAll(".stat-number");
+      let statsAnimated = false;
+
+      const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !statsAnimated) {
+            statsAnimated = true;
+            statNumbers.forEach((stat) => {
+              const target = parseFloat(stat.dataset.target);
+              const isDecimal = target % 1 !== 0;
+              const duration = 2000;
+              const steps = 60;
+              const increment = target / steps;
+              let current = 0;
+              let step = 0;
+
+              const timer = setInterval(() => {
+                step++;
+                current += increment;
+                if (step >= steps) {
+                  current = target;
+                  clearInterval(timer);
+                }
+                if (isDecimal) {
+                  stat.textContent = current.toFixed(1) + "+";
+                } else if (target >= 1000) {
+                  stat.textContent = Math.floor(current).toLocaleString() + "+";
+                } else {
+                  stat.textContent = Math.floor(current) + "+";
+                }
+              }, duration / steps);
+            });
+          }
+        });
+      }, { threshold: 0.3 });
+
+      const statsSection = document.getElementById("stats");
+      if (statsSection) statsObserver.observe(statsSection);
+
+      // ========== Skills Radar Chart ==========
+      function getRadarColors(theme) {
+        if (theme === "light") {
+          return {
+            bg1: "rgba(0, 180, 150, 0.15)",
+            border1: "rgba(0, 180, 150, 0.8)",
+            bg2: "rgba(123, 44, 191, 0.15)",
+            border2: "rgba(123, 44, 191, 0.8)",
+            grid: "rgba(0, 0, 0, 0.1)",
+            labels: "#333333",
+            ticks: "#666666",
+          };
+        }
+        return {
+          bg1: "rgba(0, 255, 204, 0.15)",
+          border1: "rgba(0, 255, 204, 0.8)",
+          bg2: "rgba(123, 44, 191, 0.15)",
+          border2: "rgba(123, 44, 191, 0.8)",
+          grid: "rgba(255, 255, 255, 0.1)",
+          labels: "#caf0f8",
+          ticks: "#caf0f8",
+        };
+      }
+
+      function updateRadarChartTheme(theme) {
+        const colors = getRadarColors(theme);
+        const chart = window.skillsRadarChart;
+        chart.data.datasets[0].backgroundColor = colors.bg1;
+        chart.data.datasets[0].borderColor = colors.border1;
+        chart.data.datasets[0].pointBackgroundColor = colors.border1;
+        chart.data.datasets[1].backgroundColor = colors.bg2;
+        chart.data.datasets[1].borderColor = colors.border2;
+        chart.data.datasets[1].pointBackgroundColor = colors.border2;
+        chart.options.scales.r.grid.color = colors.grid;
+        chart.options.scales.r.angleLines.color = colors.grid;
+        chart.options.scales.r.pointLabels.color = colors.labels;
+        chart.options.scales.r.ticks.color = colors.ticks;
+        chart.update();
+      }
+
+      const radarCtx = document.getElementById("skillsRadar");
+      if (radarCtx) {
+        const currentTheme = document.body.getAttribute("data-theme") || "dark";
+        const colors = getRadarColors(currentTheme);
+
+        window.skillsRadarChart = new Chart(radarCtx, {
+          type: "radar",
+          data: {
+            labels: [
+              "React.js",
+              "Node.js",
+              "MongoDB",
+              "TypeScript",
+              "Socket.io",
+              "Redis",
+              "AWS/Cloud",
+              "Docker",
+            ],
+            datasets: [
+              {
+                label: "Proficiency",
+                data: [90, 88, 85, 70, 80, 75, 72, 55],
+                backgroundColor: colors.bg1,
+                borderColor: colors.border1,
+                borderWidth: 2,
+                pointBackgroundColor: colors.border1,
+                pointBorderColor: colors.border1,
+                pointRadius: 4,
+              },
+              {
+                label: "Interest",
+                data: [85, 92, 80, 80, 75, 78, 85, 70],
+                backgroundColor: colors.bg2,
+                borderColor: colors.border2,
+                borderWidth: 2,
+                pointBackgroundColor: colors.border2,
+                pointBorderColor: colors.border2,
+                pointRadius: 4,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            scales: {
+              r: {
+                beginAtZero: true,
+                max: 100,
+                ticks: {
+                  stepSize: 20,
+                  color: colors.ticks,
+                  backdropColor: "transparent",
+                  font: { size: 10 },
+                },
+                grid: { color: colors.grid },
+                angleLines: { color: colors.grid },
+                pointLabels: {
+                  color: colors.labels,
+                  font: { size: 12, family: "Poppins" },
+                },
+              },
+            },
+            plugins: {
+              legend: {
+                labels: {
+                  color: colors.labels,
+                  font: { family: "Poppins" },
+                  usePointStyle: true,
+                  pointStyle: "circle",
+                },
+              },
+            },
+          },
+        });
+      }
+
+      // ========== GitHub Heatmap ==========
+      async function fetchGitHubData() {
+        try {
+          const res = await fetch("https://api.github.com/users/moohiit");
+          if (!res.ok) throw new Error("GitHub API error");
+          const user = await res.json();
+
+          document.getElementById("ghRepos").textContent = user.public_repos;
+          document.getElementById("ghFollowers").textContent = user.followers;
+          document.getElementById("ghFollowing").textContent = user.following;
+
+          // Fetch contribution events to build heatmap
+          await fetchGitHubEvents(user.login);
+        } catch (err) {
+          console.warn("GitHub API failed, using fallback data:", err);
+          document.getElementById("ghRepos").textContent = "20+";
+          document.getElementById("ghFollowers").textContent = "10+";
+          document.getElementById("ghFollowing").textContent = "15+";
+          generateFallbackHeatmap();
+        }
+      }
+
+      async function fetchGitHubEvents(username) {
+        const contributionMap = {};
+        const today = new Date();
+        const oneYearAgo = new Date(today);
+        oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+
+        try {
+          // Fetch multiple pages of events (max 10 pages of 30 = 300 events)
+          for (let page = 1; page <= 3; page++) {
+            const res = await fetch(
+              `https://api.github.com/users/${username}/events/public?per_page=100&page=${page}`
+            );
+            if (!res.ok) break;
+            const events = await res.json();
+            if (events.length === 0) break;
+
+            events.forEach((event) => {
+              const date = event.created_at.split("T")[0];
+              contributionMap[date] = (contributionMap[date] || 0) + 1;
+            });
+          }
+        } catch (e) {
+          console.warn("Events fetch failed:", e);
+        }
+
+        // Count total contributions
+        const totalContribs = Object.values(contributionMap).reduce(
+          (a, b) => a + b,
+          0
+        );
+        document.getElementById("ghContributions").textContent =
+          totalContribs > 0 ? totalContribs + "+" : "100+";
+
+        buildHeatmap(contributionMap);
+      }
+
+      function generateFallbackHeatmap() {
+        const map = {};
+        const today = new Date();
+        for (let i = 0; i < 365; i++) {
+          const d = new Date(today);
+          d.setDate(d.getDate() - i);
+          const key = d.toISOString().split("T")[0];
+          map[key] = Math.random() > 0.6 ? Math.floor(Math.random() * 5) : 0;
+        }
+        document.getElementById("ghContributions").textContent = "100+";
+        buildHeatmap(map);
+      }
+
+      function buildHeatmap(contributionMap) {
+        const grid = document.getElementById("heatmapGrid");
+        const monthsEl = document.getElementById("heatmapMonths");
+        grid.innerHTML = "";
+        monthsEl.innerHTML = "";
+
+        const today = new Date();
+        const startDate = new Date(today);
+        startDate.setDate(startDate.getDate() - 364);
+
+        // Adjust to start on a Sunday
+        const dayOfWeek = startDate.getDay();
+        startDate.setDate(startDate.getDate() - dayOfWeek);
+
+        const totalDays =
+          Math.ceil((today - startDate) / (1000 * 60 * 60 * 24)) + 1;
+        const weeks = Math.ceil(totalDays / 7);
+
+        // Build month labels
+        const monthNames = [
+          "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+          "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+        ];
+        let lastMonth = -1;
+        for (let w = 0; w < weeks; w++) {
+          const d = new Date(startDate);
+          d.setDate(d.getDate() + w * 7);
+          const month = d.getMonth();
+          if (month !== lastMonth) {
+            const span = document.createElement("span");
+            span.textContent = monthNames[month];
+            span.style.gridColumnStart = w + 1;
+            monthsEl.appendChild(span);
+            lastMonth = month;
+          }
+        }
+
+        // Build grid columns (weeks)
+        for (let w = 0; w < weeks; w++) {
+          const col = document.createElement("div");
+          col.classList.add("heatmap-week");
+
+          for (let d = 0; d < 7; d++) {
+            const cellDate = new Date(startDate);
+            cellDate.setDate(cellDate.getDate() + w * 7 + d);
+
+            const cell = document.createElement("div");
+            cell.classList.add("heatmap-cell");
+
+            if (cellDate > today) {
+              cell.setAttribute("data-level", "0");
+              cell.style.opacity = "0.3";
+            } else {
+              const dateStr = cellDate.toISOString().split("T")[0];
+              const count = contributionMap[dateStr] || 0;
+              let level = 0;
+              if (count >= 8) level = 4;
+              else if (count >= 5) level = 3;
+              else if (count >= 3) level = 2;
+              else if (count >= 1) level = 1;
+              cell.setAttribute("data-level", level);
+              cell.title = `${dateStr}: ${count} contribution${count !== 1 ? "s" : ""}`;
+            }
+            col.appendChild(cell);
+          }
+          grid.appendChild(col);
+        }
+      }
+
+      fetchGitHubData();
+
       // Terminal Chatbot
       const terminalBody = document.getElementById("terminalBody");
       const terminalInput = document.getElementById("terminalInput");
@@ -1313,5 +1746,7 @@
         processCommand("clear");
       });
     </script>
+    <script data-goatcounter="https://mohitpatel.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
   </body>
 </html>
