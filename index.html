@@ -41,6 +41,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./css/styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <link rel="canonical" href="https://mohitpatel.org/" />
     <script type="application/ld+json">
       {
@@ -102,6 +103,9 @@
   </head>
 
   <body>
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="custom-cursor" id="customCursor"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
     <div class="grid-pattern"></div>
     <div class="stars"></div>
 
@@ -126,9 +130,14 @@
               class="cta-button resume-button"
               href="./files/MohitPatelResume.pdf"
               download="Mohit_Patel_Resume.pdf"
-              >Resume</a
+              id="resumeBtn"
+              ><i class="fas fa-download"></i> Resume</a
             >
           </nav>
+
+          <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+            <i class="fas fa-moon" id="themeIcon"></i>
+          </button>
 
           <div class="hamburger" id="hamburger">
             <span></span>
@@ -199,6 +208,33 @@
             title="Whatsapp"
             ><i class="fab fa-whatsapp"></i
           ></a>
+        </div>
+      </div>
+    </section>
+
+    <section id="stats">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-briefcase"></i></div>
+            <div class="stat-number" data-target="1.5">0</div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-project-diagram"></i></div>
+            <div class="stat-number" data-target="10">0</div>
+            <div class="stat-label">Projects Completed</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-code"></i></div>
+            <div class="stat-number" data-target="15000">0</div>
+            <div class="stat-label">Lines of Code</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-mug-hot"></i></div>
+            <div class="stat-number" data-target="500">0</div>
+            <div class="stat-label">Cups of Chai</div>
+          </div>
         </div>
       </div>
     </section>
@@ -330,6 +366,106 @@
               <div class="skill-item">npm/yarn</div>
               <div class="skill-item">CI/CD</div>
             </div>
+          </div>
+        </div>
+
+        <div class="radar-chart-container">
+          <h3 class="radar-title">Skill Proficiency</h3>
+          <div class="radar-wrapper">
+            <canvas id="skillsRadar"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="github-activity">
+      <div class="container">
+        <div class="section-title">
+          <h2>GitHub Activity</h2>
+        </div>
+
+        <div class="github-heatmap-card">
+          <div class="github-profile-row">
+            <img src="https://avatars.githubusercontent.com/u/109367447?v=4" alt="Mohit Patel" class="github-avatar" />
+            <div class="github-profile-info">
+              <h3 class="github-username">moohiit</h3>
+              <p class="github-bio">Full Stack Developer | MERN Stack</p>
+            </div>
+            <a href="https://github.com/moohiit" class="btn-outline github-follow-btn" target="_blank">
+              <i class="fab fa-github"></i> Follow
+            </a>
+          </div>
+
+          <div class="github-stats-row" id="githubStats">
+            <div class="github-stat">
+              <span class="github-stat-value" id="ghRepos">--</span>
+              <span class="github-stat-label">Repos</span>
+            </div>
+            <div class="github-stat">
+              <span class="github-stat-value" id="ghFollowers">--</span>
+              <span class="github-stat-label">Followers</span>
+            </div>
+            <div class="github-stat">
+              <span class="github-stat-value" id="ghFollowing">--</span>
+              <span class="github-stat-label">Following</span>
+            </div>
+            <div class="github-stat">
+              <span class="github-stat-value" id="ghContributions">--</span>
+              <span class="github-stat-label">Contributions (Year)</span>
+            </div>
+          </div>
+
+          <div class="heatmap-container">
+            <div class="heatmap-months" id="heatmapMonths"></div>
+            <div class="heatmap-grid-wrapper">
+              <div class="heatmap-days">
+                <span>Mon</span>
+                <span>Wed</span>
+                <span>Fri</span>
+              </div>
+              <div class="heatmap-grid" id="heatmapGrid"></div>
+            </div>
+            <div class="heatmap-legend">
+              <span class="heatmap-legend-label">Less</span>
+              <span class="heatmap-cell" data-level="0"></span>
+              <span class="heatmap-cell" data-level="1"></span>
+              <span class="heatmap-cell" data-level="2"></span>
+              <span class="heatmap-cell" data-level="3"></span>
+              <span class="heatmap-cell" data-level="4"></span>
+              <span class="heatmap-legend-label">More</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="code-showcase">
+      <div class="container">
+        <div class="section-title">
+          <h2>Code Showcase</h2>
+        </div>
+
+        <div class="code-editor">
+          <div class="code-editor-header">
+            <div class="terminal-dots">
+              <span class="dot-red"></span>
+              <span class="dot-yellow"></span>
+              <span class="dot-green"></span>
+            </div>
+            <div class="code-tabs">
+              <button class="code-tab active" data-snippet="0">React Hook</button>
+              <button class="code-tab" data-snippet="1">Express API</button>
+              <button class="code-tab" data-snippet="2">MongoDB</button>
+              <button class="code-tab" data-snippet="3">Socket.io</button>
+            </div>
+          </div>
+          <div class="code-editor-body">
+            <div class="code-line-numbers" id="codeLineNumbers"></div>
+            <pre class="code-content" id="codeContent"></pre>
+          </div>
+          <div class="code-editor-footer">
+            <span class="code-lang" id="codeLang">JavaScript</span>
+            <span class="code-info">Auto-typing...</span>
           </div>
         </div>
       </div>
@@ -767,6 +903,29 @@
       </div>
     </section>
 
+    <section id="spotify">
+      <div class="container">
+        <div class="section-title">
+          <h2>Recently Played</h2>
+        </div>
+
+        <div class="spotify-card">
+          <div class="spotify-header">
+            <i class="fab fa-spotify spotify-icon"></i>
+            <span>What I've been listening to</span>
+          </div>
+          <div class="spotify-widget">
+            <img
+              src="https://spotify-recently-played-readme.vercel.app/api?user=316rzbhecq2khqsc4ysqdhbgqmdu&count=5&width=600&unique=true"
+              alt="Spotify Recently Played"
+              class="spotify-img"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="contact">
       <div class="container">
         <div class="section-title">
@@ -878,6 +1037,48 @@
       </div>
     </section>
 
+    <!-- Secret Arcade (Ctrl+G) -->
+    <div class="arcade-overlay" id="arcadeOverlay">
+      <div class="arcade-modal">
+        <div class="arcade-header">
+          <h2 class="arcade-title"><i class="fas fa-gamepad"></i> Secret Arcade</h2>
+          <p class="arcade-hint">You found it! Press <kbd>Ctrl+G</kbd> or click X to close</p>
+          <button class="arcade-close" id="arcadeClose"><i class="fas fa-times"></i></button>
+        </div>
+
+        <div class="arcade-menu" id="arcadeMenu">
+          <button class="arcade-game-btn" data-game="snake">
+            <i class="fas fa-snake"></i>
+            <span class="arcade-game-icon">🐍</span>
+            <span class="arcade-game-name">Snake</span>
+            <span class="arcade-game-desc">Classic snake game</span>
+          </button>
+          <button class="arcade-game-btn" data-game="memory">
+            <span class="arcade-game-icon">🧠</span>
+            <span class="arcade-game-name">Memory Match</span>
+            <span class="arcade-game-desc">Match the tech logos</span>
+          </button>
+          <button class="arcade-game-btn" data-game="typing">
+            <span class="arcade-game-icon">⌨️</span>
+            <span class="arcade-game-name">Typing Test</span>
+            <span class="arcade-game-desc">Test your speed</span>
+          </button>
+        </div>
+
+        <div class="arcade-game-area" id="arcadeGameArea" style="display:none;">
+          <button class="arcade-back-btn" id="arcadeBack"><i class="fas fa-arrow-left"></i> Back</button>
+          <canvas id="snakeCanvas" width="400" height="400" style="display:none;"></canvas>
+          <div id="memoryGame" style="display:none;"></div>
+          <div id="typingGame" style="display:none;"></div>
+        </div>
+      </div>
+    </div>
+
+    <button class="arcade-hint-badge" id="arcadeHintBadge" title="Secret Arcade">
+      <i class="fas fa-gamepad"></i>
+      <span>Ctrl+G</span>
+    </button>
+
     <button class="scroll-top" id="scrollTop" title="Back to top">
       <i class="fas fa-chevron-up"></i>
     </button>
@@ -911,6 +1112,13 @@
               title="Twitter"
               ><i class="fab fa-twitter"></i
             ></a>
+          </div>
+          <div class="visitor-counter">
+            <i class="fas fa-eye"></i>
+            <span>Visitors: </span>
+            <img src="https://mohitpatel.goatcounter.com/counter//count.svg"
+              alt="visitor count"
+              class="visitor-count-badge" />
           </div>
           <div class="copyright">© 2025 Mohit Patel. All Rights Reserved.</div>
         </div>
@@ -949,7 +1157,51 @@
         });
       });
 
-      // Header scroll effect + active nav highlighting
+      // ========== Page Load Progress Bar ==========
+      const progressBar = document.getElementById("progressBar");
+
+      // ========== Custom Cursor ==========
+      const customCursor = document.getElementById("customCursor");
+      const cursorDot = document.getElementById("cursorDot");
+      let cursorX = 0, cursorY = 0;
+      let dotX = 0, dotY = 0;
+
+      document.addEventListener("mousemove", (e) => {
+        cursorX = e.clientX;
+        cursorY = e.clientY;
+        cursorDot.style.left = cursorX + "px";
+        cursorDot.style.top = cursorY + "px";
+      });
+
+      function animateCursor() {
+        dotX += (cursorX - dotX) * 0.15;
+        dotY += (cursorY - dotY) * 0.15;
+        customCursor.style.left = dotX + "px";
+        customCursor.style.top = dotY + "px";
+        requestAnimationFrame(animateCursor);
+      }
+      animateCursor();
+
+      // Expand cursor on hoverable elements
+      const hoverTargets = "a, button, .skill-item, .tech-item, .project-card, .suggestion-chip, .code-tab, .social-icon, .arcade-game-btn, .memory-card, input, textarea";
+      document.querySelectorAll(hoverTargets).forEach((el) => {
+        el.addEventListener("mouseenter", () => {
+          customCursor.classList.add("cursor-hover");
+          cursorDot.classList.add("dot-hover");
+        });
+        el.addEventListener("mouseleave", () => {
+          customCursor.classList.remove("cursor-hover");
+          cursorDot.classList.remove("dot-hover");
+        });
+      });
+
+      // Hide custom cursor on touch devices
+      if ("ontouchstart" in window) {
+        customCursor.style.display = "none";
+        cursorDot.style.display = "none";
+      }
+
+      // Header scroll effect + active nav highlighting + progress bar
       const sections = document.querySelectorAll("section[id]");
       const navItems = document.querySelectorAll(".nav-links a[href^='#']");
       const scrollTopBtn = document.getElementById("scrollTop");
@@ -957,6 +1209,11 @@
       window.addEventListener("scroll", () => {
         const header = document.querySelector("header");
         const scrollY = window.scrollY;
+
+        // Progress bar
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
+        progressBar.style.width = scrollPercent + "%";
 
         if (scrollY > 100) {
           header.style.padding = "10px 0";
@@ -1125,6 +1382,930 @@
       calculateCurrentDuration();
       setInterval(calculateCurrentDuration, 86400000);
 
+      // ========== Dark/Light Theme Toggle ==========
+      const themeToggle = document.getElementById("themeToggle");
+      const themeIcon = document.getElementById("themeIcon");
+      const savedTheme = localStorage.getItem("theme") || "dark";
+
+      function applyTheme(theme) {
+        document.body.setAttribute("data-theme", theme);
+        if (theme === "light") {
+          themeIcon.classList.remove("fa-moon");
+          themeIcon.classList.add("fa-sun");
+        } else {
+          themeIcon.classList.remove("fa-sun");
+          themeIcon.classList.add("fa-moon");
+        }
+        localStorage.setItem("theme", theme);
+        // Update radar chart colors if it exists
+        if (window.skillsRadarChart) {
+          updateRadarChartTheme(theme);
+        }
+      }
+
+      applyTheme(savedTheme);
+
+      themeToggle.addEventListener("click", () => {
+        const current = document.body.getAttribute("data-theme") || "dark";
+        applyTheme(current === "dark" ? "light" : "dark");
+      });
+
+      // ========== Stats Counter Animation ==========
+      const statNumbers = document.querySelectorAll(".stat-number");
+      let statsAnimated = false;
+
+      const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !statsAnimated) {
+            statsAnimated = true;
+            statNumbers.forEach((stat) => {
+              const target = parseFloat(stat.dataset.target);
+              const isDecimal = target % 1 !== 0;
+              const duration = 2000;
+              const steps = 60;
+              const increment = target / steps;
+              let current = 0;
+              let step = 0;
+
+              const timer = setInterval(() => {
+                step++;
+                current += increment;
+                if (step >= steps) {
+                  current = target;
+                  clearInterval(timer);
+                }
+                if (isDecimal) {
+                  stat.textContent = current.toFixed(1) + "+";
+                } else if (target >= 1000) {
+                  stat.textContent = Math.floor(current).toLocaleString() + "+";
+                } else {
+                  stat.textContent = Math.floor(current) + "+";
+                }
+              }, duration / steps);
+            });
+          }
+        });
+      }, { threshold: 0.3 });
+
+      const statsSection = document.getElementById("stats");
+      if (statsSection) statsObserver.observe(statsSection);
+
+      // ========== Skills Radar Chart ==========
+      function getRadarColors(theme) {
+        if (theme === "light") {
+          return {
+            bg1: "rgba(0, 180, 150, 0.15)",
+            border1: "rgba(0, 180, 150, 0.8)",
+            bg2: "rgba(123, 44, 191, 0.15)",
+            border2: "rgba(123, 44, 191, 0.8)",
+            grid: "rgba(0, 0, 0, 0.1)",
+            labels: "#333333",
+            ticks: "#666666",
+          };
+        }
+        return {
+          bg1: "rgba(0, 255, 204, 0.15)",
+          border1: "rgba(0, 255, 204, 0.8)",
+          bg2: "rgba(123, 44, 191, 0.15)",
+          border2: "rgba(123, 44, 191, 0.8)",
+          grid: "rgba(255, 255, 255, 0.1)",
+          labels: "#caf0f8",
+          ticks: "#caf0f8",
+        };
+      }
+
+      function updateRadarChartTheme(theme) {
+        const colors = getRadarColors(theme);
+        const chart = window.skillsRadarChart;
+        chart.data.datasets[0].backgroundColor = colors.bg1;
+        chart.data.datasets[0].borderColor = colors.border1;
+        chart.data.datasets[0].pointBackgroundColor = colors.border1;
+        chart.data.datasets[1].backgroundColor = colors.bg2;
+        chart.data.datasets[1].borderColor = colors.border2;
+        chart.data.datasets[1].pointBackgroundColor = colors.border2;
+        chart.options.scales.r.grid.color = colors.grid;
+        chart.options.scales.r.angleLines.color = colors.grid;
+        chart.options.scales.r.pointLabels.color = colors.labels;
+        chart.options.scales.r.ticks.color = colors.ticks;
+        chart.update();
+      }
+
+      const radarCtx = document.getElementById("skillsRadar");
+      if (radarCtx) {
+        const currentTheme = document.body.getAttribute("data-theme") || "dark";
+        const colors = getRadarColors(currentTheme);
+
+        window.skillsRadarChart = new Chart(radarCtx, {
+          type: "radar",
+          data: {
+            labels: [
+              "React.js",
+              "Node.js",
+              "MongoDB",
+              "TypeScript",
+              "Socket.io",
+              "Redis",
+              "AWS/Cloud",
+              "Docker",
+            ],
+            datasets: [
+              {
+                label: "Proficiency",
+                data: [90, 88, 85, 70, 80, 75, 72, 55],
+                backgroundColor: colors.bg1,
+                borderColor: colors.border1,
+                borderWidth: 2,
+                pointBackgroundColor: colors.border1,
+                pointBorderColor: colors.border1,
+                pointRadius: 4,
+              },
+              {
+                label: "Interest",
+                data: [85, 92, 80, 80, 75, 78, 85, 70],
+                backgroundColor: colors.bg2,
+                borderColor: colors.border2,
+                borderWidth: 2,
+                pointBackgroundColor: colors.border2,
+                pointBorderColor: colors.border2,
+                pointRadius: 4,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            scales: {
+              r: {
+                beginAtZero: true,
+                max: 100,
+                ticks: {
+                  stepSize: 20,
+                  color: colors.ticks,
+                  backdropColor: "transparent",
+                  font: { size: 10 },
+                },
+                grid: { color: colors.grid },
+                angleLines: { color: colors.grid },
+                pointLabels: {
+                  color: colors.labels,
+                  font: { size: 12, family: "Poppins" },
+                },
+              },
+            },
+            plugins: {
+              legend: {
+                labels: {
+                  color: colors.labels,
+                  font: { family: "Poppins" },
+                  usePointStyle: true,
+                  pointStyle: "circle",
+                },
+              },
+            },
+          },
+        });
+      }
+
+      // ========== GitHub Heatmap ==========
+      async function fetchGitHubData() {
+        try {
+          const res = await fetch("https://api.github.com/users/moohiit");
+          if (!res.ok) throw new Error("GitHub API error");
+          const user = await res.json();
+
+          document.getElementById("ghRepos").textContent = user.public_repos;
+          document.getElementById("ghFollowers").textContent = user.followers;
+          document.getElementById("ghFollowing").textContent = user.following;
+
+          // Fetch contribution events to build heatmap
+          await fetchGitHubEvents(user.login);
+        } catch (err) {
+          console.warn("GitHub API failed, using fallback data:", err);
+          document.getElementById("ghRepos").textContent = "20+";
+          document.getElementById("ghFollowers").textContent = "10+";
+          document.getElementById("ghFollowing").textContent = "15+";
+          generateFallbackHeatmap();
+        }
+      }
+
+      async function fetchGitHubEvents(username) {
+        const contributionMap = {};
+        const today = new Date();
+        const oneYearAgo = new Date(today);
+        oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+
+        try {
+          // Fetch multiple pages of events (max 10 pages of 30 = 300 events)
+          for (let page = 1; page <= 3; page++) {
+            const res = await fetch(
+              `https://api.github.com/users/${username}/events/public?per_page=100&page=${page}`
+            );
+            if (!res.ok) break;
+            const events = await res.json();
+            if (events.length === 0) break;
+
+            events.forEach((event) => {
+              const date = event.created_at.split("T")[0];
+              contributionMap[date] = (contributionMap[date] || 0) + 1;
+            });
+          }
+        } catch (e) {
+          console.warn("Events fetch failed:", e);
+        }
+
+        // Count total contributions
+        const totalContribs = Object.values(contributionMap).reduce(
+          (a, b) => a + b,
+          0
+        );
+        document.getElementById("ghContributions").textContent =
+          totalContribs > 0 ? totalContribs + "+" : "100+";
+
+        buildHeatmap(contributionMap);
+      }
+
+      function generateFallbackHeatmap() {
+        const map = {};
+        const today = new Date();
+        for (let i = 0; i < 365; i++) {
+          const d = new Date(today);
+          d.setDate(d.getDate() - i);
+          const key = d.toISOString().split("T")[0];
+          map[key] = Math.random() > 0.6 ? Math.floor(Math.random() * 5) : 0;
+        }
+        document.getElementById("ghContributions").textContent = "100+";
+        buildHeatmap(map);
+      }
+
+      function buildHeatmap(contributionMap) {
+        const grid = document.getElementById("heatmapGrid");
+        const monthsEl = document.getElementById("heatmapMonths");
+        grid.innerHTML = "";
+        monthsEl.innerHTML = "";
+
+        const today = new Date();
+        const startDate = new Date(today);
+        startDate.setDate(startDate.getDate() - 364);
+
+        // Adjust to start on a Sunday
+        const dayOfWeek = startDate.getDay();
+        startDate.setDate(startDate.getDate() - dayOfWeek);
+
+        const totalDays =
+          Math.ceil((today - startDate) / (1000 * 60 * 60 * 24)) + 1;
+        const weeks = Math.ceil(totalDays / 7);
+
+        // Build month labels
+        const monthNames = [
+          "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+          "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+        ];
+        let lastMonth = -1;
+        for (let w = 0; w < weeks; w++) {
+          const d = new Date(startDate);
+          d.setDate(d.getDate() + w * 7);
+          const month = d.getMonth();
+          if (month !== lastMonth) {
+            const span = document.createElement("span");
+            span.textContent = monthNames[month];
+            span.style.gridColumnStart = w + 1;
+            monthsEl.appendChild(span);
+            lastMonth = month;
+          }
+        }
+
+        // Build grid columns (weeks)
+        for (let w = 0; w < weeks; w++) {
+          const col = document.createElement("div");
+          col.classList.add("heatmap-week");
+
+          for (let d = 0; d < 7; d++) {
+            const cellDate = new Date(startDate);
+            cellDate.setDate(cellDate.getDate() + w * 7 + d);
+
+            const cell = document.createElement("div");
+            cell.classList.add("heatmap-cell");
+
+            if (cellDate > today) {
+              cell.setAttribute("data-level", "0");
+              cell.style.opacity = "0.3";
+            } else {
+              const dateStr = cellDate.toISOString().split("T")[0];
+              const count = contributionMap[dateStr] || 0;
+              let level = 0;
+              if (count >= 8) level = 4;
+              else if (count >= 5) level = 3;
+              else if (count >= 3) level = 2;
+              else if (count >= 1) level = 1;
+              cell.setAttribute("data-level", level);
+              cell.title = `${dateStr}: ${count} contribution${count !== 1 ? "s" : ""}`;
+            }
+            col.appendChild(cell);
+          }
+          grid.appendChild(col);
+        }
+      }
+
+      fetchGitHubData();
+
+      // ========== Resume Download Analytics ==========
+      const resumeBtn = document.getElementById("resumeBtn");
+      if (resumeBtn) {
+        resumeBtn.addEventListener("click", () => {
+          if (window.goatcounter && window.goatcounter.count) {
+            window.goatcounter.count({ path: "/resume-download", event: true });
+          }
+        });
+      }
+
+      // ========== Code Snippet Showcase ==========
+      const codeSnippets = [
+        {
+          lang: "React.js",
+          code: `const useAuth = () => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) return setLoading(false);
+
+    axios.get("/api/auth/me", {
+      headers: { Authorization: \`Bearer \${token}\` }
+    })
+    .then(res => setUser(res.data.user))
+    .catch(() => localStorage.removeItem("token"))
+    .finally(() => setLoading(false));
+  }, []);
+
+  const login = async (email, password) => {
+    const { data } = await axios.post("/api/auth/login", {
+      email, password
+    });
+    localStorage.setItem("token", data.token);
+    setUser(data.user);
+  };
+
+  return { user, loading, login };
+};`
+        },
+        {
+          lang: "Express.js",
+          code: `const protect = async (req, res, next) => {
+  const token = req.headers.authorization
+    ?.split(" ")[1];
+
+  if (!token) {
+    return res.status(401).json({
+      message: "Not authorized"
+    });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = await User.findById(decoded.id)
+      .select("-password");
+    next();
+  } catch (err) {
+    res.status(401).json({
+      message: "Token expired"
+    });
+  }
+};
+
+router.get("/api/products",
+  cacheMiddleware(300),
+  async (req, res) => {
+    const products = await Product.find()
+      .populate("category")
+      .sort({ createdAt: -1 });
+    res.json({ success: true, products });
+  }
+);`
+        },
+        {
+          lang: "MongoDB",
+          code: `// Aggregation Pipeline - Sales Analytics
+const analytics = await Order.aggregate([
+  {
+    $match: {
+      status: "delivered",
+      createdAt: {
+        $gte: new Date(startDate),
+        $lte: new Date(endDate)
+      }
+    }
+  },
+  {
+    $group: {
+      _id: {
+        month: { $month: "$createdAt" },
+        year: { $year: "$createdAt" }
+      },
+      totalSales: { $sum: "$totalAmount" },
+      orderCount: { $sum: 1 },
+      avgOrderValue: { $avg: "$totalAmount" }
+    }
+  },
+  { $sort: { "_id.year": 1, "_id.month": 1 } }
+]);`
+        },
+        {
+          lang: "Socket.io",
+          code: `// Real-time Chat with Socket.io
+io.on("connection", (socket) => {
+  console.log("User connected:", socket.id);
+
+  socket.on("join_room", (roomId) => {
+    socket.join(roomId);
+    socket.to(roomId).emit("user_joined", {
+      userId: socket.userId,
+      timestamp: new Date()
+    });
+  });
+
+  socket.on("send_message", async (data) => {
+    const message = await Message.create({
+      sender: socket.userId,
+      room: data.roomId,
+      content: data.content
+    });
+
+    io.to(data.roomId).emit("new_message", {
+      ...message.toObject(),
+      sender: { name: socket.userName }
+    });
+  });
+
+  socket.on("typing", (roomId) => {
+    socket.to(roomId).emit("user_typing", {
+      userId: socket.userId
+    });
+  });
+});`
+        }
+      ];
+
+      let currentSnippet = 0;
+      let codeTypingTimer = null;
+
+      function typeCode(snippet) {
+        const codeEl = document.getElementById("codeContent");
+        const lineNumEl = document.getElementById("codeLineNumbers");
+        const langEl = document.getElementById("codeLang");
+        if (!codeEl) return;
+
+        langEl.textContent = snippet.lang;
+        codeEl.textContent = "";
+        lineNumEl.innerHTML = "";
+
+        const code = snippet.code;
+        let i = 0;
+        let lineCount = 1;
+        lineNumEl.innerHTML = "<span>1</span>";
+
+        clearInterval(codeTypingTimer);
+        codeTypingTimer = setInterval(() => {
+          if (i < code.length) {
+            codeEl.textContent += code[i];
+            if (code[i] === "\n") {
+              lineCount++;
+              lineNumEl.innerHTML += `<span>${lineCount}</span>`;
+            }
+            codeEl.parentElement.scrollTop = codeEl.parentElement.scrollHeight;
+            i++;
+          } else {
+            clearInterval(codeTypingTimer);
+            setTimeout(() => {
+              currentSnippet = (currentSnippet + 1) % codeSnippets.length;
+              document.querySelectorAll(".code-tab").forEach((t, idx) => {
+                t.classList.toggle("active", idx === currentSnippet);
+              });
+              typeCode(codeSnippets[currentSnippet]);
+            }, 4000);
+          }
+        }, 18);
+      }
+
+      document.querySelectorAll(".code-tab").forEach((tab) => {
+        tab.addEventListener("click", () => {
+          currentSnippet = parseInt(tab.dataset.snippet);
+          document.querySelectorAll(".code-tab").forEach((t) =>
+            t.classList.remove("active")
+          );
+          tab.classList.add("active");
+          typeCode(codeSnippets[currentSnippet]);
+        });
+      });
+
+      // Start code typing when section is visible
+      const codeObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            typeCode(codeSnippets[currentSnippet]);
+            codeObserver.disconnect();
+          }
+        });
+      }, { threshold: 0.3 });
+
+      const codeSection = document.getElementById("code-showcase");
+      if (codeSection) codeObserver.observe(codeSection);
+
+      // ========== Secret Arcade ==========
+      const arcadeOverlay = document.getElementById("arcadeOverlay");
+      const arcadeMenu = document.getElementById("arcadeMenu");
+      const arcadeGameArea = document.getElementById("arcadeGameArea");
+      const arcadeClose = document.getElementById("arcadeClose");
+      const arcadeBack = document.getElementById("arcadeBack");
+      let activeGame = null;
+
+      // Toggle arcade with Ctrl+G
+      document.addEventListener("keydown", (e) => {
+        if (e.ctrlKey && e.key === "g") {
+          e.preventDefault();
+          arcadeOverlay.classList.toggle("open");
+          if (!arcadeOverlay.classList.contains("open")) stopAllGames();
+        }
+        if (e.key === "Escape" && arcadeOverlay.classList.contains("open")) {
+          arcadeOverlay.classList.remove("open");
+          stopAllGames();
+        }
+      });
+
+      arcadeClose.addEventListener("click", () => {
+        arcadeOverlay.classList.remove("open");
+        stopAllGames();
+      });
+
+      // Floating arcade hint badge
+      const arcadeHintBadge = document.getElementById("arcadeHintBadge");
+      arcadeHintBadge.addEventListener("click", () => {
+        arcadeOverlay.classList.add("open");
+      });
+
+      arcadeBack.addEventListener("click", () => {
+        stopAllGames();
+        arcadeGameArea.style.display = "none";
+        arcadeMenu.style.display = "grid";
+      });
+
+      function stopAllGames() {
+        if (activeGame === "snake") clearInterval(snakeInterval);
+        activeGame = null;
+        document.getElementById("snakeCanvas").style.display = "none";
+        document.getElementById("memoryGame").style.display = "none";
+        document.getElementById("typingGame").style.display = "none";
+      }
+
+      document.querySelectorAll(".arcade-game-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const game = btn.dataset.game;
+          arcadeMenu.style.display = "none";
+          arcadeGameArea.style.display = "block";
+
+          if (game === "snake") startSnake();
+          else if (game === "memory") startMemory();
+          else if (game === "typing") startTyping();
+        });
+      });
+
+      // ---- SNAKE GAME ----
+      let snakeInterval;
+      function startSnake() {
+        activeGame = "snake";
+        const canvas = document.getElementById("snakeCanvas");
+        canvas.style.display = "block";
+        const ctx = canvas.getContext("2d");
+        const grid = 20;
+        const cols = canvas.width / grid;
+        const rows = canvas.height / grid;
+
+        let snake = [{ x: 10, y: 10 }];
+        let food = spawnFood();
+        let dir = { x: 1, y: 0 };
+        let nextDir = { x: 1, y: 0 };
+        let score = 0;
+        let gameOver = false;
+
+        function spawnFood() {
+          return {
+            x: Math.floor(Math.random() * cols),
+            y: Math.floor(Math.random() * rows)
+          };
+        }
+
+        function drawGame() {
+          // Background
+          ctx.fillStyle = "#0a192f";
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+          // Grid lines
+          ctx.strokeStyle = "rgba(0,255,204,0.05)";
+          for (let i = 0; i < cols; i++) {
+            ctx.beginPath(); ctx.moveTo(i * grid, 0); ctx.lineTo(i * grid, canvas.height); ctx.stroke();
+          }
+          for (let i = 0; i < rows; i++) {
+            ctx.beginPath(); ctx.moveTo(0, i * grid); ctx.lineTo(canvas.width, i * grid); ctx.stroke();
+          }
+
+          // Food
+          ctx.fillStyle = "#ff006e";
+          ctx.shadowColor = "#ff006e";
+          ctx.shadowBlur = 10;
+          ctx.beginPath();
+          ctx.arc(food.x * grid + grid / 2, food.y * grid + grid / 2, grid / 2 - 2, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.shadowBlur = 0;
+
+          // Snake
+          snake.forEach((seg, i) => {
+            ctx.fillStyle = i === 0 ? "#00ffcc" : "rgba(0,255,204,0.6)";
+            ctx.shadowColor = "#00ffcc";
+            ctx.shadowBlur = i === 0 ? 8 : 3;
+            ctx.fillRect(seg.x * grid + 1, seg.y * grid + 1, grid - 2, grid - 2);
+          });
+          ctx.shadowBlur = 0;
+
+          // Score
+          ctx.fillStyle = "#00ffcc";
+          ctx.font = "14px Orbitron";
+          ctx.fillText("Score: " + score, 10, 20);
+
+          if (gameOver) {
+            ctx.fillStyle = "rgba(0,0,0,0.7)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#00ffcc";
+            ctx.font = "28px Orbitron";
+            ctx.textAlign = "center";
+            ctx.fillText("Game Over!", canvas.width / 2, canvas.height / 2 - 15);
+            ctx.font = "16px Poppins";
+            ctx.fillText("Score: " + score, canvas.width / 2, canvas.height / 2 + 15);
+            ctx.font = "13px Poppins";
+            ctx.fillStyle = "rgba(255,255,255,0.5)";
+            ctx.fillText("Press Space to restart", canvas.width / 2, canvas.height / 2 + 45);
+            ctx.textAlign = "left";
+          }
+        }
+
+        function update() {
+          if (gameOver) return;
+          dir = nextDir;
+          const head = { x: snake[0].x + dir.x, y: snake[0].y + dir.y };
+
+          if (head.x < 0 || head.x >= cols || head.y < 0 || head.y >= rows ||
+              snake.some(s => s.x === head.x && s.y === head.y)) {
+            gameOver = true;
+            drawGame();
+            clearInterval(snakeInterval);
+            return;
+          }
+
+          snake.unshift(head);
+          if (head.x === food.x && head.y === food.y) {
+            score += 10;
+            food = spawnFood();
+          } else {
+            snake.pop();
+          }
+          drawGame();
+        }
+
+        function handleSnakeKey(e) {
+          if (activeGame !== "snake") return;
+          const k = e.key;
+          if (k === "ArrowUp" && dir.y === 0) nextDir = { x: 0, y: -1 };
+          else if (k === "ArrowDown" && dir.y === 0) nextDir = { x: 0, y: 1 };
+          else if (k === "ArrowLeft" && dir.x === 0) nextDir = { x: -1, y: 0 };
+          else if (k === "ArrowRight" && dir.x === 0) nextDir = { x: 1, y: 0 };
+          else if (k === " " && gameOver) {
+            snake = [{ x: 10, y: 10 }];
+            food = spawnFood();
+            dir = { x: 1, y: 0 };
+            nextDir = { x: 1, y: 0 };
+            score = 0;
+            gameOver = false;
+            snakeInterval = setInterval(update, 120);
+          }
+          if (["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"," "].includes(k)) e.preventDefault();
+        }
+
+        document.addEventListener("keydown", handleSnakeKey);
+        drawGame();
+        snakeInterval = setInterval(update, 120);
+      }
+
+      // ---- MEMORY MATCH GAME ----
+      function startMemory() {
+        activeGame = "memory";
+        const container = document.getElementById("memoryGame");
+        container.style.display = "block";
+
+        const techIcons = [
+          { name: "React", icon: "fab fa-react", color: "#61dafb" },
+          { name: "Node", icon: "fab fa-node-js", color: "#68a063" },
+          { name: "MongoDB", icon: "fas fa-database", color: "#4db33d" },
+          { name: "JS", icon: "fab fa-js-square", color: "#f7df1e" },
+          { name: "Docker", icon: "fab fa-docker", color: "#2496ed" },
+          { name: "Git", icon: "fab fa-git-alt", color: "#f05032" },
+          { name: "AWS", icon: "fab fa-aws", color: "#ff9900" },
+          { name: "CSS", icon: "fab fa-css3-alt", color: "#264de4" }
+        ];
+
+        const cards = [...techIcons, ...techIcons]
+          .sort(() => Math.random() - 0.5);
+
+        let flipped = [];
+        let matched = 0;
+        let moves = 0;
+        let locked = false;
+
+        container.innerHTML = `
+          <div class="memory-header">
+            <span class="memory-moves">Moves: <strong>0</strong></span>
+            <span class="memory-matched">Matched: <strong>0</strong>/8</span>
+          </div>
+          <div class="memory-grid">
+            ${cards.map((card, i) => `
+              <div class="memory-card" data-index="${i}" data-name="${card.name}">
+                <div class="memory-card-inner">
+                  <div class="memory-card-front">?</div>
+                  <div class="memory-card-back">
+                    <i class="${card.icon}" style="color:${card.color}"></i>
+                  </div>
+                </div>
+              </div>
+            `).join("")}
+          </div>
+        `;
+
+        container.querySelectorAll(".memory-card").forEach((card) => {
+          card.addEventListener("click", () => {
+            if (locked || card.classList.contains("flipped") || card.classList.contains("matched")) return;
+
+            card.classList.add("flipped");
+            flipped.push(card);
+
+            if (flipped.length === 2) {
+              moves++;
+              container.querySelector(".memory-moves strong").textContent = moves;
+              locked = true;
+
+              const [a, b] = flipped;
+              if (a.dataset.name === b.dataset.name) {
+                a.classList.add("matched");
+                b.classList.add("matched");
+                matched++;
+                container.querySelector(".memory-matched strong").textContent = matched;
+                flipped = [];
+                locked = false;
+
+                if (matched === 8) {
+                  setTimeout(() => {
+                    container.innerHTML += `
+                      <div class="memory-win">
+                        <h3>You Win!</h3>
+                        <p>Completed in ${moves} moves</p>
+                        <button class="cta-button memory-restart">Play Again</button>
+                      </div>
+                    `;
+                    container.querySelector(".memory-restart").addEventListener("click", () => startMemory());
+                  }, 500);
+                }
+              } else {
+                setTimeout(() => {
+                  a.classList.remove("flipped");
+                  b.classList.remove("flipped");
+                  flipped = [];
+                  locked = false;
+                }, 800);
+              }
+            }
+          });
+        });
+      }
+
+      // ---- TYPING SPEED TEST ----
+      function startTyping() {
+        activeGame = "typing";
+        const container = document.getElementById("typingGame");
+        container.style.display = "block";
+
+        const sentences = [
+          "const express = require('express');",
+          "app.use(cors({ origin: '*' }));",
+          "const user = await User.findById(id);",
+          "router.post('/api/login', authController);",
+          "io.on('connection', (socket) => {});",
+          "mongoose.connect(process.env.MONGO_URI);",
+          "const token = jwt.sign({ id }, secret);",
+          "res.status(200).json({ success: true });",
+          "const [state, setState] = useState(null);",
+          "useEffect(() => { fetchData(); }, []);"
+        ];
+
+        const shuffled = sentences.sort(() => Math.random() - 0.5).slice(0, 5);
+        const fullText = shuffled.join("\n");
+        let startTime = null;
+        let currentIndex = 0;
+        let errors = 0;
+        let finished = false;
+
+        container.innerHTML = `
+          <div class="typing-container">
+            <div class="typing-header">
+              <span class="typing-wpm">WPM: <strong>0</strong></span>
+              <span class="typing-accuracy">Accuracy: <strong>100%</strong></span>
+              <span class="typing-time">Time: <strong>0s</strong></span>
+            </div>
+            <div class="typing-text" id="typingText"></div>
+            <input type="text" class="typing-input" id="typingInput" placeholder="Start typing here..." autocomplete="off" autofocus />
+            <p class="typing-hint">Type the highlighted code above. Press Enter after each line.</p>
+          </div>
+        `;
+
+        const typingTextEl = document.getElementById("typingText");
+        const typingInput = document.getElementById("typingInput");
+
+        function renderText() {
+          let html = "";
+          for (let i = 0; i < fullText.length; i++) {
+            let cls = "";
+            if (i < currentIndex) cls = "typed-correct";
+            else if (i === currentIndex) cls = "typed-current";
+            const ch = fullText[i] === "\n" ? "↵\n" : fullText[i];
+            html += `<span class="${cls}">${ch}</span>`;
+          }
+          typingTextEl.innerHTML = html;
+        }
+
+        renderText();
+        typingInput.focus();
+
+        let wpmInterval = setInterval(() => {
+          if (!startTime || finished) return;
+          const elapsed = (Date.now() - startTime) / 1000;
+          container.querySelector(".typing-time strong").textContent = Math.floor(elapsed) + "s";
+          const words = currentIndex / 5;
+          const wpm = Math.round((words / elapsed) * 60) || 0;
+          container.querySelector(".typing-wpm strong").textContent = wpm;
+        }, 500);
+
+        typingInput.addEventListener("input", (e) => {
+          if (finished) return;
+          if (!startTime) startTime = Date.now();
+
+          const typed = e.data;
+          if (typed === null) return; // backspace
+
+          if (typed === fullText[currentIndex] || (fullText[currentIndex] === "\n" && typed === "\n")) {
+            currentIndex++;
+          } else if (fullText[currentIndex] === "\n") {
+            // skip, user needs to press enter
+            return;
+          } else {
+            errors++;
+            currentIndex++;
+          }
+
+          const accuracy = Math.max(0, Math.round(((currentIndex - errors) / currentIndex) * 100));
+          container.querySelector(".typing-accuracy strong").textContent = accuracy + "%";
+
+          typingInput.value = "";
+          renderText();
+
+          if (currentIndex >= fullText.length) {
+            finished = true;
+            clearInterval(wpmInterval);
+            const elapsed = (Date.now() - startTime) / 1000;
+            const words = fullText.length / 5;
+            const finalWpm = Math.round((words / elapsed) * 60);
+            const finalAccuracy = Math.max(0, Math.round(((fullText.length - errors) / fullText.length) * 100));
+
+            container.innerHTML += `
+              <div class="typing-result">
+                <h3>${finalWpm > 60 ? "Blazing Fast!" : finalWpm > 40 ? "Great Speed!" : "Keep Practicing!"}</h3>
+                <div class="typing-result-stats">
+                  <div><strong>${finalWpm}</strong> WPM</div>
+                  <div><strong>${finalAccuracy}%</strong> Accuracy</div>
+                  <div><strong>${Math.round(elapsed)}s</strong> Time</div>
+                </div>
+                <button class="cta-button typing-restart">Try Again</button>
+              </div>
+            `;
+            container.querySelector(".typing-restart").addEventListener("click", () => startTyping());
+          }
+        });
+
+        typingInput.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" && fullText[currentIndex] === "\n") {
+            e.preventDefault();
+            currentIndex++;
+            renderText();
+            typingInput.value = "";
+          }
+        });
+      }
+
       // Terminal Chatbot
       const terminalBody = document.getElementById("terminalBody");
       const terminalInput = document.getElementById("terminalInput");
@@ -1194,6 +2375,18 @@
           "  → 🎧 Listening to music while debugging at 2 AM",
           "  → ☕ Fueled by chai and clean code"
         ],
+        games: [
+          "🕹️ <span class='terminal-highlight'>Secret Arcade Unlocked!</span>",
+          "",
+          "Press <span class='terminal-cmd'>Ctrl+G</span> to open the arcade, or click the 🎮 badge at the bottom-left.",
+          "",
+          "Available games:",
+          "  🐍 <span class='terminal-highlight'>Snake</span> — Classic snake with neon glow",
+          "  🧠 <span class='terminal-highlight'>Memory Match</span> — Match tech stack icons",
+          "  ⌨️  <span class='terminal-highlight'>Typing Test</span> — Test your coding speed",
+          "",
+          "Have fun!"
+        ],
         help: [
           "Available commands:",
           "  <span class='terminal-cmd'>whoami</span>       — Know who I am",
@@ -1203,6 +2396,7 @@
           "  <span class='terminal-cmd'>projects</span>     — Featured projects",
           "  <span class='terminal-cmd'>contact</span>      — How to reach me",
           "  <span class='terminal-cmd'>hobbies</span>      — What I do for fun",
+          "  <span class='terminal-cmd'>games</span>        — 🕹️ Secret arcade",
           "  <span class='terminal-cmd'>clear</span>        — Clear the terminal",
           "",
           "Or type anything — I'll try my best to answer!"
@@ -1219,6 +2413,7 @@
         "email": "contact", "phone": "contact", "reach": "contact", "hire": "contact", "connect": "contact",
         "fun": "hobbies", "hobby": "hobbies", "free time": "hobbies", "interests": "hobbies",
         "hi": "greeting", "hello": "greeting", "hey": "greeting",
+        "game": "games", "play": "games", "arcade": "games", "snake": "games", "secret": "games",
       };
 
       function addTerminalLine(text, isCommand) {
@@ -1313,5 +2508,7 @@
         processCommand("clear");
       });
     </script>
+    <script data-goatcounter="https://mohitpatel.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
   </body>
 </html>
