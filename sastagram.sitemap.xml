@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+		<!--	created with www.mysitemapgenerator.com	-->
+		<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+	<loc>https://sastagram.mohitpatel.org/</loc>
+	<lastmod>2025-10-17T06:29:16+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://sastagram.mohitpatel.org/login</loc>
+	<lastmod>2025-10-17T06:29:16+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://sastagram.mohitpatel.org/signup</loc>
+	<lastmod>2025-10-17T06:29:16+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://sastagram.mohitpatel.org/profile/edit</loc>
+	<lastmod>2025-10-17T06:29:16+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://sastagram.mohitpatel.org/engine.io</loc>
+	<lastmod>2025-10-17T06:29:16+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://sastagram.mohitpatel.org/search</loc>
+	<lastmod>2025-10-17T06:29:16+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://sastagram.mohitpatel.org/explore</loc>
+	<lastmod>2025-10-17T06:29:16+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://sastagram.mohitpatel.org/messages</loc>
+	<lastmod>2025-10-17T06:29:16+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://sastagram.mohitpatel.org/notifications</loc>
+	<lastmod>2025-10-17T06:29:16+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://sastagram.mohitpatel.org/chat</loc>
+	<lastmod>2025-10-17T06:29:16+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+</urlset>
