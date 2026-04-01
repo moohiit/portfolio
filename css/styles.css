@@ -730,6 +730,12 @@ section {
   background: linear-gradient(to bottom, var(--primary), var(--secondary));
   left: 50%;
   transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.timeline.timeline-active::before {
+  opacity: 1;
 }
 
 .timeline-item {

@@ -1041,6 +1041,11 @@
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("active");
+            // Show the timeline line only when a timeline card becomes visible
+            if (entry.target.classList.contains("timeline-item")) {
+              const timeline = entry.target.closest(".timeline");
+              if (timeline) timeline.classList.add("timeline-active");
+            }
           }
         });
       }, observerOptions);
