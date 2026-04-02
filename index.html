@@ -45,8 +45,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./css/styles.css" />
-    <!-- defer so Chart.js doesn't block page render -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+    <!-- Chart.js loaded just-in-time before the inline script - do NOT use defer here as it runs after inline scripts -->
     <link rel="canonical" href="https://mohitpatel.org/" />
     <script type="application/ld+json">
       {
@@ -1177,6 +1176,8 @@
       </div>
     </footer>
 
+    <!-- Chart.js loaded synchronously right before the inline script that uses it -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script>
       // Mobile Menu Toggle
       const hamburger = document.getElementById("hamburger");
@@ -2603,6 +2604,6 @@ io.on("connection", (socket) => {
       });
     </script>
     <script data-goatcounter="https://mohitpatel.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+        async src="https://gc.zgo.at/count.js"></script>
   </body>
 </html>
