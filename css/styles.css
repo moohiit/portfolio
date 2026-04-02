@@ -20,9 +20,6 @@ body[data-theme="light"] {
   --darker: #e2e8f0;
   --light: #1a202c;
   --lighter: #2d3748;
-}
-
-body[data-theme="light"] {
   background: linear-gradient(135deg, #f0f4f8, #e2e8f0);
   color: #1a202c;
 }
@@ -269,18 +266,7 @@ body {
   }
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(rgb(0 0 0 / 80%) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(0 0 0 / 80%) 1px, transparent 1px);
-  z-index: -1;
-  pointer-events: none;
-}
+/* body::before grid removed — .grid-pattern div handles the background grid */
 
 .stars {
   position: fixed;
@@ -473,7 +459,8 @@ header {
 
 .resume-button {
   display: block;
-  width: 100px;
+  min-width: 110px;
+  width: auto;
   text-align: center;
   padding: 15px 10px;
 }
@@ -573,7 +560,7 @@ header {
 
 .hero-description {
   font-size: 1.2rem;
-  text-align: center;
+  text-align: left;
   margin-bottom: 40px;
   color: var(--lighter);
 }
@@ -1292,12 +1279,7 @@ section {
   margin: 15px 0;
 }
 
-.tech-item {
-  background: rgba(0, 255, 204, 0.1);
-  padding: 5px 12px;
-  border-radius: 30px;
-  font-size: 0.85rem;
-}
+/* .tech-item duplicate removed — canonical rule defined in the tech-stack block above */
 
 .project-links {
   display: flex;

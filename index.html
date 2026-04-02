@@ -14,7 +14,7 @@
     <meta name="author" content="Mohit Patel" />
     <meta
       property="og:title"
-      content="Mohit Patel | MERN Stack & Full Stack Web Developer"
+      content="Mohit Patel | MERN Stack &amp; Full Stack Web Developer"
     />
     <meta
       property="og:description"
@@ -32,6 +32,10 @@
       type="image/png"
     />
     <title>Mohit Patel | MERN Stack Developer Portfolio</title>
+    <!-- Preconnect to external origins for faster font/icon loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -41,7 +45,8 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./css/styles.css" />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <!-- defer so Chart.js doesn't block page render -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
     <link rel="canonical" href="https://mohitpatel.org/" />
     <script type="application/ld+json">
       {
@@ -182,30 +187,40 @@
             href="https://www.linkedin.com/in/mohit-patel-51338a245/"
             class="social-icon linkedin"
             title="LinkedIn"
+            target="_blank"
+            rel="noopener noreferrer"
             ><i class="fab fa-linkedin-in"></i
           ></a>
           <a
             href="https://github.com/moohiit"
             class="social-icon github"
             title="GitHub"
+            target="_blank"
+            rel="noopener noreferrer"
             ><i class="fab fa-github"></i
           ></a>
           <a
             href="https://www.instagram.com/m.o.h.i.t.p.a.t.e.l"
             class="social-icon instagram"
             title="Instagram"
+            target="_blank"
+            rel="noopener noreferrer"
             ><i class="fab fa-instagram"></i
           ></a>
           <a
             href="https://x.com/mooohiit"
             class="social-icon twitter"
             title="Twitter"
+            target="_blank"
+            rel="noopener noreferrer"
             ><i class="fab fa-twitter"></i
           ></a>
           <a
             href="https://wa.me/+917060993826"
             class="social-icon whatsapp"
             title="Whatsapp"
+            target="_blank"
+            rel="noopener noreferrer"
             ><i class="fab fa-whatsapp"></i
           ></a>
         </div>
@@ -386,12 +401,12 @@
 
         <div class="github-heatmap-card">
           <div class="github-profile-row">
-            <img src="https://avatars.githubusercontent.com/u/109367447?v=4" alt="Mohit Patel" class="github-avatar" />
+            <img src="https://avatars.githubusercontent.com/u/109367447?v=4" alt="Mohit Patel" class="github-avatar" loading="lazy" />
             <div class="github-profile-info">
               <h3 class="github-username">moohiit</h3>
               <p class="github-bio">Full Stack Developer | MERN Stack</p>
             </div>
-            <a href="https://github.com/moohiit" class="btn-outline github-follow-btn" target="_blank">
+            <a href="https://github.com/moohiit" class="btn-outline github-follow-btn" target="_blank" rel="noopener noreferrer">
               <i class="fab fa-github"></i> Follow
             </a>
           </div>
@@ -657,11 +672,15 @@
                 <a
                   href="https://shopease.mohitpatel.org/"
                   class="project-link demo-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   >Live Demo</a
                 >
                 <a
                   href="https://github.com/moohiit/e-com-shop"
                   class="project-link code-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   >View Code</a
                 >
               </div>
@@ -691,11 +710,15 @@
                 <a
                   href="https://ai-interview-prep-mohit.vercel.app/"
                   class="project-link demo-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   >Live Demo</a
                 >
                 <a
                   href="https://github.com/moohiit/ai-interview-prep"
                   class="project-link code-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   >View Code</a
                 >
               </div>
@@ -725,11 +748,15 @@
                 <a
                   href="https://sastagram.mohitpatel.org/"
                   class="project-link demo-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   >Live Demo</a
                 >
                 <a
                   href="https://github.com/moohiit/instagram-clone"
                   class="project-link code-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   >View Code</a
                 >
               </div>
@@ -757,11 +784,15 @@
                 <a
                   href="https://watchman.mohitpatel.org"
                   class="project-link demo-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   >Live Demo</a
                 >
                 <a
                   href="https://github.com/moohiit/watchman-system"
                   class="project-link code-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   >View Code</a
                 >
               </div>
@@ -783,6 +814,7 @@
               src="./images/Advance Excel.png"
               alt="Advance Excel Certificate"
               class="certificate-img"
+              loading="lazy"
             />
             <h3 class="certificate-title">
               Advance Certification in Microsoft Excel
@@ -790,6 +822,8 @@
             <a
               href="https://lms.intellipaat.com/certificate-link/?Yz0yNjYwOSZ1PTE2NDkxMiZleHQ9MQ=="
               class="certificate-link"
+              target="_blank"
+              rel="noopener noreferrer"
               >View Certificate</a
             >
           </div>
@@ -798,11 +832,14 @@
               src="./images/Data Science.png"
               alt="Data Science Certificate"
               class="certificate-img"
+              loading="lazy"
             />
             <h3 class="certificate-title">Data Science Course</h3>
             <a
               href="https://lms.intellipaat.com/certificate-link/?Yz01Nzk5JnU9MTY0OTEyJmV4dD0x"
               class="certificate-link"
+              target="_blank"
+              rel="noopener noreferrer"
               >View Certificate</a
             >
           </div>
@@ -811,6 +848,7 @@
               src="./images/MongoDB.png"
               alt="MongoDB Certificate"
               class="certificate-img"
+              loading="lazy"
             />
             <h3 class="certificate-title">
               MongoDB Developer's Toolkit: CRUD Mastery with Node.js
@@ -818,6 +856,8 @@
             <a
               href="https://www.geeksforgeeks.org/certificate/c97fe9133e67d1456dcc544d1410b7e5"
               class="certificate-link"
+              target="_blank"
+              rel="noopener noreferrer"
               >View Certificate</a
             >
           </div>
@@ -826,11 +866,14 @@
               src="./images/IBM_Data_Science.png"
               alt="IBM Data Science Certificate"
               class="certificate-img"
+              loading="lazy"
             />
             <h3 class="certificate-title">IBM Data Science</h3>
             <a
               href="https://coursera.org/share/2acc587f7d7b0d409c3c2fb2333f522a"
               class="certificate-link"
+              target="_blank"
+              rel="noopener noreferrer"
               >View Certificate</a
             >
           </div>
@@ -855,11 +898,11 @@
           </div>
 
           <div class="slider-dots">
-            <span class="dot active" onclick="currentSlide(1)"></span>
-            <span class="dot" onclick="currentSlide(2)"></span>
-            <span class="dot" onclick="currentSlide(3)"></span>
-            <span class="dot" onclick="currentSlide(4)"></span>
-            <span class="dot" onclick="currentSlide(5)"></span>
+            <span class="dot active" data-index="1"></span>
+            <span class="dot" data-index="2"></span>
+            <span class="dot" data-index="3"></span>
+            <span class="dot" data-index="4"></span>
+            <span class="dot" data-index="5"></span>
           </div>
         </div>
       </div>
@@ -920,7 +963,9 @@
               alt="Spotify Recently Played"
               class="spotify-img"
               loading="lazy"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
             />
+            <p style="display:none; text-align:center; opacity:0.5; padding:20px 0; font-size:0.9rem;">🎵 Spotify data unavailable right now.</p>
           </div>
         </div>
       </div>
@@ -1048,7 +1093,6 @@
 
         <div class="arcade-menu" id="arcadeMenu">
           <button class="arcade-game-btn" data-game="snake">
-            <i class="fas fa-snake"></i>
             <span class="arcade-game-icon">🐍</span>
             <span class="arcade-game-name">Snake</span>
             <span class="arcade-game-desc">Classic snake game</span>
@@ -1092,24 +1136,32 @@
               href="https://www.linkedin.com/in/mohit-patel-51338a245/"
               class="social-icon linkedin"
               title="LinkedIn"
+              target="_blank"
+              rel="noopener noreferrer"
               ><i class="fab fa-linkedin-in"></i
             ></a>
             <a
               href="https://github.com/moohiit"
               class="social-icon github"
               title="GitHub"
+              target="_blank"
+              rel="noopener noreferrer"
               ><i class="fab fa-github"></i
             ></a>
             <a
               href="https://www.instagram.com/m.o.h.i.t.p.a.t.e.l"
               class="social-icon instagram"
               title="Instagram"
+              target="_blank"
+              rel="noopener noreferrer"
               ><i class="fab fa-instagram"></i
             ></a>
             <a
               href="https://x.com/mooohiit"
               class="social-icon twitter"
               title="Twitter"
+              target="_blank"
+              rel="noopener noreferrer"
               ><i class="fab fa-twitter"></i
             ></a>
           </div>
@@ -1120,7 +1172,7 @@
               alt="visitor count"
               class="visitor-count-badge" />
           </div>
-          <div class="copyright">© 2025 Mohit Patel. All Rights Reserved.</div>
+          <div class="copyright" id="copyrightYear">© <span id="currentYear"></span> Mohit Patel. All Rights Reserved.</div>
         </div>
       </div>
     </footer>
@@ -1141,6 +1193,18 @@
           hamburger.classList.remove("active");
           navLinks.classList.remove("active");
         });
+      });
+
+      // Close mobile nav when clicking outside the panel
+      document.addEventListener("click", (e) => {
+        if (
+          navLinks.classList.contains("active") &&
+          !navLinks.contains(e.target) &&
+          !hamburger.contains(e.target)
+        ) {
+          hamburger.classList.remove("active");
+          navLinks.classList.remove("active");
+        }
       });
 
       // Smooth scrolling for navigation links
@@ -1166,11 +1230,18 @@
       let cursorX = 0, cursorY = 0;
       let dotX = 0, dotY = 0;
 
+      let rafId = null;
       document.addEventListener("mousemove", (e) => {
         cursorX = e.clientX;
         cursorY = e.clientY;
-        cursorDot.style.left = cursorX + "px";
-        cursorDot.style.top = cursorY + "px";
+        // Use RAF to batch dot position update with frame
+        if (!rafId) {
+          rafId = requestAnimationFrame(() => {
+            cursorDot.style.left = cursorX + "px";
+            cursorDot.style.top = cursorY + "px";
+            rafId = null;
+          });
+        }
       });
 
       function animateCursor() {
@@ -1347,7 +1418,12 @@
       });
 
       showSlides(slideIndex);
-      setInterval(() => plusSlides(1), 5000);
+      // Store interval so it can be cleared if needed
+      const sliderInterval = setInterval(() => plusSlides(1), 5000);
+
+      // Dynamic copyright year
+      const yearEl = document.getElementById("currentYear");
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
 
       // Calculate and display current experience duration
       function calculateCurrentDuration() {
@@ -1568,8 +1644,13 @@
 
       // ========== GitHub Heatmap ==========
       async function fetchGitHubData() {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 8000);
         try {
-          const res = await fetch("https://api.github.com/users/moohiit");
+          const res = await fetch("https://api.github.com/users/moohiit", {
+            signal: controller.signal,
+          });
+          clearTimeout(timeoutId);
           if (!res.ok) throw new Error("GitHub API error");
           const user = await res.json();
 
@@ -1580,6 +1661,7 @@
           // Fetch contribution events to build heatmap
           await fetchGitHubEvents(user.login);
         } catch (err) {
+          clearTimeout(timeoutId);
           console.warn("GitHub API failed, using fallback data:", err);
           document.getElementById("ghRepos").textContent = "20+";
           document.getElementById("ghFollowers").textContent = "10+";
@@ -1949,8 +2031,18 @@ io.on("connection", (socket) => {
         arcadeMenu.style.display = "grid";
       });
 
+      // Track the Snake keydown handler so it can be properly removed
+      let _snakeKeyHandler = null;
+
       function stopAllGames() {
-        if (activeGame === "snake") clearInterval(snakeInterval);
+        if (activeGame === "snake") {
+          clearInterval(snakeInterval);
+          // Remove snake key listener to prevent memory leak
+          if (_snakeKeyHandler) {
+            document.removeEventListener("keydown", _snakeKeyHandler);
+            _snakeKeyHandler = null;
+          }
+        }
         activeGame = null;
         document.getElementById("snakeCanvas").style.display = "none";
         document.getElementById("memoryGame").style.display = "none";
@@ -2089,6 +2181,8 @@ io.on("connection", (socket) => {
           if (["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"," "].includes(k)) e.preventDefault();
         }
 
+        // Store reference so stopAllGames can remove it
+        _snakeKeyHandler = handleSnakeKey;
         document.addEventListener("keydown", handleSnakeKey);
         drawGame();
         snakeInterval = setInterval(update, 120);
