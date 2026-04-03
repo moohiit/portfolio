@@ -1856,21 +1856,25 @@ footer {
 .visitor-counter {
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  gap: 6px;
   margin-top: 12px;
   font-size: 0.85rem;
-  opacity: 0.6;
+  opacity: 0.8;
   color: var(--primary);
 }
 
-.visitor-counter i {
-  font-size: 0.9rem;
+.visitor-counter span {
+  display: flex;
+  align-items: center;
+  line-height: 1;
 }
 
 .visitor-count-badge {
-  height: 18px;
-  vertical-align: middle;
-  filter: brightness(1.2);
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
 }
 
 /* Certificate Placeholder (for certificates without images) */
@@ -2869,18 +2873,3 @@ body[data-theme="light"] .spotify-card {
   }
 }
 
-/* ========== Visitor & Resume Count Badges ========== */
-.visitor-counter {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.85rem;
-  opacity: 0.8;
-}
-
-.visitor-count-badge {
-  font-weight: 700;
-  color: var(--primary);
-  font-size: 0.95rem;
-  letter-spacing: 0.5px;
-}

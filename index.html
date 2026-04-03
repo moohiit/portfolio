@@ -1838,6 +1838,9 @@ io.on("connection", (socket) => {
 
     // Track the Snake keydown handler so it can be properly removed
     let _snakeKeyHandler = null;
+    let _snakeTouchStartHandler = null;
+    let _snakeTouchMoveHandler = null;
+    let _snakeTouchEndHandler = null;
 
     function stopAllGames() {
       if (activeGame === "snake") {
@@ -1846,6 +1849,17 @@ io.on("connection", (socket) => {
         if (_snakeKeyHandler) {
           document.removeEventListener("keydown", _snakeKeyHandler);
           _snakeKeyHandler = null;
+        }
+        if (_snakeTouchStartHandler) {
+          const c = document.getElementById("snakeCanvas");
+          if (c) {
+            c.removeEventListener("touchstart", _snakeTouchStartHandler);
+            c.removeEventListener("touchmove", _snakeTouchMoveHandler);
+            c.removeEventListener("touchend", _snakeTouchEndHandler);
+          }
+          _snakeTouchStartHandler = null;
+          _snakeTouchMoveHandler = null;
+          _snakeTouchEndHandler = null;
         }
       }
       activeGame = null;
@@ -1939,7 +1953,7 @@ io.on("connection", (socket) => {
           ctx.fillText("Score: " + score, canvas.width / 2, canvas.height / 2 + 15);
           ctx.font = "13px Poppins";
           ctx.fillStyle = "rgba(255,255,255,0.5)";
-          ctx.fillText("Press Space to restart", canvas.width / 2, canvas.height / 2 + 45);
+          ctx.fillText("Press Space or Tap to restart", canvas.width / 2, canvas.height / 2 + 45);
           ctx.textAlign = "left";
         }
       }
@@ -1981,16 +1995,67 @@ io.on("connection", (socket) => {
           nextDir = { x: 1, y: 0 };
           score = 0;
           gameOver = false;
-          snakeInterval = setInterval(update, 120);
+          snakeInterval = setInterval(update, 200);
         }
         if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " "].includes(k)) e.preventDefault();
       }
 
+      // Swipe controls
+      let touchStartX = 0;
+      let touchStartY = 0;
+
+      function handleTouchStart(e) {
+        if (activeGame !== "snake") return;
+        if (e.touches.length > 0) {
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+        }
+      }
+
+      function handleTouchMove(e) {
+        if (activeGame !== "snake") return;
+        if (!gameOver) e.preventDefault(); // Prevent scrolling while playing
+      }
+
+      function handleTouchEnd(e) {
+        if (activeGame !== "snake" || e.changedTouches.length === 0) return;
+        let dx = e.changedTouches[0].clientX - touchStartX;
+        let dy = e.changedTouches[0].clientY - touchStartY;
+
+        // If tap (no swipe) and gameOver, restart
+        if (Math.abs(dx) < 10 && Math.abs(dy) < 10 && gameOver) {
+          snake = [{ x: 10, y: 10 }];
+          food = spawnFood();
+          dir = { x: 1, y: 0 };
+          nextDir = { x: 1, y: 0 };
+          score = 0;
+          gameOver = false;
+          snakeInterval = setInterval(update, 200);
+          return;
+        }
+
+        if (Math.abs(dx) > Math.abs(dy)) {
+          if (dx > 30 && dir.x === 0) nextDir = { x: 1, y: 0 };
+          else if (dx < -30 && dir.x === 0) nextDir = { x: -1, y: 0 };
+        } else {
+          if (dy > 30 && dir.y === 0) nextDir = { x: 0, y: 1 };
+          else if (dy < -30 && dir.y === 0) nextDir = { x: 0, y: -1 };
+        }
+      }
+
       // Store reference so stopAllGames can remove it
       _snakeKeyHandler = handleSnakeKey;
+      _snakeTouchStartHandler = handleTouchStart;
+      _snakeTouchMoveHandler = handleTouchMove;
+      _snakeTouchEndHandler = handleTouchEnd;
+
       document.addEventListener("keydown", handleSnakeKey);
+      canvas.addEventListener("touchstart", handleTouchStart, { passive: false });
+      canvas.addEventListener("touchmove", handleTouchMove, { passive: false });
+      canvas.addEventListener("touchend", handleTouchEnd);
+      
       drawGame();
-      snakeInterval = setInterval(update, 120);
+      snakeInterval = setInterval(update, 200);
     }
 
     // ---- MEMORY MATCH GAME ----
