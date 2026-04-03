@@ -463,6 +463,26 @@ header {
   width: auto;
   text-align: center;
   padding: 15px 10px;
+  position: relative;
+}
+
+/* Resume download count badge */
+.resume-dl-badge {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  line-height: 1;
+  padding: 2px 6px;
+  border-radius: 10px;
+  margin-left: 6px;
+  vertical-align: middle;
+  letter-spacing: 0.5px;
+  border: 1px solid rgba(255,255,255,0.25);
+  white-space: nowrap;
 }
 
 /* Social Icons */
@@ -2842,3 +2862,19 @@ body[data-theme="light"] .spotify-card {
     margin-top: 20px;
   }
 }
+
+/* ========== Visitor & Resume Count Badges ========== */
+.visitor-counter {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.visitor-count-badge {
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+}
