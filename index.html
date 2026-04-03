@@ -1167,9 +1167,7 @@
           <div class="visitor-counter">
             <i class="fas fa-eye"></i>
             <span>Visitors: </span>
-            <img src="https://mohitpatel.goatcounter.com/counter//count.svg"
-              alt="visitor count"
-              class="visitor-count-badge" />
+            <span id="gc-visitor-count" class="visitor-count-badge">…</span>
           </div>
           <div class="copyright" id="copyrightYear">© <span id="currentYear"></span> Mohit Patel. All Rights Reserved.</div>
         </div>
@@ -1425,6 +1423,16 @@
       // Dynamic copyright year
       const yearEl = document.getElementById("currentYear");
       if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      // GoatCounter – fetch raw visitor count (number only)
+      (function () {
+        const el = document.getElementById("gc-visitor-count");
+        if (!el) return;
+        fetch("https://mohitpatel.goatcounter.com/counter//.json")
+          .then(function (r) { return r.json(); })
+          .then(function (data) { el.textContent = data.count || "0"; })
+          .catch(function () { el.textContent = "-"; });
+      })();
 
       // Calculate and display current experience duration
       function calculateCurrentDuration() {
@@ -2604,6 +2612,6 @@ io.on("connection", (socket) => {
       });
     </script>
     <script data-goatcounter="https://mohitpatel.goatcounter.com/count"
-        async src="https://gc.zgo.at/count.js"></script>
+        async src="//gc.zgo.at/count.js"></script>
   </body>
 </html>
