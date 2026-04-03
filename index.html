@@ -1528,15 +1528,19 @@
         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
       ];
       let lastMonth = -1;
+      let lastMonthW = -1;
       for (let w = 0; w < weeks; w++) {
         const d = new Date(startDate);
         d.setDate(d.getDate() + w * 7);
         const month = d.getMonth();
         if (month !== lastMonth) {
-          const span = document.createElement("span");
-          span.textContent = monthNames[month];
-          span.style.gridColumnStart = w + 1;
-          monthsEl.appendChild(span);
+          if (lastMonthW === -1 || (w - lastMonthW) >= 3) {
+            const span = document.createElement("span");
+            span.textContent = monthNames[month];
+            span.style.gridColumnStart = w + 1;
+            monthsEl.appendChild(span);
+            lastMonthW = w;
+          }
           lastMonth = month;
         }
       }
