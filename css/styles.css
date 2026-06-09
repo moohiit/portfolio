@@ -1090,17 +1090,18 @@ section {
 
 .timeline-date {
   position: relative;
-  width: 120px;
+  width: auto;
   text-align: center;
-  padding: 8px 12px;
+  padding: 8px 16px;
   background: linear-gradient(90deg, var(--primary), var(--secondary));
   color: var(--darker);
   border-radius: 30px;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   z-index: 2;
   margin-bottom: 15px;
   box-shadow: 0 2px 10px rgba(0, 255, 204, 0.3);
+  white-space: nowrap;
 }
 
 .timeline-details {
@@ -2851,9 +2852,9 @@ body[data-theme="light"] .spotify-card {
   }
 
   .timeline-date {
-    width: 90px;
-    font-size: 0.8rem;
-    padding: 5px 7px;
+    width: auto;
+    font-size: 0.75rem;
+    padding: 5px 10px;
   }
 
   .certificate-title {
@@ -2871,5 +2872,549 @@ body[data-theme="light"] .spotify-card {
     height: auto;
     margin-top: 20px;
   }
+}
+
+/* =============================================
+   UI UPGRADE — Experience & Skills Enhancements
+   ============================================= */
+
+/* ---- Current job pulsing badge ---- */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 255, 204, 0.5); }
+  50%       { box-shadow: 0 0 0 8px rgba(0, 255, 204, 0); }
+}
+
+@keyframes dotBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+.current-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 255, 204, 0.12);
+  border: 1px solid rgba(0, 255, 204, 0.4);
+  color: var(--primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-left: 10px;
+  vertical-align: middle;
+  text-transform: uppercase;
+  animation: pulseGlow 2s infinite;
+}
+
+.current-badge::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--primary);
+  animation: dotBlink 1.2s ease-in-out infinite;
+}
+
+/* ---- Current job card — stronger border glow ---- */
+.timeline-item--current .timeline-content {
+  border-color: rgba(0, 255, 204, 0.45);
+  box-shadow: 0 0 0 1px rgba(0, 255, 204, 0.12), 0 8px 30px rgba(0, 255, 204, 0.18);
+  position: relative;
+  overflow: hidden;
+}
+
+.timeline-item--current .timeline-content::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 15px;
+  padding: 2px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.timeline-item--current .timeline-content:hover {
+  box-shadow: 0 0 0 1px rgba(0, 255, 204, 0.2), 0 15px 40px rgba(0, 255, 204, 0.25);
+}
+
+/* ---- Company type tag ---- */
+.company-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 2px 9px;
+  border-radius: 12px;
+  margin-left: 8px;
+  vertical-align: middle;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.company-tag--fintech {
+  background: rgba(255, 189, 46, 0.15);
+  color: #ffbd2e;
+  border: 1px solid rgba(255, 189, 46, 0.3);
+}
+
+.company-tag--healthtech {
+  background: rgba(123, 44, 191, 0.15);
+  color: #b07fff;
+  border: 1px solid rgba(123, 44, 191, 0.3);
+}
+
+.company-tag--internship {
+  background: rgba(202, 240, 248, 0.1);
+  color: var(--light);
+  border: 1px solid rgba(202, 240, 248, 0.2);
+}
+
+/* ---- Skill card color variants on hover ---- */
+.skill-card--frontend:hover {
+  border-color: var(--primary);
+  box-shadow: 0 10px 35px rgba(0, 255, 204, 0.15);
+}
+
+.skill-card--backend:hover {
+  border-color: var(--secondary);
+  box-shadow: 0 10px 35px rgba(123, 44, 191, 0.2);
+}
+
+.skill-card--backend:hover .skill-icon {
+  background: rgba(123, 44, 191, 0.2);
+  color: #b07fff;
+}
+
+.skill-card--devops {
+  background: rgba(20, 40, 70, 0.3);
+  border-radius: 15px;
+  padding: 25px;
+  transition: var(--transition);
+  border: 1px solid rgba(255, 140, 0, 0.15);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transform: translateY(50px);
+  opacity: 0;
+}
+
+.skill-card--devops.active {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.skill-card--devops:hover {
+  transform: translateY(-10px);
+  border-color: #ff8c00;
+  box-shadow: 0 10px 35px rgba(255, 140, 0, 0.18);
+}
+
+.skill-card--devops .skill-icon {
+  background: rgba(255, 140, 0, 0.12);
+  color: #ff8c00;
+}
+
+.skill-card--devops .skill-item:hover {
+  background: #ff8c00;
+  color: var(--darker);
+}
+
+.skill-card--tools:hover {
+  border-color: #1da1f2;
+  box-shadow: 0 10px 35px rgba(29, 161, 242, 0.15);
+}
+
+.skill-card--tools:hover .skill-icon {
+  background: rgba(29, 161, 242, 0.15);
+  color: #1da1f2;
+}
+
+/* ---- Skill item stagger animation ---- */
+.skill-item {
+  animation: skillFadeIn 0.4s ease both;
+}
+
+@keyframes skillFadeIn {
+  from { opacity: 0; transform: scale(0.85) translateY(6px); }
+  to   { opacity: 1; transform: scale(0.95) translateY(0); }
+}
+
+.skill-card.active .skill-item:nth-child(1)  { animation-delay: 0.05s; }
+.skill-card.active .skill-item:nth-child(2)  { animation-delay: 0.10s; }
+.skill-card.active .skill-item:nth-child(3)  { animation-delay: 0.15s; }
+.skill-card.active .skill-item:nth-child(4)  { animation-delay: 0.20s; }
+.skill-card.active .skill-item:nth-child(5)  { animation-delay: 0.25s; }
+.skill-card.active .skill-item:nth-child(6)  { animation-delay: 0.30s; }
+.skill-card.active .skill-item:nth-child(7)  { animation-delay: 0.35s; }
+.skill-card.active .skill-item:nth-child(8)  { animation-delay: 0.40s; }
+.skill-card.active .skill-item:nth-child(9)  { animation-delay: 0.45s; }
+.skill-card.active .skill-item:nth-child(10) { animation-delay: 0.50s; }
+.skill-card.active .skill-item:nth-child(11) { animation-delay: 0.55s; }
+.skill-card.active .skill-item:nth-child(12) { animation-delay: 0.60s; }
+.skill-card.active .skill-item:nth-child(13) { animation-delay: 0.65s; }
+.skill-card.active .skill-item:nth-child(14) { animation-delay: 0.70s; }
+
+/* ---- Section title underline gradient ---- */
+.section-title h2::after {
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+}
+
+/* ---- Light theme overrides for new classes ---- */
+body[data-theme="light"] .current-badge {
+  background: rgba(0, 180, 150, 0.12);
+  border-color: rgba(0, 180, 150, 0.3);
+}
+
+body[data-theme="light"] .company-tag--fintech {
+  background: rgba(255, 189, 46, 0.1);
+}
+
+body[data-theme="light"] .company-tag--healthtech {
+  background: rgba(123, 44, 191, 0.08);
+}
+
+body[data-theme="light"] .skill-card--devops {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: rgba(255, 140, 0, 0.15);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+/* ---- Project badges ---- */
+.project-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-left: 8px;
+  vertical-align: middle;
+  text-transform: uppercase;
+}
+
+.project-badge--featured {
+  background: linear-gradient(90deg, rgba(0, 255, 204, 0.2), rgba(123, 44, 191, 0.2));
+  color: var(--primary);
+  border: 1px solid rgba(0, 255, 204, 0.35);
+}
+
+.project-badge--mobile {
+  background: rgba(255, 140, 0, 0.15);
+  color: #ff8c00;
+  border: 1px solid rgba(255, 140, 0, 0.3);
+}
+
+/* ---- Featured project card ---- */
+.project-card--featured {
+  border-color: rgba(0, 255, 204, 0.25);
+  box-shadow: 0 5px 20px rgba(0, 255, 204, 0.08);
+}
+
+.project-card--featured:hover {
+  border-color: var(--primary);
+  box-shadow: 0 15px 40px rgba(0, 255, 204, 0.2);
+}
+
+/* ---- Gradient project image (mobile app card) ---- */
+.project-img--gradient {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.mobile-app-icon {
+  font-size: 4rem;
+  color: var(--primary);
+  opacity: 0.6;
+  text-shadow: 0 0 30px rgba(0, 255, 204, 0.5);
+  position: relative;
+  z-index: 1;
+}
+
+body[data-theme="light"] .project-card--featured {
+  border-color: rgba(0, 180, 150, 0.2);
+}
+
+body[data-theme="light"] .project-badge--featured {
+  background: rgba(0, 180, 150, 0.1);
+  color: #00b494;
+  border-color: rgba(0, 180, 150, 0.3);
+}
+
+/* =============================================
+   CINEMATIC UI UPGRADE
+   ============================================= */
+
+/* ── Ambient color blobs (bokeh depth) ── */
+.ambient-blob {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  will-change: transform;
+}
+
+.ambient-blob-1 {
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(0, 255, 204, 0.07) 0%, transparent 70%);
+  top: -200px; right: -150px;
+  animation: blobDrift1 18s ease-in-out infinite alternate;
+}
+
+.ambient-blob-2 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(123, 44, 191, 0.09) 0%, transparent 70%);
+  bottom: 15%; left: -180px;
+  animation: blobDrift2 22s ease-in-out infinite alternate;
+}
+
+.ambient-blob-3 {
+  width: 450px; height: 450px;
+  background: radial-gradient(circle, rgba(255, 0, 110, 0.05) 0%, transparent 70%);
+  top: 55%; right: 5%;
+  animation: blobDrift3 15s ease-in-out infinite alternate;
+}
+
+@keyframes blobDrift1 {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(-60px, 80px) scale(1.1); }
+}
+@keyframes blobDrift2 {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(80px, -60px) scale(0.95); }
+}
+@keyframes blobDrift3 {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(-40px, -80px) scale(1.08); }
+}
+
+/* ── Vignette (cinematic dark edges) ── */
+.vignette {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(ellipse at center,
+    transparent 50%,
+    rgba(6, 16, 35, 0.55) 100%);
+}
+
+/* ── Film grain overlay ── */
+body::after {
+  content: "";
+  position: fixed; inset: 0; z-index: 9997;
+  pointer-events: none;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 220px 220px;
+}
+
+/* ── Enhanced glassmorphism on all cards ── */
+.skill-card,
+.project-card,
+.timeline-content,
+.stat-card,
+.education-card,
+.contact-info,
+.contact-form {
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+}
+
+/* ── Card inner highlight shimmer on hover ── */
+.skill-card,
+.project-card,
+.stat-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-card::after,
+.project-card::after,
+.stat-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0) 55%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.skill-card:hover::after,
+.project-card:hover::after,
+.stat-card:hover::after {
+  opacity: 1;
+}
+
+/* ── Hero enhancements ── */
+.hero-title span:first-child {
+  filter: drop-shadow(0 0 40px rgba(0, 255, 204, 0.18));
+}
+
+.hero-subtitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  letter-spacing: 0.5px;
+}
+
+.hero-subtitle::before {
+  content: "";
+  display: inline-block;
+  width: 32px; height: 2px;
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+.hero-highlight {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* ── Profile image — second inner ring ── */
+.profile-container::after {
+  content: "";
+  position: absolute;
+  width: 88%; height: 88%;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 255, 204, 0.15);
+  animation: rotate 30s linear infinite reverse;
+  pointer-events: none;
+}
+
+/* ── Section title glow ── */
+.section-title h2 {
+  filter: drop-shadow(0 0 20px rgba(0, 255, 204, 0.15));
+}
+
+/* ── Stats — neon number glow ── */
+.stat-number {
+  text-shadow: 0 0 30px rgba(0, 255, 204, 0.35), 0 0 60px rgba(0, 255, 204, 0.12);
+}
+
+.stat-icon {
+  filter: drop-shadow(0 0 8px rgba(0, 255, 204, 0.4));
+}
+
+/* ── Project card — cinematic image zoom ── */
+.project-img {
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              filter 0.7s ease;
+  filter: brightness(0.9) saturate(1.1);
+}
+
+.project-card:hover .project-img {
+  transform: scale(1.06);
+  filter: brightness(1.05) saturate(1.2);
+}
+
+/* ── Timeline current — animated left bar ── */
+.timeline-item--current .timeline-content::after {
+  content: "";
+  position: absolute;
+  top: 20px; bottom: 20px; left: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, var(--primary), var(--secondary));
+  border-radius: 0 2px 2px 0;
+  box-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
+}
+
+/* ── Enhanced scrollbar ── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--darker); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, var(--primary), var(--secondary));
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+/* ── Blur-in scroll reveal ── */
+@keyframes fadeInBlur {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.skill-card.active,
+.project-card.active,
+.timeline-item.active {
+  animation: fadeInBlur 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Section dividers ── */
+section + section::before {
+  content: "";
+  display: block;
+  height: 1px;
+  background: linear-gradient(
+    90deg, transparent, rgba(0, 255, 204, 0.12), rgba(123, 44, 191, 0.12), transparent
+  );
+  margin: 0 10%;
+}
+
+/* ── Skill item 3D tilt feel ── */
+.skill-item {
+  transition: var(--transition), box-shadow 0.3s ease;
+}
+
+.skill-item:hover {
+  box-shadow: 0 4px 15px rgba(0, 255, 204, 0.25);
+}
+
+/* ── Stat card depth border ── */
+.stat-card {
+  border: 1px solid rgba(0, 255, 204, 0.1);
+  transition: var(--transition);
+}
+
+.stat-card:hover {
+  border-color: rgba(0, 255, 204, 0.3);
+  box-shadow: 0 8px 30px rgba(0, 255, 204, 0.1), inset 0 1px 0 rgba(255,255,255,0.04);
+  transform: translateY(-6px);
+}
+
+/* ── Nav link active indicator ── */
+.nav-links a.active-link {
+  text-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
+}
+
+/* ── Light theme adjustments for cinematic overlay ── */
+body[data-theme="light"]::after {
+  opacity: 0.01;
+}
+
+body[data-theme="light"] .vignette {
+  background: radial-gradient(ellipse at center,
+    transparent 50%,
+    rgba(226, 232, 240, 0.4) 100%);
+}
+
+body[data-theme="light"] .ambient-blob-1 {
+  background: radial-gradient(circle, rgba(0, 180, 150, 0.06) 0%, transparent 70%);
+}
+
+body[data-theme="light"] .ambient-blob-2 {
+  background: radial-gradient(circle, rgba(123, 44, 191, 0.05) 0%, transparent 70%);
+}
+
+body[data-theme="light"] .ambient-blob-3 {
+  background: radial-gradient(circle, rgba(255, 0, 110, 0.03) 0%, transparent 70%);
 }
 
