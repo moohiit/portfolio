@@ -45,9 +45,8 @@ body[data-theme="light"] .contact-form,
 body[data-theme="light"] .timeline-content,
 body[data-theme="light"] .stat-card {
   background: rgba(255, 255, 255, 0.7);
-  border-color: rgba(0, 180, 150, 0.15);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
 }
+
 
 body[data-theme="light"] .skill-item,
 body[data-theme="light"] .tech-item,
@@ -998,27 +997,19 @@ section {
 }
 
 .timeline::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  background: linear-gradient(to bottom, var(--primary), var(--secondary));
-  left: 50%;
-  transform: translateX(-50%);
-  opacity: 0;
-  transition: opacity 0.6s ease;
+  display: none;
 }
 
 .timeline.timeline-active::before {
-  opacity: 1;
+  display: none;
 }
 
 .timeline-item {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 60px;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 36px;
   position: relative;
   transform: translateY(50px);
   opacity: 0;
@@ -1030,19 +1021,29 @@ section {
   opacity: 1;
 }
 
+/* No connector dots in new side-by-side layout */
+.timeline-item::before {
+  display: none;
+}
+
+.timeline-item--current::before {
+  display: none;
+}
+
 .timeline-content {
   background: rgba(20, 40, 70, 0.4);
   border-radius: 15px;
   padding: 30px;
-  width: 100%;
-  max-width: 600px;
+  flex: 1;
+  min-width: 0;
   border: 1px solid rgba(0, 255, 204, 0.2);
+  border-left: 3px solid var(--primary);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   transition: var(--transition);
   position: relative;
   z-index: 1;
-  margin-top: 50px;
+  margin-top: 0;
   box-shadow: 0 5px 20px rgba(0, 255, 204, 0.1);
 }
 
@@ -1089,19 +1090,21 @@ section {
 }
 
 .timeline-date {
-  position: relative;
-  width: auto;
+  flex-shrink: 0;
+  width: 180px;
   text-align: center;
-  padding: 8px 16px;
-  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  padding: 8px 14px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
   color: var(--darker);
-  border-radius: 30px;
-  font-weight: 600;
-  font-size: 0.85rem;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.78rem;
   z-index: 2;
-  margin-bottom: 15px;
-  box-shadow: 0 2px 10px rgba(0, 255, 204, 0.3);
+  margin-top: 10px;
+  margin-bottom: 0;
+  box-shadow: 0 2px 12px rgba(0, 255, 204, 0.35);
   white-space: nowrap;
+  line-height: 1.5;
 }
 
 .timeline-details {
@@ -2723,21 +2726,21 @@ body[data-theme="light"] .spotify-card {
     gap: 12px;
   }
 
-  .timeline::before {
-    left: 50%;
-    transform: translateX(-50%);
+  .timeline-item {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .timeline-date {
+    width: auto;
+    align-self: flex-start;
+    margin-top: 0;
+    font-size: 0.82rem;
   }
 
   .timeline-content {
     width: 100%;
-    max-width: 500px;
-    margin: 50px auto 0;
-  }
-
-  .timeline-date {
-    width: 100px;
-    font-size: 0.85rem;
-    padding: 6px 8px;
+    margin: 0;
   }
 
   .contact-info,
@@ -2847,12 +2850,11 @@ body[data-theme="light"] .spotify-card {
   }
 
   .timeline-content {
-    max-width: 400px;
-    margin: 40px auto 0;
+    width: 100%;
+    margin: 0;
   }
 
   .timeline-date {
-    width: auto;
     font-size: 0.75rem;
     padding: 5px 10px;
   }
@@ -2920,27 +2922,17 @@ body[data-theme="light"] .spotify-card {
 /* ---- Current job card — stronger border glow ---- */
 .timeline-item--current .timeline-content {
   border-color: rgba(0, 255, 204, 0.45);
-  box-shadow: 0 0 0 1px rgba(0, 255, 204, 0.12), 0 8px 30px rgba(0, 255, 204, 0.18);
+  border-left: 4px solid var(--primary);
+  box-shadow: 0 8px 30px rgba(0, 255, 204, 0.18);
   position: relative;
-  overflow: hidden;
 }
 
 .timeline-item--current .timeline-content::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 15px;
-  padding: 2px;
-  background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: destination-out;
-  mask-composite: exclude;
-  pointer-events: none;
+  display: none;
 }
 
 .timeline-item--current .timeline-content:hover {
-  box-shadow: 0 0 0 1px rgba(0, 255, 204, 0.2), 0 15px 40px rgba(0, 255, 204, 0.25);
+  box-shadow: 0 15px 40px rgba(0, 255, 204, 0.25);
 }
 
 /* ---- Company type tag ---- */
@@ -3318,16 +3310,7 @@ body::after {
   filter: brightness(1.05) saturate(1.2);
 }
 
-/* ── Timeline current — animated left bar ── */
-.timeline-item--current .timeline-content::after {
-  content: "";
-  position: absolute;
-  top: 20px; bottom: 20px; left: 0;
-  width: 3px;
-  background: linear-gradient(to bottom, var(--primary), var(--secondary));
-  border-radius: 0 2px 2px 0;
-  box-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
-}
+/* ── Timeline current — left border glow handled by border-left on .timeline-content ── */
 
 /* ── Enhanced scrollbar ── */
 ::-webkit-scrollbar { width: 5px; }
