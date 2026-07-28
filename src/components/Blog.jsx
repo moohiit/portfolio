@@ -2,8 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import SectionTitle from "./SectionTitle.jsx";
 import { blogConfig } from "../data.js";
 
+// Renders only when real articles exist (dev.to or manualPosts) —
+// no fabricated placeholder posts on a professional portfolio.
 export default function Blog() {
-  const [posts, setPosts] = useState(blogConfig.fallbackPosts);
+  const [posts, setPosts] = useState(blogConfig.manualPosts);
   const fetched = useRef(false);
 
   useEffect(() => {
@@ -23,13 +25,15 @@ export default function Blog() {
           );
         }
       })
-      .catch(() => { /* keep fallback posts */ });
+      .catch(() => { /* keep manual posts (possibly empty) */ });
   }, []);
+
+  if (posts.length === 0) return null;
 
   return (
     <section id="blog">
       <div className="container">
-        <SectionTitle number="09">Technical Writing</SectionTitle>
+        <SectionTitle>Technical Writing</SectionTitle>
 
         <div className="blog-grid">
           {posts.map((p) => (

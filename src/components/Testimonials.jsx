@@ -2,6 +2,7 @@ import SectionTitle from "./SectionTitle.jsx";
 import { testimonials } from "../data.js";
 
 export default function Testimonials() {
+  if (testimonials.length === 0) return null;
   return (
     <section id="testimonials">
       <div className="container">

@@ -5,12 +5,16 @@ export default function Achievements() {
   return (
     <section id="achievements">
       <div className="container">
-        <SectionTitle>Achievements & Milestones</SectionTitle>
+        <SectionTitle number="05">Achievements & Milestones</SectionTitle>
 
         <div className="achievements-grid">
           {achievements.map((a) => (
             <div className="achievement-card" key={a.title}>
-              <div className="achievement-icon"><i className={a.icon}></i></div>
+              {a.image ? (
+                <img src={a.image} alt={a.title} className="achievement-img" loading="lazy" />
+              ) : (
+                <div className="achievement-icon"><i className={a.icon}></i></div>
+              )}
               <h3 className="achievement-title">{a.title}</h3>
               <p className="achievement-desc">{a.desc}</p>
               {a.link && (

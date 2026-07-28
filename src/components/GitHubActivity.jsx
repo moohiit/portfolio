@@ -116,7 +116,7 @@ export default function GitHubActivity() {
   return (
     <section id="github-activity">
       <div className="container">
-        <SectionTitle number="04">GitHub Activity</SectionTitle>
+        <SectionTitle number="07">GitHub Activity</SectionTitle>
 
         <div className="github-heatmap-card">
           <div className="github-profile-row">

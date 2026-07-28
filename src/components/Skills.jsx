@@ -96,7 +96,7 @@ export default function Skills({ theme }) {
   return (
     <section id="skills">
       <div className="container">
-        <SectionTitle number="02">Technical Skills</SectionTitle>
+        <SectionTitle number="04">Technical Skills</SectionTitle>
 
         <div className="skills-container">
           {skillCategories.map((cat) => (

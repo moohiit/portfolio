@@ -4,7 +4,7 @@ export default function Contact() {
   return (
     <section id="contact">
       <div className="container">
-        <SectionTitle number="10">Get In Touch</SectionTitle>
+        <SectionTitle number="11">Get In Touch</SectionTitle>
 
         <div className="contact-container">
           <div className="contact-info">

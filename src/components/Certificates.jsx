@@ -18,7 +18,7 @@ export default function Certificates() {
   return (
     <section id="certificates">
       <div className="container">
-        <SectionTitle number="07">Certificates</SectionTitle>
+        <SectionTitle number="09">Certificates</SectionTitle>
 
         <div className="certificate-slider">
           {certificates.map((cert, i) => (

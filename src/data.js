@@ -12,8 +12,8 @@ export const roles = [
 export const stats = [
   { icon: "fas fa-briefcase", target: 2, label: "Years Experience" },
   { icon: "fas fa-project-diagram", target: 10, label: "Projects Completed" },
-  { icon: "fas fa-code", target: 15000, label: "Lines of Code" },
-  { icon: "fas fa-mug-hot", target: 500, label: "Cups of Chai" },
+  { icon: "fas fa-rocket", target: 4, label: "Live Products" },
+  { icon: "fas fa-certificate", target: 5, label: "Certifications", plus: false },
 ];
 
 export const skillCategories = [
@@ -144,10 +144,9 @@ export const projects = [
     code: "https://github.com/moohiit/ai-playground",
   },
   {
-    title: "Expense Tracker — Mobile App",
+    title: "Splitzy — AI Expense Tracker",
     badge: { text: "Mobile", cls: "project-badge--mobile" },
-    gradient: "linear-gradient(135deg, #0a192f 0%, #1a1a4e 40%, #2d1b6e 100%)",
-    mobileIcon: true,
+    image: "/images/splitzy-feature.png",
     description:
       "React Native (Expo) companion app for the AI Playground expense tracker. Features receipt scanning via Gemini Vision, group expense splits, spending coach chat, savings goals, shareable bill-split links, and offline-capable JWT auth — all synced to the shared backend service layer.",
     architecture: [
@@ -309,6 +308,7 @@ export const codingProfiles = [
 export const achievements = [
   {
     icon: "fab fa-google-play",
+    image: "/images/splitzy-icon.png",
     title: "Splitzy AI on Google Play",
     desc: "Published the AI expense-splitting mobile app (React Native + Gemini) live on the Play Store.",
     link: "https://play.google.com/store/apps/details?id=com.moohiit.expensetracker",
@@ -331,52 +331,20 @@ export const achievements = [
 ];
 
 // ---- NEW: Testimonials ----
-// Replace with real quotes from LinkedIn recommendations / colleagues.
-export const testimonials = [
-  {
-    quote:
-      "Mohit consistently delivered secure, well-structured APIs and was the go-to person for debugging production issues. His Redis caching work transformed our API performance.",
-    name: "Team Lead",
-    role: "Life Layer Health Solutions",
-  },
-  {
-    quote:
-      "A fast learner who takes real ownership. Mohit shipped the real-time chat and notification system ahead of schedule and it has run reliably since.",
-    name: "Senior Developer",
-    role: "Project Collaborator",
-  },
-  {
-    quote:
-      "His AI Playground project shows rare end-to-end capability — from vector search backends to polished mobile UX. Highly recommended.",
-    name: "Mentor",
-    role: "Developer Community",
-  },
-];
+// The section stays hidden until real quotes are added here.
+// Ask for LinkedIn recommendations, then add entries like:
+//   { quote: "…", name: "Full Name", role: "Title, Company" },
+export const testimonials = [];
 
 // ---- NEW: Blog / writing ----
-// Set devToUsername to auto-fetch latest posts from dev.to; fallbackPosts shown otherwise.
+// The section renders only when dev.to has published articles for this
+// username (or when manualPosts has entries). Article ideas worth writing:
+//   - "How I Built a 7-Module GenAI Platform on the Gemini Free Tier"
+//   - "Redis Caching Patterns That Made Our APIs 10x Faster"
+//   - "Zero-Downtime Deploys with Nginx + PM2 + GitHub Actions"
 export const blogConfig = {
   devToUsername: "moohiit",
-  fallbackPosts: [
-    {
-      title: "How I Built a 7-Module GenAI Platform on the Gemini Free Tier",
-      desc: "Architecture decisions, rate-limit tricks, and vector search on a $0 budget.",
-      url: "https://github.com/moohiit/ai-playground",
-      tags: ["GenAI", "Next.js", "MongoDB"],
-    },
-    {
-      title: "Redis Caching Patterns That Made Our APIs 10x Faster",
-      desc: "Cache-aside, TTL tuning, and invalidation strategies from a production health-tech app.",
-      url: "https://www.linkedin.com/in/mohit-patel-51338a245/",
-      tags: ["Node.js", "Redis", "Performance"],
-    },
-    {
-      title: "Zero-Downtime Deploys with Nginx + PM2 + GitHub Actions",
-      desc: "A practical CI/CD setup for Node.js apps on a bare Linux VPS.",
-      url: "https://www.linkedin.com/in/mohit-patel-51338a245/",
-      tags: ["DevOps", "CI/CD", "Nginx"],
-    },
-  ],
+  manualPosts: [],
 };
 
 export const codeSnippets = [

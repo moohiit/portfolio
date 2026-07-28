@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { stats } from "../data.js";
 
-function format(value, target) {
-  if (target % 1 !== 0) return value.toFixed(1) + "+";
-  if (target >= 1000) return Math.floor(value).toLocaleString() + "+";
-  return Math.floor(value) + "+";
+function format(value, stat) {
+  const suffix = stat.plus === false ? "" : "+";
+  if (stat.target % 1 !== 0) return value.toFixed(1) + suffix;
+  if (stat.target >= 1000) return Math.floor(value).toLocaleString() + suffix;
+  return Math.floor(value) + suffix;
 }
 
 export default function Stats() {
@@ -41,7 +42,7 @@ export default function Stats() {
           {stats.map((s, i) => (
             <div className="stat-card" key={s.label}>
               <div className="stat-icon"><i className={s.icon}></i></div>
-              <div className="stat-number">{format(values[i], s.target)}</div>
+              <div className="stat-number">{format(values[i], s)}</div>
               <div className="stat-label">{s.label}</div>
             </div>
           ))}

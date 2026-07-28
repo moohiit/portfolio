@@ -5,7 +5,7 @@ export default function Education() {
   return (
     <section id="education">
       <div className="container">
-        <SectionTitle number="08">Education</SectionTitle>
+        <SectionTitle number="10">Education</SectionTitle>
 
         <div className="education-grid">
           {education.map((ed) => (

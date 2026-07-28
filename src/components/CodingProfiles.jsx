@@ -5,7 +5,7 @@ export default function CodingProfiles() {
   return (
     <section id="coding-profiles">
       <div className="container">
-        <SectionTitle number="03">Coding Profiles</SectionTitle>
+        <SectionTitle number="06">Coding Profiles</SectionTitle>
 
         <div className="profiles-grid">
           {codingProfiles.map((p) => (

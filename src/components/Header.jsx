@@ -37,10 +37,10 @@ export default function Header({ theme, onToggleTheme }) {
 
   const links = [
     ["#about", "About"],
-    ["#skills", "Skills"],
-    ["#coding-profiles", "Profiles"],
     ["#experience", "Experience"],
     ["#projects", "Projects"],
+    ["#skills", "Skills"],
+    ["#coding-profiles", "Profiles"],
     ["#certificates", "Certificates"],
     ["#education", "Education"],
     ["#contact", "Contact"],

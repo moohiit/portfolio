@@ -49,7 +49,7 @@ export default function FeaturedRepos() {
   return (
     <section id="repos">
       <div className="container">
-        <SectionTitle>Open Source & Repositories</SectionTitle>
+        <SectionTitle number="08">Open Source & Repositories</SectionTitle>
 
         <div className="repos-grid">
           {repos.map((repo) => (

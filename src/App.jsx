@@ -183,17 +183,17 @@ export default function App() {
       <Stats />
       <Terminal />
       <Services />
+      <Experience />
+      <Projects />
       <Skills theme={theme} />
+      <Achievements />
       <CodingProfiles />
       <GitHubActivity />
       <FeaturedRepos />
       <CodeShowcase />
-      <Experience />
-      <Projects />
-      <Achievements />
       <Certificates />
-      <Testimonials />
       <Education />
+      <Testimonials />
       <Blog />
       <Spotify />
       <Contact />
