@@ -1,39 +1,28 @@
 # Mohit Patel's Portfolio
 
-A showcase of projects, skills, and experience in web development and software engineering.
+A showcase of projects, skills, and experience in web development and software engineering — built as a serverless static React app (Vite), deployed at [mohitpatel.org](https://mohitpatel.org/).
 
 ## Features
-- Responsive design
-- Project demos and descriptions
-- Interactive contact form with email functionality
+- React 18 + Vite, fully static build (no backend server)
+- Dark/light theme, custom cursor, cinematic background effects
+- Interactive terminal chatbot, code showcase, secret arcade (Ctrl+G)
+- Live GitHub activity heatmap, stats, and featured repositories (GitHub API)
+- Coding profiles, achievements, testimonials, technical writing sections
+- Contact form via Web3Forms (serverless)
+- SEO preserved: sitemaps, robots.txt, and resume served at the domain root
 
-## Demo
-#### Homepage
-![Homepage](./images/portfolio.png)
-#### Projects Section
-![Projects Section](./images/Project_section.png)
-
-## Table of Contents
-- [Installation](#installation)
-- [Technologies](#technologies)
-- [Projects](#projects)
-- [License](#license)
-- [Contact](#contact)
-
-## Installation
+## Development
 1. Clone the repo: `git clone https://github.com/moohiit/portfolio.git`
 2. Install dependencies: `npm install`
-3. Run the project: `npm start`
+3. Run dev server: `npm run dev`
+4. Production build: `npm run build` (output in `dist/`)
 
-## Technologies
-- **Frontend:** React, Tailwind CSS, Material UI
-- **Backend:** Node.js, Express.js, PHP, MongoDB
-
-## Projects
-### Watchman System
-A security management system at colleges...
-### Social Media and Messaging Website
-A full-stack application...
+## Structure
+- `index.html` — meta tags, JSON-LD structured data, fonts
+- `src/data.js` — all site content (edit this to update text/projects/links)
+- `src/components/` — one component per section
+- `src/styles.css` — main design system; `src/extra.css` — new-section styles
+- `public/` — sitemaps, robots.txt, dns.config, images, resume (emitted at site root unchanged)
 
 ## License
 This project is licensed under the MIT License.
