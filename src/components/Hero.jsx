@@ -1,8 +1,29 @@
 import { useEffect, useState } from "react";
 import { roles, currentlyBuilding } from "../data.js";
 
+// Repos that shouldn't appear as "currently building" even when recently pushed
+// (the portfolio itself and the profile readme repo are meta, not projects).
+const BUILDING_EXCLUDE = ["portfolio", "moohiit"];
+
 export default function Hero() {
   const [text, setText] = useState("");
+  const [building, setBuilding] = useState(currentlyBuilding);
+
+  useEffect(() => {
+    fetch("https://api.github.com/users/moohiit/repos?sort=pushed&per_page=15")
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then((repos) => {
+        const repo = repos.find((r) => !r.fork && !BUILDING_EXCLUDE.includes(r.name));
+        if (!repo) return;
+        setBuilding({
+          name: repo.name,
+          desc: repo.description || currentlyBuilding.desc,
+          tech: [repo.language, ...(repo.topics || [])].filter(Boolean).slice(0, 3),
+          link: repo.html_url,
+        });
+      })
+      .catch(() => { /* keep static fallback from data.js */ });
+  }, []);
 
   useEffect(() => {
     let roleIndex = 0, charIndex = 0, isDeleting = false, timer;
@@ -57,19 +78,14 @@ export default function Hero() {
               <div className="profile-circle"></div>
               <div className="profile-img"></div>
             </div>
-            <a
-              className="building-card"
-              href={currentlyBuilding.link}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a className="building-card" href={building.link} target="_blank" rel="noopener noreferrer">
               <span className="building-pulse"></span>
               <div>
                 <div className="building-label">Currently building</div>
-                <div className="building-name">{currentlyBuilding.name}</div>
-                <div className="building-desc">{currentlyBuilding.desc}</div>
+                <div className="building-name">{building.name}</div>
+                <div className="building-desc">{building.desc}</div>
                 <div className="building-tech">
-                  {currentlyBuilding.tech.map((t) => (
+                  {building.tech.map((t) => (
                     <span key={t}>{t}</span>
                   ))}
                 </div>
