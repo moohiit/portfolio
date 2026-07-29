@@ -9,6 +9,13 @@ export const roles = [
   "React.js Developer",
 ];
 
+export const currentlyBuilding = {
+  name: "PrivateChat",
+  desc: "End-to-end encrypted chat, zero-knowledge server",
+  tech: ["Next.js", "PartyKit", "Turso"],
+  link: "https://github.com/moohiit/PrivateChat",
+};
+
 export const stats = [
   { icon: "fas fa-briefcase", target: 2, label: "Years Experience" },
   { icon: "fas fa-project-diagram", target: 10, label: "Projects Completed" },
@@ -345,6 +352,46 @@ export const testimonials = [];
 export const blogConfig = {
   devToUsername: "moohiit",
   manualPosts: [],
+};
+
+// ---- Toolbox (/uses) ----
+export const toolbox = [
+  { icon: "fas fa-code", label: "Editor", value: "VS Code + Vim keybindings" },
+  { icon: "fas fa-terminal", label: "Terminal", value: "zsh · iTerm2" },
+  { icon: "fas fa-layer-group", label: "Core stack", value: "Node.js · Express · MongoDB · React · Next.js" },
+  { icon: "fas fa-server", label: "Servers", value: "Ubuntu · Nginx · PM2 · Certbot" },
+  { icon: "fas fa-rocket", label: "CI/CD", value: "GitHub Actions" },
+  { icon: "fas fa-vial", label: "API & testing", value: "Postman · Jest" },
+  { icon: "fas fa-robot", label: "AI tooling", value: "Gemini API · MongoDB Atlas Vector Search" },
+  { icon: "fas fa-mobile-alt", label: "Mobile", value: "Expo (React Native) · NativeWind" },
+];
+
+// ---- AI Playground case study (opened from the featured project card) ----
+export const caseStudy = {
+  title: "Building the AI Playground",
+  subtitle: "7 GenAI modules, one platform, $0 infrastructure budget",
+  sections: [
+    {
+      heading: "The problem",
+      body: "I wanted a single place to demonstrate practical GenAI engineering — not toy demos, but end-to-end features with auth, persistence, and error handling. The constraint: run everything on free tiers (Gemini API, MongoDB Atlas, Vercel) without degrading UX.",
+    },
+    {
+      heading: "Architecture",
+      body: "Next.js 15 App Router serves both the UI and API routes — no separate backend to host. Each module (resume matcher, NL-to-SQL, PDF RAG chat, YouTube Q&A, expense tracker, streaming generator) shares a common service layer: JWT auth, Zod validation at every boundary, and a rate-limit wrapper around Gemini calls. The Expo mobile app for the expense tracker consumes the exact same service layer.",
+    },
+    {
+      heading: "Hard decisions",
+      body: "RAG on a free tier: MongoDB Atlas Vector Search instead of a dedicated vector DB — one database for documents, embeddings, and app data, with page-level citation metadata stored alongside chunks. Gemini free-tier rate limits: request queuing with graceful client-side streaming fallbacks, and gemini-2.5-flash-lite where thinking-token overhead broke budgets. Receipt OCR: Gemini Vision with a strict Zod schema so a bad extraction fails loudly instead of corrupting expense data.",
+    },
+    {
+      heading: "Outcomes",
+      body: "Seven working modules in production at aiplayground.mohitpatel.org, a companion mobile app (Splitzy) live on Google Play, and a codebase that doubles as my reference implementation for prompt design, structured output, and streaming UX.",
+    },
+  ],
+  links: {
+    demo: "https://aiplayground.mohitpatel.org",
+    code: "https://github.com/moohiit/ai-playground",
+  },
 };
 
 export const codeSnippets = [

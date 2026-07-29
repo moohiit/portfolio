@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-export default function Header({ theme, onToggleTheme }) {
+export default function Header({ theme, onToggleTheme, cursorOn, onToggleCursor }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dlCount, setDlCount] = useState(null);
   const navRef = useRef(null);
@@ -79,6 +79,14 @@ export default function Header({ theme, onToggleTheme }) {
             </a>
           </nav>
 
+          <button
+            className={"theme-toggle cursor-toggle" + (cursorOn ? " cursor-toggle--on" : "")}
+            title={cursorOn ? "Disable custom cursor" : "Enable custom cursor"}
+            aria-label="Toggle custom cursor"
+            onClick={onToggleCursor}
+          >
+            <i className="fas fa-mouse-pointer"></i>
+          </button>
           <button className="theme-toggle" title="Toggle theme" aria-label="Toggle light/dark theme" onClick={onToggleTheme}>
             <i className={theme === "light" ? "fas fa-sun" : "fas fa-moon"}></i>
           </button>

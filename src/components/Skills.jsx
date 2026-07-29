@@ -1,5 +1,4 @@
-import { useEffect, useRef } from "react";
-import Chart from "chart.js/auto";
+import { useEffect, useRef, useState } from "react";
 import SectionTitle from "./SectionTitle.jsx";
 import { skillCategories, radarData } from "../data.js";
 
@@ -18,13 +17,36 @@ function getRadarColors(theme) {
   };
 }
 
+function SkillItems({ items }) {
+  const [expanded, setExpanded] = useState(false);
+  const shown = expanded ? items : items.slice(0, 6);
+  const hidden = items.length - 6;
+  return (
+    <div className="skill-items">
+      {shown.map((item) => (
+        <div className="skill-item" key={item}>{item}</div>
+      ))}
+      {hidden > 0 && (
+        <button className="skill-item skill-more" onClick={() => setExpanded(!expanded)}>
+          {expanded ? "show less" : `+${hidden} more`}
+        </button>
+      )}
+    </div>
+  );
+}
+
 export default function Skills({ theme }) {
   const canvasRef = useRef(null);
   const chartRef = useRef(null);
 
+  // Chart.js is loaded on demand to keep it out of the main bundle
   useEffect(() => {
-    const colors = getRadarColors(theme);
-    chartRef.current = new Chart(canvasRef.current, {
+    let cancelled = false;
+    (async () => {
+      const { default: Chart } = await import("chart.js/auto");
+      if (cancelled || !canvasRef.current) return;
+      const colors = getRadarColors(theme);
+      chartRef.current = new Chart(canvasRef.current, {
       type: "radar",
       data: {
         labels: radarData.labels,
@@ -69,9 +91,13 @@ export default function Skills({ theme }) {
             labels: { color: colors.labels, font: { family: "Poppins" }, usePointStyle: true, pointStyle: "circle" },
           },
         },
-      },
-    });
-    return () => chartRef.current?.destroy();
+        },
+      });
+    })();
+    return () => {
+      cancelled = true;
+      chartRef.current?.destroy();
+    };
   }, []);
 
   // Re-color chart on theme change
@@ -111,11 +137,7 @@ export default function Skills({ theme }) {
                 </div>
                 <span className="skill-proficiency-value">{cat.proficiency}%</span>
               </div>
-              <div className="skill-items">
-                {cat.items.map((item) => (
-                  <div className="skill-item" key={item}>{item}</div>
-                ))}
-              </div>
+              <SkillItems items={cat.items} />
             </div>
           ))}
         </div>

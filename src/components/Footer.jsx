@@ -26,6 +26,14 @@ export default function Footer() {
             <span>Visitors: </span>
             <span className="visitor-count-badge">{visitors}</span>
           </div>
+          <a
+            className="site-architecture-link"
+            href="https://github.com/moohiit/portfolio/blob/main/ARCHITECTURE.md"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i className="fas fa-drafting-compass"></i> How this site works
+          </a>
           <div className="copyright">© {new Date().getFullYear()} Mohit Patel. All Rights Reserved.</div>
         </div>
       </div>

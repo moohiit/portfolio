@@ -243,16 +243,17 @@ body {
   transform: translate(-50%, -50%) scale(0);
 }
 
-/* Custom cursor: hide default on desktop */
+/* Custom cursor: hide default on desktop, only when opted in via body.cursor-on */
 @media (hover: hover) and (pointer: fine) {
-  body {
+  body.cursor-on {
     cursor: none;
   }
 
-  a, button, input, textarea, select,
-  .skill-item, .tech-item, .project-card,
-  .suggestion-chip, .code-tab, .social-icon,
-  .arcade-game-btn, .memory-card {
+  body.cursor-on a, body.cursor-on button, body.cursor-on input,
+  body.cursor-on textarea, body.cursor-on select,
+  body.cursor-on .skill-item, body.cursor-on .tech-item, body.cursor-on .project-card,
+  body.cursor-on .suggestion-chip, body.cursor-on .code-tab, body.cursor-on .social-icon,
+  body.cursor-on .arcade-game-btn, body.cursor-on .memory-card {
     cursor: none;
   }
 }

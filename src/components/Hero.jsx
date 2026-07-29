@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { roles } from "../data.js";
+import { roles, currentlyBuilding } from "../data.js";
 
 export default function Hero() {
   const [text, setText] = useState("");
@@ -57,6 +57,24 @@ export default function Hero() {
               <div className="profile-circle"></div>
               <div className="profile-img"></div>
             </div>
+            <a
+              className="building-card"
+              href={currentlyBuilding.link}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="building-pulse"></span>
+              <div>
+                <div className="building-label">Currently building</div>
+                <div className="building-name">{currentlyBuilding.name}</div>
+                <div className="building-desc">{currentlyBuilding.desc}</div>
+                <div className="building-tech">
+                  {currentlyBuilding.tech.map((t) => (
+                    <span key={t}>{t}</span>
+                  ))}
+                </div>
+              </div>
+            </a>
           </div>
         </div>
         <div className="social-icons">

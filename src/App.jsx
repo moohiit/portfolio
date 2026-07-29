@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import Header from "./components/Header.jsx";
 import Hero from "./components/Hero.jsx";
 import Stats from "./components/Stats.jsx";
@@ -18,12 +18,20 @@ import Education from "./components/Education.jsx";
 import Blog from "./components/Blog.jsx";
 import Spotify from "./components/Spotify.jsx";
 import Contact from "./components/Contact.jsx";
-import Arcade from "./components/Arcade.jsx";
+import Toolbox from "./components/Toolbox.jsx";
+import CaseStudy from "./components/CaseStudy.jsx";
 import Footer from "./components/Footer.jsx";
+
+const Arcade = lazy(() => import("./components/Arcade.jsx"));
+
+const REDUCED_MOTION =
+  typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 export default function App() {
   const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "dark");
+  const [cursorOn, setCursorOn] = useState(() => localStorage.getItem("customCursor") === "on");
   const [arcadeOpen, setArcadeOpen] = useState(false);
+  const [caseStudyOpen, setCaseStudyOpen] = useState(false);
   const [scrollTopVisible, setScrollTopVisible] = useState(false);
   const progressRef = useRef(null);
   const cursorRef = useRef(null);
@@ -34,13 +42,14 @@ export default function App() {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  // Custom cursor
+  // Custom cursor — opt-in, disabled on touch devices and for reduced-motion users
   useEffect(() => {
-    if ("ontouchstart" in window) {
-      if (cursorRef.current) cursorRef.current.style.display = "none";
-      if (dotRef.current) dotRef.current.style.display = "none";
-      return;
-    }
+    document.body.classList.toggle("cursor-on", cursorOn && !REDUCED_MOTION);
+    localStorage.setItem("customCursor", cursorOn ? "on" : "off");
+    const show = cursorOn && !REDUCED_MOTION && !("ontouchstart" in window);
+    if (cursorRef.current) cursorRef.current.style.display = show ? "" : "none";
+    if (dotRef.current) dotRef.current.style.display = show ? "" : "none";
+    if (!show) return;
     let cursorX = 0, cursorY = 0, dotX = 0, dotY = 0;
     let rafId = null, running = true;
 
@@ -89,7 +98,7 @@ export default function App() {
       document.removeEventListener("mousemove", onMove);
       document.removeEventListener("mouseover", onOver);
     };
-  }, []);
+  }, [cursorOn]);
 
   // Scroll: progress bar, header shrink, active nav, scroll-top visibility
   useEffect(() => {
@@ -174,17 +183,20 @@ export default function App() {
       <div className="grid-pattern"></div>
       <div className="stars"></div>
       <div className="ambient-blob ambient-blob-1"></div>
-      <div className="ambient-blob ambient-blob-2"></div>
-      <div className="ambient-blob ambient-blob-3"></div>
       <div className="vignette"></div>
 
-      <Header theme={theme} onToggleTheme={() => setTheme(theme === "dark" ? "light" : "dark")} />
+      <Header
+        theme={theme}
+        onToggleTheme={() => setTheme(theme === "dark" ? "light" : "dark")}
+        cursorOn={cursorOn}
+        onToggleCursor={() => setCursorOn(!cursorOn)}
+      />
       <Hero />
       <Stats />
       <Terminal />
       <Services />
       <Experience />
-      <Projects />
+      <Projects onOpenCaseStudy={() => setCaseStudyOpen(true)} />
       <Skills theme={theme} />
       <Achievements />
       <CodingProfiles />
@@ -195,10 +207,15 @@ export default function App() {
       <Education />
       <Testimonials />
       <Blog />
+      <Toolbox />
       <Spotify />
       <Contact />
 
-      <Arcade open={arcadeOpen} onClose={() => setArcadeOpen(false)} />
+      <CaseStudy open={caseStudyOpen} onClose={() => setCaseStudyOpen(false)} />
+
+      <Suspense fallback={null}>
+        {arcadeOpen && <Arcade open={arcadeOpen} onClose={() => setArcadeOpen(false)} />}
+      </Suspense>
 
       <button
         className="arcade-hint-badge"

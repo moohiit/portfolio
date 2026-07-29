@@ -472,3 +472,319 @@ body[data-theme="light"] .skill-proficiency-track {
 .contact-item .fa-whatsapp {
   color: var(--whatsapp);
 }
+
+/* ==========================================================================
+   UI upgrade batch: hero building card, browser frames, toolbox, case study,
+   calmer glows, reduced-motion support
+   ========================================================================== */
+
+/* ---- Reduced motion: honor the user's OS preference ---- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---- Hero: currently-building card ---- */
+.hero-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.building-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: rgba(20, 40, 70, 0.45);
+  border: 1px solid rgba(0, 255, 204, 0.18);
+  border-radius: 12px;
+  padding: 14px 18px;
+  text-decoration: none;
+  color: inherit;
+  max-width: 320px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: var(--transition);
+}
+
+.building-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-3px);
+}
+
+body[data-theme="light"] .building-card {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(0, 180, 150, 0.25);
+}
+
+.building-pulse {
+  width: 10px;
+  height: 10px;
+  min-width: 10px;
+  margin-top: 5px;
+  border-radius: 50%;
+  background: var(--primary);
+  animation: buildingPulse 2s ease-in-out infinite;
+}
+
+@keyframes buildingPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 255, 204, 0.5); }
+  50% { box-shadow: 0 0 0 7px rgba(0, 255, 204, 0); }
+}
+
+.building-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  opacity: 0.6;
+}
+
+.building-name {
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.95rem;
+  color: var(--primary);
+  margin: 3px 0;
+}
+
+.building-desc {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  line-height: 1.5;
+}
+
+.building-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.building-tech span {
+  font-size: 0.68rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: rgba(0, 255, 204, 0.08);
+  border: 1px solid rgba(0, 255, 204, 0.15);
+}
+
+/* ---- Browser-frame mockups for project screenshots ---- */
+.browser-frame-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: rgba(10, 20, 40, 0.85);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+body[data-theme="light"] .browser-frame-bar {
+  background: rgba(220, 228, 238, 0.9);
+  border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+
+.browser-frame-bar > span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.browser-frame-bar > span:nth-child(1) { background: #ff5f57; }
+.browser-frame-bar > span:nth-child(2) { background: #febc2e; }
+.browser-frame-bar > span:nth-child(3) { background: #28c840; }
+
+.browser-frame-url {
+  flex: 1;
+  margin-left: 8px;
+  font-size: 0.7rem;
+  font-family: monospace;
+  opacity: 0.55;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  padding: 3px 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+body[data-theme="light"] .browser-frame-url {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+/* ---- Skills: expander chip ---- */
+.skill-more {
+  cursor: pointer;
+  border-style: dashed !important;
+  opacity: 0.75;
+  background: transparent;
+  font: inherit;
+  color: var(--primary);
+}
+
+.skill-more:hover {
+  opacity: 1;
+}
+
+/* ---- Toolbox ---- */
+.toolbox-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 18px;
+}
+
+.toolbox-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 18px;
+  border-radius: 12px;
+  background: rgba(20, 40, 70, 0.3);
+  border: 1px solid rgba(0, 255, 204, 0.1);
+}
+
+body[data-theme="light"] .toolbox-item {
+  background: rgba(255, 255, 255, 0.75);
+  border-color: rgba(0, 180, 150, 0.2);
+}
+
+.toolbox-item i {
+  color: var(--primary);
+  font-size: 1.1rem;
+  margin-top: 3px;
+}
+
+.toolbox-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  opacity: 0.6;
+  margin-bottom: 3px;
+}
+
+.toolbox-value {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* ---- Case study overlay ---- */
+.casestudy-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 10, 24, 0.85);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.casestudy-modal {
+  position: relative;
+  background: var(--dark);
+  border: 1px solid rgba(0, 255, 204, 0.2);
+  border-radius: 16px;
+  max-width: 720px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 40px;
+}
+
+.casestudy-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 1.2rem;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.casestudy-close:hover { opacity: 1; }
+
+.casestudy-title {
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.6rem;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 6px;
+}
+
+.casestudy-subtitle {
+  opacity: 0.7;
+  margin-bottom: 28px;
+  font-size: 0.95rem;
+}
+
+.casestudy-section {
+  margin-bottom: 22px;
+}
+
+.casestudy-section h3 {
+  color: var(--primary);
+  font-size: 1.02rem;
+  margin-bottom: 8px;
+}
+
+.casestudy-section p {
+  font-size: 0.92rem;
+  line-height: 1.75;
+  opacity: 0.88;
+}
+
+.casestudy-links {
+  display: flex;
+  gap: 14px;
+  margin-top: 30px;
+}
+
+/* ---- Case-study trigger on the project card ---- */
+.project-link--story {
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+/* ---- Cursor toggle state ---- */
+.cursor-toggle {
+  opacity: 0.55;
+  margin-right: 8px;
+}
+
+.cursor-toggle--on {
+  opacity: 1;
+  color: var(--primary);
+}
+
+/* ---- Footer architecture link ---- */
+.site-architecture-link {
+  color: inherit;
+  opacity: 0.7;
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+.site-architecture-link:hover {
+  opacity: 1;
+  color: var(--primary);
+}
+
+/* ---- Calmer glow pass ---- */
+.profile-circle {
+  box-shadow: 0 0 18px rgba(0, 255, 204, 0.35);
+}
+
+.profile-circle::before {
+  box-shadow: 0 0 10px var(--primary), 0 0 22px rgba(0, 255, 204, 0.4);
+}

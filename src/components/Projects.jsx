@@ -1,7 +1,7 @@
 import SectionTitle from "./SectionTitle.jsx";
 import { projects } from "../data.js";
 
-export default function Projects() {
+export default function Projects({ onOpenCaseStudy }) {
   return (
     <section id="projects">
       <div className="container">
@@ -10,15 +10,17 @@ export default function Projects() {
         <div className="projects-grid">
           {projects.map((p) => (
             <div className={"project-card" + (p.featured ? " project-card--featured" : "")} key={p.title}>
-              {p.gradient ? (
-                <div className="project-img project-img--gradient" style={{ background: p.gradient }}>
-                  {p.mobileIcon && (
-                    <div className="mobile-app-icon"><i className="fas fa-mobile-alt"></i></div>
-                  )}
+              <div className="browser-frame">
+                <div className="browser-frame-bar">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <div className="browser-frame-url">
+                    {(p.demo || p.playStore || "").replace(/^https?:\/\//, "").replace(/\/$/, "") || "github.com/moohiit"}
+                  </div>
                 </div>
-              ) : (
                 <div className="project-img" style={{ backgroundImage: `url('${p.image}')` }}></div>
-              )}
+              </div>
               <div className="project-content">
                 <h3 className="project-title">
                   {p.title}
@@ -38,6 +40,11 @@ export default function Projects() {
                   ))}
                 </div>
                 <div className="project-links">
+                  {p.featured && (
+                    <button className="project-link demo-link project-link--story" onClick={onOpenCaseStudy}>
+                      Read the build story →
+                    </button>
+                  )}
                   {p.demo && (
                     <a href={p.demo} className="project-link demo-link" target="_blank" rel="noopener noreferrer">Live Demo</a>
                   )}
