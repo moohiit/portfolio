@@ -40,8 +40,8 @@ export default function Projects({ onOpenCaseStudy }) {
                   ))}
                 </div>
                 <div className="project-links">
-                  {p.featured && (
-                    <button className="project-link project-link--story" onClick={onOpenCaseStudy}>
+                  {p.storyKey && (
+                    <button className="project-link project-link--story" onClick={() => onOpenCaseStudy(p.storyKey)}>
                       <i className="fas fa-book-open"></i> Read the build story
                     </button>
                   )}

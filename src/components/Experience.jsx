@@ -19,7 +19,7 @@ function currentDuration(startDateStr) {
   return text.trim();
 }
 
-export default function Experience() {
+export default function Experience({ onOpenCaseStudy }) {
   return (
     <section id="experience">
       <div className="container">
@@ -57,6 +57,14 @@ export default function Experience() {
                     <span className="tech-item" key={t}>{t}</span>
                   ))}
                 </div>
+                {job.storyKey && (
+                  <button
+                    className="project-link project-link--story timeline-story-btn"
+                    onClick={() => onOpenCaseStudy(job.storyKey)}
+                  >
+                    <i className="fas fa-book-open"></i> Read the build story
+                  </button>
+                )}
               </div>
             </div>
           ))}

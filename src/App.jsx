@@ -31,7 +31,7 @@ export default function App() {
   const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "dark");
   const [cursorOn, setCursorOn] = useState(() => localStorage.getItem("customCursor") === "on");
   const [arcadeOpen, setArcadeOpen] = useState(false);
-  const [caseStudyOpen, setCaseStudyOpen] = useState(false);
+  const [openStudy, setOpenStudy] = useState(null);
   const [scrollTopVisible, setScrollTopVisible] = useState(false);
   const progressRef = useRef(null);
   const cursorRef = useRef(null);
@@ -195,8 +195,8 @@ export default function App() {
       <Stats />
       <Terminal />
       <Services />
-      <Experience />
-      <Projects onOpenCaseStudy={() => setCaseStudyOpen(true)} />
+      <Experience onOpenCaseStudy={setOpenStudy} />
+      <Projects onOpenCaseStudy={setOpenStudy} />
       <Skills theme={theme} />
       <Achievements />
       <CodingProfiles />
@@ -211,7 +211,7 @@ export default function App() {
       <Spotify />
       <Contact />
 
-      <CaseStudy open={caseStudyOpen} onClose={() => setCaseStudyOpen(false)} />
+      <CaseStudy studyKey={openStudy} onClose={() => setOpenStudy(null)} />
 
       <Suspense fallback={null}>
         {arcadeOpen && <Arcade open={arcadeOpen} onClose={() => setArcadeOpen(false)} />}

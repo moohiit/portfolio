@@ -812,3 +812,12 @@ body[data-theme="light"] .project-link--story {
 .project-links {
   flex-wrap: wrap;
 }
+
+.timeline-story-btn {
+  display: block;
+  width: 100%;
+  margin-top: 16px;
+  padding: 8px;
+  border-radius: 5px;
+  text-align: center;
+}

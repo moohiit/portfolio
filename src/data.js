@@ -83,6 +83,7 @@ export const experience = [
     tag: "Fintech",
     tagClass: "company-tag--fintech",
     startDate: "2026-02-01",
+    storyKey: "multiTenant",
     description:
       "Building the collections-partner platform end to end — a high-performance Fastify backend and an Expo React Native field app — plus handling critical production issues in a fast-paced fintech environment.",
     details: [
@@ -140,6 +141,7 @@ export const projects = [
     title: "AI Playground — GenAI Hub",
     badge: { text: "Featured", cls: "project-badge--featured" },
     featured: true,
+    storyKey: "aiPlayground",
     image: "/images/ai-playground.png",
     description:
       "A unified platform of seven end-to-end generative AI modules: resume & JD matcher, natural-language SQL sandbox, AI-powered expense tracker (receipt OCR, spending coach, savings goals, bill-split links), streaming Markdown generator, PDF chat with RAG & page-level citations, YouTube Q&A from transcripts, and a real-time content hub.",
@@ -367,11 +369,12 @@ export const toolbox = [
   { icon: "fas fa-mobile-alt", label: "Mobile", value: "Expo (React Native) · NativeWind" },
 ];
 
-// ---- AI Playground case study (opened from the featured project card) ----
-export const caseStudy = {
-  title: "Building the AI Playground",
-  subtitle: "7 GenAI modules, one platform, $0 infrastructure budget",
-  sections: [
+// ---- Case studies ("Read the build story" overlays) ----
+export const caseStudies = {
+  aiPlayground: {
+    title: "Building the AI Playground",
+    subtitle: "7 GenAI modules, one platform, $0 infrastructure budget",
+    sections: [
     {
       heading: "The problem",
       body: "I wanted a single place to demonstrate practical GenAI engineering — not toy demos, but end-to-end features with auth, persistence, and error handling. The constraint: run everything on free tiers (Gemini API, MongoDB Atlas, Vercel) without degrading UX.",
@@ -388,10 +391,37 @@ export const caseStudy = {
       heading: "Outcomes",
       body: "Seven working modules in production at aiplayground.mohitpatel.org, a companion mobile app (Splitzy) live on Google Play, and a codebase that doubles as my reference implementation for prompt design, structured output, and streaming UX.",
     },
-  ],
-  links: {
-    demo: "https://aiplayground.mohitpatel.org",
-    code: "https://github.com/moohiit/ai-playground",
+    ],
+    links: [
+      { label: "Live Demo", url: "https://aiplayground.mohitpatel.org", primary: true },
+      { label: "View Code", url: "https://github.com/moohiit/ai-playground" },
+    ],
+  },
+
+  multiTenant: {
+    title: "A Multi-Tenant Lender Integration Platform",
+    subtitle: "What I'm building at Quikkred — public API docs at developers.quikkred.in",
+    sections: [
+      {
+        heading: "The problem",
+        body: "Multiple lenders and organizations need to hand collection cases to Quikkred's field-partner network — each with their own branding, data formats, payment flows, and status-update requirements. Onboarding every lender with custom code doesn't scale; the platform had to become multi-tenant with a single public API surface.",
+      },
+      {
+        heading: "Architecture",
+        body: "A Fastify (Node.js) backend where every case, payout, and event is scoped to its source organization. Lenders integrate through a versioned public API — authenticated per tenant via API-key middleware — to push cases in bulk, receive status updates over signed webhooks with delivery tracking and retries, and reconcile payments through remittance batches. Per-tenant branding flows through to everything the borrower and field partner see.",
+      },
+      {
+        heading: "Hard decisions",
+        body: "Webhook reliability: an outbox pattern with per-delivery logging and retry, so a lender's downtime never loses an update. Auditability for finance: every external API request is logged, and imports/remittances run as idempotent batches — re-sending a file can't double-create cases or payments. Developer experience: a public Docusaurus documentation portal (authentication, sending cases, payments, receiving updates, sandbox testing) so lender teams can integrate without hand-holding.",
+      },
+      {
+        heading: "Where it stands",
+        body: "Live in production with the docs portal at developers.quikkred.in, powering case intake, geo-routed field assignment, real-time partner updates, and Razorpay-based payouts — with Sentry, structured logging, and rate limiting keeping it observable and stable under SLA.",
+      },
+    ],
+    links: [
+      { label: "API Documentation", url: "https://developers.quikkred.in", primary: true },
+    ],
   },
 };
 
