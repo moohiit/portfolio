@@ -202,7 +202,7 @@ export const projects = [
     ],
     tech: ["React", "Node.js", "Express", "MongoDB", "Socket.io", "Tailwind CSS"],
     demo: "https://sastagram.mohitpatel.org/",
-    code: "https://github.com/moohiit/instagram-clone",
+    code: "https://github.com/moohiit/sastagram",
   },
   {
     title: "Watchman System (WMS)",
