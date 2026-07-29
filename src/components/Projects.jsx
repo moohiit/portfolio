@@ -41,8 +41,8 @@ export default function Projects({ onOpenCaseStudy }) {
                 </div>
                 <div className="project-links">
                   {p.featured && (
-                    <button className="project-link demo-link project-link--story" onClick={onOpenCaseStudy}>
-                      Read the build story →
+                    <button className="project-link project-link--story" onClick={onOpenCaseStudy}>
+                      <i className="fas fa-book-open"></i> Read the build story
                     </button>
                   )}
                   {p.demo && (

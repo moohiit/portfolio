@@ -750,10 +750,30 @@ body[data-theme="light"] .toolbox-item {
 
 /* ---- Case-study trigger on the project card ---- */
 .project-link--story {
-  background: none;
-  border: none;
+  flex-basis: 100%;
+  background: linear-gradient(90deg, rgba(0, 255, 204, 0.1), rgba(123, 44, 191, 0.12));
+  border: 1px dashed rgba(0, 255, 204, 0.45);
+  color: var(--primary);
   font: inherit;
+  font-weight: 600;
+  font-size: 0.9rem;
   cursor: pointer;
+  white-space: nowrap;
+}
+
+.project-link--story i {
+  margin-right: 6px;
+  font-size: 0.8rem;
+}
+
+.project-link--story:hover {
+  border-style: solid;
+  background: linear-gradient(90deg, rgba(0, 255, 204, 0.18), rgba(123, 44, 191, 0.2));
+}
+
+body[data-theme="light"] .project-link--story {
+  border-color: rgba(0, 150, 130, 0.5);
+  color: #00806b;
 }
 
 /* ---- Cursor toggle state ---- */
