@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import SectionTitle from "./SectionTitle.jsx";
-
-const USERNAME = "moohiit";
+import { fetchRepos, GITHUB_USERNAME } from "../lib/github.js";
 
 const LANG_COLORS = {
   JavaScript: "#f7df1e", TypeScript: "#3178c6", HTML: "#e34c26", CSS: "#563d7c",
@@ -16,11 +15,7 @@ export default function FeaturedRepos() {
   useEffect(() => {
     if (fetched.current) return;
     fetched.current = true;
-    fetch(`https://api.github.com/users/${USERNAME}/repos?sort=updated&per_page=100`)
-      .then((r) => {
-        if (!r.ok) throw new Error("GitHub API error");
-        return r.json();
-      })
+    fetchRepos()
       .then((all) => {
         const picked = all
           .filter((r) => !r.fork)
@@ -36,10 +31,10 @@ export default function FeaturedRepos() {
     return (
       <section id="repos">
         <div className="container">
-          <SectionTitle>Open Source & Repositories</SectionTitle>
+          <SectionTitle number="08">Open Source & Repositories</SectionTitle>
           <p className="repos-fallback">
             Couldn't load repositories right now — browse them directly on{" "}
-            <a href={`https://github.com/${USERNAME}`} target="_blank" rel="noopener noreferrer">github.com/{USERNAME}</a>.
+            <a href={`https://github.com/${GITHUB_USERNAME}`} target="_blank" rel="noopener noreferrer">github.com/{GITHUB_USERNAME}</a>.
           </p>
         </div>
       </section>
@@ -83,7 +78,7 @@ export default function FeaturedRepos() {
         </div>
 
         <div className="repos-more">
-          <a href={`https://github.com/${USERNAME}?tab=repositories`} className="btn-outline" target="_blank" rel="noopener noreferrer">
+          <a href={`https://github.com/${GITHUB_USERNAME}?tab=repositories`} className="btn-outline" target="_blank" rel="noopener noreferrer">
             <i className="fab fa-github"></i> View All Repositories
           </a>
         </div>
