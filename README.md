@@ -78,5 +78,5 @@ MIT
 
 - Website: [mohitpatel.org](https://mohitpatel.org/)
 - GitHub: [@moohiit](https://github.com/moohiit)
-- LinkedIn: [Mohit Patel](https://www.linkedin.com/in/mohit-patel-51338a245/)
+- LinkedIn: [Mohit Patel](https://www.linkedin.com/in/moohiitpatel/)
 - Email: mohit.patel.edu@gmail.com
