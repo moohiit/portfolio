@@ -335,7 +335,7 @@ header {
 
 .header-content {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -367,6 +367,8 @@ header {
   display: flex;
   align-items: center;
   gap: 30px;
+  margin-left: auto;
+  margin-right: 18px;
 }
 
 .nav-links a {
@@ -477,6 +479,17 @@ header {
   text-align: center;
   padding: 10px 24px;
   position: relative;
+}
+
+/* The pill is an <a> inside .nav-links, so it must out-rank the generic link rule */
+.nav-links a.resume-button,
+.nav-links a.resume-button:hover {
+  padding: 9px 20px;
+  color: var(--lighter);
+}
+
+.nav-links a.resume-button::after {
+  display: none;
 }
 
 /* Resume download count badge */
@@ -2626,9 +2639,9 @@ body[data-theme="light"] .spotify-card {
     font-size: 1.5rem;
   }
 
-  .resume-button {
+  .nav-links a.resume-button {
     min-width: 0;
-    padding: 8px 16px;
+    padding: 7px 16px;
   }
 
   .theme-toggle {
@@ -2640,6 +2653,10 @@ body[data-theme="light"] .spotify-card {
 
 /* Below 1200px the full menu no longer fits beside the logo: use the drawer */
 @media (max-width: 1200px) {
+  .cursor-toggle {
+    margin-left: auto;
+  }
+
   .nav-links {
     display: none;
     position: fixed;
