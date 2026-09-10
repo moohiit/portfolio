@@ -83,6 +83,7 @@ export default function Header({ theme, onToggleTheme, cursorOn, onToggleCursor 
             className={"theme-toggle cursor-toggle" + (cursorOn ? " cursor-toggle--on" : "")}
             title={cursorOn ? "Disable custom cursor" : "Enable custom cursor"}
             aria-label="Toggle custom cursor"
+            aria-pressed={cursorOn}
             onClick={onToggleCursor}
           >
             <i className="fas fa-mouse-pointer"></i>

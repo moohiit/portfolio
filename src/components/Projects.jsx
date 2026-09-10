@@ -19,7 +19,12 @@ export default function Projects({ onOpenCaseStudy }) {
                     {(p.demo || p.playStore || "").replace(/^https?:\/\//, "").replace(/\/$/, "") || "github.com/moohiit"}
                   </div>
                 </div>
-                <div className="project-img" style={{ backgroundImage: `url('${p.image}')` }}></div>
+                <div
+                  className="project-img"
+                  role="img"
+                  aria-label={`${p.title} screenshot`}
+                  style={{ backgroundImage: `url('${p.image}')` }}
+                ></div>
               </div>
               <div className="project-content">
                 <h3 className="project-title">

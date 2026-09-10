@@ -42,7 +42,7 @@
 .repo-card {
   background: rgba(20, 40, 70, 0.3);
   border-radius: 15px;
-  border: 1px solid rgba(0, 255, 204, 0.1);
+  border: 1px solid rgba(var(--primary-rgb), 0.1);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   padding: 25px;
@@ -55,7 +55,7 @@ body[data-theme="light"] .testimonial-card,
 body[data-theme="light"] .blog-card,
 body[data-theme="light"] .repo-card {
   background: rgba(255, 255, 255, 0.75);
-  border-color: rgba(0, 180, 150, 0.2);
+  border-color: rgba(var(--primary-rgb), 0.2);
 }
 
 /* ---- Services ---- */
@@ -72,7 +72,7 @@ body[data-theme="light"] .repo-card {
 .service-card:hover {
   transform: translateY(-5px);
   border-color: var(--primary);
-  box-shadow: 0 10px 30px rgba(0, 255, 204, 0.15);
+  box-shadow: 0 10px 30px rgba(var(--primary-rgb), 0.15);
 }
 
 .service-icon {
@@ -104,7 +104,7 @@ body[data-theme="light"] .repo-card {
   flex: 1;
   height: 6px;
   border-radius: 3px;
-  background: rgba(0, 255, 204, 0.12);
+  background: rgba(var(--primary-rgb), 0.12);
   overflow: hidden;
 }
 
@@ -144,7 +144,7 @@ body[data-theme="light"] .skill-proficiency-track {
 .profile-card:hover {
   transform: translateY(-5px);
   border-color: var(--primary);
-  box-shadow: 0 10px 30px rgba(0, 255, 204, 0.15);
+  box-shadow: 0 10px 30px rgba(var(--primary-rgb), 0.15);
 }
 
 .profile-card-icon {
@@ -157,7 +157,7 @@ body[data-theme="light"] .skill-proficiency-track {
   align-items: center;
   justify-content: center;
   border-radius: 12px;
-  background: rgba(0, 255, 204, 0.08);
+  background: rgba(var(--primary-rgb), 0.08);
 }
 
 .profile-card--linkedin .profile-card-icon { color: var(--linkedin); background: rgba(10, 102, 194, 0.12); }
@@ -215,7 +215,7 @@ body[data-theme="light"] .skill-proficiency-track {
 .repo-card:hover {
   transform: translateY(-5px);
   border-color: var(--primary);
-  box-shadow: 0 10px 30px rgba(0, 255, 204, 0.15);
+  box-shadow: 0 10px 30px rgba(var(--primary-rgb), 0.15);
 }
 
 .repo-card-header {
@@ -294,7 +294,7 @@ body[data-theme="light"] .skill-proficiency-track {
 .achievement-card:hover {
   transform: translateY(-5px);
   border-color: var(--primary);
-  box-shadow: 0 10px 30px rgba(0, 255, 204, 0.15);
+  box-shadow: 0 10px 30px rgba(var(--primary-rgb), 0.15);
 }
 
 .achievement-icon {
@@ -354,7 +354,7 @@ body[data-theme="light"] .skill-proficiency-track {
 .testimonial-card:hover {
   transform: translateY(-5px);
   border-color: var(--primary);
-  box-shadow: 0 10px 30px rgba(0, 255, 204, 0.15);
+  box-shadow: 0 10px 30px rgba(var(--primary-rgb), 0.15);
 }
 
 .testimonial-quote-icon {
@@ -383,7 +383,7 @@ body[data-theme="light"] .skill-proficiency-track {
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  background: rgba(0, 255, 204, 0.1);
+  background: rgba(var(--primary-rgb), 0.1);
   color: var(--primary);
   display: flex;
   align-items: center;
@@ -417,7 +417,7 @@ body[data-theme="light"] .skill-proficiency-track {
 .blog-card:hover {
   transform: translateY(-5px);
   border-color: var(--primary);
-  box-shadow: 0 10px 30px rgba(0, 255, 204, 0.15);
+  box-shadow: 0 10px 30px rgba(var(--primary-rgb), 0.15);
 }
 
 .blog-icon {
@@ -501,7 +501,7 @@ body[data-theme="light"] .skill-proficiency-track {
   align-items: flex-start;
   gap: 12px;
   background: rgba(20, 40, 70, 0.45);
-  border: 1px solid rgba(0, 255, 204, 0.18);
+  border: 1px solid rgba(var(--primary-rgb), 0.18);
   border-radius: 12px;
   padding: 14px 18px;
   text-decoration: none;
@@ -519,7 +519,7 @@ body[data-theme="light"] .skill-proficiency-track {
 
 body[data-theme="light"] .building-card {
   background: rgba(255, 255, 255, 0.8);
-  border-color: rgba(0, 180, 150, 0.25);
+  border-color: rgba(var(--primary-rgb), 0.25);
 }
 
 .building-pulse {
@@ -533,8 +533,8 @@ body[data-theme="light"] .building-card {
 }
 
 @keyframes buildingPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 255, 204, 0.5); }
-  50% { box-shadow: 0 0 0 7px rgba(0, 255, 204, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0.5); }
+  50% { box-shadow: 0 0 0 7px rgba(var(--primary-rgb), 0); }
 }
 
 .building-label {
@@ -568,8 +568,8 @@ body[data-theme="light"] .building-card {
   font-size: 0.68rem;
   padding: 2px 8px;
   border-radius: 10px;
-  background: rgba(0, 255, 204, 0.08);
-  border: 1px solid rgba(0, 255, 204, 0.15);
+  background: rgba(var(--primary-rgb), 0.08);
+  border: 1px solid rgba(var(--primary-rgb), 0.15);
 }
 
 /* ---- Browser-frame mockups for project screenshots ---- */
@@ -643,12 +643,12 @@ body[data-theme="light"] .browser-frame-url {
   padding: 16px 18px;
   border-radius: 12px;
   background: rgba(20, 40, 70, 0.3);
-  border: 1px solid rgba(0, 255, 204, 0.1);
+  border: 1px solid rgba(var(--primary-rgb), 0.1);
 }
 
 body[data-theme="light"] .toolbox-item {
   background: rgba(255, 255, 255, 0.75);
-  border-color: rgba(0, 180, 150, 0.2);
+  border-color: rgba(var(--primary-rgb), 0.2);
 }
 
 .toolbox-item i {
@@ -687,7 +687,7 @@ body[data-theme="light"] .toolbox-item {
 .casestudy-modal {
   position: relative;
   background: var(--dark);
-  border: 1px solid rgba(0, 255, 204, 0.2);
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
   border-radius: 16px;
   max-width: 720px;
   width: 100%;
@@ -751,8 +751,8 @@ body[data-theme="light"] .toolbox-item {
 /* ---- Case-study trigger on the project card ---- */
 .project-link--story {
   flex-basis: 100%;
-  background: linear-gradient(90deg, rgba(0, 255, 204, 0.1), rgba(123, 44, 191, 0.12));
-  border: 1px dashed rgba(0, 255, 204, 0.45);
+  background: linear-gradient(90deg, rgba(var(--primary-rgb), 0.1), rgba(123, 44, 191, 0.12));
+  border: 1px dashed rgba(var(--primary-rgb), 0.45);
   color: var(--primary);
   font: inherit;
   font-weight: 600;
@@ -768,12 +768,12 @@ body[data-theme="light"] .toolbox-item {
 
 .project-link--story:hover {
   border-style: solid;
-  background: linear-gradient(90deg, rgba(0, 255, 204, 0.18), rgba(123, 44, 191, 0.2));
+  background: linear-gradient(90deg, rgba(var(--primary-rgb), 0.18), rgba(123, 44, 191, 0.2));
 }
 
 body[data-theme="light"] .project-link--story {
-  border-color: rgba(0, 150, 130, 0.5);
-  color: #00806b;
+  border-color: rgba(var(--primary-rgb), 0.5);
+  color: var(--primary);
 }
 
 /* ---- Cursor toggle state ---- */
@@ -802,11 +802,11 @@ body[data-theme="light"] .project-link--story {
 
 /* ---- Calmer glow pass ---- */
 .profile-circle {
-  box-shadow: 0 0 18px rgba(0, 255, 204, 0.35);
+  box-shadow: 0 0 18px rgba(var(--primary-rgb), 0.35);
 }
 
 .profile-circle::before {
-  box-shadow: 0 0 10px var(--primary), 0 0 22px rgba(0, 255, 204, 0.4);
+  box-shadow: 0 0 10px var(--primary), 0 0 22px rgba(var(--primary-rgb), 0.4);
 }
 
 .project-links {
@@ -821,3 +821,49 @@ body[data-theme="light"] .project-link--story {
   border-radius: 5px;
   text-align: center;
 }
+
+/* ---- Contact form: submit status line + honeypot (Contact.jsx fetch submit) ---- */
+.contact-form .form-status {
+  margin: 14px 0 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.contact-form .form-status:empty {
+  margin: 0;
+}
+
+.contact-form .form-status--success {
+  color: var(--primary);
+}
+
+body[data-theme="light"] .contact-form .form-status--success {
+  color: var(--primary); /* 6.2:1 on the light card */
+}
+
+.contact-form .form-status--error {
+  color: #ff6b8b;
+}
+
+body[data-theme="light"] .contact-form .form-status--error {
+  color: #c81e4f;
+}
+
+.contact-form .form-status a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.contact-form .cta-button[aria-disabled="true"] {
+  cursor: progress;
+  box-shadow: 0 5px 15px rgba(var(--primary-rgb), 0.2);
+}
+
+.contact-form .cta-button[aria-disabled="true"]:hover {
+  transform: none;
+}
+
+.contact-form input.hidden {
+  display: none !important;
+}
+/* ---- end contact form status ---- */

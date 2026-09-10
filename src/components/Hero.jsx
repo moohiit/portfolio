@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { roles, currentlyBuilding } from "../data.js";
+import { fetchRepos } from "../lib/github.js";
 
 // Repos that shouldn't appear as "currently building" even when recently pushed
 // (the portfolio itself and the profile readme repo are meta, not projects).
@@ -8,10 +9,13 @@ const BUILDING_EXCLUDE = ["portfolio", "moohiit"];
 export default function Hero() {
   const [text, setText] = useState("");
   const [building, setBuilding] = useState(currentlyBuilding);
+  const fetched = useRef(false);
 
   useEffect(() => {
-    fetch("https://api.github.com/users/moohiit/repos?sort=pushed&per_page=15")
-      .then((r) => (r.ok ? r.json() : Promise.reject()))
+    if (fetched.current) return;
+    fetched.current = true;
+    // fetchRepos() is shared with FeaturedRepos, so this costs no extra API quota.
+    fetchRepos()
       .then((repos) => {
         const repo = repos.find((r) => !r.fork && !BUILDING_EXCLUDE.includes(r.name));
         if (!repo) return;
@@ -51,6 +55,10 @@ export default function Hero() {
     return () => clearTimeout(timer);
   }, []);
 
+  // DOM order is the reading / tab order on every viewport: text, social links,
+  // then the photo and the "currently building" card. On desktop the grid puts
+  // the photo column beside the text and the social row underneath both
+  // (.hero .social-icons in styles.css); on phones it is a single column.
   return (
     <section className="hero" id="about">
       <div className="container">
@@ -73,6 +81,14 @@ export default function Hero() {
             </div>
           </div>
 
+          <div className="social-icons">
+            <a href="https://www.linkedin.com/in/moohiitpatel/" className="social-icon linkedin" title="LinkedIn" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin-in"></i></a>
+            <a href="https://github.com/moohiit" className="social-icon github" title="GitHub" target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i></a>
+            <a href="https://www.instagram.com/m.o.h.i.t.p.a.t.e.l" className="social-icon instagram" title="Instagram" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>
+            <a href="https://x.com/mooohiit" className="social-icon twitter" title="Twitter" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter"></i></a>
+            <a href="https://wa.me/+917060993826" className="social-icon whatsapp" title="Whatsapp" target="_blank" rel="noopener noreferrer"><i className="fab fa-whatsapp"></i></a>
+          </div>
+
           <div className="hero-image">
             <div className="profile-container">
               <div className="profile-circle"></div>
@@ -92,13 +108,6 @@ export default function Hero() {
               </div>
             </a>
           </div>
-        </div>
-        <div className="social-icons">
-          <a href="https://www.linkedin.com/in/moohiitpatel/" className="social-icon linkedin" title="LinkedIn" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin-in"></i></a>
-          <a href="https://github.com/moohiit" className="social-icon github" title="GitHub" target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i></a>
-          <a href="https://www.instagram.com/m.o.h.i.t.p.a.t.e.l" className="social-icon instagram" title="Instagram" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>
-          <a href="https://x.com/mooohiit" className="social-icon twitter" title="Twitter" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter"></i></a>
-          <a href="https://wa.me/+917060993826" className="social-icon whatsapp" title="Whatsapp" target="_blank" rel="noopener noreferrer"><i className="fab fa-whatsapp"></i></a>
         </div>
       </div>
     </section>

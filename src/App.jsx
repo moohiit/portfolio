@@ -110,7 +110,7 @@ export default function App() {
       }
       const header = document.querySelector("header");
       if (header) {
-        header.style.padding = scrollY > 100 ? "10px 0" : "20px 0";
+        header.style.padding = scrollY > 100 ? "8px 0" : "12px 0";
         header.style.boxShadow = scrollY > 100 ? "0 5px 20px rgba(0, 0, 0, 0.1)" : "none";
       }
       let current = "";
@@ -165,7 +165,8 @@ export default function App() {
   // Arcade Ctrl+G shortcut
   useEffect(() => {
     const onKey = (e) => {
-      if (e.ctrlKey && e.key === "g") {
+      // e.key is "G" with CapsLock on or Shift held; compare case-insensitively.
+      if (e.ctrlKey && typeof e.key === "string" && e.key.toLowerCase() === "g") {
         e.preventDefault();
         setArcadeOpen((o) => !o);
       }

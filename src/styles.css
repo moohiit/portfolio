@@ -1,5 +1,6 @@
 :root {
   --primary: #00ffcc;
+  --primary-rgb: 0, 255, 204;
   --secondary: #7b2cbf;
   --dark: #0a192f;
   --darker: #061023;
@@ -16,6 +17,13 @@
 
 /* Light Theme Variables */
 body[data-theme="light"] {
+  --primary: #0d6b64;
+  --primary-rgb: 13, 107, 100;
+  --secondary: #5b21b6;
+  --accent: #be185d;
+  --github: #24292f;
+  --twitter: #0c7abf;
+  --whatsapp: #128c7e;
   --dark: #f0f4f8;
   --darker: #e2e8f0;
   --light: #1a202c;
@@ -30,7 +38,7 @@ body[data-theme="light"] .grid-pattern {
 
 body[data-theme="light"] header {
   background: rgba(240, 244, 248, 0.9);
-  border-bottom-color: rgba(0, 180, 150, 0.15);
+  border-bottom-color: rgba(var(--primary-rgb), 0.15);
 }
 
 body[data-theme="light"] .nav-links a {
@@ -48,17 +56,18 @@ body[data-theme="light"] .stat-card {
 }
 
 
+/* The base rules already tint these with rgba(var(--primary-rgb), 0.1); a light
+   background here would outrank the :hover fills, so only the text colour is set. */
 body[data-theme="light"] .skill-item,
 body[data-theme="light"] .tech-item,
 body[data-theme="light"] .education-year,
 body[data-theme="light"] .education-grade {
-  background: rgba(0, 180, 150, 0.1);
   color: #2d3748;
 }
 
 body[data-theme="light"] .terminal-window {
   background: rgba(255, 255, 255, 0.95);
-  border-color: rgba(0, 180, 150, 0.2);
+  border-color: rgba(var(--primary-rgb), 0.2);
 }
 
 body[data-theme="light"] .terminal-header {
@@ -90,15 +99,22 @@ body[data-theme="light"] .terminal-suggestions {
 }
 
 body[data-theme="light"] .suggestion-chip {
-  background: rgba(0, 180, 150, 0.08);
-  border-color: rgba(0, 180, 150, 0.2);
+  border-color: rgba(var(--primary-rgb), 0.2);
 }
 
 body[data-theme="light"] .form-group input,
 body[data-theme="light"] .form-group textarea {
   background: rgba(0, 0, 0, 0.03);
   color: #2d3748;
-  border-color: rgba(0, 180, 150, 0.2);
+  border-color: rgba(var(--primary-rgb), 0.2);
+}
+
+/* Focus must win over the rest-state border above, and needs a stronger ring than
+   the dark theme's 0.1 alpha to be visible on a pale field (WCAG 2.4.7). */
+body[data-theme="light"] .form-group input:focus,
+body[data-theme="light"] .form-group textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.35);
 }
 
 body[data-theme="light"] .project-img::after {
@@ -111,7 +127,7 @@ body[data-theme="light"] footer {
 
 body[data-theme="light"] .github-heatmap-card {
   background: rgba(255, 255, 255, 0.7);
-  border-color: rgba(0, 180, 150, 0.15);
+  border-color: rgba(var(--primary-rgb), 0.15);
 }
 
 body[data-theme="light"] .heatmap-cell[data-level="0"] {
@@ -130,10 +146,6 @@ body[data-theme="light"] .code-editor-footer {
 
 body[data-theme="light"] .code-content {
   color: #24292f;
-}
-
-body[data-theme="light"] .code-line-numbers span {
-  color: rgba(0, 0, 0, 0.2);
 }
 
 body[data-theme="light"] .code-tab {
@@ -159,19 +171,15 @@ body[data-theme="light"] .copyright {
 }
 
 body[data-theme="light"] .experience-duration {
-  background: rgba(0, 180, 150, 0.1);
+  background: rgba(var(--primary-rgb), 0.1);
 }
 
 body[data-theme="light"] .certificate-slider {
   background: transparent;
 }
 
-body[data-theme="light"] .slider-btn {
-  background: rgba(0, 180, 150, 0.15);
-}
-
 body[data-theme="light"] .dot {
-  background: rgba(0, 180, 150, 0.25);
+  background: rgba(var(--primary-rgb), 0.25);
 }
 
 * {
@@ -199,7 +207,7 @@ body {
   background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
   z-index: 10000;
   transition: width 0.1s linear;
-  box-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
+  box-shadow: 0 0 10px rgba(var(--primary-rgb), 0.5);
 }
 
 /* Custom Cursor */
@@ -221,7 +229,7 @@ body {
 .custom-cursor.cursor-hover {
   width: 55px;
   height: 55px;
-  background: rgba(0, 255, 204, 0.08);
+  background: rgba(var(--primary-rgb), 0.08);
   border-color: var(--secondary);
 }
 
@@ -313,7 +321,7 @@ body {
 
 /* Header & Navigation */
 header {
-  padding: 20px 0;
+  padding: 12px 0;
   position: fixed;
   top: 0;
   width: 100%;
@@ -321,7 +329,7 @@ header {
   background: rgba(2, 3, 43, 0.9);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0, 255, 204, 0.1);
+  border-bottom: 1px solid rgba(var(--primary-rgb), 0.1);
   transition: var(--transition);
 }
 
@@ -347,6 +355,7 @@ header {
   font-family: "Orbitron", sans-serif;
   font-weight: 700;
   font-size: 1.8rem;
+  white-space: nowrap;
   background: linear-gradient(90deg, var(--primary), var(--secondary));
   -webkit-background-clip: text;
   background-clip: text;
@@ -356,6 +365,7 @@ header {
 
 .nav-links {
   display: flex;
+  align-items: center;
   gap: 30px;
 }
 
@@ -402,18 +412,18 @@ header {
   border: none;
   cursor: pointer;
   font-size: 1rem;
-  box-shadow: 0 5px 15px rgba(0, 255, 204, 0.3);
+  box-shadow: 0 5px 15px rgba(var(--primary-rgb), 0.3);
 }
 
 .cta-button:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 255, 204, 0.5);
+  box-shadow: 0 8px 20px rgba(var(--primary-rgb), 0.5);
 }
 
 /* Theme Toggle */
 .theme-toggle {
-  background: rgba(0, 255, 204, 0.1);
-  border: 1px solid rgba(0, 255, 204, 0.2);
+  background: rgba(var(--primary-rgb), 0.1);
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
   color: var(--primary);
   width: 42px;
   height: 42px;
@@ -553,7 +563,8 @@ header {
 .hero-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 50px;
+  column-gap: 50px;
+  row-gap: 0; /* the social row spaces itself with its own margin */
   align-items: center;
 }
 
@@ -609,7 +620,7 @@ header {
 }
 
 .btn-outline:hover {
-  background: rgba(0, 255, 204, 0.1);
+  background: rgba(var(--primary-rgb), 0.1);
   transform: translateY(-3px);
 }
 
@@ -617,6 +628,19 @@ header {
   display: flex;
   justify-content: center;
   animation: float 6s ease-in-out infinite;
+}
+
+/* Hero social row: it sits between the text and the photo in the DOM (Hero.jsx)
+   so keyboard/reading order matches phones; on wider screens it spans the grid
+   as a final full-width row. The box is sized to its icons (they are centered
+   anyway) so the fixed corner controls never sit inside a container-wide,
+   mostly empty box. */
+.hero .social-icons {
+  grid-column: 1 / -1;
+  order: 1;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .profile-container {
@@ -705,8 +729,8 @@ section {
   margin: 0 auto;
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid rgba(0, 255, 204, 0.15);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(0, 255, 204, 0.05);
+  border: 1px solid rgba(var(--primary-rgb), 0.15);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(var(--primary-rgb), 0.05);
   background: rgba(6, 16, 35, 0.95);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -717,7 +741,7 @@ section {
   align-items: center;
   padding: 12px 16px;
   background: rgba(10, 25, 47, 0.9);
-  border-bottom: 1px solid rgba(0, 255, 204, 0.1);
+  border-bottom: 1px solid rgba(var(--primary-rgb), 0.1);
 }
 
 .terminal-dots {
@@ -763,7 +787,7 @@ section {
 
 .terminal-clear-btn:hover {
   color: var(--primary);
-  background: rgba(0, 255, 204, 0.1);
+  background: rgba(var(--primary-rgb), 0.1);
 }
 
 .terminal-body {
@@ -786,12 +810,12 @@ section {
 }
 
 .terminal-body::-webkit-scrollbar-thumb {
-  background: rgba(0, 255, 204, 0.2);
+  background: rgba(var(--primary-rgb), 0.2);
   border-radius: 3px;
 }
 
 .terminal-body::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 255, 204, 0.4);
+  background: rgba(var(--primary-rgb), 0.4);
 }
 
 .terminal-line {
@@ -865,7 +889,7 @@ section {
   align-items: center;
   gap: 10px;
   padding: 12px 20px;
-  border-top: 1px solid rgba(0, 255, 204, 0.08);
+  border-top: 1px solid rgba(var(--primary-rgb), 0.08);
   background: rgba(10, 25, 47, 0.5);
 }
 
@@ -889,13 +913,13 @@ section {
   flex-wrap: wrap;
   gap: 8px;
   padding: 14px 20px;
-  border-top: 1px solid rgba(0, 255, 204, 0.06);
+  border-top: 1px solid rgba(var(--primary-rgb), 0.06);
   background: rgba(10, 25, 47, 0.3);
 }
 
 .suggestion-chip {
-  background: rgba(0, 255, 204, 0.08);
-  border: 1px solid rgba(0, 255, 204, 0.15);
+  background: rgba(var(--primary-rgb), 0.08);
+  border: 1px solid rgba(var(--primary-rgb), 0.15);
   color: var(--primary);
   padding: 6px 16px;
   border-radius: 20px;
@@ -910,7 +934,7 @@ section {
   background: var(--primary);
   color: var(--darker);
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(0, 255, 204, 0.3);
+  box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.3);
 }
 
 /* Skills Section */
@@ -926,7 +950,7 @@ section {
   border-radius: 15px;
   padding: 25px;
   transition: var(--transition);
-  border: 1px solid rgba(0, 255, 204, 0.1);
+  border: 1px solid rgba(var(--primary-rgb), 0.1);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   transform: translateY(50px);
@@ -941,7 +965,7 @@ section {
 .skill-card:hover {
   transform: translateY(-10px);
   border-color: var(--primary);
-  box-shadow: 0 10px 30px rgba(0, 255, 204, 0.1);
+  box-shadow: 0 10px 30px rgba(var(--primary-rgb), 0.1);
 }
 
 .skill-header {
@@ -953,7 +977,7 @@ section {
 .skill-icon {
   width: 50px;
   height: 50px;
-  background: rgba(0, 255, 204, 0.1);
+  background: rgba(var(--primary-rgb), 0.1);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -975,7 +999,7 @@ section {
 }
 
 .skill-item {
-  background: rgba(0, 255, 204, 0.1);
+  background: rgba(var(--primary-rgb), 0.1);
   padding: 6px 15px;
   border-radius: 30px;
   font-size: 0.9rem;
@@ -1037,7 +1061,7 @@ section {
   padding: 30px;
   flex: 1;
   min-width: 0;
-  border: 1px solid rgba(0, 255, 204, 0.2);
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
   border-left: 3px solid var(--primary);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
@@ -1045,18 +1069,18 @@ section {
   position: relative;
   z-index: 1;
   margin-top: 0;
-  box-shadow: 0 5px 20px rgba(0, 255, 204, 0.1);
+  box-shadow: 0 5px 20px rgba(var(--primary-rgb), 0.1);
 }
 
 .timeline-content:hover {
   transform: translateY(-5px);
   border-color: var(--primary);
-  box-shadow: 0 10px 30px rgba(0, 255, 204, 0.2);
+  box-shadow: 0 10px 30px rgba(var(--primary-rgb), 0.2);
 }
 
 .timeline-header {
   margin-bottom: 20px;
-  border-bottom: 1px solid rgba(0, 255, 204, 0.2);
+  border-bottom: 1px solid rgba(var(--primary-rgb), 0.2);
   padding-bottom: 15px;
 }
 
@@ -1077,7 +1101,7 @@ section {
   display: inline-block;
   margin-left: 10px;
   font-size: 0.9rem;
-  background: rgba(0, 255, 204, 0.1);
+  background: rgba(var(--primary-rgb), 0.1);
   padding: 3px 10px;
   border-radius: 20px;
   color: var(--primary);
@@ -1103,7 +1127,7 @@ section {
   z-index: 2;
   margin-top: 10px;
   margin-bottom: 0;
-  box-shadow: 0 2px 12px rgba(0, 255, 204, 0.35);
+  box-shadow: 0 2px 12px rgba(var(--primary-rgb), 0.35);
   white-space: nowrap;
   line-height: 1.5;
 }
@@ -1134,7 +1158,7 @@ section {
 }
 
 .tech-item {
-  background: rgba(0, 255, 204, 0.1);
+  background: rgba(var(--primary-rgb), 0.1);
   padding: 6px 15px;
   border-radius: 20px;
   font-size: 0.85rem;
@@ -1169,7 +1193,7 @@ section {
   max-width: 100%;
   height: auto;
   border-radius: 10px;
-  box-shadow: 0 5px 20px rgba(0, 255, 204, 0.1);
+  box-shadow: 0 5px 20px rgba(var(--primary-rgb), 0.1);
   margin-bottom: 20px;
 }
 
@@ -1201,7 +1225,7 @@ section {
 }
 
 .slider-btn {
-  background: rgba(0, 255, 204, 0.2);
+  background: rgba(var(--primary-rgb), 0.2);
   color: var(--primary);
   border: none;
   width: 40px;
@@ -1226,7 +1250,7 @@ section {
   display: inline-block;
   width: 10px;
   height: 10px;
-  background: rgba(0, 255, 204, 0.3);
+  background: rgba(var(--primary-rgb), 0.3);
   border-radius: 50%;
   margin: 0 5px;
   cursor: pointer;
@@ -1251,7 +1275,7 @@ section {
   border-radius: 15px;
   overflow: hidden;
   transition: var(--transition);
-  border: 1px solid rgba(0, 255, 204, 0.1);
+  border: 1px solid rgba(var(--primary-rgb), 0.1);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   transform: translateY(50px);
@@ -1268,7 +1292,7 @@ section {
 .project-card:hover {
   transform: translateY(-10px);
   border-color: var(--primary);
-  box-shadow: 0 15px 40px rgba(0, 255, 204, 0.2);
+  box-shadow: 0 15px 40px rgba(var(--primary-rgb), 0.2);
 }
 
 .project-img {
@@ -1358,7 +1382,7 @@ section {
   background: rgba(20, 40, 70, 0.3);
   border-radius: 15px;
   padding: 30px;
-  border: 1px solid rgba(0, 255, 204, 0.1);
+  border: 1px solid rgba(var(--primary-rgb), 0.1);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
@@ -1382,7 +1406,7 @@ section {
 .contact-icon {
   width: 40px;
   height: 40px;
-  background: rgba(0, 255, 204, 0.1);
+  background: rgba(var(--primary-rgb), 0.1);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1410,7 +1434,7 @@ section {
   background: rgba(20, 40, 70, 0.3);
   border-radius: 15px;
   padding: 30px;
-  border: 1px solid rgba(0, 255, 204, 0.1);
+  border: 1px solid rgba(var(--primary-rgb), 0.1);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
@@ -1431,7 +1455,7 @@ section {
   width: 100%;
   padding: 12px;
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(0, 255, 204, 0.1);
+  border: 1px solid rgba(var(--primary-rgb), 0.1);
   border-radius: 8px;
   color: var(--light);
   font-size: 0.95rem;
@@ -1442,7 +1466,7 @@ section {
 .form-group textarea:focus {
   border-color: var(--primary);
   outline: none;
-  box-shadow: 0 0 0 3px rgba(0, 255, 204, 0.1);
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1);
 }
 
 .form-group textarea {
@@ -1455,7 +1479,7 @@ footer {
   background: rgba(1, 2, 40, 0.8);
   padding: 30px 0;
   text-align: center;
-  border-top: 1px solid rgba(0, 255, 204, 0.1);
+  border-top: 1px solid rgba(var(--primary-rgb), 0.1);
 }
 
 .footer-content {
@@ -1521,7 +1545,7 @@ footer {
   visibility: hidden;
   transform: translateY(20px);
   transition: var(--transition);
-  box-shadow: 0 5px 20px rgba(0, 255, 204, 0.3);
+  box-shadow: 0 5px 20px rgba(var(--primary-rgb), 0.3);
 }
 
 .scroll-top.visible {
@@ -1532,7 +1556,7 @@ footer {
 
 .scroll-top:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 30px rgba(0, 255, 204, 0.5);
+  box-shadow: 0 8px 30px rgba(var(--primary-rgb), 0.5);
 }
 
 /* Education Section */
@@ -1550,7 +1574,7 @@ footer {
   display: flex;
   gap: 20px;
   align-items: flex-start;
-  border: 1px solid rgba(0, 255, 204, 0.1);
+  border: 1px solid rgba(var(--primary-rgb), 0.1);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   transition: var(--transition);
@@ -1566,14 +1590,14 @@ footer {
 .education-card:hover {
   transform: translateY(-5px);
   border-color: var(--primary);
-  box-shadow: 0 10px 30px rgba(0, 255, 204, 0.15);
+  box-shadow: 0 10px 30px rgba(var(--primary-rgb), 0.15);
 }
 
 .education-icon {
   width: 60px;
   height: 60px;
   min-width: 60px;
-  background: linear-gradient(135deg, rgba(0, 255, 204, 0.15), rgba(123, 44, 191, 0.15));
+  background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.15), rgba(123, 44, 191, 0.15));
   border-radius: 15px;
   display: flex;
   align-items: center;
@@ -1609,7 +1633,7 @@ footer {
   gap: 8px;
   font-size: 0.9rem;
   color: var(--light);
-  background: rgba(0, 255, 204, 0.1);
+  background: rgba(var(--primary-rgb), 0.1);
   padding: 5px 12px;
   border-radius: 20px;
 }
@@ -1636,7 +1660,7 @@ footer {
   border-radius: 15px;
   padding: 30px 20px;
   text-align: center;
-  border: 1px solid rgba(0, 255, 204, 0.1);
+  border: 1px solid rgba(var(--primary-rgb), 0.1);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   transition: var(--transition);
@@ -1645,7 +1669,7 @@ footer {
 .stat-card:hover {
   transform: translateY(-5px);
   border-color: var(--primary);
-  box-shadow: 0 10px 30px rgba(0, 255, 204, 0.15);
+  box-shadow: 0 10px 30px rgba(var(--primary-rgb), 0.15);
 }
 
 .stat-icon {
@@ -1695,7 +1719,7 @@ footer {
   background: rgba(20, 40, 70, 0.3);
   border-radius: 15px;
   padding: 30px;
-  border: 1px solid rgba(0, 255, 204, 0.1);
+  border: 1px solid rgba(var(--primary-rgb), 0.1);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
@@ -1750,9 +1774,9 @@ footer {
 .github-stat {
   text-align: center;
   padding: 12px;
-  background: rgba(0, 255, 204, 0.05);
+  background: rgba(var(--primary-rgb), 0.05);
   border-radius: 10px;
-  border: 1px solid rgba(0, 255, 204, 0.08);
+  border: 1px solid rgba(var(--primary-rgb), 0.08);
 }
 
 .github-stat-value {
@@ -1777,9 +1801,9 @@ footer {
 
 .heatmap-months {
   display: grid;
-  grid-template-columns: repeat(53, 14px);
+  grid-template-columns: repeat(53, 14px); /* fallback; GitHubActivity.jsx sets the real week count inline */
   gap: 0;
-  margin-left: 36px;
+  margin-left: 35px; /* .heatmap-days min-width 30px + 5px gap */
   margin-bottom: 5px;
   font-size: 0.7rem;
   opacity: 0.6;
@@ -1828,19 +1852,19 @@ footer {
 }
 
 .heatmap-cell[data-level="1"] {
-  background: rgba(0, 255, 204, 0.25);
+  background: rgba(var(--primary-rgb), 0.25);
 }
 
 .heatmap-cell[data-level="2"] {
-  background: rgba(0, 255, 204, 0.45);
+  background: rgba(var(--primary-rgb), 0.45);
 }
 
 .heatmap-cell[data-level="3"] {
-  background: rgba(0, 255, 204, 0.65);
+  background: rgba(var(--primary-rgb), 0.65);
 }
 
 .heatmap-cell[data-level="4"] {
-  background: rgba(0, 255, 204, 0.9);
+  background: rgba(var(--primary-rgb), 0.9);
 }
 
 .heatmap-legend {
@@ -1887,14 +1911,14 @@ footer {
   width: 200px;
   height: 150px;
   margin: 0 auto 20px;
-  background: linear-gradient(135deg, rgba(0, 255, 204, 0.1), rgba(123, 44, 191, 0.1));
+  background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.1), rgba(123, 44, 191, 0.1));
   border-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 3rem;
   color: var(--primary);
-  border: 2px dashed rgba(0, 255, 204, 0.2);
+  border: 2px dashed rgba(var(--primary-rgb), 0.2);
 }
 
 /* Code Showcase Section */
@@ -1903,7 +1927,7 @@ footer {
   margin: 0 auto;
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid rgba(0, 255, 204, 0.15);
+  border: 1px solid rgba(var(--primary-rgb), 0.15);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
   background: #0d1117;
 }
@@ -1913,7 +1937,7 @@ footer {
   align-items: center;
   padding: 10px 16px;
   background: #161b22;
-  border-bottom: 1px solid rgba(0, 255, 204, 0.08);
+  border-bottom: 1px solid rgba(var(--primary-rgb), 0.08);
   gap: 15px;
 }
 
@@ -1942,7 +1966,7 @@ footer {
 
 .code-tab.active {
   color: var(--primary);
-  background: rgba(0, 255, 204, 0.08);
+  background: rgba(var(--primary-rgb), 0.08);
   border-bottom: 2px solid var(--primary);
 }
 
@@ -1958,7 +1982,7 @@ footer {
 }
 
 .code-editor-body::-webkit-scrollbar-thumb {
-  background: rgba(0, 255, 204, 0.2);
+  background: rgba(var(--primary-rgb), 0.2);
   border-radius: 3px;
 }
 
@@ -1995,7 +2019,7 @@ footer {
   justify-content: space-between;
   padding: 6px 16px;
   background: #161b22;
-  border-top: 1px solid rgba(0, 255, 204, 0.08);
+  border-top: 1px solid rgba(var(--primary-rgb), 0.08);
   font-size: 0.72rem;
 }
 
@@ -2033,14 +2057,14 @@ footer {
 .arcade-modal {
   background: #0a192f;
   border-radius: 16px;
-  border: 1px solid rgba(0, 255, 204, 0.2);
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
   width: 90%;
   max-width: 550px;
   max-height: 90vh;
   overflow-y: auto;
   padding: 25px;
   position: relative;
-  box-shadow: 0 25px 80px rgba(0, 255, 204, 0.1);
+  box-shadow: 0 25px 80px rgba(var(--primary-rgb), 0.1);
 }
 
 .arcade-header {
@@ -2065,11 +2089,11 @@ footer {
 }
 
 .arcade-hint kbd {
-  background: rgba(0, 255, 204, 0.1);
+  background: rgba(var(--primary-rgb), 0.1);
   padding: 2px 8px;
   border-radius: 4px;
   font-size: 0.75rem;
-  border: 1px solid rgba(0, 255, 204, 0.2);
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
 }
 
 .arcade-close {
@@ -2097,7 +2121,7 @@ footer {
 
 .arcade-game-btn {
   background: rgba(20, 40, 70, 0.4);
-  border: 1px solid rgba(0, 255, 204, 0.1);
+  border: 1px solid rgba(var(--primary-rgb), 0.1);
   border-radius: 12px;
   padding: 25px 15px;
   cursor: pointer;
@@ -2112,7 +2136,7 @@ footer {
 .arcade-game-btn:hover {
   border-color: var(--primary);
   transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 255, 204, 0.15);
+  box-shadow: 0 8px 25px rgba(var(--primary-rgb), 0.15);
 }
 
 .arcade-game-icon {
@@ -2132,8 +2156,8 @@ footer {
 }
 
 .arcade-back-btn {
-  background: rgba(0, 255, 204, 0.1);
-  border: 1px solid rgba(0, 255, 204, 0.15);
+  background: rgba(var(--primary-rgb), 0.1);
+  border: 1px solid rgba(var(--primary-rgb), 0.15);
   color: var(--primary);
   padding: 6px 16px;
   border-radius: 8px;
@@ -2152,7 +2176,7 @@ footer {
   display: block;
   margin: 0 auto;
   border-radius: 8px;
-  border: 1px solid rgba(0, 255, 204, 0.15);
+  border: 1px solid rgba(var(--primary-rgb), 0.15);
   max-width: 100%;
 }
 
@@ -2205,14 +2229,14 @@ footer {
 
 .memory-card-front {
   background: rgba(20, 40, 70, 0.6);
-  border: 1px solid rgba(0, 255, 204, 0.15);
-  color: rgba(0, 255, 204, 0.3);
+  border: 1px solid rgba(var(--primary-rgb), 0.15);
+  color: rgba(var(--primary-rgb), 0.3);
   font-weight: 700;
 }
 
 .memory-card-back {
-  background: rgba(0, 255, 204, 0.08);
-  border: 1px solid rgba(0, 255, 204, 0.3);
+  background: rgba(var(--primary-rgb), 0.08);
+  border: 1px solid rgba(var(--primary-rgb), 0.3);
   transform: rotateY(180deg);
   font-size: 2rem;
 }
@@ -2226,9 +2250,9 @@ footer {
   text-align: center;
   margin-top: 20px;
   padding: 20px;
-  background: rgba(0, 255, 204, 0.05);
+  background: rgba(var(--primary-rgb), 0.05);
   border-radius: 12px;
-  border: 1px solid rgba(0, 255, 204, 0.2);
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
 }
 
 .memory-win h3 {
@@ -2271,7 +2295,7 @@ footer {
   overflow-y: auto;
   white-space: pre-wrap;
   word-break: break-all;
-  border: 1px solid rgba(0, 255, 204, 0.08);
+  border: 1px solid rgba(var(--primary-rgb), 0.08);
 }
 
 .typing-text .typed-correct {
@@ -2279,7 +2303,7 @@ footer {
 }
 
 .typing-text .typed-current {
-  background: rgba(0, 255, 204, 0.3);
+  background: rgba(var(--primary-rgb), 0.3);
   color: #fff;
   border-radius: 2px;
   padding: 0 1px;
@@ -2289,7 +2313,7 @@ footer {
   width: 100%;
   padding: 12px 16px;
   background: rgba(20, 40, 70, 0.5);
-  border: 1px solid rgba(0, 255, 204, 0.15);
+  border: 1px solid rgba(var(--primary-rgb), 0.15);
   border-radius: 8px;
   color: #28c840;
   font-family: 'Courier New', monospace;
@@ -2300,7 +2324,7 @@ footer {
 
 .typing-input:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(0, 255, 204, 0.1);
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1);
 }
 
 .typing-hint {
@@ -2313,9 +2337,9 @@ footer {
   text-align: center;
   margin-top: 20px;
   padding: 20px;
-  background: rgba(0, 255, 204, 0.05);
+  background: rgba(var(--primary-rgb), 0.05);
   border-radius: 12px;
-  border: 1px solid rgba(0, 255, 204, 0.2);
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
 }
 
 .typing-result h3 {
@@ -2388,18 +2412,26 @@ body[data-theme="light"] .spotify-card {
   background: rgba(255, 255, 255, 0.7);
 }
 
-/* Arcade Hint Badge */
+/* Arcade Hint Badge
+   Sits bottom-right, stacked 15px above .scroll-top (30px + 50px + 15px), as a
+   compact 50px pill. Bottom-left put it over the hero's buttons on short laptop
+   viewports (~650px tall); on the right the hero's photo/card column never
+   reaches this far at any two-column width. The "Ctrl+G" label is a small
+   tooltip above the pill on hover / keyboard focus, so the footprint never
+   grows sideways into the hero's building card. */
 .arcade-hint-badge {
   position: fixed;
-  bottom: 30px;
-  left: 30px;
+  bottom: 95px;
+  right: 30px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  min-width: 50px;
+  height: 50px;
   background: rgba(10, 25, 47, 0.85);
-  border: 1px solid rgba(0, 255, 204, 0.2);
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
   color: var(--primary);
-  padding: 10px 16px;
+  padding: 0 15px;
   border-radius: 30px;
   cursor: pointer;
   font-size: 0.8rem;
@@ -2409,14 +2441,14 @@ body[data-theme="light"] .spotify-card {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   animation: hintPulse 3s ease-in-out infinite;
-  box-shadow: 0 4px 15px rgba(0, 255, 204, 0.1);
+  box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.1);
 }
 
 .arcade-hint-badge:hover {
   background: var(--primary);
   color: var(--darker);
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0, 255, 204, 0.3);
+  box-shadow: 0 8px 25px rgba(var(--primary-rgb), 0.3);
   animation: none;
 }
 
@@ -2425,20 +2457,48 @@ body[data-theme="light"] .spotify-card {
 }
 
 .arcade-hint-badge span {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: rgba(10, 25, 47, 0.95);
+  border: 1px solid rgba(var(--primary-rgb), 0.3);
+  color: var(--primary);
   font-family: 'Courier New', monospace;
   font-weight: 600;
   font-size: 0.75rem;
-  opacity: 0.8;
+  line-height: 1.2;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.arcade-hint-badge:hover span,
+.arcade-hint-badge:focus-visible span {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Ctrl+G is a keyboard shortcut, so phones and touch-first devices get the pill
+   without the shortcut tooltip. The pill itself stays: the arcade has touch
+   controls, and tapping this badge is the only way in without a keyboard. */
+@media (max-width: 768px), (hover: none), (pointer: coarse) {
+  .arcade-hint-badge span {
+    display: none;
+  }
 }
 
 @keyframes hintPulse {
   0%, 100% {
-    box-shadow: 0 4px 15px rgba(0, 255, 204, 0.1);
-    border-color: rgba(0, 255, 204, 0.2);
+    box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.1);
+    border-color: rgba(var(--primary-rgb), 0.2);
   }
   50% {
-    box-shadow: 0 4px 20px rgba(0, 255, 204, 0.25);
-    border-color: rgba(0, 255, 204, 0.4);
+    box-shadow: 0 4px 20px rgba(var(--primary-rgb), 0.25);
+    border-color: rgba(var(--primary-rgb), 0.4);
   }
 }
 
@@ -2492,13 +2552,13 @@ body[data-theme="light"] .spotify-card {
 
 @keyframes pulseBorder {
   0% {
-    box-shadow: 0 0 0 0px rgba(0, 255, 204, 0.4);
+    box-shadow: 0 0 0 0px rgba(var(--primary-rgb), 0.4);
   }
   70% {
-    box-shadow: 0 0 0 15px rgba(0, 255, 204, 0);
+    box-shadow: 0 0 0 15px rgba(var(--primary-rgb), 0);
   }
   100% {
-    box-shadow: 0 0 0 0px rgba(0, 255, 204, 0);
+    box-shadow: 0 0 0 0px rgba(var(--primary-rgb), 0);
   }
 }
 
@@ -2509,13 +2569,19 @@ body[data-theme="light"] .spotify-card {
     text-align: center;
   }
 
+  /* Stacked layout (tablet + phone): name and role first, then social links, then the photo */
   .hero-text {
+    order: 1;
+  }
+
+  .hero .social-icons {
     order: 2;
+    margin-top: 24px;
   }
 
   .hero-image {
-    order: 1;
-    margin-bottom: 40px;
+    order: 3;
+    margin: 40px 0 0; /* text -> photo spacing (the grid has no row gap) */
   }
 
   .hero-buttons,
@@ -2546,11 +2612,34 @@ body[data-theme="light"] .spotify-card {
   }
 }
 
-@media (max-width: 768px) {
-  .container {
-    padding: 0 10px;
+/* Compact header on narrow desktops so the logo never wraps to two lines */
+@media (max-width: 1400px) {
+  .nav-links {
+    gap: 16px;
   }
 
+  .nav-links a {
+    font-size: 1rem;
+  }
+
+  .logo-text {
+    font-size: 1.5rem;
+  }
+
+  .resume-button {
+    min-width: 0;
+    padding: 8px 16px;
+  }
+
+  .theme-toggle {
+    width: 38px;
+    height: 38px;
+    margin-right: 8px;
+  }
+}
+
+/* Below 1200px the full menu no longer fits beside the logo: use the drawer */
+@media (max-width: 1200px) {
   .nav-links {
     display: none;
     position: fixed;
@@ -2600,6 +2689,12 @@ body[data-theme="light"] .spotify-card {
 
   .hamburger.active span:nth-child(3) {
     transform: rotate(-45deg) translate(7px, -6px);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 10px;
   }
 
   .hero-title {
@@ -2711,16 +2806,7 @@ body[data-theme="light"] .spotify-card {
     font-size: 1.3rem;
   }
 
-  .arcade-hint-badge {
-    bottom: 20px;
-    left: 15px;
-    padding: 8px 12px;
-    font-size: 0.72rem;
-  }
-
-  .arcade-hint-badge span {
-    display: none;
-  }
+  /* .arcade-hint-badge is display:none at this width (see its base rules) */
 
   .hero-buttons {
     flex-direction: column;
@@ -2750,13 +2836,13 @@ body[data-theme="light"] .spotify-card {
   }
 
   .profile-container {
-    width: 280px;
-    height: 280px;
+    width: 260px;
+    height: 260px;
   }
 
   .profile-img {
-    width: 220px;
-    height: 220px;
+    width: 200px;
+    height: 200px;
   }
 
   .slider-controls {
@@ -2775,10 +2861,24 @@ body[data-theme="light"] .spotify-card {
     height: 45px;
   }
 
+  /* Phone hero order: text (name, role, description, buttons) -> social icons
+     -> photo -> building card. This is also the DOM order (Hero.jsx), so the tab
+     sequence and screen-reader order match the screen; the order properties
+     only undo the tablet block's photo-first arrangement. */
+  .hero-text {
+    order: 1;
+  }
+
+  .hero .social-icons {
+    order: 2;
+    margin-top: 24px;
+  }
+
   .hero-image {
+    order: 3;
     width: 100%;
     height: auto;
-    margin-top: 20px;
+    margin: 40px 0 0;
   }
 
   .project-card {
@@ -2804,6 +2904,16 @@ body[data-theme="light"] .spotify-card {
     right: 20px;
     width: 42px;
     height: 42px;
+  }
+
+  /* Same column as the smaller .scroll-top, 12px above it, and the same 42px disc
+     (no side padding: the wide gamepad glyph would otherwise stretch the pill) */
+  .arcade-hint-badge {
+    right: 20px;
+    bottom: 74px;
+    min-width: 42px;
+    height: 42px;
+    padding: 0;
   }
 
   .stats-grid {
@@ -2841,13 +2951,13 @@ body[data-theme="light"] .spotify-card {
   }
 
   .profile-container {
-    width: 240px;
-    height: 240px;
+    width: 220px;
+    height: 220px;
   }
 
   .profile-img {
-    width: 180px;
-    height: 180px;
+    width: 170px;
+    height: 170px;
   }
 
   .timeline-content {
@@ -2873,7 +2983,7 @@ body[data-theme="light"] .spotify-card {
   .hero-image {
     width: 100%;
     height: auto;
-    margin-top: 20px;
+    margin: 36px 0 0;
   }
 }
 
@@ -2883,8 +2993,8 @@ body[data-theme="light"] .spotify-card {
 
 /* ---- Current job pulsing badge ---- */
 @keyframes pulseGlow {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 255, 204, 0.5); }
-  50%       { box-shadow: 0 0 0 8px rgba(0, 255, 204, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0.5); }
+  50%       { box-shadow: 0 0 0 8px rgba(var(--primary-rgb), 0); }
 }
 
 @keyframes dotBlink {
@@ -2896,8 +3006,8 @@ body[data-theme="light"] .spotify-card {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(0, 255, 204, 0.12);
-  border: 1px solid rgba(0, 255, 204, 0.4);
+  background: rgba(var(--primary-rgb), 0.12);
+  border: 1px solid rgba(var(--primary-rgb), 0.4);
   color: var(--primary);
   font-size: 0.75rem;
   font-weight: 700;
@@ -2922,9 +3032,9 @@ body[data-theme="light"] .spotify-card {
 
 /* ---- Current job card — stronger border glow ---- */
 .timeline-item--current .timeline-content {
-  border-color: rgba(0, 255, 204, 0.45);
+  border-color: rgba(var(--primary-rgb), 0.45);
   border-left: 4px solid var(--primary);
-  box-shadow: 0 8px 30px rgba(0, 255, 204, 0.18);
+  box-shadow: 0 8px 30px rgba(var(--primary-rgb), 0.18);
   position: relative;
 }
 
@@ -2933,7 +3043,7 @@ body[data-theme="light"] .spotify-card {
 }
 
 .timeline-item--current .timeline-content:hover {
-  box-shadow: 0 15px 40px rgba(0, 255, 204, 0.25);
+  box-shadow: 0 15px 40px rgba(var(--primary-rgb), 0.25);
 }
 
 /* ---- Company type tag ---- */
@@ -2971,7 +3081,7 @@ body[data-theme="light"] .spotify-card {
 /* ---- Skill card color variants on hover ---- */
 .skill-card--frontend:hover {
   border-color: var(--primary);
-  box-shadow: 0 10px 35px rgba(0, 255, 204, 0.15);
+  box-shadow: 0 10px 35px rgba(var(--primary-rgb), 0.15);
 }
 
 .skill-card--backend:hover {
@@ -3059,8 +3169,8 @@ body[data-theme="light"] .spotify-card {
 
 /* ---- Light theme overrides for new classes ---- */
 body[data-theme="light"] .current-badge {
-  background: rgba(0, 180, 150, 0.12);
-  border-color: rgba(0, 180, 150, 0.3);
+  background: rgba(var(--primary-rgb), 0.12);
+  border-color: rgba(var(--primary-rgb), 0.3);
 }
 
 body[data-theme="light"] .company-tag--fintech {
@@ -3091,9 +3201,9 @@ body[data-theme="light"] .skill-card--devops {
 }
 
 .project-badge--featured {
-  background: linear-gradient(90deg, rgba(0, 255, 204, 0.2), rgba(123, 44, 191, 0.2));
+  background: linear-gradient(90deg, rgba(var(--primary-rgb), 0.2), rgba(123, 44, 191, 0.2));
   color: var(--primary);
-  border: 1px solid rgba(0, 255, 204, 0.35);
+  border: 1px solid rgba(var(--primary-rgb), 0.35);
 }
 
 .project-badge--mobile {
@@ -3104,13 +3214,13 @@ body[data-theme="light"] .skill-card--devops {
 
 /* ---- Featured project card ---- */
 .project-card--featured {
-  border-color: rgba(0, 255, 204, 0.25);
-  box-shadow: 0 5px 20px rgba(0, 255, 204, 0.08);
+  border-color: rgba(var(--primary-rgb), 0.25);
+  box-shadow: 0 5px 20px rgba(var(--primary-rgb), 0.08);
 }
 
 .project-card--featured:hover {
   border-color: var(--primary);
-  box-shadow: 0 15px 40px rgba(0, 255, 204, 0.2);
+  box-shadow: 0 15px 40px rgba(var(--primary-rgb), 0.2);
 }
 
 /* ---- Gradient project image (mobile app card) ---- */
@@ -3125,19 +3235,19 @@ body[data-theme="light"] .skill-card--devops {
   font-size: 4rem;
   color: var(--primary);
   opacity: 0.6;
-  text-shadow: 0 0 30px rgba(0, 255, 204, 0.5);
+  text-shadow: 0 0 30px rgba(var(--primary-rgb), 0.5);
   position: relative;
   z-index: 1;
 }
 
 body[data-theme="light"] .project-card--featured {
-  border-color: rgba(0, 180, 150, 0.2);
+  border-color: rgba(var(--primary-rgb), 0.2);
 }
 
 body[data-theme="light"] .project-badge--featured {
-  background: rgba(0, 180, 150, 0.1);
-  color: #00b494;
-  border-color: rgba(0, 180, 150, 0.3);
+  background: linear-gradient(90deg, rgba(var(--primary-rgb), 0.1), rgba(91, 33, 182, 0.08));
+  color: var(--primary); /* 6.2:1 on the card; the previous #00b494 was 2.6:1 */
+  border-color: rgba(var(--primary-rgb), 0.3);
 }
 
 /* =============================================
@@ -3155,7 +3265,7 @@ body[data-theme="light"] .project-badge--featured {
 
 .ambient-blob-1 {
   width: 700px; height: 700px;
-  background: radial-gradient(circle, rgba(0, 255, 204, 0.07) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(var(--primary-rgb), 0.07) 0%, transparent 70%);
   top: -200px; right: -150px;
   animation: blobDrift1 18s ease-in-out infinite alternate;
 }
@@ -3251,7 +3361,7 @@ body::after {
 
 /* ── Hero enhancements ── */
 .hero-title span:first-child {
-  filter: drop-shadow(0 0 40px rgba(0, 255, 204, 0.18));
+  filter: drop-shadow(0 0 40px rgba(var(--primary-rgb), 0.18));
 }
 
 .hero-subtitle {
@@ -3280,23 +3390,23 @@ body::after {
   position: absolute;
   width: 88%; height: 88%;
   border-radius: 50%;
-  border: 1px solid rgba(0, 255, 204, 0.15);
+  border: 1px solid rgba(var(--primary-rgb), 0.15);
   animation: rotate 30s linear infinite reverse;
   pointer-events: none;
 }
 
 /* ── Section title glow ── */
 .section-title h2 {
-  filter: drop-shadow(0 0 20px rgba(0, 255, 204, 0.15));
+  filter: drop-shadow(0 0 20px rgba(var(--primary-rgb), 0.15));
 }
 
 /* ── Stats — neon number glow ── */
 .stat-number {
-  text-shadow: 0 0 30px rgba(0, 255, 204, 0.35), 0 0 60px rgba(0, 255, 204, 0.12);
+  text-shadow: 0 0 30px rgba(var(--primary-rgb), 0.35), 0 0 60px rgba(var(--primary-rgb), 0.12);
 }
 
 .stat-icon {
-  filter: drop-shadow(0 0 8px rgba(0, 255, 204, 0.4));
+  filter: drop-shadow(0 0 8px rgba(var(--primary-rgb), 0.4));
 }
 
 /* ── Project card — cinematic image zoom ── */
@@ -3348,7 +3458,7 @@ section + section::before {
   display: block;
   height: 1px;
   background: linear-gradient(
-    90deg, transparent, rgba(0, 255, 204, 0.12), rgba(123, 44, 191, 0.12), transparent
+    90deg, transparent, rgba(var(--primary-rgb), 0.12), rgba(123, 44, 191, 0.12), transparent
   );
   margin: 0 10%;
 }
@@ -3359,24 +3469,24 @@ section + section::before {
 }
 
 .skill-item:hover {
-  box-shadow: 0 4px 15px rgba(0, 255, 204, 0.25);
+  box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.25);
 }
 
 /* ── Stat card depth border ── */
 .stat-card {
-  border: 1px solid rgba(0, 255, 204, 0.1);
+  border: 1px solid rgba(var(--primary-rgb), 0.1);
   transition: var(--transition);
 }
 
 .stat-card:hover {
-  border-color: rgba(0, 255, 204, 0.3);
-  box-shadow: 0 8px 30px rgba(0, 255, 204, 0.1), inset 0 1px 0 rgba(255,255,255,0.04);
+  border-color: rgba(var(--primary-rgb), 0.3);
+  box-shadow: 0 8px 30px rgba(var(--primary-rgb), 0.1), inset 0 1px 0 rgba(255,255,255,0.04);
   transform: translateY(-6px);
 }
 
 /* ── Nav link active indicator ── */
 .nav-links a.active-link {
-  text-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
+  text-shadow: 0 0 15px rgba(var(--primary-rgb), 0.4);
 }
 
 /* ── Light theme adjustments for cinematic overlay ── */
@@ -3391,7 +3501,7 @@ body[data-theme="light"] .vignette {
 }
 
 body[data-theme="light"] .ambient-blob-1 {
-  background: radial-gradient(circle, rgba(0, 180, 150, 0.06) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(var(--primary-rgb), 0.06) 0%, transparent 70%);
 }
 
 body[data-theme="light"] .ambient-blob-2 {
@@ -3402,3 +3512,156 @@ body[data-theme="light"] .ambient-blob-3 {
   background: radial-gradient(circle, rgba(255, 0, 110, 0.03) 0%, transparent 70%);
 }
 
+
+/* ==========================================================================
+   Light theme readability pass (WCAG AA) — the dark theme is untouched.
+   The colour tokens themselves are overridden in the body[data-theme="light"]
+   block at the top of this file (teal-700-ish primary #0d6b64 = 5.2:1 on the
+   darkest light surface #e2e8f0, 6.4:1 for white text on it). The rules below
+   fix the places where those tokens are used as FILLED backgrounds, where
+   neon glow effects would smudge on a light ground, where dark-theme text
+   colours were hardcoded, and where low-opacity labels fell under 4.5:1.
+   ========================================================================== */
+
+/* -- Filled primary / gradient surfaces: white text (6.4:1 on the primary, 9:1 on the secondary) -- */
+body[data-theme="light"] .cta-button,
+body[data-theme="light"] .demo-link,
+body[data-theme="light"] .timeline-date,
+body[data-theme="light"] .scroll-top,
+body[data-theme="light"] .theme-toggle:hover,
+body[data-theme="light"] .slider-btn:hover,
+body[data-theme="light"] .suggestion-chip:hover,
+body[data-theme="light"] .skill-item:hover,
+body[data-theme="light"] .tech-item:hover {
+  color: #ffffff;
+}
+
+body[data-theme="light"] .skill-card--devops .skill-item:hover {
+  color: #0f172a; /* dark text on the orange fill: 7.7:1 */
+}
+
+/* -- Nav: active / hovered link keeps the primary tint (5.7:1 on the header); no neon glow -- */
+body[data-theme="light"] .nav-links a:hover,
+body[data-theme="light"] .nav-links a.active-link {
+  color: var(--primary);
+  text-shadow: none;
+}
+
+/* -- Gradient text & glows: neon drop-shadows are a dark-ground effect -- */
+body[data-theme="light"] .hero-title span:first-child,
+body[data-theme="light"] .section-title h2,
+body[data-theme="light"] .stat-icon {
+  filter: none;
+}
+
+body[data-theme="light"] .stat-number {
+  text-shadow: none;
+}
+
+body[data-theme="light"] .section-number {
+  opacity: 1;
+}
+
+/* -- Code showcase: the active tab keeps the primary tint (the generic light .code-tab rule outranked it) -- */
+body[data-theme="light"] .code-tab.active {
+  color: var(--primary);
+}
+
+body[data-theme="light"] .code-line-numbers span {
+  color: rgba(0, 0, 0, 0.55); /* 4.8:1 on the #f6f8fa code body */
+}
+
+body[data-theme="light"] .code-info {
+  color: rgba(36, 41, 47, 0.7);
+}
+
+/* -- Terminal: hardcoded dark-theme text colours were invisible or too bright on the white terminal -- */
+body[data-theme="light"] .terminal-title,
+body[data-theme="light"] .terminal-clear-btn {
+  color: rgba(45, 55, 72, 0.75);
+}
+
+body[data-theme="light"] .terminal-clear-btn:hover {
+  color: var(--primary);
+}
+
+body[data-theme="light"] .terminal-muted {
+  color: rgba(45, 55, 72, 0.75);
+}
+
+body[data-theme="light"] .terminal-input::placeholder {
+  color: rgba(45, 55, 72, 0.75); /* 5.2:1 on the input strip */
+}
+
+body[data-theme="light"] .terminal-cmd {
+  color: #b45309; /* amber-700: 5.0:1 */
+}
+
+body[data-theme="light"] .terminal-user-cmd {
+  color: #15803d; /* green-700: 5.0:1 */
+}
+
+body[data-theme="light"] .terminal-error {
+  color: #b91c1c; /* red-700: 6.4:1 */
+}
+
+/* -- Footer: this text sits on the darkest light surface (#e2e8f0), so no extra opacity -- */
+body[data-theme="light"] .copyright,
+body[data-theme="light"] .visitor-counter {
+  opacity: 1;
+}
+
+/* -- Small uppercase labels / heatmap legend: 0.5-0.6 opacity fell under 4.5:1 on white cards -- */
+body[data-theme="light"] .building-label,
+body[data-theme="light"] .toolbox-label,
+body[data-theme="light"] .heatmap-legend-label,
+body[data-theme="light"] .github-stat-label {
+  opacity: 0.8;
+}
+
+/* -- Custom-cursor toggle: off = dimmed icon (3.2:1, the 3:1 floor for UI icons); on = full
+      icon on a stronger tint with a solid border, so the state is visible without the glow -- */
+body[data-theme="light"] .cursor-toggle {
+  opacity: 0.7;
+}
+
+body[data-theme="light"] .cursor-toggle--on {
+  opacity: 1;
+  background: rgba(var(--primary-rgb), 0.18);
+  border-color: var(--primary);
+}
+
+/* -- Social icons: --github is #24292f here (the white glyph was invisible); hover glow becomes a shadow -- */
+body[data-theme="light"] .social-icon.github {
+  background: rgba(36, 41, 47, 0.08);
+}
+
+body[data-theme="light"] .social-icon:hover {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+}
+
+/* -- Dark-surface islands: the arcade modal and its hint badge keep a hardcoded navy background,
+      so they keep the dark palette (and light text) even while the light theme is active -- */
+body[data-theme="light"] .arcade-modal,
+body[data-theme="light"] .arcade-hint-badge {
+  --primary: #00ffcc;
+  --primary-rgb: 0, 255, 204;
+  --secondary: #7b2cbf;
+  --accent: #ff006e;
+  --light: #caf0f8;
+  --lighter: #f1f5f9;
+  --dark: #0a192f;
+  --darker: #061023;
+}
+
+body[data-theme="light"] .arcade-modal {
+  color: var(--light);
+}
+/* -- Header CTAs are <a> inside .nav-links, so the light .nav-links a rule outranks .cta-button: keep white on the gradient -- */
+body[data-theme="light"] .nav-links a.cta-button,
+body[data-theme="light"] .nav-links a.cta-button:hover {
+  color: #ffffff;
+  text-shadow: none;
+}
+
+/* ---- end light theme readability pass ---- */
