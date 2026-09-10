@@ -142,7 +142,7 @@ export const projects = [
     badge: { text: "Featured", cls: "project-badge--featured" },
     featured: true,
     storyKey: "aiPlayground",
-    image: "/images/ai-playground.png",
+    image: "/images/ai-playground.webp",
     description:
       "A unified platform of seven end-to-end generative AI modules: resume & JD matcher, natural-language SQL sandbox, AI-powered expense tracker (receipt OCR, spending coach, savings goals, bill-split links), streaming Markdown generator, PDF chat with RAG & page-level citations, YouTube Q&A from transcripts, and a real-time content hub.",
     architecture: [
@@ -156,7 +156,7 @@ export const projects = [
   {
     title: "Splitzy — AI Expense Tracker",
     badge: { text: "Mobile", cls: "project-badge--mobile" },
-    image: "/images/splitzy-feature.png",
+    image: "/images/splitzy-feature.webp",
     description:
       "React Native (Expo) companion app for the AI Playground expense tracker. Features receipt scanning via Gemini Vision, group expense splits, spending coach chat, savings goals, shareable bill-split links, and offline-capable JWT auth — all synced to the shared backend service layer.",
     architecture: [
@@ -169,7 +169,7 @@ export const projects = [
   },
   {
     title: "ShopEase E-commerce Website",
-    image: "/images/ShopEase.png",
+    image: "/images/ShopEase.webp",
     description:
       "An e-commerce platform where users, sellers, and admins can buy, sell, and manage users and products. Admin can manage users, products, categories, and other data. Includes all features for sellers and buyers.",
     architecture: [
@@ -182,7 +182,7 @@ export const projects = [
   },
   {
     title: "AI Interview Prep Platform",
-    image: "/images/PrepAi.png",
+    image: "/images/PrepAi.webp",
     description:
       "AI-powered platform that generates interview questions and provides real-time feedback to help candidates prepare effectively.",
     architecture: [
@@ -194,7 +194,7 @@ export const projects = [
   },
   {
     title: "Social Media & Messaging Platform",
-    image: "/images/sastagram.png",
+    image: "/images/sastagram.webp",
     description:
       "A feature-rich social media platform with real-time messaging, posts, likes, comments, and follow functionality.",
     architecture: [
@@ -206,7 +206,7 @@ export const projects = [
   },
   {
     title: "Watchman System (WMS)",
-    image: "/images/watchman.png",
+    image: "/images/watchman.webp",
     description:
       "Visitor and student tracking system for educational institutions to enhance campus security.",
     architecture: [
@@ -221,27 +221,27 @@ export const projects = [
 export const certificates = [
   {
     title: "Advance Certification in Microsoft Excel",
-    image: "/images/Advance Excel.png",
+    image: "/images/Advance Excel.webp",
     link: "https://lms.intellipaat.com/certificate-link/?Yz0yNjYwOSZ1PTE2NDkxMiZleHQ9MQ==",
   },
   {
     title: "Data Science Course",
-    image: "/images/Data Science.png",
+    image: "/images/Data Science.webp",
     link: "https://lms.intellipaat.com/certificate-link/?Yz01Nzk5JnU9MTY0OTEyJmV4dD0x",
   },
   {
     title: "MongoDB Developer's Toolkit: CRUD Mastery with Node.js",
-    image: "/images/MongoDB.png",
+    image: "/images/MongoDB.webp",
     link: "https://www.geeksforgeeks.org/certificate/c97fe9133e67d1456dcc544d1410b7e5",
   },
   {
     title: "IBM Data Science",
-    image: "/images/IBM_Data_Science.png",
+    image: "/images/IBM_Data_Science.webp",
     link: "https://coursera.org/share/2acc587f7d7b0d409c3c2fb2333f522a",
   },
   {
     title: "MS SQL Developer Course",
-    image: "/images/MS SQL.png",
+    image: "/images/MS SQL.webp",
     link: "https://lms.intellipaat.com/certificate-link/?Yz0yODUzJnU9MTY0OTEyJmV4dD0x",
   },
 ];
@@ -318,7 +318,7 @@ export const codingProfiles = [
 export const achievements = [
   {
     icon: "fab fa-google-play",
-    image: "/images/splitzy-icon.png",
+    image: "/images/splitzy-icon.webp",
     title: "Splitzy AI on Google Play",
     desc: "Published the AI expense-splitting mobile app (React Native + Gemini) live on the Play Store.",
     link: "https://play.google.com/store/apps/details?id=com.moohiit.expensetracker",

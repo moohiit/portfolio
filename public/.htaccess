@@ -1,0 +1,102 @@
+# ---------------------------------------------------------------------------
+# Apache config for the built site on shared cPanel hosting (GoViralHost).
+#
+# Vite copies public/ verbatim into dist/, so after `npm run build` this file
+# sits next to index.html and is uploaded to public_html with everything else.
+#
+# Deliberately conservative so it cannot 500 on a locked-down host:
+#   - every directive is wrapped in <IfModule>; a missing module just means
+#     that block is skipped, not an error
+#   - no Options, no RewriteEngine, no SPA fallback (the site uses hash
+#     navigation, so every real URL maps to a real file)
+#   - no CSP (the page loads from Google Fonts, cdnjs, GitHub, dev.to,
+#     GoatCounter and Web3Forms)
+#
+# Deploy note: uploading dist/* replaces any .htaccess already in public_html
+# (a cPanel HTTPS/www redirect, for example). Check the live file first and
+# merge such rules into this one rather than losing them.
+# ---------------------------------------------------------------------------
+
+
+# --- MIME types --------------------------------------------------------------
+# Belt-and-braces for hosts with an old mime.types; harmless where already set.
+<IfModule mod_mime.c>
+  AddType image/webp                      .webp
+  AddType font/woff2                      .woff2
+</IfModule>
+
+
+# --- Compression -------------------------------------------------------------
+# AddOutputFilterByType lives in mod_filter on Apache 2.4, hence the inner guard.
+<IfModule mod_deflate.c>
+  <IfModule mod_filter.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css
+    AddOutputFilterByType DEFLATE application/javascript application/x-javascript text/javascript
+    AddOutputFilterByType DEFLATE application/json application/ld+json
+    AddOutputFilterByType DEFLATE image/svg+xml
+    AddOutputFilterByType DEFLATE application/xml text/xml application/rss+xml
+  </IfModule>
+</IfModule>
+
+
+# --- Caching -----------------------------------------------------------------
+# Vite fingerprints everything under /assets/ (name-<hash>.js / .css), so those
+# can be cached forever: a deploy produces new filenames and index.html points
+# at them. index.html, the sitemaps and robots.txt must always be revalidated
+# so a fresh upload shows up immediately.
+#
+# Files in /images/ (project screenshots, og-card.png) keep their plain names,
+# so they are NOT immutable: a re-export under the same filename must reach
+# returning visitors, proxies and link-preview crawlers after a short while.
+#
+# mod_expires sets Expires + a plain max-age; mod_headers then sets the exact
+# Cache-Control value ("public"/"immutable", or "no-cache"). Either module on
+# its own still gives sensible behaviour.
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # Entry point and crawler files: always revalidate
+  ExpiresByType text/html                 "access plus 0 seconds"
+  ExpiresByType text/plain                "access plus 0 seconds"
+  ExpiresByType text/xml                  "access plus 0 seconds"
+  ExpiresByType application/xml           "access plus 0 seconds"
+
+  # Fingerprinted bundles: one year
+  ExpiresByType text/css                  "access plus 1 year"
+  ExpiresByType application/javascript    "access plus 1 year"
+  ExpiresByType application/x-javascript  "access plus 1 year"
+  ExpiresByType text/javascript           "access plus 1 year"
+
+  # Un-fingerprinted media (/images/*.webp, og-card.png, any local font): one week
+  ExpiresByType image/webp                "access plus 1 week"
+  ExpiresByType image/png                 "access plus 1 week"
+  ExpiresByType font/woff2                "access plus 1 week"
+  ExpiresByType application/font-woff2    "access plus 1 week"
+</IfModule>
+
+<IfModule mod_headers.c>
+  # Vite output only: name-<8-char hash>.js / .css (e.g. index-DzVJx61g.js).
+  # Only fingerprinted files may be immutable; the name changes with the content.
+  <FilesMatch "-[A-Za-z0-9_-]{8}\.(js|css)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # Plain-named images and fonts: cache for a week, then revalidate
+  <FilesMatch "\.(webp|png|woff2)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+
+  # index.html, sitemap*.xml, robots.txt
+  <FilesMatch "\.(html|xml|txt)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
+
+
+# --- Security headers --------------------------------------------------------
+# "always" so they are also sent on 304s and error pages. No CSP on purpose.
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
