@@ -307,7 +307,7 @@ export const codingProfiles = [
   {
     name: "LinkedIn",
     icon: "fab fa-linkedin-in",
-    handle: "mohit-patel",
+    handle: "moohiitpatel",
     link: "https://www.linkedin.com/in/moohiitpatel/",
     stats: "Professional network & recommendations",
     cls: "profile-card--linkedin",
