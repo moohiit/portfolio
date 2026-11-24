@@ -851,6 +851,59 @@ main, .site-footer { position: relative; z-index: 2; }
 }
 .social-btn:hover { color: var(--brand); border-color: rgba(var(--brand-rgb), 0.5); transform: translateY(-3px); }
 
+/* Photo with a rotating gradient ring: shown on phones/tablets only. */
+.hero-avatar {
+  position: relative;
+  display: none;
+  width: 128px;
+  height: 128px;
+  margin-bottom: 28px;
+}
+.hero-avatar::before {
+  content: "";
+  position: absolute;
+  inset: -40px;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(var(--violet-rgb), 0.45), rgba(var(--brand-rgb), 0.12) 45%, transparent 70%);
+  filter: blur(8px);
+}
+.hero-avatar-ring {
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--brand), var(--violet), transparent 65%, var(--brand));
+  /* Only the outer 5px band shows, so it reads as a ring even before the photo loads. */
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 5px), #000 calc(100% - 4px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 5px), #000 calc(100% - 4px));
+  animation: spin 6s linear infinite;
+}
+.hero-avatar img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--bg);
+  background: var(--surface-solid);
+}
+.hero-avatar-badge {
+  position: absolute;
+  right: 2px;
+  bottom: 6px;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  color: var(--brand-ink);
+  background: var(--brand);
+  border: 3px solid var(--bg);
+  box-shadow: var(--glow);
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
 /* Live console */
 .console-wrap { perspective: 1200px; }
 .console {
@@ -1725,6 +1778,9 @@ main, .site-footer { position: relative; z-index: 2; }
   .menu-btn { display: inline-flex; }
   .hero { padding-top: 110px; }
   .hero-inner { grid-template-columns: 1fr; }
+  .hero-avatar { display: block; }
+  /* Photo already sits at the top of the hero, so the console skips it. */
+  .console-profile { display: none; }
   .console-wrap { max-width: 520px; }
   .project-feature { grid-template-columns: 1fr; }
   .tl-item { grid-template-columns: 1fr; gap: 10px; }

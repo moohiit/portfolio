@@ -202,6 +202,26 @@ export default function Hero({ theme }) {
 
       <div className="container hero-inner">
         <div className="hero-copy">
+          {/* Phones/tablets only: on desktop the photo lives in the console card. */}
+          <motion.div
+            className="hero-avatar"
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.9, ease: EASE, delay: HERO_DELAY }}
+          >
+            <span className="hero-avatar-ring" aria-hidden="true"></span>
+            <img
+              src="https://avatars.githubusercontent.com/u/109367447?v=4&s=320"
+              alt="Mohit Patel"
+              width="128"
+              height="128"
+              fetchPriority="high"
+            />
+            <span className="hero-avatar-badge" aria-hidden="true">
+              <i className="fas fa-code"></i>
+            </span>
+          </motion.div>
+
           <motion.a href="#contact" className="status-chip" {...fade(0)}>
             <span className="pulse-dot"></span>
             Open to new opportunities
