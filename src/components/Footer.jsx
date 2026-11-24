@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { NAV_LINKS } from "./Header.jsx";
+import { SOCIALS } from "./Hero.jsx";
 
 export default function Footer() {
   const [visitors, setVisitors] = useState("…");
@@ -11,30 +13,49 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer>
+    <footer className="site-footer">
       <div className="container">
-        <div className="footer-content">
-          <div className="footer-logo">Mohit Patel</div>
-          <div className="social-icons">
-            <a href="https://www.linkedin.com/in/moohiitpatel/" className="social-icon linkedin" title="LinkedIn" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin-in"></i></a>
-            <a href="https://github.com/moohiit" className="social-icon github" title="GitHub" target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i></a>
-            <a href="https://www.instagram.com/m.o.h.i.t.p.a.t.e.l" className="social-icon instagram" title="Instagram" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>
-            <a href="https://x.com/mooohiit" className="social-icon twitter" title="Twitter" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter"></i></a>
+        <div className="footer-top">
+          <div className="footer-brand">
+            <a href="#top" className="brand">
+              <span className="brand-mark">MP</span>
+              <span className="brand-name">Mohit Patel</span>
+            </a>
+            <p className="card-text">Backend Developer building fintech APIs, GenAI products and the servers they run on.</p>
+            <div className="social-row">
+              {SOCIALS.map((s) => (
+                <a key={s.label} href={s.href} className="social-btn" aria-label={s.label} title={s.label} target="_blank" rel="noopener noreferrer">
+                  <i className={s.icon} aria-hidden="true"></i>
+                </a>
+              ))}
+            </div>
           </div>
-          <div className="visitor-counter">
-            <i className="fas fa-eye"></i>
-            <span>Visitors: </span>
-            <span className="visitor-count-badge">{visitors}</span>
+
+          <nav className="footer-nav" aria-label="Footer">
+            <span className="mono-label">Sitemap</span>
+            {NAV_LINKS.map(([href, label]) => (
+              <a key={href} href={href}>{label}</a>
+            ))}
+          </nav>
+
+          <div className="footer-nav">
+            <span className="mono-label">More</span>
+            <a href="/files/MohitPatelResume.pdf" download="Mohit_Patel_Resume.pdf">Resume (PDF)</a>
+            <a href="https://github.com/moohiit/portfolio/blob/main/ARCHITECTURE.md" target="_blank" rel="noopener noreferrer">How this site works</a>
+            <a href="https://github.com/moohiit/portfolio" target="_blank" rel="noopener noreferrer">Source code</a>
           </div>
-          <a
-            className="site-architecture-link"
-            href="https://github.com/moohiit/portfolio/blob/main/ARCHITECTURE.md"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <i className="fas fa-drafting-compass"></i> How this site works
+        </div>
+
+        <div className="footer-wordmark" aria-hidden="true">MOHIT PATEL</div>
+
+        <div className="footer-bottom">
+          <span>© {new Date().getFullYear()} Mohit Patel</span>
+          <span className="footer-visitors">
+            <span className="pulse-dot"></span> {visitors} visitors
+          </span>
+          <a href="#top" className="text-link">
+            Back to top <i className="fas fa-arrow-up" aria-hidden="true"></i>
           </a>
-          <div className="copyright">© {new Date().getFullYear()} Mohit Patel. All Rights Reserved.</div>
         </div>
       </div>
     </footer>

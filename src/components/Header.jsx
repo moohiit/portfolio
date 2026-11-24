@@ -1,10 +1,28 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import { EASE } from "./ui.jsx";
 
-export default function Header({ theme, onToggleTheme, cursorOn, onToggleCursor }) {
+export const NAV_LINKS = [
+  ["#projects", "Work"],
+  ["#experience", "Experience"],
+  ["#skills", "Skills"],
+  ["#open-source", "Open Source"],
+  ["#lab", "Lab"],
+  ["#contact", "Contact"],
+];
+
+export const IS_MAC = typeof navigator !== "undefined" && /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
+
+export function countResumeDownload() {
+  if (window.goatcounter && window.goatcounter.count) {
+    window.goatcounter.count({ path: "/resume-download", event: true });
+  }
+}
+
+export default function Header({ theme, onToggleTheme, onOpenPalette, active }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [dlCount, setDlCount] = useState(null);
-  const navRef = useRef(null);
-  const hamburgerRef = useRef(null);
 
   const fetchResumeCount = () => {
     fetch("https://mohitpatel.goatcounter.com/counter/resume-download.json")
@@ -15,94 +33,105 @@ export default function Header({ theme, onToggleTheme, cursorOn, onToggleCursor 
 
   useEffect(() => {
     fetchResumeCount();
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close mobile nav when clicking outside
   useEffect(() => {
-    const onDocClick = (e) => {
-      if (menuOpen && !navRef.current?.contains(e.target) && !hamburgerRef.current?.contains(e.target)) {
-        setMenuOpen(false);
-      }
-    };
-    document.addEventListener("click", onDocClick);
-    return () => document.removeEventListener("click", onDocClick);
+    if (!menuOpen) return;
+    const onKey = (e) => e.key === "Escape" && setMenuOpen(false);
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
   }, [menuOpen]);
 
   const onResumeClick = () => {
-    if (window.goatcounter && window.goatcounter.count) {
-      window.goatcounter.count({ path: "/resume-download", event: true });
-    }
+    countResumeDownload();
     setTimeout(fetchResumeCount, 3000);
   };
 
-  const links = [
-    ["#about", "About"],
-    ["#experience", "Experience"],
-    ["#projects", "Projects"],
-    ["#skills", "Skills"],
-    ["#coding-profiles", "Profiles"],
-    ["#certificates", "Certificates"],
-    ["#education", "Education"],
-    ["#contact", "Contact"],
-  ];
-
   return (
-    <header>
-      <div className="container">
-        <div className="header-content">
-          <div className="logo">
-            <div className="logo-icon"><i className="fas fa-code"></i></div>
-            <div className="logo-text">Mohit Patel</div>
-          </div>
+    <header className={"site-header" + (scrolled ? " is-scrolled" : "")}>
+      <div className="container header-row">
+        <a href="#top" className="brand" aria-label="Mohit Patel, back to top">
+          <span className="brand-mark">MP</span>
+          <span className="brand-name">Mohit Patel</span>
+        </a>
 
-          <nav className={"nav-links" + (menuOpen ? " active" : "")} ref={navRef}>
-            {links.map(([href, label], i) => (
-              <a key={href} href={href} data-num={String(i + 1).padStart(2, "0")} onClick={() => setMenuOpen(false)}>
-                {label}
+        <nav className="nav-pill" aria-label="Primary">
+          {NAV_LINKS.map(([href, label]) => {
+            const isActive = active === href.slice(1);
+            return (
+              <a key={href} href={href} className={isActive ? "is-active" : undefined} aria-current={isActive ? "true" : undefined}>
+                {isActive && (
+                  <motion.span className="nav-highlight" layoutId="nav-highlight" transition={{ type: "spring", stiffness: 380, damping: 32 }} />
+                )}
+                <span className="nav-label">{label}</span>
               </a>
-            ))}
-            <a href="#contact" className="cta-button hire-me-mobile" onClick={() => setMenuOpen(false)}>
-              Hire Me
-            </a>
-            <a
-              className="cta-button resume-button"
-              href="/files/MohitPatelResume.pdf"
-              download="Mohit_Patel_Resume.pdf"
-              onClick={onResumeClick}
-            >
-              <i className="fas fa-download"></i> Resume
-              {dlCount && (
-                <span className="resume-dl-badge" style={{ display: "inline-flex" }} title="Total downloads">
-                  {dlCount}
-                </span>
-              )}
-            </a>
-          </nav>
+            );
+          })}
+        </nav>
 
+        <div className="header-actions">
+          <button className="kbd-btn" onClick={onOpenPalette} aria-label="Open command palette">
+            <i className="fas fa-magnifying-glass" aria-hidden="true"></i>
+            <kbd>{IS_MAC ? "⌘" : "Ctrl"} K</kbd>
+          </button>
+          <button className="icon-btn" onClick={onToggleTheme} aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`} title="Toggle theme">
+            <i className={theme === "light" ? "fas fa-moon" : "fas fa-sun"} aria-hidden="true"></i>
+          </button>
+          <a className="btn btn-primary btn-sm resume-btn" href="/files/MohitPatelResume.pdf" download="Mohit_Patel_Resume.pdf" onClick={onResumeClick}>
+            <i className="fas fa-arrow-down" aria-hidden="true"></i> Resume
+            {dlCount && (
+              <span className="resume-count" title="Total downloads">
+                {dlCount}
+              </span>
+            )}
+          </a>
           <button
-            className={"theme-toggle cursor-toggle" + (cursorOn ? " cursor-toggle--on" : "")}
-            title={cursorOn ? "Disable custom cursor" : "Enable custom cursor"}
-            aria-label="Toggle custom cursor"
-            aria-pressed={cursorOn}
-            onClick={onToggleCursor}
-          >
-            <i className="fas fa-mouse-pointer"></i>
-          </button>
-          <button className="theme-toggle" title="Toggle theme" aria-label="Toggle light/dark theme" onClick={onToggleTheme}>
-            <i className={theme === "light" ? "fas fa-sun" : "fas fa-moon"}></i>
-          </button>
-
-          <div
-            className={"hamburger" + (menuOpen ? " active" : "")}
-            ref={hamburgerRef}
-            onClick={() => setMenuOpen(!menuOpen)}
+            className={"icon-btn menu-btn" + (menuOpen ? " is-open" : "")}
+            onClick={() => setMenuOpen((o) => !o)}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
           >
             <span></span>
             <span></span>
-            <span></span>
-          </div>
+          </button>
         </div>
       </div>
+
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.nav
+            id="mobile-menu"
+            className="mobile-menu"
+            aria-label="Mobile"
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.35, ease: EASE }}
+          >
+            {NAV_LINKS.map(([href, label], i) => (
+              <motion.a
+                key={href}
+                href={href}
+                onClick={() => setMenuOpen(false)}
+                initial={{ opacity: 0, x: -16 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.04 * i + 0.05, duration: 0.4, ease: EASE }}
+              >
+                <span className="mobile-index">{String(i + 1).padStart(2, "0")}</span>
+                {label}
+              </motion.a>
+            ))}
+            <a className="btn btn-primary" href="/files/MohitPatelResume.pdf" download="Mohit_Patel_Resume.pdf" onClick={onResumeClick}>
+              <i className="fas fa-arrow-down" aria-hidden="true"></i> Download resume
+            </a>
+          </motion.nav>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

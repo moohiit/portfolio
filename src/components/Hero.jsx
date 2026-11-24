@@ -1,20 +1,178 @@
 import { useEffect, useRef, useState } from "react";
-import { roles, currentlyBuilding } from "../data.js";
+import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "motion/react";
+import { roles, currentlyBuilding, stats, skillCategories } from "../data.js";
 import { fetchRepos } from "../lib/github.js";
+import HeroCanvas from "./HeroCanvas.jsx";
+import { HERO_DELAY } from "./Preloader.jsx";
+import { Counter, EASE, Magnetic } from "./ui.jsx";
 
 // Repos that shouldn't appear as "currently building" even when recently pushed
 // (the portfolio itself and the profile readme repo are meta, not projects).
 const BUILDING_EXCLUDE = ["portfolio", "moohiit"];
 
-export default function Hero() {
+const TAGS = ["Fintech APIs", "GenAI", "DevOps", "Mobile"];
+
+export const SOCIALS = [
+  { href: "https://www.linkedin.com/in/moohiitpatel/", icon: "fab fa-linkedin-in", label: "LinkedIn" },
+  { href: "https://github.com/moohiit", icon: "fab fa-github", label: "GitHub" },
+  { href: "https://x.com/mooohiit", icon: "fab fa-x-twitter", label: "X (Twitter)" },
+  { href: "https://www.instagram.com/m.o.h.i.t.p.a.t.e.l", icon: "fab fa-instagram", label: "Instagram" },
+  { href: "https://wa.me/+917060993826", icon: "fab fa-whatsapp", label: "WhatsApp" },
+];
+
+function useTypewriter(words) {
   const [text, setText] = useState("");
+  useEffect(() => {
+    let wordIndex = 0, charIndex = 0, deleting = false, timer;
+    const tick = () => {
+      const word = words[wordIndex];
+      charIndex += deleting ? -1 : 1;
+      setText(word.substring(0, charIndex));
+      let delay = deleting ? 35 : 75;
+      if (!deleting && charIndex === word.length) {
+        delay = 2000;
+        deleting = true;
+      } else if (deleting && charIndex === 0) {
+        deleting = false;
+        wordIndex = (wordIndex + 1) % words.length;
+        delay = 350;
+      }
+      timer = setTimeout(tick, delay);
+    };
+    timer = setTimeout(tick, HERO_DELAY * 1000 + 600);
+    return () => clearTimeout(timer);
+  }, [words]);
+  return text;
+}
+
+// Letter-by-letter rise for the display name.
+function DisplayName({ lines }) {
+  let n = 0;
+  return (
+    <h1 className="hero-title">
+      <span className="sr-only">{lines.join(" ")}</span>
+      {lines.map((line, li) => (
+        <span className={"hero-line" + (li === 1 ? " hero-line--accent" : "")} aria-hidden="true" key={line}>
+          {[...line].map((ch) => {
+            const i = n++;
+            return (
+              <span className="split-word" key={i}>
+                <motion.span
+                  className="split-inner"
+                  initial={{ y: "110%" }}
+                  animate={{ y: "0%" }}
+                  transition={{ duration: 1, ease: EASE, delay: HERO_DELAY + i * 0.045 }}
+                >
+                  {ch}
+                </motion.span>
+              </span>
+            );
+          })}
+        </span>
+      ))}
+    </h1>
+  );
+}
+
+// The right-hand "live console": real stats, real GitHub activity.
+function Console({ building }) {
+  const reduced = useReducedMotion();
+  const px = useMotionValue(0);
+  const py = useMotionValue(0);
+  const rotateX = useSpring(useTransform(py, [-0.5, 0.5], [6, -6]), { stiffness: 150, damping: 20 });
+  const rotateY = useSpring(useTransform(px, [-0.5, 0.5], [-8, 8]), { stiffness: 150, damping: 20 });
+
+  const onMove = (e) => {
+    if (reduced || e.pointerType !== "mouse") return;
+    const r = e.currentTarget.getBoundingClientRect();
+    px.set((e.clientX - r.left) / r.width - 0.5);
+    py.set((e.clientY - r.top) / r.height - 0.5);
+  };
+  const reset = () => {
+    px.set(0);
+    py.set(0);
+  };
+
+  return (
+    <motion.div
+      className="console-wrap"
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1.1, ease: EASE, delay: HERO_DELAY + 0.45 }}
+      onPointerMove={onMove}
+      onPointerLeave={reset}
+    >
+      <motion.div className="console glass" style={{ rotateX, rotateY }}>
+        <div className="console-bar">
+          <span className="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span className="console-url">mohit@prod:~/status</span>
+          <span className="live-badge"><span className="pulse-dot"></span>Live</span>
+        </div>
+
+        <div className="console-profile">
+          <img src="https://avatars.githubusercontent.com/u/109367447?v=4" alt="Mohit Patel" width="56" height="56" />
+          <div>
+            <div className="console-name">Mohit Patel</div>
+            <div className="console-role">Backend Developer · Quikkred</div>
+          </div>
+        </div>
+
+        <div className="console-stats">
+          {stats.map((s) => (
+            <div className="console-stat" key={s.label}>
+              <div className="console-stat-value">
+                <Counter to={s.target} suffix={s.plus === false ? "" : "+"} />
+              </div>
+              <div className="console-stat-label">{s.label}</div>
+            </div>
+          ))}
+        </div>
+
+        <a className="console-building" href={building.link} target="_blank" rel="noopener noreferrer">
+          <div className="console-building-top">
+            <span className="mono-label"><span className="pulse-dot pulse-dot--violet"></span>Currently building</span>
+            <i className="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+          </div>
+          <div className="console-building-name">{building.name}</div>
+          <div className="console-building-desc">{building.desc}</div>
+          <div className="chip-row">
+            {building.tech.map((t) => (
+              <span className="chip chip--sm" key={t}>{t}</span>
+            ))}
+          </div>
+        </a>
+
+        <div className="console-health">
+          <div className="mono-label">Stack health</div>
+          {skillCategories.map((c, i) => (
+            <div className="health-row" key={c.key}>
+              <span>{c.title}</span>
+              <div className="health-track">
+                <motion.span
+                  className="health-fill"
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: c.proficiency / 100 }}
+                  transition={{ duration: 1.4, ease: EASE, delay: HERO_DELAY + 0.9 + i * 0.12 }}
+                />
+              </div>
+              <span className="health-value">{c.proficiency}%</span>
+            </div>
+          ))}
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+export default function Hero({ theme }) {
+  const role = useTypewriter(roles);
   const [building, setBuilding] = useState(currentlyBuilding);
   const fetched = useRef(false);
 
   useEffect(() => {
     if (fetched.current) return;
     fetched.current = true;
-    // fetchRepos() is shared with FeaturedRepos, so this costs no extra API quota.
+    // fetchRepos() is shared with the repo grid, so this costs no extra API quota.
     fetchRepos()
       .then((repos) => {
         const repo = repos.find((r) => !r.fork && !BUILDING_EXCLUDE.includes(r.name));
@@ -29,87 +187,72 @@ export default function Hero() {
       .catch(() => { /* keep static fallback from data.js */ });
   }, []);
 
-  useEffect(() => {
-    let roleIndex = 0, charIndex = 0, isDeleting = false, timer;
-    const tick = () => {
-      const currentRole = roles[roleIndex];
-      if (isDeleting) {
-        charIndex--;
-      } else {
-        charIndex++;
-      }
-      setText(currentRole.substring(0, charIndex));
+  const fade = (delay) => ({
+    initial: { opacity: 0, y: 18 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.8, ease: EASE, delay: HERO_DELAY + delay },
+  });
 
-      let speed = isDeleting ? 40 : 80;
-      if (!isDeleting && charIndex === currentRole.length) {
-        speed = 2000;
-        isDeleting = true;
-      } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        roleIndex = (roleIndex + 1) % roles.length;
-        speed = 400;
-      }
-      timer = setTimeout(tick, speed);
-    };
-    tick();
-    return () => clearTimeout(timer);
-  }, []);
-
-  // DOM order is the reading / tab order on every viewport: text, social links,
-  // then the photo and the "currently building" card. On desktop the grid puts
-  // the photo column beside the text and the social row underneath both
-  // (.hero .social-icons in styles.css); on phones it is a single column.
   return (
     <section className="hero" id="about">
-      <div className="container">
-        <div className="hero-content">
-          <div className="hero-text">
-            <div className="hero-subtitle">Hello, I'm</div>
-            <h1 className="hero-title">
-              <span>Mohit Patel</span>
-              <span className="typewriter">{text}</span>
-            </h1>
-            <p className="hero-description">
-              Backend Developer at <span className="hero-highlight">Quikkred</span> — engineering critical financial
-              APIs, managing production Linux infrastructure, and shipping{" "}
-              <span className="hero-highlight">AI-powered MERN products</span> that scale.
-            </p>
-
-            <div className="hero-buttons">
-              <a href="#projects" className="cta-button">View Projects</a>
-              <a href="#contact" className="btn-outline">Get In Touch</a>
-            </div>
-          </div>
-
-          <div className="social-icons">
-            <a href="https://www.linkedin.com/in/moohiitpatel/" className="social-icon linkedin" title="LinkedIn" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin-in"></i></a>
-            <a href="https://github.com/moohiit" className="social-icon github" title="GitHub" target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i></a>
-            <a href="https://www.instagram.com/m.o.h.i.t.p.a.t.e.l" className="social-icon instagram" title="Instagram" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>
-            <a href="https://x.com/mooohiit" className="social-icon twitter" title="Twitter" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter"></i></a>
-            <a href="https://wa.me/+917060993826" className="social-icon whatsapp" title="Whatsapp" target="_blank" rel="noopener noreferrer"><i className="fab fa-whatsapp"></i></a>
-          </div>
-
-          <div className="hero-image">
-            <div className="profile-container">
-              <div className="profile-circle"></div>
-              <div className="profile-img"></div>
-            </div>
-            <a className="building-card" href={building.link} target="_blank" rel="noopener noreferrer">
-              <span className="building-pulse"></span>
-              <div>
-                <div className="building-label">Currently building</div>
-                <div className="building-name">{building.name}</div>
-                <div className="building-desc">{building.desc}</div>
-                <div className="building-tech">
-                  {building.tech.map((t) => (
-                    <span key={t}>{t}</span>
-                  ))}
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
+      <div className="hero-bg" aria-hidden="true">
+        <HeroCanvas theme={theme} />
+        <div className="hero-grid"></div>
       </div>
+
+      <div className="container hero-inner">
+        <div className="hero-copy">
+          <motion.a href="#contact" className="status-chip" {...fade(0)}>
+            <span className="pulse-dot"></span>
+            Open to new opportunities
+            <i className="fas fa-arrow-right" aria-hidden="true"></i>
+          </motion.a>
+
+          <DisplayName lines={["Mohit", "Patel"]} />
+
+          <motion.div className="hero-role" {...fade(0.35)}>
+            <span className="hero-role-prompt">&gt;</span>
+            <span>{role}</span>
+            <span className="caret" aria-hidden="true"></span>
+          </motion.div>
+
+          <motion.p className="hero-desc" {...fade(0.45)}>
+            Backend Developer at <strong>Quikkred</strong>, building critical financial APIs, running production
+            Linux infrastructure, and shipping <strong>AI-powered MERN products</strong> that scale.
+          </motion.p>
+
+          <motion.div className="hero-ctas" {...fade(0.55)}>
+            <Magnetic>
+              <a href="#projects" className="btn btn-primary btn-lg">
+                View my work <i className="fas fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </Magnetic>
+            <Magnetic>
+              <a href="#contact" className="btn btn-ghost btn-lg">Get in touch</a>
+            </Magnetic>
+          </motion.div>
+
+          <motion.ul className="hero-tags" {...fade(0.65)} aria-label="Focus areas">
+            {TAGS.map((t) => (
+              <li key={t}>[ {t} ]</li>
+            ))}
+          </motion.ul>
+
+          <motion.div className="social-row" {...fade(0.75)}>
+            {SOCIALS.map((s) => (
+              <a key={s.label} href={s.href} className="social-btn" aria-label={s.label} title={s.label} target="_blank" rel="noopener noreferrer">
+                <i className={s.icon} aria-hidden="true"></i>
+              </a>
+            ))}
+          </motion.div>
+        </div>
+
+        <Console building={building} />
+      </div>
+
+      <a href="#services" className="scroll-cue" aria-label="Scroll to content">
+        <span></span>
+      </a>
     </section>
   );
 }

@@ -1,29 +1,32 @@
-import SectionTitle from "./SectionTitle.jsx";
 import { education } from "../data.js";
+import Certificates from "./Certificates.jsx";
+import { Reveal, SectionHeader } from "./ui.jsx";
 
+// Education + certificates, merged into one "Credentials" section.
 export default function Education() {
   return (
-    <section id="education">
+    <section id="credentials" className="section">
       <div className="container">
-        <SectionTitle number="10">Education</SectionTitle>
-
-        <div className="education-grid">
-          {education.map((ed) => (
-            <div className="education-card" key={ed.degree}>
-              <div className="education-icon">
-                <i className="fas fa-graduation-cap"></i>
-              </div>
-              <div className="education-info">
-                <h3 className="education-degree">{ed.degree}</h3>
-                <p className="education-school">{ed.school}</p>
-                <div className="education-meta">
-                  <span className="education-year"><i className="fas fa-calendar-alt"></i> {ed.year}</span>
-                  <span className="education-grade"><i className="fas fa-star"></i> {ed.grade}</span>
+        <SectionHeader index="07" eyebrow="Credentials" title="Education & certifications" />
+        <div className="edu-grid" id="education">
+          {education.map((ed, i) => (
+            <Reveal className="card spot edu-card" key={ed.degree} delay={i * 0.08}>
+              <span className="icon-tile"><i className="fas fa-graduation-cap" aria-hidden="true"></i></span>
+              <div>
+                <h3 className="card-title">{ed.degree}</h3>
+                <p className="card-text">{ed.school}</p>
+                <div className="edu-meta">
+                  <span className="chip chip--sm">{ed.year}</span>
+                  <span className="chip chip--sm chip--brand">{ed.grade}</span>
                 </div>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
+        <Reveal>
+          <h3 className="subhead">Certifications</h3>
+          <Certificates />
+        </Reveal>
       </div>
     </section>
   );

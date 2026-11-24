@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import SectionTitle from "./SectionTitle.jsx";
 import { fetchRepos, GITHUB_USERNAME } from "../lib/github.js";
 
 const LANG_COLORS = {
@@ -29,27 +28,19 @@ export default function FeaturedRepos() {
 
   if (failed) {
     return (
-      <section id="repos">
-        <div className="container">
-          <SectionTitle number="08">Open Source & Repositories</SectionTitle>
-          <p className="repos-fallback">
+      <p className="repos-fallback">
             Couldn't load repositories right now — browse them directly on{" "}
             <a href={`https://github.com/${GITHUB_USERNAME}`} target="_blank" rel="noopener noreferrer">github.com/{GITHUB_USERNAME}</a>.
-          </p>
-        </div>
-      </section>
+      </p>
     );
   }
 
   return (
-    <section id="repos">
-      <div className="container">
-        <SectionTitle number="08">Open Source & Repositories</SectionTitle>
-
+    <div id="repos">
         <div className="repos-grid">
           {repos.map((repo) => (
             <a
-              className="repo-card"
+              className="card spot repo-card"
               key={repo.id}
               href={repo.html_url}
               target="_blank"
@@ -78,11 +69,10 @@ export default function FeaturedRepos() {
         </div>
 
         <div className="repos-more">
-          <a href={`https://github.com/${GITHUB_USERNAME}?tab=repositories`} className="btn-outline" target="_blank" rel="noopener noreferrer">
+          <a href={`https://github.com/${GITHUB_USERNAME}?tab=repositories`} className="btn btn-ghost" target="_blank" rel="noopener noreferrer">
             <i className="fab fa-github"></i> View All Repositories
           </a>
         </div>
-      </div>
-    </section>
+    </div>
   );
 }

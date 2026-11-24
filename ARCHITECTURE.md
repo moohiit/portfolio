@@ -13,8 +13,9 @@ This portfolio is a deliberately **serverless static site** — there is no back
 | Layer | Choice | Why |
 |---|---|---|
 | Build | Vite 5 + React 18 | Static output, fast builds, no SSR needed for a single page |
-| Charts | Chart.js 4 (dynamic `import()`) | Loaded on demand so it stays out of the initial bundle |
-| Styling | Hand-written CSS design system | Full control over theming; no framework overhead |
+| Motion | Motion (Framer Motion) + Lenis | Declarative scroll/entrance animations; smooth scrolling that keeps native scroll position |
+| WebGL | OGL (dynamic `import()`) | ~25 KB shader renderer for the hero, loaded after first paint |
+| Styling | Token-based CSS (`src/styles/theme.css`) | Every colour is a CSS variable; the light theme only redefines tokens |
 | Content | Single `src/data.js` | Every string on the site lives in one editable file |
 
 ## SEO strategy
@@ -36,9 +37,10 @@ Two sections (Testimonials, Technical Writing) are fully built but render `null`
 
 ## Performance & accessibility
 
-- Chart.js and the arcade mini-games are code-split via dynamic import / `React.lazy` — they load only when needed.
-- `prefers-reduced-motion` disables all animations globally.
-- The custom cursor is **opt-in** (toggle in the header) rather than forced on visitors.
+- The WebGL hero (OGL) and the arcade mini-games are code-split via dynamic import / `React.lazy` — they load only when needed.
+- The hero shader renders at reduced resolution, pauses when off screen or in a background tab, and is skipped for reduced-motion visitors (a CSS gradient stands in).
+- The first-visit intro counter is under one second, renders over an already-loaded page, and is skipped on repeat visits.
+- `prefers-reduced-motion` disables animations globally: Motion's `reducedMotion="user"`, no Lenis, no shader, no intro.
 - Below-the-fold images use `loading="lazy"`.
 
 ## Deploy

@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react";
-import SectionTitle from "./SectionTitle.jsx";
 import { botResponses, fuzzyMatch } from "../data.js";
 
 const CHIPS = ["whoami", "skills", "experience", "education", "projects", "contact", "hobbies", "help"];
@@ -113,17 +112,9 @@ export default function Terminal() {
   }
 
   return (
-    <section id="about-terminal">
-      <div className="container">
-        <SectionTitle>Know Me Better</SectionTitle>
-
-        <div className="terminal-window">
+        <div className="terminal-window" id="about-terminal">
           <div className="terminal-header">
-            <div className="terminal-dots">
-              <span className="dot-red"></span>
-              <span className="dot-yellow"></span>
-              <span className="dot-green"></span>
-            </div>
+            <span className="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
             <div className="terminal-title">mohit@portfolio:~</div>
             <div className="terminal-actions">
               <button
@@ -137,7 +128,7 @@ export default function Terminal() {
             </div>
           </div>
 
-          <div className="terminal-body" ref={bodyRef}></div>
+          <div className="terminal-body" ref={bodyRef} data-lenis-prevent></div>
 
           <div className="terminal-input-area">
             <span className="terminal-prompt">$</span>
@@ -164,7 +155,5 @@ export default function Terminal() {
             ))}
           </div>
         </div>
-      </div>
-    </section>
   );
 }

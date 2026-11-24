@@ -1,5 +1,5 @@
 import { useState } from "react";
-import SectionTitle from "./SectionTitle.jsx";
+import { Magnetic, Reveal, SectionHeader } from "./ui.jsx";
 
 const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 const OWNER_EMAIL = "mohit.patel.edu@gmail.com";
@@ -12,6 +12,14 @@ export default function Contact() {
   // Web3Forms explains most rejections (invalid email, bad access key, spam score); shown with the error.
   const [serverMessage, setServerMessage] = useState("");
   const sending = status === "sending";
+  const [copied, setCopied] = useState(false);
+
+  const copyEmail = () => {
+    navigator.clipboard?.writeText(OWNER_EMAIL).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1600);
+    });
+  };
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -73,48 +81,46 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact">
+    <section id="contact" className="section contact-section">
       <div className="container">
-        <SectionTitle number="11">Get In Touch</SectionTitle>
+        <SectionHeader
+          index="09"
+          eyebrow="Contact"
+          title="Let's build something that ships"
+          lead="Open to backend and full-stack roles, freelance APIs and collaborations. I usually reply within a day."
+        />
 
-        <div className="contact-container">
-          <div className="contact-info">
-            <h3 className="contact-title">Let's Connect</h3>
-            <p>
-              I'm currently open to new opportunities and collaborations. Feel free to reach out if you have a
-              project in mind or just want to connect!
-            </p>
-
-            <div className="contact-details">
-              <div className="contact-item">
-                <div className="contact-icon"><i className="fas fa-envelope"></i></div>
-                <div className="contact-text">
-                  <a href={`mailto:${OWNER_EMAIL}`}>{OWNER_EMAIL}</a>
-                </div>
-              </div>
-
-              <div className="contact-item">
-                <div className="contact-icon"><i className="fas fa-phone-alt"></i></div>
-                <div className="contact-text">
-                  <a href="tel:+917060993826">+91 7060993826</a>
-                </div>
-              </div>
-
-              <div className="contact-item">
-                <div className="contact-icon"><i className="fab fa-whatsapp"></i></div>
-                <div className="contact-text">
-                  <a href="https://wa.me/+917060993826" target="_blank" rel="noopener noreferrer">WhatsApp Me</a>
-                </div>
-              </div>
-
-              <div className="contact-item">
-                <div className="contact-icon"><i className="fas fa-map-marker-alt"></i></div>
-                <div className="contact-text">Gurgaon, Haryana, India</div>
-              </div>
+        <div className="contact-grid">
+          <Reveal className="contact-info">
+            <div className="card contact-email">
+              <span className="mono-label">Email</span>
+              <a href={`mailto:${OWNER_EMAIL}`} className="contact-email-link">{OWNER_EMAIL}</a>
+              <button type="button" className="btn btn-ghost btn-sm" onClick={copyEmail}>
+                <i className={copied ? "fas fa-check" : "fas fa-copy"} aria-hidden="true"></i> {copied ? "Copied" : "Copy"}
+              </button>
             </div>
-          </div>
 
-          <div className="contact-form">
+            <ul className="contact-list">
+              <li>
+                <span className="icon-tile icon-tile--sm"><i className="fas fa-phone" aria-hidden="true"></i></span>
+                <a href="tel:+917060993826">+91 70609 93826</a>
+              </li>
+              <li>
+                <span className="icon-tile icon-tile--sm"><i className="fab fa-whatsapp" aria-hidden="true"></i></span>
+                <a href="https://wa.me/+917060993826" target="_blank" rel="noopener noreferrer">Message on WhatsApp</a>
+              </li>
+              <li>
+                <span className="icon-tile icon-tile--sm"><i className="fas fa-location-dot" aria-hidden="true"></i></span>
+                <span>Gurgaon, Haryana, India</span>
+              </li>
+              <li>
+                <span className="icon-tile icon-tile--sm"><i className="fab fa-linkedin-in" aria-hidden="true"></i></span>
+                <a href="https://www.linkedin.com/in/moohiitpatel/" target="_blank" rel="noopener noreferrer">linkedin.com/in/moohiitpatel</a>
+              </li>
+            </ul>
+          </Reveal>
+
+          <Reveal className="card contact-form" delay={0.1}>
             <form onSubmit={handleSubmit}>
               <input type="hidden" name="access_key" value="0db51182-14c2-4b47-bc33-f3fcbb1c7b55" />
               {/* Honeypot for bots: hidden from people, screen readers and the tab order. */}
@@ -128,36 +134,41 @@ export default function Contact() {
                 aria-hidden="true"
               />
 
-              <div className="form-group">
-                <label htmlFor="name">Full Name</label>
-                <input type="text" id="name" name="name" placeholder="Enter your name" required />
+              <div className="field-row">
+                <div className="field">
+                  <label htmlFor="name">Name</label>
+                  <input type="text" id="name" name="name" placeholder="Your name" autoComplete="name" required />
+                </div>
+                <div className="field">
+                  <label htmlFor="email">Email</label>
+                  <input type="email" id="email" name="email" placeholder="you@company.com" autoComplete="email" required />
+                </div>
               </div>
 
-              <div className="form-group">
-                <label htmlFor="email">Email Address</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" required />
+              <div className="field-row">
+                <div className="field">
+                  <label htmlFor="phone">Phone <span className="optional">(optional)</span></label>
+                  <input type="tel" id="phone" name="phone" placeholder="+91 …" autoComplete="tel" />
+                </div>
+                <div className="field">
+                  <label htmlFor="subject">Subject</label>
+                  <input type="text" id="subject" name="subject" placeholder="What's it about?" />
+                </div>
               </div>
 
-              <div className="form-group">
-                <label htmlFor="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="subject">Subject</label>
-                <input type="text" id="subject" name="subject" placeholder="What is this regarding?" />
-              </div>
-
-              <div className="form-group">
+              <div className="field">
                 <label htmlFor="message">Message</label>
-                <textarea id="message" name="message" placeholder="Your message here..." required></textarea>
+                <textarea id="message" name="message" rows="5" placeholder="Tell me about the role or project…" required></textarea>
               </div>
 
               {/* aria-disabled rather than disabled: a disabled button drops keyboard focus to <body>
                   mid-submit. handleSubmit ignores repeat submits while a request is in flight. */}
-              <button type="submit" className="cta-button" aria-disabled={sending} aria-busy={sending}>
-                {sending ? "Sending…" : "Send Message"}
-              </button>
+              <Magnetic strength={0.2}>
+                <button type="submit" className="btn btn-primary btn-lg" aria-disabled={sending} aria-busy={sending}>
+                  {sending ? "Sending…" : "Send message"}
+                  <i className={sending ? "fas fa-circle-notch fa-spin" : "fas fa-paper-plane"} aria-hidden="true"></i>
+                </button>
+              </Magnetic>
 
               <p
                 className={`form-status${status === "success" || status === "error" ? ` form-status--${status}` : ""}`}
@@ -175,7 +186,7 @@ export default function Contact() {
                 )}
               </p>
             </form>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

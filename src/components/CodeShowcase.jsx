@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import SectionTitle from "./SectionTitle.jsx";
 import { codeSnippets } from "../data.js";
 
 export default function CodeShowcase() {
@@ -56,17 +55,9 @@ export default function CodeShowcase() {
   const lineCount = typed.split("\n").length;
 
   return (
-    <section id="code-showcase" ref={sectionRef}>
-      <div className="container">
-        <SectionTitle>Code Showcase</SectionTitle>
-
-        <div className="code-editor">
+        <div className="code-editor" id="code-showcase" ref={sectionRef}>
           <div className="code-editor-header">
-            <div className="terminal-dots">
-              <span className="dot-red"></span>
-              <span className="dot-yellow"></span>
-              <span className="dot-green"></span>
-            </div>
+            <span className="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
             <div className="code-tabs">
               {["React Hook", "Express API", "MongoDB", "Socket.io"].map((label, i) => (
                 <button
@@ -79,7 +70,7 @@ export default function CodeShowcase() {
               ))}
             </div>
           </div>
-          <div className="code-editor-body" ref={bodyRef}>
+          <div className="code-editor-body" ref={bodyRef} data-lenis-prevent>
             <div className="code-line-numbers">
               {Array.from({ length: lineCount }, (_, i) => (
                 <span key={i}>{i + 1}</span>
@@ -92,7 +83,5 @@ export default function CodeShowcase() {
             <span className="code-info">Auto-typing...</span>
           </div>
         </div>
-      </div>
-    </section>
   );
 }
