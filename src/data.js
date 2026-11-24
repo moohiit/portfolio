@@ -11,7 +11,7 @@ export const roles = [
 
 export const currentlyBuilding = {
   name: "Fluxus Forge Lending Cloud",
-  desc: "Multi-tenant, white-label lending platform: LOS, LMS, collections and lender CRM",
+  desc: "In development: a multi-tenant, white-label lending platform with LOS, LMS, collections and lender CRM",
   tech: ["TypeScript", "Fastify", "PostgreSQL"],
   link: "https://fluxusforge.in",
 };
@@ -86,9 +86,9 @@ export const experience = [
     startDate: "2026-02-01",
     storyKey: "fluxusForge",
     description:
-      "Backend engineer across a lending group's product stack: the API behind the Quikkred personal-loan app, the Quikkred Collect field-collections platform, and now lead engineer and top contributor on the Fluxus Forge Lending Cloud.",
+      "Backend engineer across a lending group's product stack: the API behind the Quikkred personal-loan app, the Quikkred Collect field-collections platform, and now lead engineer and top contributor on the Fluxus Forge Lending Cloud, which is in active development.",
     details: [
-      { icon: "fas fa-layer-group", text: "Lead engineer on Fluxus Forge Lending Cloud, a multi-tenant, white-label lending platform (LOS, LMS, collections, lender CRM) built as a TypeScript monorepo of 6 apps and 15 packages. Designed tenant isolation, the provisioning control plane and Cloudflare edge routing." },
+      { icon: "fas fa-layer-group", text: "Lead engineer on Fluxus Forge Lending Cloud, a multi-tenant, white-label lending platform (LOS, LMS, collections, lender CRM) in active development as a TypeScript monorepo of 6 apps and 15 packages. Designed tenant isolation, the provisioning control plane and Cloudflare edge routing." },
       { icon: "fas fa-mobile-alt", text: "Built the backend, ops CRM and core app features of Quikkred Collect (10K+ installs, 4.6★ on Google Play): road-distance case matching and earnings, pincode geocoding, in-app calling and Play in-app updates." },
       { icon: "fas fa-plug", text: "Designed the multi-tenant lender API for field collections: HMAC-signed requests, push/pull/CSV ingest, a durable event store with webhook delivery and replay, and idempotent import and remittance batches. Wrote and shipped its public developer portal." },
       { icon: "fas fa-heartbeat", text: "Owned the Credit Health programme in the Quikkred loan-app API (10K+ installs): lifecycle state machine, mandate billing, referral ladder and campaigns, across 37 endpoints with 42 test files." },
@@ -145,14 +145,15 @@ export const projects = [
     storyKey: "fluxusForge",
     image: "/images/fluxusforge.webp",
     description:
-      "A multi-tenant, white-label lending platform for NBFCs and fintechs. Every lender gets its own branded site and borrower app, a lender CRM (LOS, LMS, collections), a lending engine and a field-agent app, all from one codebase, with per-tenant domains and databases. I'm the lead engineer and top contributor.",
+      "A multi-tenant, white-label lending platform for NBFCs and fintechs. Every lender gets its own branded site and borrower app, a lender CRM (LOS, LMS, collections), a lending engine and a field-agent app, all from one codebase, with per-tenant domains and databases. Currently in active development; I'm the lead engineer and top contributor.",
     architecture: [
       "Tenant isolation by construction: tenant context on every request, one package allowed to open databases, lint rules that block hard-coded brands",
       "Control plane for self-serve signup and tenant provisioning, with a Cloudflare Worker routing each host to its tenant",
       "Entitlements generated from code: every route declares its capability (24 capabilities, 29 roles)",
     ],
     tech: ["TypeScript", "Fastify 5", "PostgreSQL", "Kysely", "MongoDB", "Redis", "Cloudflare Workers", "React", "Next.js", "Turborepo", "Docker", "Prometheus", "Playwright"],
-    demo: "https://fluxusforge.in",
+    status: "In development",
+    site: "https://fluxusforge.in",
   },
   {
     title: "Quikkred Collect — Field Collections",
@@ -362,7 +363,7 @@ export const achievements = [
   {
     icon: "fas fa-layer-group",
     title: "Lead engineer, lending cloud",
-    desc: "Top contributor (650+ commits in 8 weeks) to a multi-tenant lending platform: 6 apps, 15 packages and 70+ lending-engine modules.",
+    desc: "Top contributor (650+ commits in 8 weeks) to a multi-tenant lending platform in active development: 6 apps, 15 packages and 70+ lending-engine modules so far.",
     link: "https://fluxusforge.in",
   },
   {
@@ -460,8 +461,8 @@ export const caseStudies = {
         body: "Isolation by construction rather than by convention: tenant context travels with every request, only one package may open a database connection, and custom lint rules plus a scanner block hard-coded brands, secrets and personal data. Permissions are declared on each route and the entitlement catalog is generated from the code (24 capabilities, 29 roles), so documentation can't drift. Delivery runs on self-hosted CI runners with affected-only test selection, a merge gate, and production runbooks with restore drills.",
       },
       {
-        heading: "My role",
-        body: "I made the initial commit and I'm the top contributor (650+ commits in about 8 weeks). I own the control plane, edge routing, the shared service kernel, the tenant packages, entitlements and CI. I set the architecture and review and merge the work of the rest of the team, who build the lending engine, CRM and site on these foundations.",
+        heading: "Where it stands & my role",
+        body: "The platform is in active development and not yet fully built. I made the initial commit and I'm the top contributor (650+ commits in about 8 weeks). I own the control plane, edge routing, the shared service kernel, the tenant packages, entitlements and CI. I set the architecture and review and merge the work of the rest of the team, who build the lending engine, CRM and site on these foundations.",
       },
     ],
     links: [
@@ -630,7 +631,7 @@ export const botResponses = {
     "Hey! I'm <span class='terminal-highlight'>Mohit Patel</span> — a Full Stack Developer based in Gurgaon, Haryana.",
     "I'm a results-driven <span class='terminal-highlight'>Node.js & MERN Stack Developer</span> with 2+ years of hands-on experience.",
     "I build scalable REST APIs, real-time apps, and production-grade cloud-integrated solutions.",
-    "Currently at <span class='terminal-highlight'>Quikkred · Fluxus Forge</span>, leading engineering on a multi-tenant lending cloud.",
+    "Currently at <span class='terminal-highlight'>Quikkred · Fluxus Forge</span>, leading development of a multi-tenant lending cloud.",
   ],
   skills: [
     "<span class='terminal-cmd'>// Frontend</span>",
@@ -646,7 +647,7 @@ export const botResponses = {
   ],
   experience: [
     "<span class='terminal-highlight'>Backend Developer</span> @ Quikkred — <span class='terminal-cmd'>February 2026 - Present</span>",
-    "  → Lead engineer on Fluxus Forge Lending Cloud (multi-tenant LOS/LMS, TypeScript monorepo)",
+    "  → Lead engineer on Fluxus Forge Lending Cloud, in development (multi-tenant LOS/LMS, TypeScript monorepo)",
     "  → Built Quikkred Collect's backend, ops CRM & app features (10K+ installs, 4.6★)",
     "  → Multi-tenant lender API: HMAC auth, webhooks with replay, idempotent batches",
     "  → Credit Health programme & investor ledger in the Quikkred loan-app API",
@@ -669,7 +670,7 @@ export const botResponses = {
     "  Score: <span class='terminal-cmd'>82.37%</span> | 2017 - 2020",
   ],
   projects: [
-    "<span class='terminal-highlight'>★ Fluxus Forge Lending Cloud</span> — multi-tenant white-label lending platform (lead engineer)",
+    "<span class='terminal-highlight'>★ Fluxus Forge Lending Cloud</span> — multi-tenant white-label lending platform, in development (lead engineer)",
     "   Tech: TypeScript, Fastify, PostgreSQL, Cloudflare Workers, React",
     "",
     "<span class='terminal-highlight'>★ Quikkred Collect</span> — field-collections app on Google Play (10K+ installs, 4.6★)",

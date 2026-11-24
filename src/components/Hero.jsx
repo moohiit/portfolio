@@ -215,7 +215,7 @@ export default function Hero({ theme }) {
           </motion.div>
 
           <motion.p className="hero-desc" {...fade(0.45)}>
-            Backend Developer at <strong>Quikkred</strong>, leading engineering on the{" "}
+            Backend Developer at <strong>Quikkred</strong>, leading development of the{" "}
             <strong>Fluxus Forge</strong> multi-tenant lending cloud, and building the APIs behind two fintech apps
             with <strong>10K+ installs</strong> on Google Play.
           </motion.p>

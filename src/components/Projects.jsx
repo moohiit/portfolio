@@ -4,10 +4,11 @@ import { Reveal, SectionHeader } from "./ui.jsx";
 const MAX_TECH = 6;
 
 function hostOf(p) {
-  return (p.demo || p.playStore || "").replace(/^https?:\/\//, "").replace(/\/$/, "").split("/")[0] || "github.com/moohiit";
+  return (p.demo || p.playStore || p.site || "").replace(/^https?:\/\//, "").replace(/\/$/, "").split("/")[0] || "github.com/moohiit";
 }
 
 function Status({ p }) {
+  if (p.status) return <span className="status-tag status-tag--violet"><span className="pulse-dot pulse-dot--violet"></span>{p.status}</span>;
   if (p.playStore) return <span className="status-tag"><span className="pulse-dot"></span>On Google Play</span>;
   if (p.demo) return <span className="status-tag"><span className="pulse-dot"></span>Live</span>;
   return null;
@@ -24,6 +25,11 @@ function Links({ p, onOpenCaseStudy }) {
       {p.demo && (
         <a href={p.demo} className="btn btn-ghost btn-sm" target="_blank" rel="noopener noreferrer">
           Live demo <i className="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+        </a>
+      )}
+      {p.site && (
+        <a href={p.site} className="btn btn-ghost btn-sm" target="_blank" rel="noopener noreferrer">
+          Website <i className="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
         </a>
       )}
       {p.playStore && (

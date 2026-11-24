@@ -18,7 +18,7 @@ function buildCommands({ theme, onToggleTheme, onOpenArcade, onOpenCaseStudy }) 
       const items = [];
       if (p.storyKey)
         items.push({ group: "Projects", icon: "fas fa-book-open", label: `${p.title}: build story`, run: () => onOpenCaseStudy(p.storyKey) });
-      const live = p.demo || p.playStore;
+      const live = p.demo || p.playStore || p.site;
       if (live) items.push({ group: "Projects", icon: "fas fa-arrow-up-right-from-square", label: `Open ${p.title}`, run: open(live) });
       return items;
     }),

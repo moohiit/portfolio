@@ -1846,3 +1846,4 @@ main, .site-footer { position: relative; z-index: 2; }
   .project-feature--flip { grid-template-columns: 1fr 1.1fr; }
   .project-feature--flip .shot { order: 2; }
 }
+.status-tag--violet { color: var(--violet); background: rgba(var(--violet-rgb), 0.1); border-color: rgba(var(--violet-rgb), 0.3); }
