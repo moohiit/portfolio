@@ -400,7 +400,7 @@ export const caseStudies = {
 
   multiTenant: {
     title: "A Multi-Tenant Lender Integration Platform",
-    subtitle: "What I'm building at Quikkred — public API docs at developers.quikkred.in",
+    subtitle: "What I'm building at Quikkred — public API docs at developers.fluxusforge.in",
     sections: [
       {
         heading: "The problem",
@@ -416,11 +416,11 @@ export const caseStudies = {
       },
       {
         heading: "Where it stands",
-        body: "Live in production with the docs portal at developers.quikkred.in, powering case intake, geo-routed field assignment, real-time partner updates, and Razorpay-based payouts — with Sentry, structured logging, and rate limiting keeping it observable and stable under SLA.",
+        body: "Live in production with the docs portal at developers.fluxusforge.in, powering case intake, geo-routed field assignment, real-time partner updates, and Razorpay-based payouts — with Sentry, structured logging, and rate limiting keeping it observable and stable under SLA.",
       },
     ],
     links: [
-      { label: "API Documentation", url: "https://developers.quikkred.in", primary: true },
+      { label: "API Documentation", url: "https://developers.fluxusforge.in", primary: true },
     ],
   },
 };
