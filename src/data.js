@@ -694,7 +694,7 @@ export const botResponses = {
     "🔗 LinkedIn: <span class='terminal-cmd'>linkedin.com/in/moohiitpatel</span>",
     "💻 GitHub: <span class='terminal-cmd'>github.com/moohiit</span>",
     "",
-    "Feel free to reach out! I'm an <span class='terminal-highlight'>immediate joiner</span>.",
+    "Feel free to reach out. I usually reply within a day.",
   ],
   hobbies: [
     "When I'm not coding, you'll find me:",
