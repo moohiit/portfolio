@@ -609,7 +609,7 @@ export const botResponses = {
     "   Tech: PHP, Apache, MySQL",
   ],
   contact: [
-    "📧 Email: <span class='terminal-highlight'>mohit.patel.edu@gmail.com</span>",
+    "📧 Email: <span class='terminal-highlight'>mohitpatel.inbox@gmail.com</span>",
     "📱 Phone: <span class='terminal-highlight'>+91 7060993826</span>",
     "📍 Location: <span class='terminal-highlight'>Gurgaon, Haryana, India</span>",
     "🔗 LinkedIn: <span class='terminal-cmd'>linkedin.com/in/moohiitpatel</span>",

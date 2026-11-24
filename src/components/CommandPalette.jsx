@@ -6,7 +6,7 @@ import { NAV_LINKS, countResumeDownload } from "./Header.jsx";
 import { EASE } from "./ui.jsx";
 import { scrollToTarget } from "../lib/scroll.js";
 
-const EMAIL = "mohit.patel.edu@gmail.com";
+const EMAIL = "mohitpatel.inbox@gmail.com";
 
 function buildCommands({ theme, onToggleTheme, onOpenArcade, onOpenCaseStudy }) {
   const go = (href) => () => (href === "#top" ? scrollToTarget(0) : scrollToTarget(href));

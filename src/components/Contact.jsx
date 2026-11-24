@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Magnetic, Reveal, SectionHeader } from "./ui.jsx";
 
 const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
-const OWNER_EMAIL = "mohit.patel.edu@gmail.com";
+const OWNER_EMAIL = "mohitpatel.inbox@gmail.com";
 const REQUEST_TIMEOUT_MS = 20000;
 const MAX_SERVER_MESSAGE_CHARS = 200;
 
