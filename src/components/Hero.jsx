@@ -110,7 +110,7 @@ function Console({ building }) {
         </div>
 
         <div className="console-profile">
-          <img src="https://avatars.githubusercontent.com/u/109367447?v=4" alt="Mohit Patel" width="56" height="56" />
+          <img src="/images/profile.webp" alt="Mohit Patel" width="56" height="56" />
           <div>
             <div className="console-name">Mohit Patel</div>
             <div className="console-role">Backend Developer · Quikkred</div>
@@ -211,11 +211,11 @@ export default function Hero({ theme }) {
           >
             <span className="hero-avatar-ring" aria-hidden="true"></span>
             <img
-              src="https://avatars.githubusercontent.com/u/109367447?v=4&s=320"
+              src="/images/profile.webp"
               alt="Mohit Patel"
               width="128"
               height="128"
-              fetchPriority="high"
+              fetchpriority="high"
             />
             <span className="hero-avatar-badge" aria-hidden="true">
               <i className="fas fa-code"></i>

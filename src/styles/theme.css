@@ -1778,7 +1778,12 @@ main, .site-footer { position: relative; z-index: 2; }
   .menu-btn { display: inline-flex; }
   .hero { padding-top: 110px; }
   .hero-inner { grid-template-columns: 1fr; }
-  .hero-avatar { display: block; }
+  /* Name and photo side by side, so the photo doesn't leave the right half empty. */
+  .hero-copy { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: 16px; }
+  .hero-copy > * { grid-column: 1 / -1; }
+  .status-chip { grid-row: 1; justify-self: start; }
+  .hero-title { grid-column: 1; grid-row: 2; }
+  .hero-avatar { display: block; grid-column: 2; grid-row: 2; width: 112px; height: 112px; margin: 0 6px 0 0; }
   /* Photo already sits at the top of the hero, so the console skips it. */
   .console-profile { display: none; }
   .console-wrap { max-width: 520px; }
