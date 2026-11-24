@@ -67,7 +67,8 @@ function Shot({ p, eager }) {
 }
 
 export default function Projects({ onOpenCaseStudy }) {
-  const [featured, ...rest] = [...projects.filter((p) => p.featured), ...projects.filter((p) => !p.featured)];
+  const featured = projects.filter((p) => p.featured);
+  const rest = projects.filter((p) => !p.featured);
 
   return (
     <section id="projects" className="section">
@@ -76,31 +77,31 @@ export default function Projects({ onOpenCaseStudy }) {
           index="02"
           eyebrow="Selected work"
           title="Products I've shipped to real users"
-          lead="Everything here is deployed, on a domain, and in use. The build stories cover the architecture and the trade-offs."
+          lead="Everything here is deployed and in use, from lending platforms at work to my own GenAI products. The build stories cover the architecture and the trade-offs."
         />
 
-        {featured && (
-          <Reveal className="card spot project-feature">
-            <Shot p={featured} eager />
+        {featured.map((f, i) => (
+          <Reveal className={"card spot project-feature" + (i % 2 ? " project-feature--flip" : "")} key={f.title}>
+            <Shot p={f} eager={i === 0} />
             <div className="project-body">
               <div className="project-meta">
-                <span className="mono-label">Featured project</span>
-                <Status p={featured} />
+                <span className="mono-label">{f.badge?.text || "Featured project"}</span>
+                <Status p={f} />
               </div>
-              <h3 className="project-title project-title--lg">{featured.title}</h3>
-              <p className="card-text">{featured.description}</p>
-              {featured.architecture && (
+              <h3 className="project-title project-title--lg">{f.title}</h3>
+              <p className="card-text">{f.description}</p>
+              {f.architecture && (
                 <ul className="arch-list">
-                  {featured.architecture.map((a) => (
+                  {f.architecture.map((a) => (
                     <li key={a}><i className="fas fa-diagram-project" aria-hidden="true"></i>{a}</li>
                   ))}
                 </ul>
               )}
-              <Tech items={featured.tech} max={8} />
-              <Links p={featured} onOpenCaseStudy={onOpenCaseStudy} />
+              <Tech items={f.tech} max={8} />
+              <Links p={f} onOpenCaseStudy={onOpenCaseStudy} />
             </div>
           </Reveal>
-        )}
+        ))}
 
         <div className="projects-grid">
           {rest.map((p, i) => (

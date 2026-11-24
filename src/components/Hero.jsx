@@ -1,14 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "motion/react";
 import { roles, currentlyBuilding, stats, skillCategories } from "../data.js";
-import { fetchRepos } from "../lib/github.js";
 import HeroCanvas from "./HeroCanvas.jsx";
 import { HERO_DELAY } from "./Preloader.jsx";
 import { Counter, EASE, Magnetic } from "./ui.jsx";
-
-// Repos that shouldn't appear as "currently building" even when recently pushed
-// (the portfolio itself and the profile readme repo are meta, not projects).
-const BUILDING_EXCLUDE = ["portfolio", "moohiit"];
 
 const TAGS = ["Fintech APIs", "GenAI", "DevOps", "Mobile"];
 
@@ -166,26 +161,9 @@ function Console({ building }) {
 
 export default function Hero({ theme }) {
   const role = useTypewriter(roles);
-  const [building, setBuilding] = useState(currentlyBuilding);
-  const fetched = useRef(false);
-
-  useEffect(() => {
-    if (fetched.current) return;
-    fetched.current = true;
-    // fetchRepos() is shared with the repo grid, so this costs no extra API quota.
-    fetchRepos()
-      .then((repos) => {
-        const repo = repos.find((r) => !r.fork && !BUILDING_EXCLUDE.includes(r.name));
-        if (!repo) return;
-        setBuilding({
-          name: repo.name,
-          desc: repo.description || currentlyBuilding.desc,
-          tech: [repo.language, ...(repo.topics || [])].filter(Boolean).slice(0, 3),
-          link: repo.html_url,
-        });
-      })
-      .catch(() => { /* keep static fallback from data.js */ });
-  }, []);
+  // Static on purpose: the current work lives in private repos, so the latest
+  // public GitHub repo would be the wrong answer here.
+  const building = currentlyBuilding;
 
   const fade = (delay) => ({
     initial: { opacity: 0, y: 18 },
@@ -237,8 +215,9 @@ export default function Hero({ theme }) {
           </motion.div>
 
           <motion.p className="hero-desc" {...fade(0.45)}>
-            Backend Developer at <strong>Quikkred</strong>, building critical financial APIs, running production
-            Linux infrastructure, and shipping <strong>AI-powered MERN products</strong> that scale.
+            Backend Developer at <strong>Quikkred</strong>, leading engineering on the{" "}
+            <strong>Fluxus Forge</strong> multi-tenant lending cloud, and building the APIs behind two fintech apps
+            with <strong>10K+ installs</strong> on Google Play.
           </motion.p>
 
           <motion.div className="hero-ctas" {...fade(0.55)}>

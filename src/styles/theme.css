@@ -1840,3 +1840,9 @@ main, .site-footer { position: relative; z-index: 2; }
   .marquee { overflow-x: auto; }
   .pulse-dot::after { display: none; }
 }
+
+/* Alternate featured cards put the screenshot on the right. */
+@media (min-width: 961px) {
+  .project-feature--flip { grid-template-columns: 1fr 1.1fr; }
+  .project-feature--flip .shot { order: 2; }
+}

@@ -3,7 +3,7 @@
 // reduced-motion visitors.
 const STACK = [
   "Node.js", "Fastify", "Express", "MongoDB", "Redis", "Socket.io", "React", "Next.js",
-  "React Native", "TypeScript", "Nginx", "PM2", "Docker", "AWS", "GitHub Actions", "Gemini", "RAG", "Razorpay",
+  "React Native", "TypeScript", "PostgreSQL", "Cloudflare Workers", "Nginx", "PM2", "Docker", "AWS", "GitHub Actions", "Gemini", "RAG",
 ];
 
 export default function Marquee() {

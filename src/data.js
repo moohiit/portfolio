@@ -3,23 +3,23 @@
 
 export const roles = [
   "Backend Developer",
-  "Node.js Engineer",
+  "Lending Platform Engineer",
+  "Node.js / Fastify Engineer",
+  "Fintech API Developer",
   "MERN Stack Developer",
-  "Fintech Developer",
-  "React.js Developer",
 ];
 
 export const currentlyBuilding = {
-  name: "PrivateChat",
-  desc: "End-to-end encrypted chat, zero-knowledge server",
-  tech: ["Next.js", "PartyKit", "Turso"],
-  link: "https://github.com/moohiit/PrivateChat",
+  name: "Fluxus Forge Lending Cloud",
+  desc: "Multi-tenant, white-label lending platform: LOS, LMS, collections and lender CRM",
+  tech: ["TypeScript", "Fastify", "PostgreSQL"],
+  link: "https://fluxusforge.in",
 };
 
 export const stats = [
   { icon: "fas fa-briefcase", target: 2, label: "Years Experience" },
   { icon: "fas fa-project-diagram", target: 10, label: "Projects Completed" },
-  { icon: "fas fa-rocket", target: 4, label: "Live Products" },
+  { icon: "fas fa-rocket", target: 8, label: "Live Products" },
   { icon: "fas fa-certificate", target: 5, label: "Certifications", plus: false },
 ];
 
@@ -41,9 +41,9 @@ export const skillCategories = [
     icon: "fas fa-server",
     proficiency: 92,
     items: [
-      "Node.js", "Express.js", "MongoDB", "MySQL", "Mongoose", "JavaScript",
-      "Java", "RESTful APIs", "MVC Architecture", "Socket.io", "Cloud Storage",
-      "JWT/OAuth2 Authentication", "SQL", "Redis(Caching)",
+      "Node.js", "TypeScript", "Fastify", "Express.js", "PostgreSQL", "MongoDB",
+      "Redis", "BullMQ", "Kysely", "Mongoose", "MySQL", "RESTful APIs", "Webhooks & HMAC signing",
+      "Outbox / event-driven design", "Socket.io", "JWT/OAuth2 Authentication", "Zod", "OpenAPI / Swagger", "Java",
     ],
   },
   {
@@ -52,8 +52,9 @@ export const skillCategories = [
     icon: "fas fa-terminal",
     proficiency: 80,
     items: [
-      "Nginx (Reverse Proxy)", "PM2", "Linux (Ubuntu)", "GitHub Actions",
-      "Docker", "CI/CD Pipelines", "SSL / Certbot", "AWS EC2",
+      "Nginx (Reverse Proxy)", "PM2", "Linux (Ubuntu)", "GitHub Actions", "Docker",
+      "Cloudflare Workers & Pages", "CI/CD Pipelines", "Self-hosted CI runners",
+      "Prometheus & Grafana", "Sentry", "SSL / Certbot", "AWS EC2",
     ],
   },
   {
@@ -63,7 +64,7 @@ export const skillCategories = [
     proficiency: 78,
     items: [
       "Git & GitHub", "AWS S3", "Google Cloud Platform", "RazorPay",
-      "Google Maps API", "VS Code", "Postman", "Testing (Jest)", "npm/yarn",
+      "Google Maps API", "Docusaurus", "Testing (Vitest, Jest)", "Playwright", "pnpm + Turborepo", "Postman", "VS Code",
     ],
   },
 ];
@@ -79,22 +80,22 @@ export const experience = [
     date: "February 2026 - Present",
     position: "Backend Developer",
     current: true,
-    company: "Quikkred",
+    company: "Quikkred · Fluxus Forge",
     tag: "Fintech",
     tagClass: "company-tag--fintech",
     startDate: "2026-02-01",
-    storyKey: "multiTenant",
+    storyKey: "fluxusForge",
     description:
-      "Building the collections-partner platform end to end — a high-performance Fastify backend and an Expo React Native field app — plus handling critical production issues in a fast-paced fintech environment.",
+      "Backend engineer across a lending group's product stack: the API behind the Quikkred personal-loan app, the Quikkred Collect field-collections platform, and now lead engineer and top contributor on the Fluxus Forge Lending Cloud.",
     details: [
-      { icon: "fas fa-code", text: "Designing and building Fastify (Node.js) APIs for collections workflows — case management, partner onboarding & KYC, earnings, and Razorpay-powered payouts/withdrawals." },
-      { icon: "fas fa-map-marked-alt", text: "Built geo-based case assignment: pincode-to-coordinate resolution and road-distance matching to route field partners to the nearest cases." },
-      { icon: "fas fa-bolt", text: "Real-time layer with Socket.io and Redis; background workers and node-cron jobs for payouts, notifications, and data-migration/backfill scripts." },
-      { icon: "fas fa-file-invoice", text: "Document pipelines: AWS S3 presigned uploads, OCR with Tesseract and pdf-parse, Excel report generation, and FCM push notifications via Firebase Admin." },
-      { icon: "fas fa-mobile-alt", text: "Developing the partner mobile app in Expo React Native (TypeScript) with React Query, React Hook Form + Zod, Firebase messaging, and multi-language support." },
-      { icon: "fas fa-shield-alt", text: "Production ownership: Sentry error tracking, Winston rotating logs, rate limiting, Swagger API docs, Nginx/PM2 on Linux, and SLA-bound incident debugging." },
+      { icon: "fas fa-layer-group", text: "Lead engineer on Fluxus Forge Lending Cloud, a multi-tenant, white-label lending platform (LOS, LMS, collections, lender CRM) built as a TypeScript monorepo of 6 apps and 15 packages. Designed tenant isolation, the provisioning control plane and Cloudflare edge routing." },
+      { icon: "fas fa-mobile-alt", text: "Built the backend, ops CRM and core app features of Quikkred Collect (10K+ installs, 4.6★ on Google Play): road-distance case matching and earnings, pincode geocoding, in-app calling and Play in-app updates." },
+      { icon: "fas fa-plug", text: "Designed the multi-tenant lender API for field collections: HMAC-signed requests, push/pull/CSV ingest, a durable event store with webhook delivery and replay, and idempotent import and remittance batches. Wrote and shipped its public developer portal." },
+      { icon: "fas fa-heartbeat", text: "Owned the Credit Health programme in the Quikkred loan-app API (10K+ installs): lifecycle state machine, mandate billing, referral ladder and campaigns, across 37 endpoints with 42 test files." },
+      { icon: "fas fa-file-invoice", text: "Built organisation billing (GST invoices, deposit and TDS ledgers, month-end billing runs) and an investor-ledger API that reconciles disbursals and repayments per loan." },
+      { icon: "fas fa-shield-alt", text: "Production reliability: outbox-based sync with HMAC webhooks and nightly reconciliation, Sentry and structured logging, Swagger and Zod across route modules, ClamAV upload scanning, capability-based RBAC, and CI with zero-downtime PM2 deploys." },
     ],
-    tech: ["Node.js", "Fastify", "MongoDB", "Redis", "Socket.io", "Razorpay", "AWS S3", "Firebase (FCM)", "React Native (Expo)", "React Query", "Nginx", "PM2", "Sentry", "CI/CD"],
+    tech: ["TypeScript", "Node.js", "Fastify", "Express", "PostgreSQL", "MongoDB", "Redis", "BullMQ", "Cloudflare Workers", "React", "React Native (Expo)", "Docker", "GitHub Actions", "PM2", "Sentry", "Prometheus/Grafana", "Playwright"],
   },
   {
     date: "June 2024 - January 2026",
@@ -137,6 +138,48 @@ export const experience = [
 ];
 
 export const projects = [
+  {
+    title: "Fluxus Forge Lending Cloud",
+    badge: { text: "Work · Lead engineer", cls: "project-badge--featured" },
+    featured: true,
+    storyKey: "fluxusForge",
+    image: "/images/fluxusforge.webp",
+    description:
+      "A multi-tenant, white-label lending platform for NBFCs and fintechs. Every lender gets its own branded site and borrower app, a lender CRM (LOS, LMS, collections), a lending engine and a field-agent app, all from one codebase, with per-tenant domains and databases. I'm the lead engineer and top contributor.",
+    architecture: [
+      "Tenant isolation by construction: tenant context on every request, one package allowed to open databases, lint rules that block hard-coded brands",
+      "Control plane for self-serve signup and tenant provisioning, with a Cloudflare Worker routing each host to its tenant",
+      "Entitlements generated from code: every route declares its capability (24 capabilities, 29 roles)",
+    ],
+    tech: ["TypeScript", "Fastify 5", "PostgreSQL", "Kysely", "MongoDB", "Redis", "Cloudflare Workers", "React", "Next.js", "Turborepo", "Docker", "Prometheus", "Playwright"],
+    demo: "https://fluxusforge.in",
+  },
+  {
+    title: "Quikkred Collect — Field Collections",
+    badge: { text: "Work · Mobile", cls: "project-badge--mobile" },
+    storyKey: "multiTenant",
+    image: "/images/quikkred-collect.webp",
+    description:
+      "Gig-style field-collections platform: KYC-verified partners pick nearby overdue cases in the app, visit the borrower, collect payment and earn per visit or by distance. Lenders plug in through a signed API. 10K+ installs, rated 4.6★ on Google Play.",
+    architecture: [
+      "Road-distance case matching and earnings, with pincode geocoding and backfill jobs",
+      "Lender API with HMAC auth, webhook delivery and replay, and idempotent batches",
+    ],
+    tech: ["Fastify", "MongoDB", "React Native (Expo)", "React", "node-cron", "Docusaurus", "FCM"],
+    playStore: "https://play.google.com/store/apps/details?id=com.quikkred.collect",
+  },
+  {
+    title: "Quikkred — Personal Loan App (API)",
+    badge: { text: "Work · Backend", cls: "project-badge--mobile" },
+    image: "/images/quikkred-app.webp",
+    description:
+      "Backend for a digital personal-loan app covering onboarding and KYC, underwriting rules, disbursal, autopay repayment and collections. I built the Credit Health programme, the partner-sync bridge, Redis caching for the dashboards and the investor-ledger API. 10K+ installs on Google Play.",
+    architecture: [
+      "Transactional outbox with HMAC-verified webhooks and nightly reconciliation for partner sync",
+    ],
+    tech: ["Node.js", "Express 5", "MongoDB", "PostgreSQL", "Redis", "Bull", "Zod", "Swagger", "Sentry"],
+    playStore: "https://play.google.com/store/apps/details?id=in.quikkred.app",
+  },
   {
     title: "AI Playground — GenAI Hub",
     badge: { text: "Featured", cls: "project-badge--featured" },
@@ -263,10 +306,10 @@ export const education = [
 
 // ---- NEW: Services / What I Do ----
 export const services = [
-  { icon: "fas fa-layer-group", title: "Full-Stack Apps", desc: "Production MERN / Next.js applications end to end — from schema design to deployment." },
-  { icon: "fas fa-robot", title: "AI Integrations", desc: "RAG pipelines, Gemini-powered features, vector search, and streaming AI UX." },
-  { icon: "fas fa-mobile-alt", title: "Mobile Apps", desc: "React Native (Expo) apps shipped to the Google Play Store." },
-  { icon: "fas fa-network-wired", title: "API Design & DevOps", desc: "Secure REST APIs, Nginx/PM2 server management, and CI/CD automation." },
+  { icon: "fas fa-landmark", title: "Fintech & Lending Platforms", desc: "Loan origination and management, collections, billing and reconciliation, built multi-tenant and audit-ready." },
+  { icon: "fas fa-plug", title: "Partner APIs & Integrations", desc: "HMAC-signed APIs, webhooks with replay, idempotent batch ingest, plus the OpenAPI docs and developer portal to go with them." },
+  { icon: "fas fa-mobile-alt", title: "Mobile Apps", desc: "React Native (Expo) apps shipped to Google Play, from case feeds and KYC flows to in-app updates." },
+  { icon: "fas fa-network-wired", title: "DevOps & Reliability", desc: "CI/CD, zero-downtime deploys, edge routing on Cloudflare, and monitoring with Sentry, Prometheus and Grafana." },
 ];
 
 // ---- NEW: Coding profiles ----
@@ -317,26 +360,28 @@ export const codingProfiles = [
 // ---- NEW: Achievements & milestones ----
 export const achievements = [
   {
-    icon: "fab fa-google-play",
-    image: "/images/splitzy-icon.webp",
-    title: "Splitzy AI on Google Play",
-    desc: "Published the AI expense-splitting mobile app (React Native + Gemini) live on the Play Store.",
-    link: "https://play.google.com/store/apps/details?id=com.moohiit.expensetracker",
+    icon: "fas fa-layer-group",
+    title: "Lead engineer, lending cloud",
+    desc: "Top contributor (650+ commits in 8 weeks) to a multi-tenant lending platform: 6 apps, 15 packages and 70+ lending-engine modules.",
+    link: "https://fluxusforge.in",
   },
   {
-    icon: "fas fa-rocket",
-    title: "4+ Live Products in Production",
-    desc: "AI Playground, ShopEase, SastaGram, and Watchman — all deployed, domain-mapped, and in active use.",
+    icon: "fab fa-google-play",
+    image: "/images/collect-icon.webp",
+    title: "3 apps live on Google Play",
+    desc: "Quikkred Collect (10K+ installs, 4.6★) and the Quikkred loan app (10K+) at work, plus my own Splitzy AI expense app.",
+    link: "https://play.google.com/store/apps/details?id=com.quikkred.collect",
+  },
+  {
+    icon: "fas fa-book",
+    title: "Public developer portal",
+    desc: "Wrote and shipped the lender API docs: HMAC signing samples in 4 languages, ingest, webhooks, payments, sandbox and go-live.",
+    link: "https://developers.fluxusforge.in",
   },
   {
     icon: "fas fa-bolt",
     title: "10x API Performance",
     desc: "Redis caching layer at Life Layer cut DB queries ~70% and made hot endpoints 10x faster.",
-  },
-  {
-    icon: "fas fa-certificate",
-    title: "5 Professional Certifications",
-    desc: "IBM Data Science, MongoDB, MS SQL, Advanced Excel, and Data Science certifications.",
   },
 ];
 
@@ -398,29 +443,57 @@ export const caseStudies = {
     ],
   },
 
-  multiTenant: {
-    title: "A Multi-Tenant Lender Integration Platform",
-    subtitle: "What I'm building at Quikkred — public API docs at developers.fluxusforge.in",
+  fluxusForge: {
+    title: "Fluxus Forge Lending Cloud",
+    subtitle: "Lead engineer on a multi-tenant, white-label lending platform",
     sections: [
       {
         heading: "The problem",
-        body: "Multiple lenders and organizations need to hand collection cases to Quikkred's field-partner network — each with their own branding, data formats, payment flows, and status-update requirements. Onboarding every lender with custom code doesn't scale; the platform had to become multi-tenant with a single public API surface.",
+        body: "Every new lender (an NBFC or a fintech) needs the same stack: a branded website and borrower app, loan origination and management, collections, a CRM for staff and a field app. Building it once per lender doesn't scale, but sharing one deployment across lenders means one tenant's data, branding or configuration must never leak into another's.",
       },
       {
         heading: "Architecture",
-        body: "A Fastify (Node.js) backend where every case, payout, and event is scoped to its source organization. Lenders integrate through a versioned public API — authenticated per tenant via API-key middleware — to push cases in bulk, receive status updates over signed webhooks with delivery tracking and retries, and reconcile payments through remittance batches. Per-tenant branding flows through to everything the borrower and field partner see.",
+        body: "A TypeScript monorepo (pnpm + Turborepo) of 6 apps and 15 packages. Fastify 5 services share a kernel I built: zod-validated routes, sessions, idempotency keys, rate limits, OpenAPI generation and tenant-tagged logs. Each tenant gets its own domain and its own databases (PostgreSQL via Kysely, plus MongoDB and Redis). A Cloudflare Worker maps every incoming host to its tenant, and a control plane handles self-serve signup, provisioning and demo lifecycles. Writes go through an outbox that turns them into events, the audit log is hash-chained, and money is always Decimal.",
       },
       {
         heading: "Hard decisions",
-        body: "Webhook reliability: an outbox pattern with per-delivery logging and retry, so a lender's downtime never loses an update. Auditability for finance: every external API request is logged, and imports/remittances run as idempotent batches — re-sending a file can't double-create cases or payments. Developer experience: a public Docusaurus documentation portal (authentication, sending cases, payments, receiving updates, sandbox testing) so lender teams can integrate without hand-holding.",
+        body: "Isolation by construction rather than by convention: tenant context travels with every request, only one package may open a database connection, and custom lint rules plus a scanner block hard-coded brands, secrets and personal data. Permissions are declared on each route and the entitlement catalog is generated from the code (24 capabilities, 29 roles), so documentation can't drift. Delivery runs on self-hosted CI runners with affected-only test selection, a merge gate, and production runbooks with restore drills.",
       },
       {
-        heading: "Where it stands",
-        body: "Live in production with the docs portal at developers.fluxusforge.in, powering case intake, geo-routed field assignment, real-time partner updates, and Razorpay-based payouts — with Sentry, structured logging, and rate limiting keeping it observable and stable under SLA.",
+        heading: "My role",
+        body: "I made the initial commit and I'm the top contributor (650+ commits in about 8 weeks). I own the control plane, edge routing, the shared service kernel, the tenant packages, entitlements and CI. I set the architecture and review and merge the work of the rest of the team, who build the lending engine, CRM and site on these foundations.",
       },
     ],
     links: [
-      { label: "API Documentation", url: "https://developers.fluxusforge.in", primary: true },
+      { label: "fluxusforge.in", url: "https://fluxusforge.in", primary: true },
+      { label: "Developer docs", url: "https://developers.fluxusforge.in" },
+    ],
+  },
+
+  multiTenant: {
+    title: "Quikkred Collect & the Lender API",
+    subtitle: "Field collections, opened up to external lenders through a signed API",
+    sections: [
+      {
+        heading: "The problem",
+        body: "Quikkred Collect sends vetted field partners to borrowers with overdue loans. Other lenders wanted to hand their cases to the same partner network, each with their own data formats, payment flows and status-update needs. Onboarding every lender with custom code doesn't scale, so the platform had to become multi-tenant behind one public API.",
+      },
+      {
+        heading: "Architecture",
+        body: "A Fastify and MongoDB backend where every case, payout and event is scoped to its organisation. Lenders authenticate with HMAC-signed requests and send cases by push, pull or CSV ingest. A durable event store feeds webhook delivery (with a delivery log and replay) and a poll feed, and payments reconcile through remittance batches. Partners get cases matched by real road distance, with pincode geocoding and backfill jobs keeping coordinates accurate.",
+      },
+      {
+        heading: "Hard decisions",
+        body: "Webhook reliability: an outbox with per-delivery logging, retries and a dead-letter queue, so a lender's downtime never loses an update. Auditability for finance: imports and remittances run as idempotent batches, so re-sending a file can't double-create cases or payments, and organisation billing (GST invoices, deposit and TDS ledgers, a month-end billing run) is generated from the same events. Developer experience: I wrote a Docusaurus portal with HMAC signing samples in Node, Python, PHP and cURL, plus sandbox and go-live guides, so lender teams can integrate without hand-holding.",
+      },
+      {
+        heading: "Where it stands",
+        body: "Live in production. Quikkred Collect has 10K+ installs and a 4.6★ rating on Google Play, and the lender API and its docs are public. I built most of the backend's lender API, billing and scheduled jobs (17 of its 30 crons), the operations CRM's collections module, and core app features: the road-distance case feed, an earnings calculator, and in-app and forced updates.",
+      },
+    ],
+    links: [
+      { label: "Google Play", url: "https://play.google.com/store/apps/details?id=com.quikkred.collect", primary: true },
+      { label: "API Documentation", url: "https://developers.fluxusforge.in" },
     ],
   },
 };
@@ -557,7 +630,7 @@ export const botResponses = {
     "Hey! I'm <span class='terminal-highlight'>Mohit Patel</span> — a Full Stack Developer based in Gurgaon, Haryana.",
     "I'm a results-driven <span class='terminal-highlight'>Node.js & MERN Stack Developer</span> with 2+ years of hands-on experience.",
     "I build scalable REST APIs, real-time apps, and production-grade cloud-integrated solutions.",
-    "Currently working at <span class='terminal-highlight'>Quikkred</span> as a Backend Developer handling financial APIs and production server management.",
+    "Currently at <span class='terminal-highlight'>Quikkred · Fluxus Forge</span>, leading engineering on a multi-tenant lending cloud.",
   ],
   skills: [
     "<span class='terminal-cmd'>// Frontend</span>",
@@ -573,11 +646,11 @@ export const botResponses = {
   ],
   experience: [
     "<span class='terminal-highlight'>Backend Developer</span> @ Quikkred — <span class='terminal-cmd'>February 2026 - Present</span>",
-    "  → Building the collections-partner platform: Fastify APIs + Expo React Native field app",
-    "  → Case management, KYC onboarding, earnings & Razorpay payouts",
-    "  → Geo-based case assignment (pincode → coordinates, road-distance matching)",
-    "  → Real-time Socket.io + Redis, cron jobs & workers, S3 uploads, OCR pipelines",
-    "  → Production ownership: Sentry, Winston, Nginx/PM2, SLA-bound incident debugging",
+    "  → Lead engineer on Fluxus Forge Lending Cloud (multi-tenant LOS/LMS, TypeScript monorepo)",
+    "  → Built Quikkred Collect's backend, ops CRM & app features (10K+ installs, 4.6★)",
+    "  → Multi-tenant lender API: HMAC auth, webhooks with replay, idempotent batches",
+    "  → Credit Health programme & investor ledger in the Quikkred loan-app API",
+    "  → CI/CD, zero-downtime PM2 deploys, Sentry, Swagger & Zod across the APIs",
     "",
     "<span class='terminal-highlight'>Full Stack Developer</span> @ Life Layer Health Solutions — <span class='terminal-cmd'>June 2024 - January 2026</span>",
     "  → Built secure backend APIs with Node.js, Express & JWT auth",
@@ -596,6 +669,12 @@ export const botResponses = {
     "  Score: <span class='terminal-cmd'>82.37%</span> | 2017 - 2020",
   ],
   projects: [
+    "<span class='terminal-highlight'>★ Fluxus Forge Lending Cloud</span> — multi-tenant white-label lending platform (lead engineer)",
+    "   Tech: TypeScript, Fastify, PostgreSQL, Cloudflare Workers, React",
+    "",
+    "<span class='terminal-highlight'>★ Quikkred Collect</span> — field-collections app on Google Play (10K+ installs, 4.6★)",
+    "   Tech: Fastify, MongoDB, React Native (Expo)",
+    "",
     "<span class='terminal-highlight'>1. ShopEase</span> — Full e-commerce platform with Razorpay payments, admin dashboard",
     "   Tech: React, Node.js, Express, MongoDB, Redux, Tailwind",
     "",
