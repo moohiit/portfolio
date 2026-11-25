@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import SectionTitle from "./SectionTitle.jsx";
 import { blogConfig } from "../data.js";
+import { Reveal, SectionHeader } from "./ui.jsx";
 
 // Renders only when real articles exist (dev.to or manualPosts) —
 // no fabricated placeholder posts on a professional portfolio.
@@ -31,22 +31,21 @@ export default function Blog() {
   if (posts.length === 0) return null;
 
   return (
-    <section id="blog">
+    <section id="blog" className="section">
       <div className="container">
-        <SectionTitle>Technical Writing</SectionTitle>
-
+        <SectionHeader eyebrow="Writing" title="Notes from production" />
         <div className="blog-grid">
-          {posts.map((p) => (
-            <a className="blog-card" key={p.title} href={p.url} target="_blank" rel="noopener noreferrer">
-              <i className="fas fa-pen-nib blog-icon"></i>
-              <h3 className="blog-title">{p.title}</h3>
-              <p className="blog-desc">{p.desc}</p>
-              <div className="blog-tags">
+          {posts.map((p, i) => (
+            <Reveal as="a" className="card spot blog-card" key={p.title} href={p.url} target="_blank" rel="noopener noreferrer" delay={i * 0.08}>
+              <span className="mono-label">Article</span>
+              <h3 className="card-title">{p.title}</h3>
+              <p className="card-text">{p.desc}</p>
+              <div className="chip-row">
                 {p.tags.map((t) => (
-                  <span className="tech-item" key={t}>{t}</span>
+                  <span className="chip chip--sm" key={t}>{t}</span>
                 ))}
               </div>
-            </a>
+            </Reveal>
           ))}
         </div>
       </div>

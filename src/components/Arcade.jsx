@@ -34,16 +34,16 @@ export default function Arcade({ open, onClose }) {
     }
 
     function drawGame() {
-      ctx.fillStyle = "#0a192f";
+      ctx.fillStyle = "#0b0616";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.strokeStyle = "rgba(0,255,204,0.05)";
+      ctx.strokeStyle = "rgba(92,242,168,0.06)";
       for (let i = 0; i < cols; i++) {
         ctx.beginPath(); ctx.moveTo(i * grid, 0); ctx.lineTo(i * grid, canvas.height); ctx.stroke();
       }
       for (let i = 0; i < rows; i++) {
         ctx.beginPath(); ctx.moveTo(0, i * grid); ctx.lineTo(canvas.width, i * grid); ctx.stroke();
       }
-      ctx.fillStyle = "#ff006e";
+      ctx.fillStyle = "#9b7bff";
       ctx.shadowColor = "#ff006e";
       ctx.shadowBlur = 10;
       ctx.beginPath();
@@ -51,20 +51,20 @@ export default function Arcade({ open, onClose }) {
       ctx.fill();
       ctx.shadowBlur = 0;
       snake.forEach((seg, i) => {
-        ctx.fillStyle = i === 0 ? "#00ffcc" : "rgba(0,255,204,0.6)";
-        ctx.shadowColor = "#00ffcc";
+        ctx.fillStyle = i === 0 ? "#5cf2a8" : "rgba(92,242,168,0.6)";
+        ctx.shadowColor = "#5cf2a8";
         ctx.shadowBlur = i === 0 ? 8 : 3;
         ctx.fillRect(seg.x * grid + 1, seg.y * grid + 1, grid - 2, grid - 2);
       });
       ctx.shadowBlur = 0;
-      ctx.fillStyle = "#00ffcc";
+      ctx.fillStyle = "#5cf2a8";
       ctx.font = "14px Orbitron";
       ctx.fillText("Score: " + score, 10, 20);
 
       if (gameOver) {
         ctx.fillStyle = "rgba(0,0,0,0.7)";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "#00ffcc";
+        ctx.fillStyle = "#5cf2a8";
         ctx.font = "28px Orbitron";
         ctx.textAlign = "center";
         ctx.fillText("Game Over!", canvas.width / 2, canvas.height / 2 - 15);
@@ -225,7 +225,7 @@ export default function Arcade({ open, onClose }) {
                     <div class="memory-win">
                       <h3>You Win!</h3>
                       <p>Completed in ${moves} moves</p>
-                      <button class="cta-button memory-restart">Play Again</button>
+                      <button class="btn btn-primary memory-restart">Play Again</button>
                     </div>
                   `;
                   container.querySelector(".memory-restart").addEventListener("click", start);
@@ -353,7 +353,7 @@ export default function Arcade({ open, onClose }) {
                 <div><strong>${finalAccuracy}%</strong> Accuracy</div>
                 <div><strong>${Math.round(elapsed)}s</strong> Time</div>
               </div>
-              <button class="cta-button typing-restart">Try Again</button>
+              <button class="btn btn-primary typing-restart">Try Again</button>
             </div>
           `;
           container.querySelector(".typing-restart").addEventListener("click", start);
@@ -379,7 +379,7 @@ export default function Arcade({ open, onClose }) {
 
   return (
     <div className={"arcade-overlay" + (open ? " open" : "")}>
-      <div className="arcade-modal">
+      <div className="arcade-modal" data-lenis-prevent>
         <div className="arcade-header">
           <h2 className="arcade-title"><i className="fas fa-gamepad"></i> Secret Arcade</h2>
           <p className="arcade-hint">You found it! Press <kbd>Ctrl+G</kbd> or click X to close</p>

@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import SectionTitle from "./SectionTitle.jsx";
 import { fetchProfile, GITHUB_USERNAME } from "../lib/github.js";
 
 const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -183,18 +182,14 @@ export default function GitHubActivity() {
   const grid = loading ? buildSkeleton() : heatmap;
 
   return (
-    <section id="github-activity">
-      <div className="container">
-        <SectionTitle number="07">GitHub Activity</SectionTitle>
-
-        <div className="github-heatmap-card">
+        <div className="card github-card">
           <div className="github-profile-row">
-            <img src="https://avatars.githubusercontent.com/u/109367447?v=4" alt="Mohit Patel" className="github-avatar" loading="lazy" />
+            <img src="/images/profile.webp" alt="Mohit Patel" className="github-avatar" loading="lazy" />
             <div className="github-profile-info">
               <h3 className="github-username">{GITHUB_USERNAME}</h3>
-              <p className="github-bio">Full Stack Developer | MERN Stack</p>
+              <p className="github-bio">Backend Developer · Node.js · MERN · GenAI</p>
             </div>
-            <a href={`https://github.com/${GITHUB_USERNAME}`} className="btn-outline github-follow-btn" target="_blank" rel="noopener noreferrer">
+            <a href={`https://github.com/${GITHUB_USERNAME}`} className="btn btn-ghost btn-sm github-follow-btn" target="_blank" rel="noopener noreferrer">
               <i className="fab fa-github"></i> Follow
             </a>
           </div>
@@ -266,7 +261,5 @@ export default function GitHubActivity() {
             </div>
           )}
         </div>
-      </div>
-    </section>
   );
 }

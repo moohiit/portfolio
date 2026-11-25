@@ -4,15 +4,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b0616" />
+  <meta name="color-scheme" content="dark light" />
+  <script>
+    // Apply the saved theme before first paint (no flash of the wrong theme).
+    try {
+      document.documentElement.setAttribute("data-theme", localStorage.getItem("theme") === "light" ? "light" : "dark");
+      document.documentElement.setAttribute("data-fx", localStorage.getItem("fx") === "off" ? "off" : "on");
+    } catch (e) {
+      document.documentElement.setAttribute("data-theme", "dark");
+    }
+  </script>
   <meta name="description"
-    content="Mohit Patel — Backend Developer at Quikkred (Fintech). 2+ years building production Node.js APIs, managing Linux servers (Nginx, PM2, CI/CD), and shipping AI-powered MERN products. Portfolio: AI Playground (7 GenAI modules — RAG, PDF chat, expense tracker, mobile app), ShopEase, SastaGram." />
+    content="Mohit Patel — Backend Developer at Quikkred, leading development of the Fluxus Forge multi-tenant lending cloud. Builds Node.js/Fastify fintech APIs, the backends of two Google Play apps with 10K+ installs (Quikkred Collect, Quikkred), and AI-powered products like AI Playground." />
   <meta name="keywords"
     content="Mohit Patel, Backend Developer, Node.js Developer, MERN Stack Developer, Full Stack Developer, Fintech Developer, DevOps, CI/CD, Nginx, PM2, GitHub Actions, Linux Server, Next.js, React, MongoDB, Gemini, RAG, Vector Search, Expo React Native, AI Playground, Quikkred" />
   <meta name="author" content="Mohit Patel" />
   <meta name="robots" content="index, follow" />
   <meta property="og:title" content="Mohit Patel | Backend Developer — Node.js · MERN · Fintech · DevOps" />
   <meta property="og:description"
-    content="Mohit Patel — Backend Developer at Quikkred (Fintech). Builds production Node.js APIs, CI/CD pipelines, and AI-powered products. Featured: AI Playground — 7 GenAI modules including RAG, PDF chat, NL-to-SQL, expense tracker with Expo mobile app." />
+    content="Backend Developer at Quikkred · Leading development of the Fluxus Forge Lending Cloud. Fintech APIs, multi-tenant lending platforms, and Google Play apps with 10K+ installs." />
   <meta property="og:image" content="https://mohitpatel.org/images/og-card.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -27,9 +38,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&display=swap" />
   <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap"
     rel="stylesheet" />
   <link rel="canonical" href="https://mohitpatel.org/" />
   <script type="application/ld+json">
@@ -40,7 +53,7 @@
       "jobTitle": "Backend Developer | Node.js | MERN Stack | Fintech | DevOps",
       "image": "https://avatars.githubusercontent.com/u/109367447?v=4",
       "description": "Backend Developer at Quikkred (Fintech) with 2+ years building production-grade Node.js APIs, managing Linux servers with Nginx and PM2, CI/CD pipelines via GitHub Actions, and shipping AI-powered MERN products including the AI Playground — a 7-module GenAI platform.",
-      "email": "mailto:mohit.patel.edu@gmail.com",
+      "email": "mailto:mohitpatel.inbox@gmail.com",
       "telephone": "+91 7060993826",
       "address": {
         "@type": "PostalAddress",

@@ -1,243 +1,219 @@
-import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useCallback, useEffect, useState } from "react";
+import { AnimatePresence, MotionConfig, motion, useScroll, useSpring } from "motion/react";
+import Preloader from "./components/Preloader.jsx";
 import Header from "./components/Header.jsx";
 import Hero from "./components/Hero.jsx";
-import Stats from "./components/Stats.jsx";
-import Terminal from "./components/Terminal.jsx";
+import Marquee from "./components/Marquee.jsx";
 import Services from "./components/Services.jsx";
-import Skills from "./components/Skills.jsx";
-import CodingProfiles from "./components/CodingProfiles.jsx";
-import GitHubActivity from "./components/GitHubActivity.jsx";
-import FeaturedRepos from "./components/FeaturedRepos.jsx";
-import CodeShowcase from "./components/CodeShowcase.jsx";
-import Experience from "./components/Experience.jsx";
 import Projects from "./components/Projects.jsx";
+import Experience from "./components/Experience.jsx";
 import Achievements from "./components/Achievements.jsx";
-import Certificates from "./components/Certificates.jsx";
-import Testimonials from "./components/Testimonials.jsx";
+import Skills from "./components/Skills.jsx";
+import OpenSource from "./components/OpenSource.jsx";
 import Education from "./components/Education.jsx";
+import Testimonials from "./components/Testimonials.jsx";
 import Blog from "./components/Blog.jsx";
-import Spotify from "./components/Spotify.jsx";
+import Lab from "./components/Lab.jsx";
 import Contact from "./components/Contact.jsx";
-import Toolbox from "./components/Toolbox.jsx";
-import CaseStudy from "./components/CaseStudy.jsx";
 import Footer from "./components/Footer.jsx";
+import CaseStudy from "./components/CaseStudy.jsx";
+import CommandPalette from "./components/CommandPalette.jsx";
+import Ambient from "./components/Ambient.jsx";
+import { initSmoothScroll, lockScroll, scrollToTarget } from "./lib/scroll.js";
 
 const Arcade = lazy(() => import("./components/Arcade.jsx"));
 
-const REDUCED_MOTION =
-  typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function readTheme() {
+  try {
+    return localStorage.getItem("theme") === "light" ? "light" : "dark";
+  } catch {
+    return "dark";
+  }
+}
+
+// Background effects (aurora drift, beams, animated borders) can be switched
+// off from the command palette; the choice is remembered per browser.
+function readFx() {
+  try {
+    return localStorage.getItem("fx") === "off" ? "off" : "on";
+  } catch {
+    return "on";
+  }
+}
 
 export default function App() {
-  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "dark");
-  const [cursorOn, setCursorOn] = useState(() => localStorage.getItem("customCursor") === "on");
+  const [theme, setTheme] = useState(readTheme);
+  const [fx, setFx] = useState(readFx);
   const [arcadeOpen, setArcadeOpen] = useState(false);
+  const [paletteOpen, setPaletteOpen] = useState(false);
   const [openStudy, setOpenStudy] = useState(null);
-  const [scrollTopVisible, setScrollTopVisible] = useState(false);
-  const progressRef = useRef(null);
-  const cursorRef = useRef(null);
-  const dotRef = useRef(null);
+  const [activeSection, setActiveSection] = useState("");
+  const [showTop, setShowTop] = useState(false);
+
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 30, mass: 0.3 });
+
+  const toggleTheme = useCallback(() => setTheme((t) => (t === "dark" ? "light" : "dark")), []);
+  const toggleFx = useCallback(() => setFx((f) => (f === "on" ? "off" : "on")), []);
+  const closeStudy = useCallback(() => setOpenStudy(null), []);
+  const closePalette = useCallback(() => setPaletteOpen(false), []);
+  const openArcade = useCallback(() => setArcadeOpen(true), []);
 
   useEffect(() => {
-    document.body.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
+    document.documentElement.setAttribute("data-theme", theme);
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", theme === "dark" ? "#0b0616" : "#f7f5fc");
+    try {
+      localStorage.setItem("theme", theme);
+    } catch { /* ignore */ }
   }, [theme]);
 
-  // Custom cursor — opt-in, disabled on touch devices and for reduced-motion users
   useEffect(() => {
-    document.body.classList.toggle("cursor-on", cursorOn && !REDUCED_MOTION);
-    localStorage.setItem("customCursor", cursorOn ? "on" : "off");
-    const show = cursorOn && !REDUCED_MOTION && !("ontouchstart" in window);
-    if (cursorRef.current) cursorRef.current.style.display = show ? "" : "none";
-    if (dotRef.current) dotRef.current.style.display = show ? "" : "none";
-    if (!show) return;
-    let cursorX = 0, cursorY = 0, dotX = 0, dotY = 0;
-    let rafId = null, running = true;
+    document.documentElement.setAttribute("data-fx", fx);
+    try {
+      localStorage.setItem("fx", fx);
+    } catch { /* ignore */ }
+  }, [fx]);
 
-    const onMove = (e) => {
-      cursorX = e.clientX;
-      cursorY = e.clientY;
-      if (!rafId) {
-        rafId = requestAnimationFrame(() => {
-          if (dotRef.current) {
-            dotRef.current.style.left = cursorX + "px";
-            dotRef.current.style.top = cursorY + "px";
-          }
-          rafId = null;
-        });
-      }
-    };
-    document.addEventListener("mousemove", onMove);
+  useEffect(() => initSmoothScroll(), []);
 
-    const animate = () => {
-      if (!running) return;
-      dotX += (cursorX - dotX) * 0.15;
-      dotY += (cursorY - dotY) * 0.15;
-      if (cursorRef.current) {
-        cursorRef.current.style.left = dotX + "px";
-        cursorRef.current.style.top = dotY + "px";
-      }
-      requestAnimationFrame(animate);
-    };
-    animate();
-
-    const hoverTargets =
-      "a, button, .skill-item, .tech-item, .project-card, .suggestion-chip, .code-tab, .social-icon, .arcade-game-btn, .memory-card, input, textarea";
-    const onOver = (e) => {
-      if (e.target.closest(hoverTargets)) {
-        cursorRef.current?.classList.add("cursor-hover");
-        dotRef.current?.classList.add("dot-hover");
-      } else {
-        cursorRef.current?.classList.remove("cursor-hover");
-        dotRef.current?.classList.remove("dot-hover");
-      }
-    };
-    document.addEventListener("mouseover", onOver);
-
-    return () => {
-      running = false;
-      document.removeEventListener("mousemove", onMove);
-      document.removeEventListener("mouseover", onOver);
-    };
-  }, [cursorOn]);
-
-  // Scroll: progress bar, header shrink, active nav, scroll-top visibility
-  useEffect(() => {
-    const onScroll = () => {
-      const scrollY = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      if (progressRef.current) {
-        progressRef.current.style.width = (docHeight > 0 ? (scrollY / docHeight) * 100 : 0) + "%";
-      }
-      const header = document.querySelector("header");
-      if (header) {
-        header.style.padding = scrollY > 100 ? "8px 0" : "12px 0";
-        header.style.boxShadow = scrollY > 100 ? "0 5px 20px rgba(0, 0, 0, 0.1)" : "none";
-      }
-      let current = "";
-      document.querySelectorAll("section[id]").forEach((section) => {
-        if (scrollY >= section.offsetTop - 120) current = section.getAttribute("id");
-      });
-      document.querySelectorAll(".nav-links a[href^='#']").forEach((link) => {
-        link.classList.toggle("active-link", link.getAttribute("href") === "#" + current);
-      });
-      setScrollTopVisible(scrollY > 500);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // Smooth scrolling for hash links
+  // In-page anchors go through Lenis (or native smooth scroll) with the header offset.
   useEffect(() => {
     const onClick = (e) => {
       const anchor = e.target.closest('a[href^="#"]');
-      if (!anchor) return;
-      const target = document.querySelector(anchor.getAttribute("href"));
+      if (!anchor || e.defaultPrevented || e.metaKey || e.ctrlKey) return;
+      const href = anchor.getAttribute("href");
+      if (href === "#top" || href === "#") {
+        e.preventDefault();
+        scrollToTarget(0);
+        return;
+      }
+      const target = document.querySelector(href);
       if (target) {
         e.preventDefault();
-        window.scrollTo({ top: target.offsetTop - 80, behavior: "smooth" });
+        scrollToTarget(target);
       }
     };
     document.addEventListener("click", onClick);
     return () => document.removeEventListener("click", onClick);
   }, []);
 
-  // Reveal-on-scroll animations (re-observe as sections mount)
+  // Cursor spotlight: cards with .spot get --mx/--my for a radial glow.
+  useEffect(() => {
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    const onMove = (e) => {
+      const card = e.target.closest?.(".spot");
+      if (!card) return;
+      const r = card.getBoundingClientRect();
+      card.style.setProperty("--mx", `${e.clientX - r.left}px`);
+      card.style.setProperty("--my", `${e.clientY - r.top}px`);
+    };
+    document.addEventListener("pointermove", onMove, { passive: true });
+    return () => document.removeEventListener("pointermove", onMove);
+  }, []);
+
+  // Active nav link: the section crossing the middle of the viewport.
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("active");
-            if (entry.target.classList.contains("timeline-item")) {
-              entry.target.closest(".timeline")?.classList.add("timeline-active");
-            }
-          }
-        });
+        entries.forEach((entry) => entry.isIntersecting && setActiveSection(entry.target.id));
       },
-      { threshold: 0.1 }
+      { rootMargin: "-45% 0px -50% 0px" }
     );
-    const selector =
-      ".skill-card, .project-card, .timeline-item, .education-card, .service-card, .profile-card, .achievement-card, .testimonial-card, .blog-card, .repo-card";
-    document.querySelectorAll(selector).forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+    document.querySelectorAll("main section[id]").forEach((s) => observer.observe(s));
+    const onScroll = () => setShowTop(window.scrollY > 700);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
-  // Arcade Ctrl+G shortcut
+  // Global shortcuts: Ctrl+G arcade, ⌘K / Ctrl+K command palette.
   useEffect(() => {
     const onKey = (e) => {
-      // e.key is "G" with CapsLock on or Shift held; compare case-insensitively.
-      if (e.ctrlKey && typeof e.key === "string" && e.key.toLowerCase() === "g") {
+      const key = typeof e.key === "string" ? e.key.toLowerCase() : "";
+      if (e.ctrlKey && key === "g") {
         e.preventDefault();
         setArcadeOpen((o) => !o);
+      } else if ((e.metaKey || e.ctrlKey) && key === "k") {
+        e.preventDefault();
+        setPaletteOpen((o) => !o);
+      } else if (e.key === "Escape") {
+        setArcadeOpen(false);
       }
-      if (e.key === "Escape") setArcadeOpen(false);
     };
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
   }, []);
 
+  // Lock page scroll while any overlay is open. Tied to state (not to the
+  // overlays' lifetimes) so it releases immediately, before exit animations end.
+  const overlayOpen = paletteOpen || Boolean(openStudy) || arcadeOpen;
+  useEffect(() => {
+    if (!overlayOpen) return;
+    lockScroll(true);
+    return () => lockScroll(false);
+  }, [overlayOpen]);
+
   return (
-    <>
-      <div className="progress-bar" ref={progressRef}></div>
-      <div className="custom-cursor" ref={cursorRef}></div>
-      <div className="cursor-dot" ref={dotRef}></div>
-      <div className="grid-pattern"></div>
-      <div className="stars"></div>
-      <div className="ambient-blob ambient-blob-1"></div>
-      <div className="vignette"></div>
+    <MotionConfig reducedMotion="user">
+      <Preloader />
+      <motion.div className="scroll-progress" style={{ scaleX: progress }} aria-hidden="true" />
+      <Ambient section={activeSection} />
+      <div className="page-noise" aria-hidden="true"></div>
 
-      <Header
-        theme={theme}
-        onToggleTheme={() => setTheme(theme === "dark" ? "light" : "dark")}
-        cursorOn={cursorOn}
-        onToggleCursor={() => setCursorOn(!cursorOn)}
-      />
-      <Hero />
-      <Stats />
-      <Terminal />
-      <Services />
-      <Experience onOpenCaseStudy={setOpenStudy} />
-      <Projects onOpenCaseStudy={setOpenStudy} />
-      <Skills theme={theme} />
-      <Achievements />
-      <CodingProfiles />
-      <GitHubActivity />
-      <FeaturedRepos />
-      <CodeShowcase />
-      <Certificates />
-      <Education />
-      <Testimonials />
-      <Blog />
-      <Toolbox />
-      <Spotify />
-      <Contact />
+      <a className="skip-link" href="#projects">Skip to content</a>
 
-      <CaseStudy studyKey={openStudy} onClose={() => setOpenStudy(null)} />
+      <Header theme={theme} onToggleTheme={toggleTheme} onOpenPalette={() => setPaletteOpen(true)} active={activeSection} />
+
+      <main id="top">
+        <Hero theme={theme} />
+        <Marquee />
+        <Services />
+        <Projects onOpenCaseStudy={setOpenStudy} />
+        <Experience onOpenCaseStudy={setOpenStudy} />
+        <Achievements />
+        <Skills />
+        <OpenSource />
+        <Education />
+        <Testimonials />
+        <Blog />
+        <Lab onOpenArcade={openArcade} />
+        <Contact />
+      </main>
+
+      <Footer />
+
+      <AnimatePresence>
+        {openStudy && <CaseStudy key={openStudy} studyKey={openStudy} onClose={closeStudy} />}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {paletteOpen && (
+          <CommandPalette
+            onClose={closePalette}
+            theme={theme}
+            onToggleTheme={toggleTheme}
+            fx={fx}
+            onToggleFx={toggleFx}
+            onOpenArcade={openArcade}
+            onOpenCaseStudy={setOpenStudy}
+          />
+        )}
+      </AnimatePresence>
 
       <Suspense fallback={null}>
         {arcadeOpen && <Arcade open={arcadeOpen} onClose={() => setArcadeOpen(false)} />}
       </Suspense>
 
       <button
-        className="arcade-hint-badge"
-        title="Secret Arcade"
-        aria-label="Open secret arcade (Ctrl+G)"
-        onClick={() => setArcadeOpen(true)}
+        className={"to-top" + (showTop ? " is-visible" : "")}
+        aria-label="Back to top"
+        onClick={() => scrollToTarget(0)}
+        tabIndex={showTop ? 0 : -1}
       >
-        <i className="fas fa-gamepad"></i>
-        <span>Ctrl+G</span>
+        <i className="fas fa-arrow-up" aria-hidden="true"></i>
       </button>
-
-      <button
-        className={"scroll-top" + (scrollTopVisible ? " visible" : "")}
-        title="Back to top"
-        aria-label="Scroll back to top"
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      >
-        <i className="fas fa-chevron-up"></i>
-      </button>
-
-      <Footer />
-    </>
+    </MotionConfig>
   );
 }

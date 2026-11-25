@@ -1,152 +1,94 @@
-import { useEffect, useRef, useState } from "react";
-import SectionTitle from "./SectionTitle.jsx";
-import { skillCategories, radarData } from "../data.js";
+import { useState } from "react";
+import { motion } from "motion/react";
+import { experience, projects, skillCategories } from "../data.js";
+import { categoryUsage } from "../lib/skills.js";
+import { EASE, Reveal, SectionHeader } from "./ui.jsx";
 
-function getRadarColors(theme) {
-  if (theme === "light") {
-    return {
-      bg1: "rgba(0, 180, 150, 0.15)", border1: "rgba(0, 180, 150, 0.8)",
-      bg2: "rgba(123, 44, 191, 0.15)", border2: "rgba(123, 44, 191, 0.8)",
-      grid: "rgba(0, 0, 0, 0.1)", labels: "#333333", ticks: "#666666",
-    };
-  }
-  return {
-    bg1: "rgba(0, 255, 204, 0.15)", border1: "rgba(0, 255, 204, 0.8)",
-    bg2: "rgba(123, 44, 191, 0.15)", border2: "rgba(123, 44, 191, 0.8)",
-    grid: "rgba(255, 255, 255, 0.1)", labels: "#caf0f8", ticks: "#caf0f8",
-  };
-}
+const VISIBLE = 8;
 
-function SkillItems({ items }) {
+// Usage is derived from the projects and jobs in data.js (see lib/skills.js),
+// so every number here can be traced back to something on the page.
+const USAGE = Object.fromEntries(skillCategories.map((c) => [c.key, categoryUsage(c)]));
+
+function SkillCard({ cat, delay }) {
   const [expanded, setExpanded] = useState(false);
-  const shown = expanded ? items : items.slice(0, 6);
-  const hidden = items.length - 6;
+  const usage = USAGE[cat.key];
+  const shown = expanded ? usage.items : usage.items.slice(0, VISIBLE);
+  const hidden = usage.items.length - VISIBLE;
+
   return (
-    <div className="skill-items">
-      {shown.map((item) => (
-        <div className="skill-item" key={item}>{item}</div>
-      ))}
-      {hidden > 0 && (
-        <button className="skill-item skill-more" onClick={() => setExpanded(!expanded)}>
-          {expanded ? "show less" : `+${hidden} more`}
-        </button>
-      )}
-    </div>
+    <Reveal className={`card spot skill-card skill-card--${cat.key}`} delay={delay}>
+      <div className="skill-head">
+        <span className="icon-tile"><i className={cat.icon} aria-hidden="true"></i></span>
+        <h3 className="card-title">{cat.title}</h3>
+        <span className="skill-value">
+          {usage.projectCount}/{projects.length} projects
+        </span>
+      </div>
+
+      <div className="usage">
+        <ol className="usage-bar" aria-label={`Used in ${usage.projectCount} of ${projects.length} projects`}>
+          {usage.projectHits.map((p, i) => (
+            <motion.li
+              key={p.title}
+              className={"usage-seg" + (p.used ? " is-used" : "")}
+              title={`${p.title}${p.used ? "" : " (not used)"}`}
+              initial={{ opacity: 0, scaleY: 0.3 }}
+              whileInView={{ opacity: 1, scaleY: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, ease: EASE, delay: delay + 0.15 + i * 0.05 }}
+            >
+              <span className="sr-only">{p.title}: {p.used ? "uses this stack" : "does not"}</span>
+            </motion.li>
+          ))}
+        </ol>
+        <p className="usage-note">
+          {usage.roleCount > 0
+            ? `${usage.roleCount} of ${experience.length} roles · professionally since ${usage.since}`
+            : "Personal projects"}
+        </p>
+      </div>
+
+      <div className="chip-row">
+        {shown.map(({ item, count, projects: p, roles: r }) => (
+          <span
+            className={"chip" + (count > 0 ? " chip--used" : "")}
+            key={item}
+            title={count > 0 ? `Used in ${p} project${p === 1 ? "" : "s"} and ${r} role${r === 1 ? "" : "s"}` : undefined}
+          >
+            {item}
+            {count > 0 && (
+              <>
+                <span className="chip-count" aria-hidden="true">×{count}</span>
+                <span className="sr-only">, used in {count} projects and roles</span>
+              </>
+            )}
+          </span>
+        ))}
+        {hidden > 0 && (
+          <button className="chip chip--btn" onClick={() => setExpanded(!expanded)} aria-expanded={expanded}>
+            {expanded ? "Show less" : `+${hidden} more`}
+          </button>
+        )}
+      </div>
+    </Reveal>
   );
 }
 
-export default function Skills({ theme }) {
-  const canvasRef = useRef(null);
-  const chartRef = useRef(null);
-
-  // Chart.js is loaded on demand to keep it out of the main bundle
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      const { default: Chart } = await import("chart.js/auto");
-      if (cancelled || !canvasRef.current) return;
-      const colors = getRadarColors(theme);
-      chartRef.current = new Chart(canvasRef.current, {
-      type: "radar",
-      data: {
-        labels: radarData.labels,
-        datasets: [
-          {
-            label: "Proficiency",
-            data: radarData.proficiency,
-            backgroundColor: colors.bg1,
-            borderColor: colors.border1,
-            borderWidth: 2,
-            pointBackgroundColor: colors.border1,
-            pointBorderColor: colors.border1,
-            pointRadius: 4,
-          },
-          {
-            label: "Interest",
-            data: radarData.interest,
-            backgroundColor: colors.bg2,
-            borderColor: colors.border2,
-            borderWidth: 2,
-            pointBackgroundColor: colors.border2,
-            pointBorderColor: colors.border2,
-            pointRadius: 4,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: true,
-        scales: {
-          r: {
-            beginAtZero: true,
-            max: 100,
-            ticks: { stepSize: 20, color: colors.ticks, backdropColor: "transparent", font: { size: 10 } },
-            grid: { color: colors.grid },
-            angleLines: { color: colors.grid },
-            pointLabels: { color: colors.labels, font: { size: 12, family: "Poppins" } },
-          },
-        },
-        plugins: {
-          legend: {
-            labels: { color: colors.labels, font: { family: "Poppins" }, usePointStyle: true, pointStyle: "circle" },
-          },
-        },
-        },
-      });
-    })();
-    return () => {
-      cancelled = true;
-      chartRef.current?.destroy();
-    };
-  }, []);
-
-  // Re-color chart on theme change
-  useEffect(() => {
-    const chart = chartRef.current;
-    if (!chart) return;
-    const colors = getRadarColors(theme);
-    chart.data.datasets[0].backgroundColor = colors.bg1;
-    chart.data.datasets[0].borderColor = colors.border1;
-    chart.data.datasets[0].pointBackgroundColor = colors.border1;
-    chart.data.datasets[1].backgroundColor = colors.bg2;
-    chart.data.datasets[1].borderColor = colors.border2;
-    chart.data.datasets[1].pointBackgroundColor = colors.border2;
-    chart.options.scales.r.grid.color = colors.grid;
-    chart.options.scales.r.angleLines.color = colors.grid;
-    chart.options.scales.r.pointLabels.color = colors.labels;
-    chart.options.scales.r.ticks.color = colors.ticks;
-    chart.options.plugins.legend.labels.color = colors.labels;
-    chart.update();
-  }, [theme]);
-
+export default function Skills() {
   return (
-    <section id="skills">
+    <section id="skills" className="section">
       <div className="container">
-        <SectionTitle number="04">Technical Skills</SectionTitle>
-
-        <div className="skills-container">
-          {skillCategories.map((cat) => (
-            <div className={`skill-card skill-card--${cat.key}`} key={cat.key}>
-              <div className="skill-header">
-                <div className="skill-icon"><i className={cat.icon}></i></div>
-                <h3 className="skill-title">{cat.title}</h3>
-              </div>
-              <div className="skill-proficiency">
-                <div className="skill-proficiency-track">
-                  <div className="skill-proficiency-fill" style={{ width: cat.proficiency + "%" }}></div>
-                </div>
-                <span className="skill-proficiency-value">{cat.proficiency}%</span>
-              </div>
-              <SkillItems items={cat.items} />
-            </div>
+        <SectionHeader
+          index="05"
+          eyebrow="Skills"
+          title="The toolkit behind the work"
+          lead="Strongest on the backend and the servers it runs on, with enough frontend and mobile to ship a whole product. Counted from the work on this page, not self-rated: each bar segment is a project, and ×N is how many projects and roles used that tool."
+        />
+        <div className="skills-grid">
+          {skillCategories.map((cat, i) => (
+            <SkillCard cat={cat} key={cat.key} delay={(i % 2) * 0.08} />
           ))}
-        </div>
-
-        <div className="radar-chart-container">
-          <h3 className="radar-title">Skill Proficiency</h3>
-          <div className="radar-wrapper">
-            <canvas ref={canvasRef}></canvas>
-          </div>
         </div>
       </div>
     </section>

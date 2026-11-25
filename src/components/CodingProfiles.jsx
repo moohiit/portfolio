@@ -1,32 +1,18 @@
-import SectionTitle from "./SectionTitle.jsx";
 import { codingProfiles } from "../data.js";
 
 export default function CodingProfiles() {
   return (
-    <section id="coding-profiles">
-      <div className="container">
-        <SectionTitle number="06">Coding Profiles</SectionTitle>
-
-        <div className="profiles-grid">
-          {codingProfiles.map((p) => (
-            <a
-              className={"profile-card " + p.cls}
-              key={p.name}
-              href={p.link}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <div className="profile-card-icon"><i className={p.icon}></i></div>
-              <div className="profile-card-body">
-                <h3 className="profile-card-name">{p.name}</h3>
-                <span className="profile-card-handle">{p.handle}</span>
-                <p className="profile-card-stats">{p.stats}</p>
-              </div>
-              <i className="fas fa-arrow-up-right-from-square profile-card-arrow"></i>
-            </a>
-          ))}
-        </div>
-      </div>
-    </section>
+    <div className="profiles-row" id="coding-profiles">
+      {codingProfiles.map((p) => (
+        <a className="card spot profile-link" key={p.name} href={p.link} target="_blank" rel="noopener noreferrer">
+          <span className="icon-tile icon-tile--sm"><i className={p.icon} aria-hidden="true"></i></span>
+          <span className="profile-text">
+            <span className="profile-name">{p.name}</span>
+            <span className="profile-handle">{p.handle}</span>
+          </span>
+          <i className="fas fa-arrow-up-right-from-square profile-arrow" aria-hidden="true"></i>
+        </a>
+      ))}
+    </div>
   );
 }

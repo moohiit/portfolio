@@ -1,28 +1,27 @@
-import SectionTitle from "./SectionTitle.jsx";
 import { achievements } from "../data.js";
+import { Reveal, SectionHeader } from "./ui.jsx";
 
 export default function Achievements() {
   return (
-    <section id="achievements">
+    <section id="achievements" className="section">
       <div className="container">
-        <SectionTitle number="05">Achievements & Milestones</SectionTitle>
-
-        <div className="achievements-grid">
-          {achievements.map((a) => (
-            <div className="achievement-card" key={a.title}>
+        <SectionHeader index="04" eyebrow="Impact" title="Milestones worth measuring" />
+        <div className="impact-grid">
+          {achievements.map((a, i) => (
+            <Reveal className="card spot impact-card" key={a.title} delay={i * 0.08}>
               {a.image ? (
-                <img src={a.image} alt={a.title} className="achievement-img" loading="lazy" />
+                <img src={a.image} alt="" className="impact-img" loading="lazy" width="48" height="48" />
               ) : (
-                <div className="achievement-icon"><i className={a.icon}></i></div>
+                <span className="icon-tile"><i className={a.icon} aria-hidden="true"></i></span>
               )}
-              <h3 className="achievement-title">{a.title}</h3>
-              <p className="achievement-desc">{a.desc}</p>
+              <h3 className="card-title">{a.title}</h3>
+              <p className="card-text">{a.desc}</p>
               {a.link && (
-                <a href={a.link} className="achievement-link" target="_blank" rel="noopener noreferrer">
-                  View <i className="fas fa-arrow-right"></i>
+                <a href={a.link} className="text-link" target="_blank" rel="noopener noreferrer">
+                  View <i className="fas fa-arrow-right" aria-hidden="true"></i>
                 </a>
               )}
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>

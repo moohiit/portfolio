@@ -6,29 +6,30 @@ Built as a fully static, serverless React app: no backend server, deployable to 
 
 ## Sections
 
-1. **Hero / About** — typewriter roles, social links, animated stats (2+ yrs experience, 10+ projects, 4+ live products, 5 certifications)
-2. **Know Me Better** — interactive terminal chatbot (`whoami`, `skills`, `experience`, `help`…)
-3. **What I Do** — full-stack apps, AI integrations, mobile apps, API design & DevOps
-4. **Work Experience** — Quikkred (Backend Developer, current) · Life Layer Health Solutions · Ducat Academy
-5. **Featured Projects** — AI Playground, Splitzy (AI expense tracker on Google Play), ShopEase, PrepAI, SastaGram, Watchman — with architecture notes per project
-6. **Technical Skills** — categorized skill cards with proficiency bars + Chart.js radar
-7. **Achievements** — Splitzy on Play Store, live products, 10x API performance, certifications
-8. **Coding Profiles** — GitHub, LeetCode, GeeksforGeeks, Docker Hub, LinkedIn (`moohiit`)
-9. **GitHub Activity** — live stats + contribution heatmap (GitHub API)
-10. **Open Source & Repositories** — top repos fetched live from the GitHub API
-11. **Code Showcase** — auto-typing code snippets (React, Express, MongoDB, Socket.io)
-12. **Certificates / Education** — certificate slider; MCA (AKTU) & B.Sc (Invertis)
-13. **Contact** — Web3Forms-powered form, email/phone/WhatsApp
-14. **Extras** — dark/light theme, custom cursor, Spotify recently-played, secret arcade (**Ctrl+G**: Snake, Memory Match, Typing Test), GoatCounter visitor & resume-download counters
+1. **Hero** — WebGL shader background over a perspective grid floor, display-type name reveal, typewriter roles, and a "live console" card (experience stats, what's being built now, and live reachability and latency for the products, probed from the visitor's browser)
+2. **What I Do** — full-stack apps, AI integrations, mobile apps, API design & DevOps
+3. **Selected Work** — Fluxus Forge and AI Playground (featured), Quikkred Collect, the Quikkred API, Splitzy, ShopEase, PrepAI, SastaGram and Watchman, with category filters and build-story case studies that include an animated request-flow diagram
+4. **Experience** — Quikkred (Backend Developer, current) · Life Layer Health Solutions · Ducat Academy, on a scroll-drawn timeline with impact numbers per role
+5. **Impact** — Splitzy on Play Store, live products, 10x API performance, certifications
+6. **Skills** — skill cards with usage counted from the projects and jobs on the page (no self-rated percentages)
+7. **Open Source** — GitHub stats, contribution heatmap, top repositories (live from the GitHub API) and coding profiles
+8. **Credentials** — MCA (AKTU) & B.Sc (Invertis), certificate gallery
+9. **Lab** — terminal chatbot, a signed-API playground (HMAC signing, replay, tampering and idempotency keys against an in-browser mock server), auto-typing code showcase, toolbox, Spotify recently-played, and the secret arcade (**Ctrl+G**: Snake, Memory Match, Typing Test)
+10. **Contact** — Web3Forms-powered form, copy-to-clipboard email, phone/WhatsApp/LinkedIn
 
-Testimonials and Technical Writing sections exist in the code but stay hidden until real recommendations / published articles are added in `src/data.js`.
+Site-wide: **⌘K / Ctrl+K command palette**, dark/light theme, an ambient background (drifting aurora that re-tints per section, a tech grid with a cursor spotlight and light pulses, switchable off from the palette), section titles that decode from random glyphs, smooth scrolling, scroll progress bar, GoatCounter visitor & resume-download counters.
+
+Testimonials and Technical Writing sections exist in the code but stay hidden until real recommendations / published articles are added in `src/data.js`. Ready-to-publish dev.to drafts and a recommendation-request template are in `drafts/` (not deployed).
 
 ## Tech Stack
 
 - **React 18** + **Vite 5** — static build, no SSR needed
-- **Chart.js 4** — skills radar
-- Custom CSS design system (`src/styles.css`) + section styles (`src/extra.css`) — no CSS framework
-- Public APIs: GitHub (stats, repos, events), dev.to (articles), GoatCounter (analytics), Web3Forms (contact)
+- **Motion** (Framer Motion) — scroll reveals, split-text headings, layout animations, modals
+- **Lenis** — smooth scrolling
+- **OGL** — the hero's WebGL shader (lazy-loaded)
+- Token-based CSS design system in `src/styles/theme.css` — no CSS framework; light mode only redefines tokens
+- Fonts: General Sans (Fontshare), Inter and JetBrains Mono (Google Fonts)
+- Public APIs: GitHub (stats, repos), github-contributions-api (heatmap), dev.to (articles), GoatCounter (analytics), Web3Forms (contact)
 
 ## Development
 
@@ -50,10 +51,10 @@ npm run preview   # preview the production build
 │   └── images/
 ├── src/
 │   ├── data.js         # ALL site content — edit this to update the site
-│   ├── App.jsx         # section composition + global effects (cursor, scroll, theme)
+│   ├── App.jsx         # section composition + global effects (scroll, spotlight, theme, shortcuts)
 │   ├── components/     # one component per section
-│   ├── styles.css      # main design system
-│   └── extra.css       # styles for newer sections
+│   ├── lib/            # GitHub API client, smooth scroll, live status probes, skill usage
+│   └── styles/theme.css # design tokens + all component styles
 ```
 
 ## Deployment
@@ -79,4 +80,4 @@ MIT
 - Website: [mohitpatel.org](https://mohitpatel.org/)
 - GitHub: [@moohiit](https://github.com/moohiit)
 - LinkedIn: [Mohit Patel](https://www.linkedin.com/in/moohiitpatel/)
-- Email: mohit.patel.edu@gmail.com
+- Email: mohitpatel.inbox@gmail.com
