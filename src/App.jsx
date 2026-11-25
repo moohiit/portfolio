@@ -18,6 +18,7 @@ import Contact from "./components/Contact.jsx";
 import Footer from "./components/Footer.jsx";
 import CaseStudy from "./components/CaseStudy.jsx";
 import CommandPalette from "./components/CommandPalette.jsx";
+import Ambient from "./components/Ambient.jsx";
 import { initSmoothScroll, lockScroll, scrollToTarget } from "./lib/scroll.js";
 
 const Arcade = lazy(() => import("./components/Arcade.jsx"));
@@ -30,8 +31,19 @@ function readTheme() {
   }
 }
 
+// Background effects (aurora drift, beams, animated borders) can be switched
+// off from the command palette; the choice is remembered per browser.
+function readFx() {
+  try {
+    return localStorage.getItem("fx") === "off" ? "off" : "on";
+  } catch {
+    return "on";
+  }
+}
+
 export default function App() {
   const [theme, setTheme] = useState(readTheme);
+  const [fx, setFx] = useState(readFx);
   const [arcadeOpen, setArcadeOpen] = useState(false);
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [openStudy, setOpenStudy] = useState(null);
@@ -42,6 +54,7 @@ export default function App() {
   const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 30, mass: 0.3 });
 
   const toggleTheme = useCallback(() => setTheme((t) => (t === "dark" ? "light" : "dark")), []);
+  const toggleFx = useCallback(() => setFx((f) => (f === "on" ? "off" : "on")), []);
   const closeStudy = useCallback(() => setOpenStudy(null), []);
   const closePalette = useCallback(() => setPaletteOpen(false), []);
   const openArcade = useCallback(() => setArcadeOpen(true), []);
@@ -53,6 +66,13 @@ export default function App() {
       localStorage.setItem("theme", theme);
     } catch { /* ignore */ }
   }, [theme]);
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-fx", fx);
+    try {
+      localStorage.setItem("fx", fx);
+    } catch { /* ignore */ }
+  }, [fx]);
 
   useEffect(() => initSmoothScroll(), []);
 
@@ -139,6 +159,7 @@ export default function App() {
     <MotionConfig reducedMotion="user">
       <Preloader />
       <motion.div className="scroll-progress" style={{ scaleX: progress }} aria-hidden="true" />
+      <Ambient section={activeSection} />
       <div className="page-noise" aria-hidden="true"></div>
 
       <a className="skip-link" href="#projects">Skip to content</a>
@@ -173,6 +194,8 @@ export default function App() {
             onClose={closePalette}
             theme={theme}
             onToggleTheme={toggleTheme}
+            fx={fx}
+            onToggleFx={toggleFx}
             onOpenArcade={openArcade}
             onOpenCaseStudy={setOpenStudy}
           />

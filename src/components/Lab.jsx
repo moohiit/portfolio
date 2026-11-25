@@ -1,15 +1,20 @@
-// The fun stuff, moved off the main flow: terminal bot, code showcase,
-// toolbox, Spotify and the arcade launcher, behind tabs.
-import { useState } from "react";
+// The fun stuff, moved off the main flow: terminal bot, the signed-request
+// API demo, code showcase, toolbox, Spotify and the arcade launcher, behind tabs.
+import { lazy, Suspense, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import Terminal from "./Terminal.jsx";
 import CodeShowcase from "./CodeShowcase.jsx";
 import Toolbox from "./Toolbox.jsx";
 import Spotify from "./Spotify.jsx";
 import { EASE, Magnetic, Reveal, SectionHeader } from "./ui.jsx";
+import { scrollToTarget } from "../lib/scroll.js";
+
+// Loaded when its tab is first opened.
+const ApiPlayground = lazy(() => import("./ApiPlayground.jsx"));
 
 const TABS = [
   { key: "terminal", label: "Terminal", icon: "fas fa-terminal", Panel: Terminal },
+  { key: "api", label: "Signed API", icon: "fas fa-signature", Panel: ApiPlayground },
   { key: "code", label: "Code", icon: "fas fa-code", Panel: CodeShowcase },
   { key: "uses", label: "Uses", icon: "fas fa-toolbox", Panel: Toolbox },
   { key: "music", label: "Music", icon: "fab fa-spotify", Panel: Spotify },
@@ -19,6 +24,17 @@ export default function Lab({ onOpenArcade }) {
   const [tab, setTab] = useState("terminal");
   const { Panel } = TABS.find((t) => t.key === tab);
 
+  // The command palette can open a tab directly ("Try the signed API demo").
+  useEffect(() => {
+    const onOpen = (e) => {
+      if (!TABS.some((t) => t.key === e.detail)) return;
+      setTab(e.detail);
+      scrollToTarget("#lab");
+    };
+    window.addEventListener("lab:open", onOpen);
+    return () => window.removeEventListener("lab:open", onOpen);
+  }, []);
+
   return (
     <section id="lab" className="section">
       <div className="container">
@@ -26,7 +42,7 @@ export default function Lab({ onOpenArcade }) {
           index="08"
           eyebrow="Lab"
           title="Things I build for fun"
-          lead="Ask the terminal bot about me, watch some code type itself, or find the arcade."
+          lead="Ask the terminal bot about me, sign and replay a request against a mock API, watch some code type itself, or find the arcade."
         />
         <div className="lab-grid">
           <Reveal className="card lab-main">
@@ -55,7 +71,9 @@ export default function Lab({ onOpenArcade }) {
                   exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.3, ease: EASE }}
                 >
-                  <Panel />
+                  <Suspense fallback={<div className="lab-loading" aria-hidden="true"></div>}>
+                    <Panel />
+                  </Suspense>
                 </motion.div>
               </AnimatePresence>
             </div>

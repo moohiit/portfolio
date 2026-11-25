@@ -1,7 +1,10 @@
-import { useEffect, useRef } from "react";
+import { lazy, Suspense, useEffect, useRef } from "react";
 import { motion } from "motion/react";
 import { caseStudies } from "../data.js";
 import { EASE } from "./ui.jsx";
+
+// Only needed once a build story is opened, so it ships as its own chunk.
+const FlowDiagram = lazy(() => import("./FlowDiagram.jsx"));
 
 // Rendered inside <AnimatePresence> by App, so it animates in and out.
 export default function CaseStudy({ studyKey, onClose }) {
@@ -59,6 +62,12 @@ export default function CaseStudy({ studyKey, onClose }) {
           >
             <h3><span className="casestudy-num">{String(i + 1).padStart(2, "0")}</span>{s.heading}</h3>
             <p>{s.body}</p>
+            {/* The request-flow diagram sits under the Architecture section. */}
+            {study.diagram && i === (study.diagram.after ?? 1) && (
+              <Suspense fallback={<div className="flow flow--loading" aria-hidden="true"></div>}>
+                <FlowDiagram diagram={study.diagram} />
+              </Suspense>
+            )}
           </motion.div>
         ))}
 

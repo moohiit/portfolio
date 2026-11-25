@@ -152,10 +152,14 @@ export default function HeroCanvas({ theme }) {
       io.observe(wrap);
 
       let rafId;
+      let drawn = false;
       const start = performance.now();
       const loop = (now) => {
         rafId = requestAnimationFrame(loop);
         if (!visible || document.hidden) return;
+        // data-fx="off" (command palette) freezes the shader on its last frame.
+        if (drawn && document.documentElement.dataset.fx === "off") return;
+        drawn = true;
         mouse[0] += (target[0] - mouse[0]) * 0.04;
         mouse[1] += (target[1] - mouse[1]) * 0.04;
         program.uniforms.uMouse.value = mouse;

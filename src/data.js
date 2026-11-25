@@ -16,6 +16,24 @@ export const currentlyBuilding = {
   link: "https://fluxusforge.in",
 };
 
+// ---- Live status strip in the hero console ----
+// The browser probes each site directly (the portfolio has no backend), so it
+// shows "reachable from your browser right now" and the round-trip time.
+// For real 30-day uptime, create free UptimeRobot monitors for these URLs and
+// paste the account's *read-only* API key here (it is safe to publish).
+export const statusConfig = {
+  uptimeRobotKey: "",
+  refreshSeconds: 60,
+  services: [
+    // quikkred.in sends Cross-Origin-Resource-Policy: same-origin on its pages,
+    // which blocks a cross-site probe; its favicon allows cross-origin loads.
+    { name: "Quikkred", url: "https://quikkred.in", probe: "https://quikkred.in/favicon.ico" },
+    { name: "Fluxus Forge", url: "https://fluxusforge.in" },
+    { name: "Developer portal", url: "https://developers.fluxusforge.in" },
+    { name: "AI Playground", url: "https://aiplayground.mohitpatel.org" },
+  ],
+};
+
 export const stats = [
   { icon: "fas fa-briefcase", target: 2, label: "Years Experience" },
   { icon: "fas fa-project-diagram", target: 10, label: "Projects Completed" },
@@ -26,11 +44,10 @@ export const stats = [
 export const skillCategories = [
   {
     key: "frontend",
-    title: "Frontend",
+    title: "Frontend & Mobile",
     icon: "fab fa-react",
-    proficiency: 88,
     items: [
-      "React.js", "HTML5", "CSS3", "JavaScript (ES6+)", "TypeScript", "Redux",
+      "React.js", "Next.js", "React Native (Expo)", "HTML5", "CSS3", "JavaScript (ES6+)", "TypeScript", "Redux",
       "Tailwind CSS", "Bootstrap", "Material UI", "Axios", "React Hook Form",
       "Responsive Design", "UI/UX Best Practices",
     ],
@@ -39,7 +56,6 @@ export const skillCategories = [
     key: "backend",
     title: "Backend",
     icon: "fas fa-server",
-    proficiency: 92,
     items: [
       "Node.js", "TypeScript", "Fastify", "Express.js", "PostgreSQL", "MongoDB",
       "Redis", "BullMQ", "Kysely", "Mongoose", "MySQL", "RESTful APIs", "Webhooks & HMAC signing",
@@ -50,7 +66,6 @@ export const skillCategories = [
     key: "devops",
     title: "DevOps & Server",
     icon: "fas fa-terminal",
-    proficiency: 80,
     items: [
       "Nginx (Reverse Proxy)", "PM2", "Linux (Ubuntu)", "GitHub Actions", "Docker",
       "Cloudflare Workers & Pages", "CI/CD Pipelines", "Self-hosted CI runners",
@@ -61,7 +76,6 @@ export const skillCategories = [
     key: "tools",
     title: "Cloud & Tools",
     icon: "fas fa-tools",
-    proficiency: 78,
     items: [
       "Git & GitHub", "AWS S3", "Google Cloud Platform", "RazorPay",
       "Google Maps API", "Docusaurus", "Testing (Vitest, Jest)", "Playwright", "pnpm + Turborepo", "Postman", "VS Code",
@@ -84,6 +98,13 @@ export const experience = [
     tag: "Fintech",
     tagClass: "company-tag--fintech",
     startDate: "2026-02-01",
+    // Impact numbers: only figures already stated elsewhere on the site.
+    impact: [
+      { value: 10, suffix: "K+", label: "installs, Quikkred Collect" },
+      { value: 4.6, suffix: "★", label: "rating on Google Play" },
+      { value: 650, suffix: "+", label: "commits in 8 weeks, Fluxus Forge" },
+      { value: 37, label: "endpoints in Credit Health" },
+    ],
     storyKey: "fluxusForge",
     description:
       "Backend engineer across a lending group's product stack: the API behind the Quikkred personal-loan app, the Quikkred Collect field-collections platform, and now lead engineer and top contributor on the Fluxus Forge Lending Cloud, which is in active development.",
@@ -104,6 +125,10 @@ export const experience = [
     tag: "Health-tech",
     tagClass: "company-tag--healthtech",
     duration: "1 yr 8 mos",
+    impact: [
+      { value: 10, suffix: "x", label: "faster hot endpoints with Redis" },
+      { prefix: "~", value: 70, suffix: "%", label: "fewer database queries" },
+    ],
     description:
       "Developed and maintained full-stack web applications using modern technologies in a health-tech product environment.",
     details: [
@@ -125,6 +150,10 @@ export const experience = [
     tag: "Training",
     tagClass: "company-tag--internship",
     duration: "6 months",
+    impact: [
+      { text: "35–40%", label: "fewer unauthorized entries" },
+      { value: 10, label: "departments consolidated" },
+    ],
     description: "Developed a comprehensive digital system for college security.",
     details: [
       { icon: "fas fa-shield-alt", text: "Gained hands-on experience in developing entry-exit monitoring system" },
@@ -140,6 +169,7 @@ export const experience = [
 export const projects = [
   {
     title: "Fluxus Forge Lending Cloud",
+    categories: ["Fintech"],
     badge: { text: "Work · Lead engineer", cls: "project-badge--featured" },
     featured: true,
     storyKey: "fluxusForge",
@@ -157,6 +187,7 @@ export const projects = [
   },
   {
     title: "Quikkred Collect — Field Collections",
+    categories: ["Fintech", "Mobile"],
     badge: { text: "Work · Mobile", cls: "project-badge--mobile" },
     storyKey: "multiTenant",
     image: "/images/quikkred-collect.webp",
@@ -171,6 +202,7 @@ export const projects = [
   },
   {
     title: "Quikkred — Personal Loan App (API)",
+    categories: ["Fintech"],
     badge: { text: "Work · Backend", cls: "project-badge--mobile" },
     image: "/images/quikkred-app.webp",
     description:
@@ -183,6 +215,7 @@ export const projects = [
   },
   {
     title: "AI Playground — GenAI Hub",
+    categories: ["GenAI", "Full-stack"],
     badge: { text: "Featured", cls: "project-badge--featured" },
     featured: true,
     storyKey: "aiPlayground",
@@ -199,6 +232,7 @@ export const projects = [
   },
   {
     title: "Splitzy — AI Expense Tracker",
+    categories: ["GenAI", "Mobile"],
     badge: { text: "Mobile", cls: "project-badge--mobile" },
     image: "/images/splitzy-feature.webp",
     description:
@@ -213,6 +247,7 @@ export const projects = [
   },
   {
     title: "ShopEase E-commerce Website",
+    categories: ["Full-stack"],
     image: "/images/ShopEase.webp",
     description:
       "An e-commerce platform where users, sellers, and admins can buy, sell, and manage users and products. Admin can manage users, products, categories, and other data. Includes all features for sellers and buyers.",
@@ -226,6 +261,7 @@ export const projects = [
   },
   {
     title: "AI Interview Prep Platform",
+    categories: ["GenAI", "Full-stack"],
     image: "/images/PrepAi.webp",
     description:
       "AI-powered platform that generates interview questions and provides real-time feedback to help candidates prepare effectively.",
@@ -238,6 +274,7 @@ export const projects = [
   },
   {
     title: "Social Media & Messaging Platform",
+    categories: ["Full-stack"],
     image: "/images/sastagram.webp",
     description:
       "A feature-rich social media platform with real-time messaging, posts, likes, comments, and follow functionality.",
@@ -250,6 +287,7 @@ export const projects = [
   },
   {
     title: "Watchman System (WMS)",
+    categories: ["Full-stack"],
     image: "/images/watchman.webp",
     description:
       "Visitor and student tracking system for educational institutions to enhance campus security.",
@@ -420,6 +458,27 @@ export const caseStudies = {
   aiPlayground: {
     title: "Building the AI Playground",
     subtitle: "7 GenAI modules, one platform, $0 infrastructure budget",
+    // Animated request-flow diagram shown after the Architecture section.
+    // Nodes sit on a 4-column x 3-row grid; each step moves a packet along one
+    // edge. fromSide/toSide (l, r, t, b) override the automatic connection sides.
+    diagram: {
+      title: "A PDF chat question, end to end",
+      nodes: [
+        { id: "client", label: "Web + Expo app", sub: "one service layer", col: 0, row: 1 },
+        { id: "api", label: "Next.js API route", sub: "JWT · Zod", col: 1, row: 1 },
+        { id: "vector", label: "Atlas Vector Search", sub: "chunks + page numbers", col: 2, row: 0 },
+        { id: "queue", label: "Rate-limit queue", sub: "free-tier budget", col: 2, row: 2 },
+        { id: "gemini", label: "Gemini 2.5", sub: "flash · flash-lite", col: 3, row: 1 },
+      ],
+      steps: [
+        { from: "client", to: "api", text: "The web app and the Expo mobile app call the same Next.js API routes. JWT auth and Zod validation sit at the boundary." },
+        { from: "api", to: "vector", fromSide: "t", toSide: "l", text: "The question is matched against the PDF's chunks in MongoDB Atlas Vector Search. Page numbers are stored next to each chunk." },
+        { from: "api", to: "queue", fromSide: "b", toSide: "l", text: "The prompt and the retrieved chunks go into a queue that keeps calls inside Gemini's free-tier rate limits." },
+        { from: "queue", to: "gemini", fromSide: "r", toSide: "b", text: "Gemini writes the answer, using flash-lite where thinking tokens would break the budget." },
+        { from: "gemini", to: "api", text: "The answer streams back to the API route as it is generated." },
+        { from: "api", to: "client", text: "The client renders it token by token, with page-level citations." },
+      ],
+    },
     sections: [
     {
       heading: "The problem",
@@ -447,6 +506,24 @@ export const caseStudies = {
   fluxusForge: {
     title: "Fluxus Forge Lending Cloud",
     subtitle: "Lead engineer on a multi-tenant, white-label lending platform",
+    diagram: {
+      title: "One request, one tenant",
+      nodes: [
+        { id: "control", label: "Control plane", sub: "signup · provisioning", col: 1, row: 0 },
+        { id: "client", label: "Borrower or staff", sub: "lender-a.example", col: 0, row: 1 },
+        { id: "edge", label: "Cloudflare Worker", sub: "host → tenant", col: 1, row: 1 },
+        { id: "kernel", label: "Fastify kernel", sub: "Zod · auth · idempotency", col: 2, row: 1 },
+        { id: "db", label: "Tenant databases", sub: "Postgres · Mongo · Redis", col: 3, row: 1 },
+        { id: "outbox", label: "Outbox → events", sub: "hash-chained audit log", col: 2, row: 2 },
+      ],
+      steps: [
+        { from: "control", to: "edge", text: "A lender signs up. The control plane provisions its databases and registers its domain for edge routing." },
+        { from: "client", to: "edge", text: "A borrower opens the lender's site. The request lands on a Cloudflare Worker." },
+        { from: "edge", to: "kernel", text: "The Worker maps the host to its tenant and forwards the request with the tenant attached." },
+        { from: "kernel", to: "db", text: "The shared Fastify kernel validates with Zod and checks the session, the route's capability and the idempotency key. Only one package may open a database, so the query can only reach this lender's own databases." },
+        { from: "kernel", to: "outbox", text: "Writes go through an outbox that turns them into events. The audit log is hash-chained, and money is always Decimal." },
+      ],
+    },
     sections: [
       {
         heading: "The problem",
@@ -474,6 +551,25 @@ export const caseStudies = {
   multiTenant: {
     title: "Quikkred Collect & the Lender API",
     subtitle: "Field collections, opened up to external lenders through a signed API",
+    diagram: {
+      title: "A case, from lender to field and back",
+      nodes: [
+        { id: "lender", label: "Lender system", sub: "push · pull · CSV", col: 0, row: 1 },
+        { id: "api", label: "Lender API", sub: "HMAC · idempotency", col: 1, row: 1 },
+        { id: "cases", label: "Case store", sub: "scoped per organisation", col: 2, row: 1 },
+        { id: "partner", label: "Partner app", sub: "road-distance feed", col: 3, row: 1 },
+        { id: "events", label: "Event store", sub: "durable log", col: 3, row: 2 },
+        { id: "webhooks", label: "Webhook outbox", sub: "retries · DLQ · replay", col: 1.5, row: 2 },
+      ],
+      steps: [
+        { from: "lender", to: "api", text: "A lender sends cases by push, pull or CSV ingest. Every request is HMAC-signed." },
+        { from: "api", to: "cases", text: "Imports run as idempotent batches, so re-sending a file can't double-create cases. Every case is scoped to its organisation." },
+        { from: "cases", to: "partner", text: "Nearby field partners see the case, matched by real road distance, with pincode geocoding keeping coordinates accurate." },
+        { from: "partner", to: "events", text: "The partner visits the borrower and collects. The update lands in a durable event store." },
+        { from: "events", to: "webhooks", text: "An outbox delivers it as a webhook, with a delivery log, retries and a dead-letter queue." },
+        { from: "webhooks", to: "lender", fromSide: "l", toSide: "b", text: "The lender gets the update, and can replay any delivery or read a poll feed instead." },
+      ],
+    },
     sections: [
       {
         heading: "The problem",

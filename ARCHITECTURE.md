@@ -28,6 +28,7 @@ This portfolio is a deliberately **serverless static site** — there is no back
 
 - **GitHub REST API** — profile stats, a contribution heatmap built from public events, and repository cards (sorted by stars, forks excluded). Each fetch has a timeout and a graceful fallback state, so API rate limits never break the page.
 - **dev.to API** — the Technical Writing section renders only when published articles exist; no placeholder content.
+- **Live status** (`lib/status.js`) — the hero console probes each product with a `no-cors` HEAD request from the visitor's browser: it resolves for any HTTP answer and fails only when the host is unreachable, so the console claims "reachable from your browser" plus a round-trip time, never uptime it can't see. Two requests per check (the faster one is shown, so DNS/TLS setup doesn't count), one retry before a site is shown as down, re-checked every 60 s while on screen. Sites that send `Cross-Origin-Resource-Policy: same-origin` (quikkred.in) are probed through a file they serve cross-origin (the favicon). Adding an UptimeRobot read-only key to `statusConfig` in `data.js` adds 30-day uptime.
 - **GoatCounter** — privacy-friendly visitor and resume-download counters, fetched as JSON.
 - **Web3Forms** — the contact form posts directly to their API; no form backend.
 
@@ -35,12 +36,18 @@ This portfolio is a deliberately **serverless static site** — there is no back
 
 Two sections (Testimonials, Technical Writing) are fully built but render `null` until real data exists in `data.js`. The site never shows fabricated quotes or fake article cards.
 
+- Skills show usage, not self-ratings: `lib/skills.js` counts how many projects and roles in `data.js` list each skill (by tech chip, or for a few prose-only skills such as HMAC/webhooks and outbox, by a word match in the descriptions and build stories).
+- Timeline impact numbers repeat only figures already stated elsewhere on the site. Add `impact` entries to a job in `data.js` to show more.
+- The Lab's signed-API demo says it is a simplified, in-browser mock; nothing is sent over the network.
+
 ## Performance & accessibility
 
-- The WebGL hero (OGL) and the arcade mini-games are code-split via dynamic import / `React.lazy` — they load only when needed.
+- The WebGL hero (OGL), the arcade mini-games, the build-story flow diagram and the Lab's API playground are code-split via dynamic import / `React.lazy` — they load only when needed.
 - The hero shader renders at reduced resolution, pauses when off screen or in a background tab, and is skipped for reduced-motion visitors (a CSS gradient stands in).
+- The ambient background (`Ambient.jsx`) animates only `transform`/`opacity`, so it stays on the compositor; the animated card borders are SVG stroke dashes on their own layer, so a frame re-rasters a thin line, not the card under it. Phones get a static aurora (no beams, no spotlight) so the glass cards are not re-blurred every frame. Measured at 59-60 fps on an integrated Intel UHD GPU at 1440×900.
+- Visitors can switch the background motion off from the command palette (`data-fx="off"`, remembered per browser); the hero shader then freezes on its last frame.
 - The first-visit intro counter is under one second, renders over an already-loaded page, and is skipped on repeat visits.
-- `prefers-reduced-motion` disables animations globally: Motion's `reducedMotion="user"`, no Lenis, no shader, no intro.
+- `prefers-reduced-motion` disables animations globally: Motion's `reducedMotion="user"`, no Lenis, no shader, no intro, no background beams or grid floor, no heading scramble, and build-story diagrams that step by hand instead of auto-playing.
 - Below-the-fold images use `loading="lazy"`.
 
 ## Deploy

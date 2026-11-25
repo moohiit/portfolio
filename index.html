@@ -10,6 +10,7 @@
     // Apply the saved theme before first paint (no flash of the wrong theme).
     try {
       document.documentElement.setAttribute("data-theme", localStorage.getItem("theme") === "light" ? "light" : "dark");
+      document.documentElement.setAttribute("data-fx", localStorage.getItem("fx") === "off" ? "off" : "on");
     } catch (e) {
       document.documentElement.setAttribute("data-theme", "dark");
     }

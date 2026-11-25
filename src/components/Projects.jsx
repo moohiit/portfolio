@@ -1,7 +1,16 @@
+import { useState } from "react";
+import { AnimatePresence } from "motion/react";
 import { projects } from "../data.js";
-import { Reveal, SectionHeader } from "./ui.jsx";
+import { BeamBorder, Reveal, SectionHeader } from "./ui.jsx";
 
 const MAX_TECH = 6;
+
+// Filter chips, built from the categories in data.js, in first-seen order.
+const FILTERS = ["All", ...new Set(projects.flatMap((p) => p.categories || []))].map((name) => ({
+  name,
+  count: name === "All" ? projects.length : projects.filter((p) => p.categories?.includes(name)).length,
+}));
+const EXIT = { opacity: 0, scale: 0.97, transition: { duration: 0.2 } };
 
 function hostOf(p) {
   return (p.demo || p.playStore || p.site || "").replace(/^https?:\/\//, "").replace(/\/$/, "").split("/")[0] || "github.com/moohiit";
@@ -72,9 +81,30 @@ function Shot({ p, eager }) {
   );
 }
 
+function Filters({ active, onChange }) {
+  return (
+    <div className="filter-row" role="group" aria-label="Filter projects">
+      {FILTERS.map((f) => (
+        <button
+          key={f.name}
+          type="button"
+          className={"filter-chip" + (active === f.name ? " is-active" : "")}
+          aria-pressed={active === f.name}
+          onClick={() => onChange(f.name)}
+        >
+          {f.name}
+          <span className="filter-count">{f.count}</span>
+        </button>
+      ))}
+    </div>
+  );
+}
+
 export default function Projects({ onOpenCaseStudy }) {
-  const featured = projects.filter((p) => p.featured);
-  const rest = projects.filter((p) => !p.featured);
+  const [filter, setFilter] = useState("All");
+  const visible = filter === "All" ? projects : projects.filter((p) => p.categories?.includes(filter));
+  const featured = visible.filter((p) => p.featured);
+  const rest = visible.filter((p) => !p.featured);
 
   return (
     <section id="projects" className="section">
@@ -86,8 +116,15 @@ export default function Projects({ onOpenCaseStudy }) {
           lead="Everything here is deployed and in use, from lending platforms at work to my own GenAI products. The build stories cover the architecture and the trade-offs."
         />
 
+        <Filters active={filter} onChange={setFilter} />
+        <p className="sr-only" aria-live="polite">
+          {filter === "All" ? `Showing all ${projects.length} projects` : `Showing ${visible.length} ${filter} projects`}
+        </p>
+
+        <AnimatePresence initial={false}>
         {featured.map((f, i) => (
-          <Reveal className={"card spot project-feature" + (i % 2 ? " project-feature--flip" : "")} key={f.title}>
+          <Reveal className={"card spot project-feature" + (i % 2 ? " project-feature--flip" : "")} key={f.title} exit={EXIT}>
+            <BeamBorder delay={i * -3.5} />
             <Shot p={f} eager={i === 0} />
             <div className="project-body">
               <div className="project-meta">
@@ -108,10 +145,12 @@ export default function Projects({ onOpenCaseStudy }) {
             </div>
           </Reveal>
         ))}
+        </AnimatePresence>
 
         <div className="projects-grid">
+          <AnimatePresence initial={false} mode="popLayout">
           {rest.map((p, i) => (
-            <Reveal className="card spot project-card" key={p.title} delay={(i % 3) * 0.08}>
+            <Reveal className="card spot project-card" key={p.title} delay={(i % 3) * 0.08} exit={EXIT} layout="position">
               <Shot p={p} />
               <div className="project-body">
                 <div className="project-meta">
@@ -128,6 +167,7 @@ export default function Projects({ onOpenCaseStudy }) {
               </div>
             </Reveal>
           ))}
+          </AnimatePresence>
         </div>
       </div>
     </section>

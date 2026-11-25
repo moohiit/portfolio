@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "motion/react";
-import { roles, currentlyBuilding, stats, skillCategories } from "../data.js";
+import { roles, currentlyBuilding, stats } from "../data.js";
 import HeroCanvas from "./HeroCanvas.jsx";
+import LiveStatus, { useLiveStatus } from "./LiveStatus.jsx";
 import { HERO_DELAY } from "./Preloader.jsx";
-import { Counter, EASE, Magnetic } from "./ui.jsx";
+import { BeamBorder, Counter, EASE, Magnetic } from "./ui.jsx";
 
 const TAGS = ["Fintech APIs", "GenAI", "DevOps", "Mobile"];
 
@@ -69,9 +70,11 @@ function DisplayName({ lines }) {
   );
 }
 
-// The right-hand "live console": real stats, real GitHub activity.
+// The right-hand "live console": real stats and live checks of the products.
 function Console({ building }) {
   const reduced = useReducedMotion();
+  const status = useLiveStatus(HERO_DELAY * 1000 + 900);
+  const { summary } = status;
   const px = useMotionValue(0);
   const py = useMotionValue(0);
   const rotateX = useSpring(useTransform(py, [-0.5, 0.5], [6, -6]), { stiffness: 150, damping: 20 });
@@ -98,10 +101,14 @@ function Console({ building }) {
       onPointerLeave={reset}
     >
       <motion.div className="console glass" style={{ rotateX, rotateY }}>
+        <BeamBorder />
         <div className="console-bar">
           <span className="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
           <span className="console-url">mohit@prod:~/status</span>
-          <span className="live-badge"><span className="pulse-dot"></span>Live</span>
+          <span className={"live-badge" + (summary && summary.up < summary.total ? " live-badge--warn" : "")}>
+            <span className="pulse-dot"></span>
+            {summary ? `${summary.up}/${summary.total} up` : "Checking"}
+          </span>
         </div>
 
         <div className="console-profile">
@@ -137,23 +144,7 @@ function Console({ building }) {
           </div>
         </a>
 
-        <div className="console-health">
-          <div className="mono-label">Stack health</div>
-          {skillCategories.map((c, i) => (
-            <div className="health-row" key={c.key}>
-              <span>{c.title}</span>
-              <div className="health-track">
-                <motion.span
-                  className="health-fill"
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: c.proficiency / 100 }}
-                  transition={{ duration: 1.4, ease: EASE, delay: HERO_DELAY + 0.9 + i * 0.12 }}
-                />
-              </div>
-              <span className="health-value">{c.proficiency}%</span>
-            </div>
-          ))}
-        </div>
+        <LiveStatus status={status} />
       </motion.div>
     </motion.div>
   );
@@ -176,6 +167,10 @@ export default function Hero({ theme }) {
       <div className="hero-bg" aria-hidden="true">
         <HeroCanvas theme={theme} />
         <div className="hero-grid"></div>
+      </div>
+      {/* Perspective grid floor running toward the viewer. */}
+      <div className="hero-floor" aria-hidden="true">
+        <div className="hero-floor-plane"></div>
       </div>
 
       <div className="container hero-inner">

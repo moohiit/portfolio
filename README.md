@@ -6,20 +6,20 @@ Built as a fully static, serverless React app: no backend server, deployable to 
 
 ## Sections
 
-1. **Hero** — WebGL shader background, display-type name reveal, typewriter roles, and a "live console" card (experience stats, the repo currently being built from the GitHub API, stack health)
+1. **Hero** — WebGL shader background over a perspective grid floor, display-type name reveal, typewriter roles, and a "live console" card (experience stats, what's being built now, and live reachability and latency for the products, probed from the visitor's browser)
 2. **What I Do** — full-stack apps, AI integrations, mobile apps, API design & DevOps
-3. **Selected Work** — AI Playground (featured), Splitzy (Google Play), ShopEase, PrepAI, SastaGram, Watchman, with build-story case studies
-4. **Experience** — Quikkred (Backend Developer, current) · Life Layer Health Solutions · Ducat Academy, on a scroll-drawn timeline
+3. **Selected Work** — Fluxus Forge and AI Playground (featured), Quikkred Collect, the Quikkred API, Splitzy, ShopEase, PrepAI, SastaGram and Watchman, with category filters and build-story case studies that include an animated request-flow diagram
+4. **Experience** — Quikkred (Backend Developer, current) · Life Layer Health Solutions · Ducat Academy, on a scroll-drawn timeline with impact numbers per role
 5. **Impact** — Splitzy on Play Store, live products, 10x API performance, certifications
-6. **Skills** — categorized skill cards with animated proficiency meters
+6. **Skills** — skill cards with usage counted from the projects and jobs on the page (no self-rated percentages)
 7. **Open Source** — GitHub stats, contribution heatmap, top repositories (live from the GitHub API) and coding profiles
 8. **Credentials** — MCA (AKTU) & B.Sc (Invertis), certificate gallery
-9. **Lab** — terminal chatbot, auto-typing code showcase, toolbox, Spotify recently-played, and the secret arcade (**Ctrl+G**: Snake, Memory Match, Typing Test)
+9. **Lab** — terminal chatbot, a signed-API playground (HMAC signing, replay, tampering and idempotency keys against an in-browser mock server), auto-typing code showcase, toolbox, Spotify recently-played, and the secret arcade (**Ctrl+G**: Snake, Memory Match, Typing Test)
 10. **Contact** — Web3Forms-powered form, copy-to-clipboard email, phone/WhatsApp/LinkedIn
 
-Site-wide: **⌘K / Ctrl+K command palette**, dark/light theme, smooth scrolling, scroll progress bar, GoatCounter visitor & resume-download counters.
+Site-wide: **⌘K / Ctrl+K command palette**, dark/light theme, an ambient background (drifting aurora that re-tints per section, a tech grid with a cursor spotlight and light pulses, switchable off from the palette), section titles that decode from random glyphs, smooth scrolling, scroll progress bar, GoatCounter visitor & resume-download counters.
 
-Testimonials and Technical Writing sections exist in the code but stay hidden until real recommendations / published articles are added in `src/data.js`.
+Testimonials and Technical Writing sections exist in the code but stay hidden until real recommendations / published articles are added in `src/data.js`. Ready-to-publish dev.to drafts and a recommendation-request template are in `drafts/` (not deployed).
 
 ## Tech Stack
 
@@ -53,7 +53,7 @@ npm run preview   # preview the production build
 │   ├── data.js         # ALL site content — edit this to update the site
 │   ├── App.jsx         # section composition + global effects (scroll, spotlight, theme, shortcuts)
 │   ├── components/     # one component per section
-│   ├── lib/            # GitHub API client, smooth-scroll helpers
+│   ├── lib/            # GitHub API client, smooth scroll, live status probes, skill usage
 │   └── styles/theme.css # design tokens + all component styles
 ```
 

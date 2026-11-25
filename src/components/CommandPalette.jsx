@@ -8,7 +8,7 @@ import { scrollToTarget } from "../lib/scroll.js";
 
 const EMAIL = "mohitpatel.inbox@gmail.com";
 
-function buildCommands({ theme, onToggleTheme, onOpenArcade, onOpenCaseStudy }) {
+function buildCommands({ theme, onToggleTheme, fx, onToggleFx, onOpenArcade, onOpenCaseStudy }) {
   const go = (href) => () => (href === "#top" ? scrollToTarget(0) : scrollToTarget(href));
   const open = (url) => () => window.open(url, "_blank", "noopener,noreferrer");
   return [
@@ -25,6 +25,12 @@ function buildCommands({ theme, onToggleTheme, onOpenArcade, onOpenCaseStudy }) 
     { group: "Actions", icon: theme === "dark" ? "fas fa-sun" : "fas fa-moon", label: `Switch to ${theme === "dark" ? "light" : "dark"} theme`, run: onToggleTheme },
     {
       group: "Actions",
+      icon: fx === "on" ? "fas fa-wand-magic" : "fas fa-wand-magic-sparkles",
+      label: `Turn background effects ${fx === "on" ? "off" : "on"}`,
+      run: onToggleFx,
+    },
+    {
+      group: "Actions",
       icon: "fas fa-arrow-down",
       label: "Download resume",
       run: () => {
@@ -37,6 +43,12 @@ function buildCommands({ theme, onToggleTheme, onOpenArcade, onOpenCaseStudy }) 
     },
     { group: "Actions", icon: "fas fa-copy", label: "Copy email address", keep: true, run: () => navigator.clipboard?.writeText(EMAIL) },
     { group: "Actions", icon: "fas fa-gamepad", label: "Open the secret arcade", run: onOpenArcade },
+    {
+      group: "Actions",
+      icon: "fas fa-signature",
+      label: "Try the signed API demo",
+      run: () => window.dispatchEvent(new CustomEvent("lab:open", { detail: "api" })),
+    },
     { group: "Links", icon: "fab fa-github", label: "GitHub", run: open("https://github.com/moohiit") },
     { group: "Links", icon: "fab fa-linkedin-in", label: "LinkedIn", run: open("https://www.linkedin.com/in/moohiitpatel/") },
     { group: "Links", icon: "fas fa-envelope", label: "Send an email", run: () => (window.location.href = `mailto:${EMAIL}`) },
@@ -50,7 +62,7 @@ export default function CommandPalette({ onClose, ...ctx }) {
   const inputRef = useRef(null);
   const listRef = useRef(null);
 
-  const commands = useMemo(() => buildCommands(ctx), [ctx.theme]); // eslint-disable-line react-hooks/exhaustive-deps
+  const commands = useMemo(() => buildCommands(ctx), [ctx.theme, ctx.fx]); // eslint-disable-line react-hooks/exhaustive-deps
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return commands;

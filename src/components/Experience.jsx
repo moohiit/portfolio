@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { motion, useScroll } from "motion/react";
 import { experience } from "../data.js";
-import { Reveal, SectionHeader } from "./ui.jsx";
+import { BeamBorder, Counter, Reveal, SectionHeader } from "./ui.jsx";
 
 const VISIBLE_DETAILS = 3;
 
@@ -33,6 +33,7 @@ function Job({ job, onOpenCaseStudy }) {
         <span className="tl-duration">{job.current ? currentDuration(job.startDate) : job.duration}</span>
       </div>
       <article className="card spot tl-card">
+        {job.current && <BeamBorder />}
         <header className="tl-head">
           <div>
             <h3 className="card-title">
@@ -44,6 +45,23 @@ function Job({ job, onOpenCaseStudy }) {
             </div>
           </div>
         </header>
+        {job.impact?.length > 0 && (
+          <dl className="tl-impact">
+            {job.impact.map((m) => (
+              <div className="tl-metric" key={m.label}>
+                <dt className="tl-metric-label">{m.label}</dt>
+                <dd className="tl-metric-value">
+                  {m.text ?? (
+                    <>
+                      {m.prefix}
+                      <Counter to={m.value} suffix={m.suffix || ""} />
+                    </>
+                  )}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        )}
         <p className="card-text">{job.description}</p>
         <ul className="tl-details">
           {details.map((d, i) => (
