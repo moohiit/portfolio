@@ -87,7 +87,7 @@ export default function Contact() {
           index="09"
           eyebrow="Contact"
           title="Let's build something that ships"
-          lead="Open to backend and full-stack roles, freelance APIs and collaborations. I usually reply within a day."
+          lead="Happy to talk backend and fintech engineering, freelance APIs or collaborations. I usually reply within a day."
         />
 
         <div className="contact-grid">

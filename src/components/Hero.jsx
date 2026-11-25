@@ -195,9 +195,9 @@ export default function Hero({ theme }) {
             </span>
           </motion.div>
 
-          <motion.a href="#contact" className="status-chip" {...fade(0)}>
+          <motion.a href="#experience" className="status-chip" {...fade(0)}>
             <span className="pulse-dot"></span>
-            Open to new opportunities
+            Shipping fintech APIs at Quikkred
             <i className="fas fa-arrow-right" aria-hidden="true"></i>
           </motion.a>
 
