@@ -25,6 +25,7 @@ This portfolio is a deliberately **serverless static site** — there is no back
 - **Content in the first HTML response.** `#root` ships with a short static profile (photo, name as `<h1>`, role, summary, profile links). Crawlers that don't run JavaScript (Bing, DuckDuckGo, link previews, AI search) read it, visitors see it as the first paint, and React replaces it on mount. It must say the same thing as the rendered page.
 - **Self-hosted favicons** (`favicon.ico` 48px, `favicon-192.png`, `apple-touch-icon.png`) made from the profile photo; Google shows the favicon next to the result.
 - The profile photo is `images/mohit-patel.webp` (a descriptive filename helps image search), and the sitemap lists only real URLs. Search engines ignore everything after `#`, so section anchors aren't listed.
+- **Link-preview image:** `og:image` / `twitter:image` point to a dated file (`images/og-mohit-patel-2026-11.png`). LinkedIn, WhatsApp and X cache preview images by URL, so a redesigned card must get a **new filename**; overwriting the old file is not enough. `images/og-card.png` is kept for old shares.
 - SEO-critical files sit in `public/`, which Vite copies verbatim to the build root — every previously indexed URL resolves identically after the React migration.
 - The single-page layout uses hash navigation, so no server-side rewrites are required on shared hosting.
 
