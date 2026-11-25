@@ -721,6 +721,34 @@ main, .site-footer { position: relative; z-index: 2; }
   background: linear-gradient(90deg, var(--violet), var(--brand));
 }
 
+/* Static profile in index.html: what crawlers without JavaScript read, and the
+   first paint until React replaces it. */
+.static-profile {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 12px;
+  padding: 24px 16px;
+  text-align: center;
+  font-family: var(--font-sans);
+  color: var(--ink-2);
+  background: var(--bg);
+}
+.static-profile img { border-radius: 50%; }
+.static-profile h1 {
+  margin: 4px 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 6vw, 3.5rem);
+  line-height: 1.05;
+  color: var(--ink);
+}
+.static-profile .static-role { margin: 0; font-family: var(--font-mono); font-size: 0.85rem; color: var(--violet); }
+.static-profile p { max-width: 56ch; margin: 0; line-height: 1.6; }
+.static-profile nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 18px; margin-top: 8px; }
+.static-profile a { color: var(--ink-2); text-underline-offset: 3px; }
+
 .preloader {
   position: fixed;
   inset: 0;

@@ -20,7 +20,11 @@ This portfolio is a deliberately **serverless static site** — there is no back
 
 ## SEO strategy
 
-- All meta tags, Open Graph tags, and **JSON-LD structured data** (Person + ItemList schemas) live in the static `index.html`, so crawlers read them without executing JavaScript.
+- All meta tags, Open Graph tags, and **JSON-LD structured data** live in the static `index.html`, so crawlers read them without executing JavaScript.
+- **One identity graph for name searches.** The JSON-LD is a single `@graph`: a `ProfilePage` whose `mainEntity` is the `Person` (Mohit Patel, alternate name `moohiit`), on a `WebSite` named "Mohit Patel" (which Google uses as the site name in results). The Person's `sameAs` lists every public profile, and the same profiles are repeated as `<link rel="me">`. Together they tell search engines that GitHub, LinkedIn, X, LeetCode and this site belong to the same person. When a profile is added or renamed, update `sameAs`, the `rel="me"` links, `SOCIALS` in `Hero.jsx` and `codingProfiles` in `data.js` together.
+- **Content in the first HTML response.** `#root` ships with a short static profile (photo, name as `<h1>`, role, summary, profile links). Crawlers that don't run JavaScript (Bing, DuckDuckGo, link previews, AI search) read it, visitors see it as the first paint, and React replaces it on mount. It must say the same thing as the rendered page.
+- **Self-hosted favicons** (`favicon.ico` 48px, `favicon-192.png`, `apple-touch-icon.png`) made from the profile photo; Google shows the favicon next to the result.
+- The profile photo is `images/mohit-patel.webp` (a descriptive filename helps image search), and the sitemap lists only real URLs. Search engines ignore everything after `#`, so section anchors aren't listed.
 - SEO-critical files sit in `public/`, which Vite copies verbatim to the build root — every previously indexed URL resolves identically after the React migration.
 - The single-page layout uses hash navigation, so no server-side rewrites are required on shared hosting.
 

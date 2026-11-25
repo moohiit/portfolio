@@ -184,7 +184,7 @@ export default function GitHubActivity() {
   return (
         <div className="card github-card">
           <div className="github-profile-row">
-            <img src="/images/profile.webp" alt="Mohit Patel" className="github-avatar" loading="lazy" />
+            <img src="/images/mohit-patel.webp" alt="Mohit Patel" className="github-avatar" loading="lazy" />
             <div className="github-profile-info">
               <h3 className="github-username">{GITHUB_USERNAME}</h3>
               <p className="github-bio">Backend Developer · Node.js · MERN · GenAI</p>

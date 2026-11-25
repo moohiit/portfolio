@@ -43,7 +43,7 @@ npm run preview   # preview the production build
 ## Project Structure
 
 ```
-├── index.html          # SEO meta tags, JSON-LD structured data, fonts
+├── index.html          # SEO meta tags, JSON-LD identity graph, static profile for crawlers, fonts
 ├── public/             # served at site root unchanged:
 │   ├── sitemap.xml, sastagram.sitemap.xml, shopease.sitemap.xml
 │   ├── robots.txt, dns.config
