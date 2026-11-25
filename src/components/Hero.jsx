@@ -112,7 +112,7 @@ function Console({ building }) {
         </div>
 
         <div className="console-profile">
-          <img src="/images/profile.webp" alt="Mohit Patel" width="56" height="56" />
+          <img src="/images/mohit-patel.webp" alt="Mohit Patel" width="56" height="56" />
           <div>
             <div className="console-name">Mohit Patel</div>
             <div className="console-role">Backend Developer · Quikkred</div>
@@ -184,7 +184,7 @@ export default function Hero({ theme }) {
           >
             <span className="hero-avatar-ring" aria-hidden="true"></span>
             <img
-              src="/images/profile.webp"
+              src="/images/mohit-patel.webp"
               alt="Mohit Patel"
               width="128"
               height="128"

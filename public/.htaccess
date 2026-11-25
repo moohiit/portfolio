@@ -68,9 +68,11 @@
   ExpiresByType application/x-javascript  "access plus 1 year"
   ExpiresByType text/javascript           "access plus 1 year"
 
-  # Un-fingerprinted media (/images/*.webp, og-card.png, any local font): one week
+  # Un-fingerprinted media (/images/*.webp, og-card.png, favicons, any local font): one week
   ExpiresByType image/webp                "access plus 1 week"
   ExpiresByType image/png                 "access plus 1 week"
+  ExpiresByType image/x-icon              "access plus 1 week"
+  ExpiresByType image/vnd.microsoft.icon  "access plus 1 week"
   ExpiresByType font/woff2                "access plus 1 week"
   ExpiresByType application/font-woff2    "access plus 1 week"
 </IfModule>
@@ -83,7 +85,7 @@
   </FilesMatch>
 
   # Plain-named images and fonts: cache for a week, then revalidate
-  <FilesMatch "\.(webp|png|woff2)$">
+  <FilesMatch "\.(webp|png|ico|woff2)$">
     Header set Cache-Control "public, max-age=604800"
   </FilesMatch>
 

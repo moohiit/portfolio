@@ -1,70 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xmlns:xhtml="http://www.w3.org/1999/xhtml"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<!--
+  Sitemap for mohitpatel.org, last updated 2026-11-25.
+  Only real URLs: search engines drop everything after "#", so the section
+  links (#about, #projects…) were all the same page and are left out.
+  Update <lastmod> when the content changes.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
-<!-- Sitemap for mohitpatel.org — last updated 2026-06-10 -->
+  <url>
+    <loc>https://mohitpatel.org/</loc>
+    <lastmod>2026-11-25</lastmod>
+    <image:image>
+      <image:loc>https://mohitpatel.org/images/mohit-patel.webp</image:loc>
+    </image:image>
+  </url>
 
-<!-- Home -->
-<url>
-   <loc>https://mohitpatel.org/</loc>
-   <lastmod>2026-06-10T00:00:00+00:00</lastmod>
-   <changefreq>monthly</changefreq>
-   <priority>1.0000</priority>
-</url>
-
-<!-- Resume (PDF download) -->
-<url>
-   <loc>https://mohitpatel.org/files/MohitPatelResume.pdf</loc>
-   <lastmod>2026-06-10T00:00:00+00:00</lastmod>
-   <changefreq>monthly</changefreq>
-   <priority>0.9000</priority>
-</url>
-
-<!-- Portfolio sections -->
-<url>
-   <loc>https://mohitpatel.org/#about</loc>
-   <lastmod>2026-06-10T00:00:00+00:00</lastmod>
-   <changefreq>monthly</changefreq>
-   <priority>0.8000</priority>
-</url>
-<url>
-   <loc>https://mohitpatel.org/#skills</loc>
-   <lastmod>2026-06-10T00:00:00+00:00</lastmod>
-   <changefreq>monthly</changefreq>
-   <priority>0.8000</priority>
-</url>
-<url>
-   <loc>https://mohitpatel.org/#experience</loc>
-   <lastmod>2026-06-10T00:00:00+00:00</lastmod>
-   <changefreq>monthly</changefreq>
-   <priority>0.9000</priority>
-</url>
-<url>
-   <loc>https://mohitpatel.org/#projects</loc>
-   <lastmod>2026-06-10T00:00:00+00:00</lastmod>
-   <changefreq>monthly</changefreq>
-   <priority>0.9000</priority>
-</url>
-<url>
-   <loc>https://mohitpatel.org/#certificates</loc>
-   <lastmod>2026-06-10T00:00:00+00:00</lastmod>
-   <changefreq>yearly</changefreq>
-   <priority>0.6000</priority>
-</url>
-<url>
-   <loc>https://mohitpatel.org/#education</loc>
-   <lastmod>2026-06-10T00:00:00+00:00</lastmod>
-   <changefreq>yearly</changefreq>
-   <priority>0.6000</priority>
-</url>
-<url>
-   <loc>https://mohitpatel.org/#contact</loc>
-   <lastmod>2026-06-10T00:00:00+00:00</lastmod>
-   <changefreq>yearly</changefreq>
-   <priority>0.7000</priority>
-</url>
+  <url>
+    <loc>https://mohitpatel.org/files/MohitPatelResume.pdf</loc>
+    <lastmod>2026-09-10</lastmod>
+  </url>
 
 </urlset>
