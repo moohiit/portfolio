@@ -111,7 +111,7 @@ export default function Contact() {
               </li>
               <li>
                 <span className="icon-tile icon-tile--sm"><i className="fas fa-location-dot" aria-hidden="true"></i></span>
-                <span>Gurgaon, Haryana, India</span>
+                <span>Delhi, India</span>
               </li>
               <li>
                 <span className="icon-tile icon-tile--sm"><i className="fab fa-linkedin-in" aria-hidden="true"></i></span>
