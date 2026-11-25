@@ -724,7 +724,7 @@ io.on("connection", (socket) => {
 
 export const botResponses = {
   whoami: [
-    "Hey! I'm <span class='terminal-highlight'>Mohit Patel</span> — a Full Stack Developer based in Gurgaon, Haryana.",
+    "Hey! I'm <span class='terminal-highlight'>Mohit Patel</span> — a Full Stack Developer based in Delhi, India.",
     "I'm a results-driven <span class='terminal-highlight'>Node.js & MERN Stack Developer</span> with 2+ years of hands-on experience.",
     "I build scalable REST APIs, real-time apps, and production-grade cloud-integrated solutions.",
     "Currently at <span class='terminal-highlight'>Quikkred · Fluxus Forge</span>, leading development of a multi-tenant lending cloud.",
@@ -787,7 +787,7 @@ export const botResponses = {
   contact: [
     "📧 Email: <span class='terminal-highlight'>mohitpatel.inbox@gmail.com</span>",
     "📱 Phone: <span class='terminal-highlight'>+91 7060993826</span>",
-    "📍 Location: <span class='terminal-highlight'>Gurgaon, Haryana, India</span>",
+    "📍 Location: <span class='terminal-highlight'>Delhi, India</span>",
     "🔗 LinkedIn: <span class='terminal-cmd'>linkedin.com/in/moohiitpatel</span>",
     "💻 GitHub: <span class='terminal-cmd'>github.com/moohiit</span>",
     "",
