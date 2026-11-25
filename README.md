@@ -66,6 +66,10 @@ Static hosting (currently GoViralHost shared hosting):
 
 SEO files (`sitemap.xml`, `robots.txt`, resume PDF) are emitted at the site root with unchanged URLs, so search-engine indexing carries over between deploys.
 
+## Resume
+
+`public/files/MohitPatelResume.pdf` is exported from `resume/resume.html`: open it in Chrome → Print → Save as PDF (A4, margins "None", "Background graphics" on). It must stay one page. Keep its content in step with `src/data.js`, and update the resume's `<lastmod>` in `public/sitemap.xml` when it changes.
+
 ## Branches
 
 - `main` — React app (current)

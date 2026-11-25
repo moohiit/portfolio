@@ -1,0 +1,172 @@
+<!doctype html>
+<!--
+  Source of public/files/MohitPatelResume.pdf.
+  To rebuild: open this file in Chrome → Print → Save as PDF, paper A4,
+  margins "None", "Background graphics" on. It must stay one page.
+  Keep the content in step with src/data.js (the site is the source of truth).
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Mohit Patel — Resume</title>
+<meta name="author" content="Mohit Patel" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=block" />
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --ink: #111827; --ink-2: #374151; --ink-3: #6b7280; --blue: #1d4ed8; --rule: #c7d2fe; --link: #1d4ed8; }
+  html, body { background: #fff; }
+  body { width: 210mm; padding: 8mm 11mm 4mm; font-family: "Noto Sans", Arial, sans-serif;
+    font-size: 9.2pt; line-height: 1.32; color: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  a { color: var(--link); text-decoration: none; }
+
+  header { text-align: center; }
+  h1 { font-size: 21pt; font-weight: 700; letter-spacing: -0.01em; line-height: 1.1; }
+  .tagline { margin-top: 3px; font-size: 10.2pt; font-weight: 600; color: var(--ink-2); }
+  .contact { margin-top: 5px; display: flex; justify-content: center; flex-wrap: wrap; gap: 2px 14px; font-size: 9.2pt; color: var(--ink-2); }
+  .contact span { display: inline-flex; align-items: center; gap: 4px; }
+  .contact svg { width: 11px; height: 11px; flex: none; }
+
+  h2 { margin: 7px 0 3px; padding-bottom: 2px; border-bottom: 1px solid var(--rule); font-size: 9.6pt; font-weight: 700;
+    letter-spacing: 0.09em; text-transform: uppercase; color: var(--blue); }
+  header + h2 { margin-top: 7px; border-top: 1.5px solid var(--blue); padding-top: 7px; border-bottom: 1px solid var(--rule); }
+
+  .summary { color: var(--ink); }
+
+  .skills { display: grid; grid-template-columns: 124px 1fr; gap: 0 8px; }
+  .skills dt { font-weight: 600; }
+  .skills dd { color: var(--ink); }
+
+  .job { margin-top: 4px; }
+  .job:first-of-type { margin-top: 2px; }
+  .row { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+  .row .when { flex: none; color: var(--ink-2); font-size: 9.2pt; }
+  .org { font-weight: 700; }
+  .meta { color: var(--ink-2); font-style: italic; }
+  .sep { color: var(--ink-3); margin: 0 4px; font-style: normal; }
+  .tag { display: inline-block; margin-left: 5px; padding: 0 6px; border-radius: 999px; font-size: 7pt; font-weight: 600;
+    letter-spacing: 0.06em; vertical-align: 1px; border: 1px solid; }
+  .tag--fin { color: #b45309; border-color: #fcd34d; background: #fffbeb; }
+  .tag--now { color: #047857; border-color: #6ee7b7; background: #ecfdf5; }
+  .tag--health { color: #6d28d9; border-color: #c4b5fd; background: #f5f3ff; }
+  ul { margin: 2px 0 0 15px; }
+  li { margin: 0.5px 0; padding-left: 1px; }
+  li::marker { color: var(--ink-2); }
+
+  .proj { margin-top: 4px; }
+  .proj .stack { color: var(--ink-3); font-size: 8.8pt; margin-top: 1px; }
+  .links a { text-decoration: underline; font-style: italic; }
+
+  .edu .row + .row { margin-top: 2px; }
+  .certs { margin-top: 2px; }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Mohit Patel</h1>
+    <div class="tagline">Backend Developer — Node.js · TypeScript · Fintech APIs · DevOps</div>
+    <div class="contact">
+      <span><svg viewBox="0 0 24 24" fill="#db2777"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg><a href="tel:+917060993826" style="color:inherit">+91 70609 93826</a></span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><a href="mailto:mohitpatel.inbox@gmail.com">mohitpatel.inbox@gmail.com</a></span>
+      <span><svg viewBox="0 0 24 24" fill="#0a66c2"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.2c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7V21h-4z"/></svg><a href="https://www.linkedin.com/in/moohiitpatel/">LinkedIn</a></span>
+      <span><svg viewBox="0 0 24 24" fill="#111827"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg><a href="https://github.com/moohiit">GitHub</a></span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.5 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.5-3.8-9S9.5 5.5 12 3z"/></svg><a href="https://mohitpatel.org/">mohitpatel.org</a></span>
+      <span><svg viewBox="0 0 24 24" fill="#dc2626"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Delhi, India</span>
+    </div>
+  </header>
+
+  <h2>Summary</h2>
+  <p class="summary">
+    Backend Developer with <b>2+ years</b> in fintech and health-tech. At Quikkred I'm <b>lead engineer on the Fluxus Forge
+    Lending Cloud</b>, a multi-tenant lending platform, and built the backend of <b>Quikkred Collect (10K+ installs, 4.6★)</b>
+    and its signed lender API. I own the path from API design to Linux servers, CI/CD and production incidents.
+  </p>
+
+  <h2>Key Skills</h2>
+  <dl class="skills">
+    <dt>Languages:</dt><dd>TypeScript, JavaScript (ES6+), SQL</dd>
+    <dt>Backend:</dt><dd>Node.js, Fastify, Express.js, REST, Webhooks &amp; HMAC signing, Socket.io, JWT, Zod, OpenAPI</dd>
+    <dt>Databases:</dt><dd>PostgreSQL (Kysely), MongoDB (Mongoose), Redis, BullMQ, MySQL</dd>
+    <dt>Architecture:</dt><dd>Multi-tenancy, outbox / event-driven design, idempotent APIs, capability-based RBAC</dd>
+    <dt>Frontend &amp; Mobile:</dt><dd>React.js, Next.js, React Native (Expo), Redux, Tailwind CSS</dd>
+    <dt>DevOps &amp; Cloud:</dt><dd>GitHub Actions, Docker, Nginx, PM2, Linux, Cloudflare Workers &amp; Pages, AWS EC2 &amp; S3</dd>
+    <dt>Quality &amp; AI:</dt><dd>Sentry, Prometheus &amp; Grafana, Vitest, Jest, Playwright · Gemini, RAG, Atlas Vector Search</dd>
+  </dl>
+
+  <h2>Experience</h2>
+  <div class="job">
+    <div class="row">
+      <div><span class="org">Quikkred · Fluxus Forge</span><span class="tag tag--fin">FINTECH</span><span class="tag tag--now">● CURRENT</span>
+        <span class="meta"><span class="sep">|</span>Backend Developer<span class="sep">|</span>Delhi</span></div>
+      <div class="when">Feb 2026 – Present</div>
+    </div>
+    <ul>
+      <li><b>Lead engineer and top contributor</b> (650+ commits in 8 weeks) on <a href="https://fluxusforge.in">Fluxus Forge Lending Cloud</a>, a multi-tenant, white-label lending platform (LOS, LMS, collections, CRM) in a TypeScript monorepo of 6 apps and 15 packages; designed tenant isolation, provisioning and Cloudflare edge routing.</li>
+      <li>Built the backend, ops CRM and core app features of <a href="https://play.google.com/store/apps/details?id=com.quikkred.collect">Quikkred Collect</a> (<b>10K+ installs, 4.6★</b> on Google Play): road-distance case matching and earnings, pincode geocoding, in-app calling and Play in-app updates.</li>
+      <li>Designed the <b>multi-tenant lender API</b>: HMAC-signed requests, push/pull/CSV ingest, webhook delivery with replay, and idempotent import and remittance batches; wrote its <a href="https://developers.fluxusforge.in">public developer portal</a> with signing samples in 4 languages.</li>
+      <li>Owned <b>Credit Health</b> in the Quikkred loan-app API (<b>37 endpoints</b>, 42 test files): lifecycle state machine, mandate billing, referral campaigns; also built GST/TDS billing ledgers and an investor-ledger API that reconciles each loan.</li>
+      <li>Production reliability: outbox sync with HMAC webhooks and nightly reconciliation, Sentry, ClamAV upload scanning, and CI with <b>zero-downtime PM2 deploys</b>.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="row">
+      <div><span class="org">Life Layer Health Solutions Pvt. Ltd</span><span class="tag tag--health">HEALTH-TECH</span>
+        <span class="meta"><span class="sep">|</span>Full Stack Developer<span class="sep">|</span>Gurugram</span></div>
+      <div class="when">Jun 2024 – Jan 2026 (1 yr 8 mos)</div>
+    </div>
+    <ul>
+      <li>Designed secure REST APIs with <b>Node.js &amp; Express</b>, JWT auth and role-based access control.</li>
+      <li>Implemented <b>Redis caching</b>: cut database queries by ~70% and made hot endpoints up to <b>10x faster</b>.</li>
+      <li>Built reusable React components; integrated <b>Socket.io</b> for real-time chat, notifications and live status.</li>
+      <li>Integrated <b>AWS S3 / Google Cloud</b> uploads, <b>Razorpay</b> payments and Google Maps location services.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="row">
+      <div><span class="org">Ducat Academy</span><span class="meta"><span class="sep">|</span>Full Stack Developer Internship<span class="sep">|</span>Noida</span></div>
+      <div class="when">Jan 2024 – Jun 2024 (6 mos)</div>
+    </div>
+    <ul>
+      <li>Built a MERN-based campus security and visitor-tracking system; reduced unauthorized entries by 35–40%.</li>
+    </ul>
+  </div>
+
+  <h2>Projects</h2>
+  <div class="proj">
+    <div><span class="org">AI Playground — GenAI Hub &amp; Splitzy</span><span class="sep">|</span><span class="links"><a href="https://aiplayground.mohitpatel.org/">Live</a> · <a href="https://play.google.com/store/apps/details?id=com.moohiit.expensetracker">Google Play</a> · <a href="https://github.com/moohiit/ai-playground">GitHub</a></span></div>
+    <div class="stack">Next.js 15 · Gemini 2.5 · RAG · MongoDB Atlas Vector Search · Expo (React Native) · NativeWind · JWT · Zod</div>
+    <ul>
+      <li><b>7 GenAI modules</b>: resume &amp; JD matcher, NL-to-SQL sandbox, AI expense tracker, streaming generator, PDF chat with RAG and page-level citations, YouTube Q&amp;A.</li>
+      <li><b>Splitzy</b>, the companion React Native (Expo) app, is <b>live on Google Play</b>: Gemini Vision receipt scanning, group splits, offline-capable JWT auth and a service layer shared with the web app.</li>
+    </ul>
+  </div>
+  <div class="proj">
+    <div><span class="org">ShopEase — E-commerce Platform</span><span class="sep">|</span><span class="links"><a href="https://shopease.mohitpatel.org/">Live</a> · <a href="https://github.com/moohiit/e-com-shop">GitHub</a></span></div>
+    <div class="stack">React · Node.js · Express · MongoDB · Redux · Razorpay · AWS S3 · GitHub Actions</div>
+    <ul>
+      <li>Buyer, seller and admin flows with role-based access: product listing, cart, orders, admin dashboard, JWT auth, S3 uploads and Razorpay payments.</li>
+    </ul>
+  </div>
+  <div class="proj">
+    <div><span class="org">SastaGram — Social Media &amp; Messaging</span><span class="sep">|</span><span class="links"><a href="https://sastagram.mohitpatel.org/">Live</a> · <a href="https://github.com/moohiit/sastagram">GitHub</a></span></div>
+    <ul>
+      <li>MERN + Socket.io: real-time chat (typing indicators, last-seen, notifications), posts, likes, comments and follows; 100+ concurrent WebSocket connections.</li>
+    </ul>
+  </div>
+
+  <h2>Education</h2>
+  <div class="edu">
+    <div class="row"><div><span class="org">Master of Computer Applications (MCA)</span><span class="meta"><span class="sep">|</span>Dr. A.P.J. Abdul Kalam Technical University</span></div><div class="when">2022 – 2024 <span class="sep">|</span> CGPA: <b>8.26</b></div></div>
+    <div class="row"><div><span class="org">Bachelor of Science (B.Sc)</span><span class="meta"><span class="sep">|</span>Invertis University, Bareilly</span></div><div class="when">2017 – 2020 <span class="sep">|</span> <b>82.37%</b></div></div>
+  </div>
+
+  <h2>Certifications</h2>
+  <ul class="certs">
+    <li>MongoDB Developer's Toolkit: CRUD Mastery with Node.js (GeeksforGeeks) — <a href="https://www.geeksforgeeks.org/certificate/c97fe9133e67d1456dcc544d1410b7e5" style="text-decoration:underline">Verify</a></li>
+    <li>MS SQL Developer Course (Intellipaat) — <a href="https://lms.intellipaat.com/certificate-link/?Yz0yODUzJnU9MTY0OTEyJmV4dD0x" style="text-decoration:underline">Verify</a></li>
+  </ul>
+</body>
+</html>
