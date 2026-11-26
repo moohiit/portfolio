@@ -436,9 +436,19 @@ export const testimonials = [];
 //   - "How I Built a 7-Module GenAI Platform on the Gemini Free Tier"
 //   - "Redis Caching Patterns That Made Our APIs 10x Faster"
 //   - "Zero-Downtime Deploys with Nginx + PM2 + GitHub Actions"
+// manualPosts show immediately and are replaced by the dev.to list when that
+// returns posts. dev.to's CDN can keep serving an old (even empty) list for a
+// day or more after you publish, so add each new post here too.
 export const blogConfig = {
   devToUsername: "moohiit",
-  manualPosts: [],
+  manualPosts: [
+    {
+      title: "Signed requests, idempotent imports and webhooks that survive downtime",
+      desc: "Lessons from building a public partner API for field collections: HMAC request signing, three layers of idempotency, and webhook delivery a lender can always recover.",
+      url: "https://dev.to/moohiit/signed-requests-idempotent-imports-and-webhooks-that-survive-downtime-31jd",
+      tags: ["node", "api", "security"],
+    },
+  ],
 };
 
 // ---- Toolbox (/uses) ----
