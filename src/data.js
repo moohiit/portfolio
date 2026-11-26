@@ -436,12 +436,19 @@ export const testimonials = [];
 //   - "How I Built a 7-Module GenAI Platform on the Gemini Free Tier"
 //   - "Redis Caching Patterns That Made Our APIs 10x Faster"
 //   - "Zero-Downtime Deploys with Nginx + PM2 + GitHub Actions"
-// manualPosts show immediately and are replaced by the dev.to list when that
-// returns posts. dev.to's CDN can keep serving an old (even empty) list for a
-// day or more after you publish, so add each new post here too.
+// Published dev.to posts appear automatically (Blog.jsx asks dev.to's API with
+// a request that changes daily, so a new post shows up by the next day).
+// manualPosts is optional: add a post here to show it the same day. Entries
+// dev.to already returns are de-duplicated by URL.
 export const blogConfig = {
   devToUsername: "moohiit",
   manualPosts: [
+    {
+      title: "Shipping GenAI features on Gemini's free tier: what broke and how I fixed it",
+      desc: "Thinking tokens that truncate JSON, a daily quota per model, and 503s on big prompts: five lessons from running AI Playground on Gemini's free tier.",
+      url: "https://dev.to/moohiit/shipping-genai-features-on-geminis-free-tier-what-broke-and-how-i-fixed-it-4ppb",
+      tags: ["ai", "gemini", "nextjs"],
+    },
     {
       title: "Signed requests, idempotent imports and webhooks that survive downtime",
       desc: "Lessons from building a public partner API for field collections: HMAC request signing, three layers of idempotency, and webhook delivery a lender can always recover.",

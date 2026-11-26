@@ -19,7 +19,7 @@ Built as a fully static, serverless React app: no backend server, deployable to 
 
 Site-wide: **⌘K / Ctrl+K command palette**, dark/light theme, an ambient background (drifting aurora that re-tints per section, a tech grid with a cursor spotlight and light pulses, switchable off from the palette), section titles that decode from random glyphs, smooth scrolling, scroll progress bar, GoatCounter visitor & resume-download counters.
 
-The Testimonials section stays hidden until real recommendations are added in `src/data.js`. The Writing section lists published dev.to posts (`blogConfig` in `src/data.js`); add each new post to `manualPosts` too, because dev.to's API can serve a cached list for a day or more. Post drafts are kept locally in `drafts/`, which is git-ignored so unpublished writing never reaches this public repo.
+The Testimonials section stays hidden until real recommendations are added in `src/data.js`. The Writing section lists published dev.to posts automatically, by the next day at the latest (dev.to's API caches each exact request, so `Blog.jsx` varies the request daily); add a post to `manualPosts` in `src/data.js` to show it the same day. Post drafts are kept locally in `drafts/`, which is git-ignored so unpublished writing never reaches this public repo.
 
 ## Tech Stack
 
